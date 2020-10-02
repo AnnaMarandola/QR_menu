@@ -76,10 +76,15 @@ const styles = (theme) => ({
 
 class SignUp extends Component {
   state = {
+    lastname: "",
+    firstname: "",
+    city: "",
+    postalCode: null,
     email: "",
     password: "",
     cguAccepted: false,
   };
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,

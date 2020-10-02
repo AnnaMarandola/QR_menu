@@ -6,18 +6,19 @@ import SignIn from "./components/authentication/SignIn";
 import SignUp from "./components/authentication/SignUp";
 import InfoResto from "./components/forms/InfoResto";
 import TemplatePage from "./components/TemplatePage";
+import MyAccount from "./components/nav/MyAccount";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {/* <Navbar /> */}
-        {/* <SignIn /> */}
+        <Navbar />
         <Switch>
-          <Route path="/singin" component={SignIn} />
+          <Route path="/signin" component={SignIn} />
           <Route path="/createaccount" component={SignUp} />
           <Route path="/inforesto" component={InfoResto} />
           <Route path="/templatechoice" component={TemplatePage} />
+          <Route path="/myaccount" component={MyAccount} />
         </Switch>
       </div>
     </BrowserRouter>
