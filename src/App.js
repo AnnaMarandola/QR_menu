@@ -18,7 +18,7 @@ function App() {
           <Route path="/createaccount" component={SignUp} />
           <Route path="/inforesto" component={InfoResto} />
           <Route path="/templatechoice" component={TemplatePage} />
-          <Route path="/myaccount" component={Dashboard} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
     </BrowserRouter>

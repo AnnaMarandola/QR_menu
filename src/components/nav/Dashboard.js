@@ -3,6 +3,7 @@ import RestaurantSummary from "./RestaurantSummary";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 
 const styles = (theme) => ({});
 
@@ -21,9 +22,14 @@ const Dashboard = ({ restaurants }) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log (state)
   return {
-    restaurants: state.restaurant.restaurants,
+    restaurants: state.firestore.ordered.restaurants
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps))(Dashboard);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "restaurants" }])
+)(Dashboard);
