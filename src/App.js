@@ -6,7 +6,7 @@ import SignIn from "./components/authentication/SignIn";
 import SignUp from "./components/authentication/SignUp";
 import InfoResto from "./components/forms/InfoResto";
 import TemplatePage from "./components/TemplatePage";
-import MyAccount from "./components/nav/MyAccount";
+import Dashboard from "./components/nav/Dashboard";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="/createaccount" component={SignUp} />
           <Route path="/inforesto" component={InfoResto} />
           <Route path="/templatechoice" component={TemplatePage} />
-          <Route path="/myaccount" component={MyAccount} />
+          <Route path="/myaccount" component={Dashboard} />
         </Switch>
       </div>
     </BrowserRouter>

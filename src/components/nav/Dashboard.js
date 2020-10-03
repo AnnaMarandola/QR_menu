@@ -6,7 +6,7 @@ import { compose } from "redux";
 
 const styles = (theme) => ({});
 
-const MyAccount = ({ restaurants }) => {
+const Dashboard = ({ restaurants }) => {
   console.log(restaurants);
   return (
     <div>
@@ -26,4 +26,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps))(MyAccount);
+export default compose(withStyles(styles), connect(mapStateToProps))(Dashboard);

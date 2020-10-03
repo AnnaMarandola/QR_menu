@@ -5,9 +5,13 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import rootreducer from "./store/reducers/rootReducer";
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { reduxFirestore, getFirestore } from "redux-firestore";
+import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
+import firebaseConfig from './config/firebaseConfig';
 
 const raleway = {
   fontFamily: "Raleway",
@@ -78,7 +82,14 @@ const theme = createMuiTheme({
   },
 });
 
-const store = createStore(rootreducer);
+const store = createStore(
+  rootreducer,
+  compose(
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+    reduxFirestore(firebaseConfig),
+    reactReduxFirebase(firebaseConfig)
+  )
+);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -86,7 +97,7 @@ ReactDOM.render(
       <CssBaseline />
       <App />
     </MuiThemeProvider>
-    </Provider>,
+  </Provider>,
   document.getElementById("root")
 );
 

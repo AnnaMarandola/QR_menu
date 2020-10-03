@@ -3,7 +3,6 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import TemplateCarousel from "./TemplateCarroussel";
 import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Navbar from "./nav/Navbar";
 
 
 function TemplatePage() {
@@ -14,7 +13,6 @@ function TemplatePage() {
   const matches = useMediaQuery("(max-width: 600px)");
   return (
     <div>
-    <Navbar/>
     <Typography variant="h1">Créez votre carte en ligne en quelques clics ! </Typography>
     <Typography variant="body1">Choisissez le style qui correspond le plus aux besoins de votre carte.</Typography>
     <Typography variant="body1">Votre carte sera personnalisée avec votre logo, le nom de votre établissement et ses coordonnées.</Typography>

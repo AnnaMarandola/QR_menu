@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core";
 import { Typography, TextField, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { createRestaurant } from '../../store/actions/restaurantActions';
 
 const styles = (theme) => ({
   root: {
@@ -34,6 +35,7 @@ const styles = (theme) => ({
 
 class InfoResto extends Component {
   state = {
+    id: null,
     name: "",
     adress: "",
     city: "",
@@ -51,7 +53,7 @@ class InfoResto extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.createRestaurant(this.state)
   };
 
   render() {
@@ -78,7 +80,7 @@ class InfoResto extends Component {
           </div>
 
           <div className={classes.buttonsContainer}>
-            <Button variant="contained" className={classes.validationButton}>
+            <Button variant="contained" className={classes.validationButton} onClick={this.handleSubmit}>
               valider
             </Button>
           </div>
@@ -87,10 +89,10 @@ class InfoResto extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    restaurants: state.restaurant.restaurants,
+    createRestaurant: (restaurant) => dispatch(createRestaurant(restaurant))
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps))(InfoResto);
+export default compose(withStyles(styles), connect(null, mapDispatchToProps))(InfoResto);
