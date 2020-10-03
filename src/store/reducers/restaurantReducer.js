@@ -16,9 +16,14 @@ const initialState = {
 const restaurantReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_RESTAURANT':
-      console.log('created restaurant', action.restaurant)
+      console.log('created restaurant', action.restaurant);
+      return state;
+    case 'CREATE_RESTAURANT_ERROR':
+      console.log('create restaurant error', action.err);
+      return state;
+    default:
+      return state;
   }
-  return state;
 };
 
 export default restaurantReducer;
