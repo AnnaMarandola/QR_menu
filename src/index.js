@@ -9,9 +9,10 @@ import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./store/reducers/rootReducer";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { reduxFirestore, getFirestore } from "redux-firestore";
-import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
+import { createFirestoreInstance, reduxFirestore, getFirestore } from "redux-firestore";
+import { getFirebase, ReactReduxFirebaseProvider } from "react-redux-firebase";
 import fbconfig from "./config/fbconfig";
+import firebase from 'firebase/app';
  
 const raleway = {
   fontFamily: "Raleway",
@@ -85,19 +86,27 @@ const theme = createMuiTheme({
 const store = createStore( rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reduxFirestore(fbconfig),
-    reactReduxFirebase(fbconfig)
+    reduxFirestore(firebase, fbconfig),
   )
 );
+
+const rrfProps = {
+  firebase,
+  config: fbconfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance
+};
 
 
 
 ReactDOM.render(
   <Provider store={store}>
+  <ReactReduxFirebaseProvider {...rrfProps}>
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <App />
     </MuiThemeProvider>
+    </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById("root")
 );

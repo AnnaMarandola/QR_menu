@@ -22,9 +22,9 @@ const Dashboard = ({ restaurants }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log (state)
+  console.log(state)
   return {
-    restaurants: state.firestore.ordered.restaurants
+    restaurants: state.firestore.ordered.restaurants,
   };
 };
 
