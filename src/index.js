@@ -9,11 +9,16 @@ import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./store/reducers/rootReducer";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { createFirestoreInstance, reduxFirestore, getFirestore } from "redux-firestore";
+import {
+  createFirestoreInstance,
+  reduxFirestore,
+  getFirestore,
+} from "redux-firestore";
 import { getFirebase, ReactReduxFirebaseProvider } from "react-redux-firebase";
-import fbconfig from "./config/fbconfig";
-import firebase from 'firebase/app';
- 
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+
 const raleway = {
   fontFamily: "Raleway",
   fontStyle: "normal",
@@ -82,30 +87,39 @@ const theme = createMuiTheme({
     },
   },
 });
+firebase.initializeApp({
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: `${process.env.REACT_APP_FIREBASE_PROJECT_ID}.firebaseapp.com`,
+  projectId: `${process.env.REACT_APP_FIREBASE_PROJECT_ID}`,
+  storageBucket: `${process.env.REACT_APP_FIREBASE_PROJECT_ID}.appspot.com`,
+});
+firebase.firestore();
 
-const store = createStore( rootReducer,
+const store = createStore(
+  rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reduxFirestore(firebase, fbconfig),
+    reduxFirestore(firebase)
   )
 );
 
 const rrfProps = {
   firebase,
-  config: fbconfig,
+  config: {
+    useFirestoreForProfile: true,
+    enableClaims: true,
+  },
   dispatch: store.dispatch,
-  createFirestoreInstance
+  createFirestoreInstance,
 };
-
-
 
 ReactDOM.render(
   <Provider store={store}>
-  <ReactReduxFirebaseProvider {...rrfProps}>
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </MuiThemeProvider>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </MuiThemeProvider>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById("root")
