@@ -3,8 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import LOGO from "../../assets/LogoProject.png";
 import "../../App.css";
 import { connect } from 'react-redux';
+import { signOut } from '../../store/actions/authActions';
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <nav>
       <div className="navbar">
@@ -13,7 +14,7 @@ const Navbar = () => {
         </Link>
         <ul>
           <li>
-            <NavLink to="./">Déconnexion</NavLink>
+            <a onClick={props.signOut()} href="logout">Déconnexion</a>
           </li>
           <li>
             <NavLink to="./myaccount">Mon compte</NavLink>
@@ -33,7 +34,13 @@ const Navbar = () => {
 const mapStateToProps = (state) => {
   console.log(state)
   return {
-
   }
 }
-export default connect(mapStateToProps)(Navbar);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
