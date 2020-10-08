@@ -4,11 +4,13 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
+import { Redirect } from "react-router-dom";
 
 const styles = (theme) => ({});
 
-const Dashboard = ({ restaurants }) => {
+const Dashboard = ({ restaurants, auth }) => {
   console.log(restaurants);
+  if(!auth.uid) return <Redirect to='/signin'/>
   return (
     <div>
       {restaurants &&
@@ -25,6 +27,7 @@ const mapStateToProps = (state) => {
   console.log(state)
   return {
     restaurants: state.firestore.ordered.restaurants,
+    auth: state.firebase.auth,
   };
 };
 

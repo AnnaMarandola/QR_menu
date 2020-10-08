@@ -1,8 +1,17 @@
 import React, { Component } from "react";
-import { Typography, TextField, Button, FormControlLabel, Checkbox} from "@material-ui/core";
+import {
+  Typography,
+  TextField,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import Logo from "../../assets/LogoProject.png";
 import Handphone from "../../assets/handphone.png";
+import { Redirect } from "react-router-dom";
+import { compose } from "redux";
+import { connect } from "react-redux";
 
 const styles = (theme) => ({
   root: {
@@ -101,7 +110,9 @@ class SignUp extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, auth } = this.props;
+    if (auth.uid) return <Redirect to="/" />;
+
     return (
       <div className={classes.root}>
         <div className={classes.header}>
@@ -173,4 +184,11 @@ class SignUp extends Component {
   }
 }
 
-export default withStyles(styles)(SignUp);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default compose(withStyles(styles), connect(mapStateToProps)
+)(SignUp);

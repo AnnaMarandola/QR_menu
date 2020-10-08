@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { signIn } from "../../store/actions/authActions";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
+
 
 const styles = (theme) => ({
   root: {
@@ -96,7 +98,9 @@ class SignIn extends Component {
   };
 
   render() {
-    const { classes, authError } = this.props;
+    const { classes, authError, auth } = this.props;
+    if(auth.uid) return <Redirect to='/'/>
+
     return (
       <div className={classes.root}>
         <div className={classes.header}>
@@ -161,6 +165,7 @@ class SignIn extends Component {
 const mapStateToProps = (state) => {
   return {
     authError: state.auth.authError,
+    auth: state.firebase.auth
   };
 };
 

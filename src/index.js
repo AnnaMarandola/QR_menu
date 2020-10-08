@@ -106,6 +106,7 @@ const store = createStore(
 const rrfProps = {
   firebase,
   config: {
+    userProfile: 'users',
     useFirestoreForProfile: true,
     enableClaims: true,
   },
