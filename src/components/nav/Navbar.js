@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import LOGO from "../../assets/LogoProject.png";
 import "../../App.css";
 import { connect } from "react-redux";
-import Menu from '../nav/Menu';
+import MyMenu from '../nav/MyMenu';
 
 const Navbar = (props) => {
   const { auth } = props;
-  const isLogged = auth.uid ? <Menu/> : null
+  const isLogged = auth.uid ? <MyMenu/> : null
   console.log('authUid', auth.uid);
   return (
     <nav>
