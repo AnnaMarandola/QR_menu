@@ -1,7 +1,7 @@
 import React from "react";
 import RestaurantSummary from "./RestaurantSummary";
 import { connect } from "react-redux";
-import { Typography, withStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
@@ -10,22 +10,19 @@ const styles = (theme) => ({});
 
 const Dashboard = ({ restaurants, auth }) => {
   console.log('restaurants', restaurants);
-  console.log('auth', auth)
+  console.log('auth dashboard', auth);
+  let restaurant = restaurants && restaurants.find((restaurant) => restaurant.authorId === auth.uid)
+  console.log('restaurant', restaurant);
+  
+
   if(!auth.uid) return <Redirect to='/signin'/>
   return (
     <div>
       {restaurants &&
-        restaurants.map((restaurant) => {
-          return (
-            <div>
-            <Typography variant='h3'>tableau de bord</Typography>
-            <RestaurantSummary restaurant={restaurant} key={restaurant.id} />
-            </div>
-          );
-        })}
-    </div>
-  );
-};
+            <RestaurantSummary restaurant={restaurant} />
+        };
+    </div>)
+}
 
 const mapStateToProps = (state) => {
   console.log(state)

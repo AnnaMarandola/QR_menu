@@ -36,7 +36,7 @@ const styles = (theme) => ({
 
 class InfoResto extends Component {
   state = {
-    id: null,
+    ownerId: "",
     name: "",
     adress: "",
     city: "",
@@ -60,6 +60,7 @@ class InfoResto extends Component {
   render() {
     const { classes, auth } = this.props;
     console.log("inforesto uid", auth.uid);
+
     // if (!auth.uid) return <Redirect to='/signin' />
 
     return (

@@ -1,11 +1,11 @@
-export const createRestaurant = (restaurant) => {
+export const createRestaurant = (restaurant, auth) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     firestore
       .collection("restaurants")
       .add({
         ...restaurant,
-        authorId: 123123,
+        authorId: '',
         createAt: new Date(),
       })
       .then(() => {
