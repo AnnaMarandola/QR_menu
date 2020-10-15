@@ -27,7 +27,7 @@ const RestaurantSummary = ({ restaurant, classes }) => {
       <Card className={classes.root}>
         <CardActionArea>
           <Typography gutterBottom variant="h5" >
-            Votre établissement :
+            Le  de votre carte:
           </Typography>
            <CardMedia
             className={classes.media}

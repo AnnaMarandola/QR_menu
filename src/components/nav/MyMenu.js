@@ -114,7 +114,7 @@ const StyledMenuItem = withStyles((theme) => ({
 //   );
 // };
 
-function MyMenu({ classes, signOut, history }) {
+function MyMenu({ classes, signOut, profile, history }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -124,7 +124,7 @@ function MyMenu({ classes, signOut, history }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  console.log('MyMenu profile', profile)
   return (
     <React.Fragment>
       <Button
@@ -179,6 +179,6 @@ MyMenu.propTypes = {
 }
 
 export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
   withStyles(styles),
-  connect(mapStateToProps, mapDispatchToProps)
 )(MyMenu);

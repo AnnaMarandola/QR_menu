@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 import MyMenu from '../nav/MyMenu';
 
 const Navbar = (props) => {
-  const { auth } = props;
-  const isLogged = auth.uid ? <MyMenu/> : null
+  const { auth, history } = props;
+  const isLogged = auth.uid ? <MyMenu history={history}/> : null
   console.log('authUid', auth.uid);
   return (
     <nav>

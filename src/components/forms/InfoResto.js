@@ -55,11 +55,12 @@ class InfoResto extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.createRestaurant(this.state);
+    console.log('restaurant created', this.state)
   };
 
   render() {
     const { classes, auth } = this.props;
-    console.log("inforesto uid", auth.uid);
+    console.log("auth uid", auth.uid);
 
     // if (!auth.uid) return <Redirect to='/signin' />
 
