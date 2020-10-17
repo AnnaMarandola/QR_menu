@@ -14,6 +14,7 @@ import { NavLink } from "react-router-dom";
 const styles = (theme) => ({
   root: {
     maxWidth: 345,
+    marginTop: '1rem'
   },
   media: {
     height: 140,
@@ -27,7 +28,7 @@ const RestaurantSummary = ({ restaurant, classes }) => {
       <Card className={classes.root}>
         <CardActionArea>
           <Typography gutterBottom variant="h5" >
-            Le  de votre carte:
+            Votre établissement :
           </Typography>
            <CardMedia
             className={classes.media}

@@ -4,7 +4,7 @@ import { Typography, Radio, Button, Card } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import TemplateCarroussel from "../TemplateCarroussel";
+import TemplateCarroussel from "../forms/TemplateCarroussel";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {updateRestaurant} from '../../store/actions/restaurantActions';
 

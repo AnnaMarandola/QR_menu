@@ -6,6 +6,7 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 import TemplateSummary from "./TemplateSummary";
+import MenuLinks from "./MenuLinks";
 
 const styles = (theme) => ({});
 
@@ -22,6 +23,7 @@ const Dashboard = ({ restaurants, auth, profile }) => {
     <div>
       {restaurants &&
       <div>
+            <MenuLinks restaurant={restaurant}/>
             <RestaurantSummary restaurant={restaurant} />
             <TemplateSummary restaurant={restaurant} />
       </div>

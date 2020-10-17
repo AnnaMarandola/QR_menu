@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import TemplateForm from "./forms/TemplateForm";
+import TemplateForm from "../forms/TemplateForm";
 
 function TemplatePage() {
   return (

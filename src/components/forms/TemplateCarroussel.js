@@ -1,8 +1,8 @@
 import React from "react";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
-import Temp1 from "../assets/templates/snapshotTemp1.png";
-import Temp2 from "../assets/templates/snapshotTemp2.png";
-import Temp3 from "../assets/templates/snapshotTemp3.png";
+import Temp1 from "../../assets/templates/snapshotTemp1.png";
+import Temp2 from "../../assets/templates/snapshotTemp2.png";
+import Temp3 from "../../assets/templates/snapshotTemp3.png";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
