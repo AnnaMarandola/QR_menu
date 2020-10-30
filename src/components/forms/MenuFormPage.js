@@ -7,12 +7,16 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Button, Typography } from "@material-ui/core";
 import CreateMenu from "./CreateMenu";
+import TitleForm from "./TitleForm";
 
 const styles = (theme) => ({
   root: {
     width: "95%",
     marginLeft: "2.5%",
   },
+  titlePage: {
+    marginBottom: '2rem',
+  }
 });
 
 const MenuFormPage = ({ classes, restaurants, auth, profile, menus }) => {
@@ -28,6 +32,7 @@ const MenuFormPage = ({ classes, restaurants, auth, profile, menus }) => {
 
   return (
     <div className={classes.root}>
+    <Typography className={classes.titlePage} variant='h1'>Votre carte</Typography>
       {restaurant && !menu ? (
         <CreateMenu restaurant={restaurant} />
       ) : (
@@ -35,7 +40,7 @@ const MenuFormPage = ({ classes, restaurants, auth, profile, menus }) => {
       )}
       {restaurant && menu &&
       restaurant.template === "template3" ? (
-        <Typography>Donnez un titre à votre carte</Typography>
+        <TitleForm menu={menu} restaurant={restaurant}/>
       ) : null}
     </div>
   );
