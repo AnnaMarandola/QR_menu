@@ -44,7 +44,6 @@ const AddNewDish = ({classes, restaurant}) => {
     console.log("restaurant in AddNewDish", restaurant )
   return (
     <div className={classes.root}>
-        <Typography variant="h1">Votre carte</Typography>
         <Accordion className={classes.accordion}
 >
         <AccordionSummary

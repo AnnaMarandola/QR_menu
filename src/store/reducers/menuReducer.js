@@ -10,12 +10,12 @@ const initialState = {
       case "CREATE_MENU_ERROR":
         console.log("create menu error", action.err);
         return state;
-    //   case "UPDATE_RESTAURANT":
-    //     console.log("update restaurant success", action.restaurant);
-    //     return state;
-    //   case "UPDATE_RESTAURANT_ERROR":
-    //     console.log("update restaurant error", action.err);
-    //     return state;
+      case "UPDATE_MENU":
+        console.log("update menu success", action.menu);
+        return state;
+      case "UPDATE_MENU_ERROR":
+        console.log("update menu error", action.err);
+        return state;
       default:
         return state;
     }
