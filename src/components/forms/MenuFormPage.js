@@ -19,7 +19,7 @@ const MenuFormPage = ({ classes, restaurants, auth, profile, menus }) => {
 
   let restaurant =restaurants &&
     restaurants.find((restaurant) => restaurant.ownerId === auth.uid);
-    
+
   let menu = menus && menus.find((menu) => menu.restoId === restaurant.id);
 
   console.log("restaurant in menuformpage", restaurant && restaurant);
@@ -28,13 +28,12 @@ const MenuFormPage = ({ classes, restaurants, auth, profile, menus }) => {
 
   return (
     <div className={classes.root}>
-      {restaurant && !restaurant.menuId ? (
+      {restaurant && !menu ? (
         <CreateMenu restaurant={restaurant} />
       ) : (
         <AddNewDish restaurant={restaurant} />
       )}
-      {restaurant &&
-      restaurant.menuId &&
+      {restaurant && menu &&
       restaurant.template === "template3" ? (
         <Typography>Donnez un titre à votre carte</Typography>
       ) : null}
