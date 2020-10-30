@@ -66,10 +66,10 @@ const TitleForm = ({ classes, restaurant, menu, auth, updateMenu }) => {
             <TextField
             className={classes.input}
               id="title"
-              label="Nos salades,  grillades, pizzas ..."
+              label={ !menu.title ? "Nos salades,  grillades, pizzas ..." : menu.title }
               onChange={handleChange}
             />
-        <Button className={classes.addButton} onClick={setTitle}>valider</Button>
+        <Button className={classes.addButton} onClick={setTitle}>{ !menu.title ? "valider" : "modifier" }</Button>
           </Card>
     </div>
   );
