@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import Logo from "../../assets/LogoProject.png";
 import Handphone from "../../assets/handphone.png";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { signIn } from "../../store/actions/authActions";
+import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
 
 const styles = (theme) => ({
@@ -89,10 +94,13 @@ class SignIn extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
+    this.props.signIn(this.state);
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, authError, auth } = this.props;
+    if(auth.uid) return <Redirect to='/'/>
+
     return (
       <div className={classes.root}>
         <div className={classes.header}>
@@ -112,15 +120,21 @@ class SignIn extends Component {
             </Link>
           </div>
           <div className={classes.inputs}>
-            <TextField id="email" label="email" onChange={this.handleChange} />
+            <TextField id="email" type="email" label="email" onChange={this.handleChange} />
             <TextField
               id="password"
-              label="motdepasse"
+              type="password"
+              label="mot de passe"
               onChange={this.handleChange}
             />
+            { authError ? <Typography>{authError}</Typography> : null}
           </div>
           <div className={classes.buttonsContainer}>
-            <Button variant="contained" className={classes.connectionButton}>
+            <Button
+              type="submit"
+              variant="contained"
+              className={classes.connectionButton}
+            >
               connexion
             </Button>
             <Typography variant="h5" className={classes.separation}>
@@ -148,5 +162,26 @@ class SignIn extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  };
+};
 
-export default withStyles(styles)(SignIn);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => dispatch(signIn(creds)),
+  };
+};
+
+SignIn.propTypes = {
+  classes: PropTypes.object.isRequired,
+  authError: PropTypes.string,
+  auth: PropTypes.object,
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps)
+)(SignIn);

@@ -1,8 +1,18 @@
 import React, { Component } from "react";
-import { Typography, TextField, Button, FormControlLabel, Checkbox} from "@material-ui/core";
+import {
+  Typography,
+  TextField,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import Logo from "../../assets/LogoProject.png";
 import Handphone from "../../assets/handphone.png";
+import { Redirect } from "react-router-dom";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { signUp } from "../../store/actions/authActions";
 
 const styles = (theme) => ({
   root: {
@@ -76,8 +86,9 @@ const styles = (theme) => ({
 
 class SignUp extends Component {
   state = {
-    lastname: "",
-    firstname: "",
+    lastName: "",
+    firstName: "",
+    restoName: "",
     city: "",
     postalCode: null,
     email: "",
@@ -92,7 +103,7 @@ class SignUp extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.signUp(this.state);
   };
   acceptCGU = (e) => {
     this.setState({
@@ -101,7 +112,9 @@ class SignUp extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, auth, authError } = this.props;
+    if (auth.uid) return <Redirect to="/inforesto" />;
+
     return (
       <div className={classes.root}>
         <div className={classes.header}>
@@ -112,21 +125,45 @@ class SignUp extends Component {
           <Typography variant="h1">Créez votre compte</Typography>
 
           <div className={classes.inputs}>
-            <TextField id="name" label="nom" onChange={this.handleChange} />
             <TextField
-              id="firstname"
+              id="lastName"
+              type="text"
+              label="nom"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="firstName"
+              type="text"
               label="prénom"
               onChange={this.handleChange}
             />
-            <TextField id="email" label="email" onChange={this.handleChange} />
-            <TextField id="city" label="ville" onChange={this.handleChange} />
             <TextField
-              id="postcode"
+              id="email"
+              type="email"
+              label="email"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="restoName"
+              type="text"
+              label="nom de votre établissement"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="city"
+              type="text"
+              label="ville"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="postalCode"
+              type="number"
               label="code postal"
               onChange={this.handleChange}
             />
             <TextField
               id="password"
+              type="password"
               label="choisir un mot de passe"
               onChange={this.handleChange}
               className={classes.passwordInput}
@@ -134,20 +171,23 @@ class SignUp extends Component {
             <FormControlLabel
               control={
                 <Checkbox
+                  id="cguAccepted"
                   checked={this.cguAccepted}
+                  type="checkbox"
                   onChange={this.acceptCGU}
                   name="checkedA"
                 />
               }
               label="j'ai lu et j'accepte les CGU."
             />
+            {authError ? <Typography>{authError}</Typography> : null}
           </div>
 
           <div className={classes.buttonsContainer}>
-            <Button variant="contained" className={classes.connectionButton}>
+            <Button variant="contained" type="submit" className={classes.connectionButton}>
               valider
             </Button>
-            <Typography variant="h5" className={classes.separation}>
+            {/* <Typography variant="h5" className={classes.separation}>
               ou
             </Typography>
             <Button variant="contained" className={classes.googleButton}>
@@ -165,7 +205,7 @@ class SignUp extends Component {
                 className={classes.facebookIcon}
               />
               utiliser mon compte facebook
-            </Button>
+            </Button> */}
           </div>
         </form>
       </div>
@@ -173,4 +213,20 @@ class SignUp extends Component {
   }
 }
 
-export default withStyles(styles)(SignUp);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    authError: state.auth.authError,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (newUser) => dispatch(signUp(newUser)),
+  };
+};
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps)
+)(SignUp);

@@ -3,6 +3,8 @@ import { withStyles } from "@material-ui/core";
 import { Typography, TextField, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { createRestaurant } from "../../store/actions/restaurantActions";
+// import { Redirect } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {
@@ -34,6 +36,7 @@ const styles = (theme) => ({
 
 class InfoResto extends Component {
   state = {
+    ownerId: "",
     name: "",
     adress: "",
     city: "",
@@ -51,11 +54,16 @@ class InfoResto extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.createRestaurant(this.state);
+    console.log('restaurant created', this.state)
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, auth } = this.props;
+    console.log("auth uid", auth.uid);
+
+    // if (!auth.uid) return <Redirect to='/signin' />
+
     return (
       <div className={classes.root}>
         <form className={classes.form} onSubmit={this.handleSubmit}>
@@ -67,18 +75,51 @@ class InfoResto extends Component {
           </Typography>
 
           <div className={classes.inputs}>
-            <TextField id="name" label="nom de l'établisement" onChange={this.handleChange}/>
-            <TextField id="adress" label="adresse" onChange={this.handleChange}/>
-            <TextField id="city" label="ville" onChange={this.handleChange}/>
-            <TextField id="postalCode" label="code postal" onChange={this.handleChange}/>
-            <TextField id="phone" label="numéro de téléphone" onChange={this.handleChange}/>
-            <TextField id="logo" label="votre logo" onChange={this.handleChange}/>
-            <TextField id="instagram" label="votre instagram" onChange={this.handleChange}/>
-            <TextField id="facebook" label="votre facebook" onChange={this.handleChange}/>
+            <TextField
+              id="name"
+              label="nom de l'établisement"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="adress"
+              label="adresse"
+              onChange={this.handleChange}
+            />
+            <TextField id="city" label="ville" onChange={this.handleChange} />
+            <TextField
+              id="postalCode"
+              label="code postal"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="phone"
+              label="numéro de téléphone"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="logo"
+              label="votre logo"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="instagram"
+              label="votre instagram"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="facebook"
+              label="votre facebook"
+              onChange={this.handleChange}
+            />
           </div>
 
           <div className={classes.buttonsContainer}>
-            <Button variant="contained" className={classes.validationButton}>
+            <Button
+              variant="contained"
+              type="submit"
+              className={classes.validationButton}
+              onClick={this.handleSubmit}
+            >
               valider
             </Button>
           </div>
@@ -87,10 +128,19 @@ class InfoResto extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
-    restaurants: state.restaurant.restaurants,
+    auth: state.firebase.auth,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createRestaurant: (restaurant) => dispatch(createRestaurant(restaurant)),
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps))(InfoResto);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps)
+)(InfoResto);

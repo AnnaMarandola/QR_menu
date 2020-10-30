@@ -1,10 +1,20 @@
 import React from "react";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
-import Temp1 from "../assets/templates/snapshotTemp1.png";
-import Temp2 from "../assets/templates/snapshotTemp2.png";
-import Temp3 from "../assets/templates/snapshotTemp3.png";
+import Temp1 from "../../assets/templates/snapshotTemp1.png";
+import Temp2 from "../../assets/templates/snapshotTemp2.png";
+import Temp3 from "../../assets/templates/snapshotTemp3.png";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
 
-const TemplateCarousel = ({ handleOpen, setHandleOpen, isMobile }) => {
+const TemplateCarousel = ({
+  handleOpen,
+  setHandleOpen,
+  isMobile,
+  auth,
+}) => {
+  console.log("auth in template carousel", auth.uid);
+
   return (
     <div className="App">
       <AutoRotatingCarousel
@@ -15,6 +25,7 @@ const TemplateCarousel = ({ handleOpen, setHandleOpen, isMobile }) => {
         mobile={isMobile}
         label="choisir ce menu"
         style={{ postion: "absolute" }}
+
       >
         <Slide
           media={<img alt="something" src={Temp1} />}
@@ -22,11 +33,7 @@ const TemplateCarousel = ({ handleOpen, setHandleOpen, isMobile }) => {
           contentStyle={{ backgroundColor: "#4cead5" }}
           title="La carte complète"
           subtitle="Une page dynamique avec des rubriques déroulantes"
-        >
-          <div>
-            <h3>title</h3>
-          </div>
-        </Slide>
+        ></Slide>
         <Slide
           media={<img alt="something" src={Temp2} />}
           mediaBackgroundStyle={{ backgroundColor: "#F89F1D" }}
@@ -46,4 +53,14 @@ const TemplateCarousel = ({ handleOpen, setHandleOpen, isMobile }) => {
   );
 };
 
-export default TemplateCarousel;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    restaurants: state.firestore.ordered.restaurants,
+  };
+};
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "restaurants" }])
+)(TemplateCarousel);

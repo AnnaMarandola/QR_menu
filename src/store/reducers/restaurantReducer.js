@@ -1,12 +1,24 @@
 const initialState = {
-    restaurants: [
-      {id: '1', name: 'Chez Jeannot', adress: '8 rue du chamboule-tout', postalCode: 31200, city: 'Toulouse', phoneContact: '05.21.58.36.99', facebook: 'https://fr-fr.facebook.com/', instagram: 'https://www.instagram.com/?hl=fr', logo: ''},
-      {id: '2', name: 'Chez Tatave', adress: '8 rue de la tortue', postalCode: 31200, city: 'Toulouse', phoneContact: '05.21.58.36.99', facebook: 'https://fr-fr.facebook.com/', instagram: 'https://www.instagram.com/?hl=fr', logo: ''},
-      {id: '3', name: 'Chez Gino', adress: '8 rue de la tapenade', postalCode: 31200, city: 'Toulouse', phoneContact: '05.21.58.36.99', facebook: 'https://fr-fr.facebook.com/', instagram: 'https://www.instagram.com/?hl=fr', logo: ''}
-    ]
+  restaurants: [
+  ],
 };
-const authReducer = (state = initialState, action) => {
-  return state;
+const restaurantReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "CREATE_RESTAURANT":
+      console.log("created restaurant", action.restaurant);
+      return state;
+    case "CREATE_RESTAURANT_ERROR":
+      console.log("create restaurant error", action.err);
+      return state;
+    case "UPDATE_RESTAURANT":
+      console.log("update restaurant success", action.restaurant);
+      return state;
+    case "UPDATE_RESTAURANT_ERROR":
+      console.log("update restaurant error", action.err);
+      return state;
+    default:
+      return state;
+  }
 };
 
-export default authReducer;
+export default restaurantReducer;
