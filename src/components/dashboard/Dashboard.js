@@ -21,13 +21,11 @@ const Dashboard = ({ restaurants, auth, profile }) => {
   if(!auth.uid) return <Redirect to='/signin'/>
   return (
     <div>
-      {restaurants &&
       <div>
             <MenuLinks restaurant={restaurant}/>
             <RestaurantSummary restaurant={restaurant} />
             <TemplateSummary restaurant={restaurant} />
       </div>
-        };
     </div>)
 }
 

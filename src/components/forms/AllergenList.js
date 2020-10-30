@@ -15,8 +15,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // width: "100%",
-    backgroundColor: theme.palette.whiteish,
+    width: "98%",
+    backgroundColor: 'white',
   },
   heading: {
 
@@ -43,7 +43,7 @@ function AllergenList() {
 
   return (
     <div className={classes.root}>
-      <Accordion>
+      <Accordion className={classes.root}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

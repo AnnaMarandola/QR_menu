@@ -1,57 +1,51 @@
 import React from "react";
-import { Button, TextField, Typography } from "@material-ui/core";
-import AllergenList from "./AllergenList";
 import { withStyles } from "@material-ui/styles";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AddNewDish from "./AddNewDish";
+import { compose } from "redux";
 
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { Button, Typography } from "@material-ui/core";
+import CreateMenu from "./CreateMenu";
 
 const styles = (theme) => ({
   root: {
-    width: '95%',
-    marginLeft: '2.5%'
+    width: "95%",
+    marginLeft: "2.5%",
   },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  input: {
-    width: '90%'
-  }
-
 });
 
-
-const MenuFormPage = ({classes}) => {
+const MenuFormPage = ({ classes, restaurants, auth, profile }) => {
+  let restaurant =
+    restaurants &&
+    restaurants.find((restaurant) => restaurant.ownerId === auth.uid);
+  console.log("restaurant in menuformpage", restaurant && restaurant);
+  console.log("profile in menuformpage", profile);
   return (
     <div className={classes.root}>
-        <Typography variant="h1">Votre carte</Typography>
-        <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>ajouter un plat</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-
-      <form className={classes.form}>
-          <TextField className={classes.input} id="name" label="nom du plat" />
-          <TextField className={classes.input} id="ingredients" label="ingredients" />
-          <TextField className={classes.input} id="description" label="description" />
-          <AllergenList />
-          <TextField className={classes.input} id="price" label="prix" />
-      <Button>ajouter à mon menu</Button>
-      </form>
-      </AccordionDetails>
-      </Accordion>
-
+      {restaurant && !restaurant.menuId ? 
+        <CreateMenu restaurant={restaurant}/>
+       : 
+        <AddNewDish restaurant={restaurant} />
+      }
+      {restaurant && restaurant.menuId && restaurant.template === "template3" ? 
+        <Typography>Donnez un titre à votre carte</Typography>
+       : null}
     </div>
   );
 };
 
-export default withStyles(styles)(MenuFormPage);
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    restaurants: state.firestore.ordered.restaurants,
+    auth: state.firebase.auth,
+    profile: state.firebase.profile,
+  };
+};
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "restaurants" }])
+)(MenuFormPage);

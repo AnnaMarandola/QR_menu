@@ -11,7 +11,7 @@ const restaurantReducer = (state = initialState, action) => {
       console.log("create restaurant error", action.err);
       return state;
     case "UPDATE_RESTAURANT":
-      console.log("update restaurant", action.restaurant);
+      console.log("update restaurant success", action.restaurant);
       return state;
     case "UPDATE_RESTAURANT_ERROR":
       console.log("update restaurant error", action.err);

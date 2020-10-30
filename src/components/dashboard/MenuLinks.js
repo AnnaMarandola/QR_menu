@@ -14,6 +14,8 @@ import { NavLink } from "react-router-dom";
 const styles = (theme) => ({
   root: {
     maxWidth: 345,
+    backgroundColor: 'white',
+
   },
   media: {
     height: 140,

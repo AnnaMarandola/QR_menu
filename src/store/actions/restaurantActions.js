@@ -8,6 +8,7 @@ export const createRestaurant = (restaurant) => {
       .add({
         ...restaurant,
         ownerId: ownerId,
+        ownerRef: firestore.collection('users').doc(ownerId),
         createAt: new Date(),
       })
       .then(() => {

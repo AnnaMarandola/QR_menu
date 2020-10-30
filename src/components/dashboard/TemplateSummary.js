@@ -12,9 +12,11 @@ import TEMP3 from "../../assets/templates/snapshotTemp3.png";
 
 
 const styles = (theme) => ({
+
   root: {
+    backgroundColor: 'white',
     maxWidth: 345,
-    marginTop: '1rem'
+    marginTop: '1rem',
   },
   media: {
     height: 140,
@@ -22,11 +24,20 @@ const styles = (theme) => ({
   templatePic: {
     width: '40%',
     marginLeft: '30%'
-  }
+  },
+  modifyButton: {
+    backgroundColor: theme.palette.primary.orange,
+    padding: '0, 1.5rem, 0, 1.5rem',
+    color: theme.palette.primary.whiteish,
+    margin: '0.5rem',
+  },
+  links: {
+    textDecoration: 'none',
+  }, 
 });
 
 const RestaurantSummary = ({ restaurant, classes }) => {
-  const { template } = restaurant;
+  const { template } = restaurant || false;
 
   const getImage = (template) => {
   if(template === "template1"){
@@ -35,7 +46,7 @@ const RestaurantSummary = ({ restaurant, classes }) => {
   if(template === "template2"){
     return TEMP2
   }
-  if(template === "template"){
+  if(template === "template3"){
     return TEMP3
   }
   else {return null}
@@ -44,6 +55,7 @@ const RestaurantSummary = ({ restaurant, classes }) => {
 
   return (
     <div>
+    { restaurant &&
       <Card className={classes.root}>
           <Typography gutterBottom variant="h5">
             Modèle choisi :
@@ -52,14 +64,15 @@ const RestaurantSummary = ({ restaurant, classes }) => {
             <Typography gutterBottom variant="h5">
               {restaurant.template}
             </Typography>
-          <NavLink to="/templatechoice">
-            <Button size="small" color="primary">
+          <NavLink className={classes.links} to="/templatechoice">
+            <Button className={classes.modifyButton}>
               Modifier
             </Button>
           </NavLink>
       </Card>
+    }
     </div>
-  );
+  )
 };
 
 export default withStyles(styles)(RestaurantSummary);
