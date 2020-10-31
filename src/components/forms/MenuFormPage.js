@@ -36,7 +36,7 @@ const MenuFormPage = ({ classes, restaurants, auth, profile, menus }) => {
       {restaurant && !menu ? (
         <CreateMenu restaurant={restaurant} />
       ) : (
-        <AddNewDish restaurant={restaurant} />
+        <AddNewDish restaurant={restaurant} menu={menu} />
       )}
       {restaurant && menu &&
       restaurant.template === "template3" ? (

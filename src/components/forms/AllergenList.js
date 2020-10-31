@@ -71,7 +71,6 @@ function AllergenList() {
               "sulfites",
               "soja",
             ].map((value) => {
-              console.log("alleergen value", value);
               const labelId = `checkbox-list-secondary-label-${value}`;
               return (
                 <ListItem key={value} button>

@@ -61,7 +61,7 @@ const TitleForm = ({ classes, restaurant, menu, auth, updateMenu }) => {
     <div>
           <Card className={classes.root}>
           <Typography className={classes.titleSection} gutterBottom variant="h2">
-              Donnez un titre à votre carte :
+          { !menu.title ? "Donnez un titre à votre carte" : "Modifier le titre de ma carte" }
             </Typography>            
             <TextField
             className={classes.input}

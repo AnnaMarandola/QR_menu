@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
-import { Typography, TextField, Button } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { createRestaurant } from "../../store/actions/restaurantActions";
 import { createMenu } from "../../store/actions/menuActions";
 // import { Redirect } from "react-router-dom";
 
