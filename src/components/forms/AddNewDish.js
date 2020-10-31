@@ -12,6 +12,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
+import { createDish } from "../../store/actions/dishActions";
+import { compose } from "redux";
+import { connect } from "react-redux";
 
 const styles = (theme) => ({
   root: {
@@ -41,8 +44,8 @@ const styles = (theme) => ({
   },
   rootAllergens: {
     width: "94%",
-    marginTop: '1rem',
-    backgroundColor: 'white',
+    marginTop: "1rem",
+    backgroundColor: "white",
   },
 });
 
@@ -81,12 +84,12 @@ class AddNewDish extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.props.createRestaurant(this.state);
-    console.log("restaurant created", this.state);
+    this.props.createDish(this.state);
+    console.log("dish created", this.state);
   };
 
   render() {
-    const { classes, restaurant, menu } = this.props;
+    const { classes, auth, restaurant, menu } = this.props;
     console.log("restaurant id in AddNewDish", restaurant && restaurant.id);
     console.log("menu ID in AddNewDish", menu && menu.id);
 
@@ -170,7 +173,10 @@ class AddNewDish extends Component {
                             <Checkbox
                               edge="end"
                               onChange={this.handleToggle(value)}
-                              checked={this.state.checkedAllergens.indexOf(value) !== -1}
+                              checked={
+                                this.state.checkedAllergens.indexOf(value) !==
+                                -1
+                              }
                               inputProps={{ "aria-labelledby": labelId }}
                             />
                           </ListItemSecondaryAction>
@@ -195,4 +201,18 @@ class AddNewDish extends Component {
   }
 }
 
-export default withStyles(styles)(AddNewDish);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createDish: (dish) => dispatch(createDish(dish)),
+  };
+};
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps)
+)(AddNewDish);
