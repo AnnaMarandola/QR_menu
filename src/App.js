@@ -9,6 +9,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import UserIsAuthenticated from "./HOC/UserIsAuthenticated";
 import WithTopBar from "./HOC/WithTopBar";
 import MenuFormPage from "./components/forms/MenuFormPage";
+import MenuPage from "./components/menu/MenuPage";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
           path="/menuform"
           component={UserIsAuthenticated(WithTopBar(MenuFormPage))}
         />
-        {/* <MenuForm path="/menupage" component={MenuPage} /> */}
+        <Route path="/menupage/:id" component={UserIsAuthenticated(MenuPage)} />
       </Switch>
     </BrowserRouter>
   );

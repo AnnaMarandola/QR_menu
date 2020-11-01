@@ -39,7 +39,11 @@ const styles = (theme) => ({
   }, 
 });
 
-const MenuChipSet = ({ restaurant, classes }) => {
+const MenuLinks = ({ restaurant, classes }) => {
+  console.log("restaurant in menu link", restaurant)
+  const restoId = restaurant && restaurant.id 
+  console.log("restoId in menulinks", restoId)
+
 
   return (
     <div>
@@ -49,10 +53,10 @@ const MenuChipSet = ({ restaurant, classes }) => {
             Votre carte
           </Typography>
           <CardContent className={classes.cardButtons}>
-          <NavLink className={classes.links} to="/menuform">
+          <NavLink className={classes.links} to="/menuform" restaurant={restaurant}>
           <Button className={classes.modifyButton}>Modifier</Button>
           </NavLink>
-          <NavLink className={classes.links} to="/menuform">
+          <NavLink className={classes.links} to={`/menupage/${restoId}`} restaurant={restaurant}>
           <Button className={classes.showButton}>Consulter</Button>
           </NavLink>
           </CardContent>
@@ -64,4 +68,4 @@ const MenuChipSet = ({ restaurant, classes }) => {
   );
 };
 
-export default withStyles(styles)(MenuChipSet);
+export default withStyles(styles)(MenuLinks);
