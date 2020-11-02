@@ -8,7 +8,7 @@ import { Fade, withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/authActions";
-import { MENU } from "../../assets/menu-icon.png";
+import  MENU  from "../../assets/menu-icon.png";
 
 const styles = (theme) => ({
   root: {
