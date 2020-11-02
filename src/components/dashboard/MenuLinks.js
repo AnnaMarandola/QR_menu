@@ -39,10 +39,10 @@ const styles = (theme) => ({
   }, 
 });
 
-const MenuChipSet = ({ restaurant, classes, menuId }) => {
+const MenuChipSet = ({ restaurant, classes, menu }) => {
   console.log("==============restaurant in menu link", restaurant)
   const restoId = restaurant && restaurant.id 
-  console.log("==============menu in menu link", menuId)
+  const menuId = menu && menu.id
   console.log("=============restoId in menulinks", restoId)
   console.log("==============menu in menulinks", menuId)
 
@@ -58,7 +58,7 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
           <Button className={classes.modifyButton}>Modifier</Button>
           </NavLink>
           
-          <NavLink className={classes.links} to={`/menupage/${restoId}`}>
+          <NavLink className={classes.links} to={`/menupage/${restoId}/${menuId}`}>
           <Button className={classes.showButton}>Consulter</Button>
           </NavLink>
           </CardContent>

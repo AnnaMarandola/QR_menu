@@ -14,14 +14,14 @@ const Dashboard = ({ restaurant, auth, profile, menus }) => {
   console.log("restaurant in dashboard", restaurant);
   console.log("auth dashboard", auth);
   console.log("*************menus in dashboard", menus);
-  let menuId = menus && menus.find((menu) => menu.restoId === restaurant.id)
-  console.log("+++++++++++++menu in dashboard",  menuId);
+  let menu = menus && menus.find((menu) => menu.restoId === restaurant.id)
+  console.log("+++++++++++++menu in dashboard",  menu);
 
   if (!auth.uid) return <Redirect to="/signin" />;
   return (
     <div>
       <div>
-        <MenuLinks restaurant={restaurant} menu={menuId} />
+        <MenuLinks restaurant={restaurant} menu={menu} />
         <RestaurantSummary restaurant={restaurant} />
         <TemplateSummary restaurant={restaurant} />
       </div>
