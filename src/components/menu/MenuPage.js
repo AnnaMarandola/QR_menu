@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase"
-
+import { firestoreConnect } from "react-redux-firebase";
+import DishList from "./DishList";
 
 const styles = (theme) => ({
   root: {
@@ -27,36 +27,34 @@ const styles = (theme) => ({
     paddingBottom: "1rem",
   },
   restoName: {
-    marginTop: "3rem"
+    marginTop: "3rem",
   },
-  menuContent: {},
+  menuContent: {
+
+  },
   menuTitle: {
     marginTop: "2rem",
-    display: "flex",
-    justifyContent: "center",
+    textAlign: "center"
   },
 });
 
 class MenuPage extends Component {
-
   componentDidMount() {
     const restoId = this.props.match.params.id;
     console.log("restoId in componentDIdMount", restoId);
   }
 
   componentDidUpdate() {
-      const menuId = this.props.restaurant.menuId;
-      console.log("menuId in componentDIdMount", menuId);
-
+    const menuId = this.props.restaurant.menuId;
+    console.log("menuId in componentDIdMount", menuId);
   }
 
   render() {
-    const { classes, restaurant, auth, menu } = this.props;
-    console.log("AUTH in menuPage", auth);
-    const resto = {...restaurant}
-    console.log("RESTO IN MENUPAGE", resto)
-    const menuData = {...menu}
-    console.log("MENU IN MENUPAGE", menuData)
+    const { classes, restaurant, menu } = this.props;
+    const resto = { ...restaurant };
+    console.log("RESTO IN MENUPAGE", resto);
+    const menuData = { ...menu };
+    console.log("MENU IN MENUPAGE", menuData);
 
     return (
       <div className={classes.root}>
@@ -68,7 +66,10 @@ class MenuPage extends Component {
         </div>
         <div className={classes.restoContact}>
           <Typography variant="body1"> {resto.adress} </Typography>
-          <Typography variant="body1"> {resto.postalCode}  {resto.city} </Typography>
+          <Typography variant="body1">
+            {" "}
+            {resto.postalCode} {resto.city}{" "}
+          </Typography>
           <Typography variant="body1"> {resto.phone} </Typography>
           <Typography variant="body1"> {resto.email} </Typography>
         </div>
@@ -76,6 +77,7 @@ class MenuPage extends Component {
           <Typography variant="h1" className={classes.menuTitle}>
             {resto.template === "template3" ? menuData.title : "La carte"}
           </Typography>
+          <DishList menu={menuData}/>
         </div>
       </div>
     );
@@ -85,22 +87,24 @@ class MenuPage extends Component {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    auth: state.firebase.auth,
-    restaurant: state.firestore.ordered.restaurants && state.firestore.ordered.restaurants[0],
+    restaurant:
+      state.firestore.ordered.restaurants &&
+      state.firestore.ordered.restaurants[0],
     menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
   };
 };
 
-export default compose(withStyles(styles),
-connect(mapStateToProps),
-firestoreConnect(props => [
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps),
+  firestoreConnect((props) => [
     {
-    collection: "restaurants",
-    doc: props.restoId,
+      collection: "restaurants",
+      doc: props.restoId,
     },
     {
-        collection: "menus",
-        doc: props.menuId
-    }
-])
+      collection: "menus",
+      doc: props.menuId,
+    },
+  ])
 )(MenuPage);

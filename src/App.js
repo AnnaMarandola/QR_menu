@@ -31,7 +31,7 @@ function App() {
           component={UserIsAuthenticated(WithTopBar(Dashboard))}
         />
         <Route
-          path="/menuform"
+          path="/menuform/:id"
           component={UserIsAuthenticated(WithTopBar(MenuFormPage))}
         />
         <Route path="/menupage/:id" component={UserIsAuthenticated(MenuPage)} />
