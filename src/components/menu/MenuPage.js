@@ -38,15 +38,25 @@ const styles = (theme) => ({
 });
 
 class MenuPage extends Component {
+
   componentDidMount() {
     const restoId = this.props.match.params.id;
     console.log("restoId in componentDIdMount", restoId);
   }
 
+  componentDidUpdate() {
+      const menuId = this.props.restaurant.menuId;
+      console.log("menuId in componentDIdMount", menuId);
+
+  }
+
   render() {
-    const { classes, restaurant, auth } = this.props;
+    const { classes, restaurant, auth, menu } = this.props;
     console.log("AUTH in menuPage", auth);
     const resto = {...restaurant}
+    console.log("RESTO IN MENUPAGE", resto)
+    const menuData = {...menu}
+    console.log("MENU IN MENUPAGE", menuData)
 
     return (
       <div className={classes.root}>
@@ -64,7 +74,7 @@ class MenuPage extends Component {
         </div>
         <div className={classes.menuContent}>
           <Typography variant="h1" className={classes.menuTitle}>
-            Nos salades
+            {resto.template === "template3" ? menuData.title : "La carte"}
           </Typography>
         </div>
       </div>
@@ -77,6 +87,7 @@ const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
     restaurant: state.firestore.ordered.restaurants && state.firestore.ordered.restaurants[0],
+    menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
   };
 };
 
@@ -86,6 +97,10 @@ firestoreConnect(props => [
     {
     collection: "restaurants",
     doc: props.restoId,
+    },
+    {
+        collection: "menus",
+        doc: props.menuId
     }
 ])
 )(MenuPage);

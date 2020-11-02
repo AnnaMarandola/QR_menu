@@ -5,7 +5,7 @@ import { compose } from "redux";
 
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Button, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import CreateMenu from "./CreateMenu";
 import TitleForm from "./TitleForm";
 
