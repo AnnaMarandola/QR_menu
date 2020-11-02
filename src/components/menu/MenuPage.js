@@ -1,79 +1,91 @@
 import { Typography } from "@material-ui/core";
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
-import logo from "../../assets/GoogleIcon.png";
+import { firestoreConnect } from "react-redux-firebase"
+
 
 const styles = (theme) => ({
-    root: {
-        width: "100%"
-    },
-    menuHearder: {
-        backgroundColor: theme.palette.primary.red,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-    },
-    logo: {
-        maxWidth: "35%",
-        marginTop: "2rem",
-    },
-    restoContact: {
-        backgroundColor: theme.palette.primary.red,
-        display: "flex",
-        paddingTop: "2rem",
-        justifyContent: "center",
-        paddingBottom: "1rem",
-
-    },
-    menuContent: {
-
-    },
-    menuTitle: {
-        marginTop: "2rem",
-        display: "flex",
-        justifyContent: "center",
-
-    }
+  root: {
+    width: "100%",
+  },
+  menuHearder: {
+    backgroundColor: theme.palette.primary.red,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  logo: {
+    maxWidth: "55%",
+  },
+  restoContact: {
+    backgroundColor: theme.palette.primary.red,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    paddingBottom: "1rem",
+  },
+  restoName: {
+    marginTop: "3rem"
+  },
+  menuContent: {},
+  menuTitle: {
+    marginTop: "2rem",
+    display: "flex",
+    justifyContent: "center",
+  },
 });
 
-const MenuPage = ({ classes, restaurant, auth, profile, match }) => {
-  console.log("restaurant in menuPage", restaurant);
-  console.log("AUTH in menuPage", auth);
-  const restoIdinParams = match.params.id
-  console.log("params id", restoIdinParams)
-  return (
-    <div className={classes.root}>
-      <div className={classes.menuHearder}>
-        <img className={classes.logo} src={logo} alt="logo" />
-        <Typography className={classes.restoName} variant="h1">
-          Resto name
-        </Typography>
-      </div>
-      <div className={classes.restoContact}>
-        <Typography variant="body1"> adress </Typography>
-        <Typography variant="body1"> postal code - city </Typography>
-        <Typography variant="body1"> phone number </Typography>
-        <Typography variant="body1"> email contact </Typography>
-        </div>
-      <div className={classes.menuContent}>
-            <Typography variant="h1" className={classes.menuTitle}>
-            Nos salades
-            </Typography>
-        </div>
-      </div>
+class MenuPage extends Component {
+  componentDidMount() {
+    const restoId = this.props.match.params.id;
+    console.log("restoId in componentDIdMount", restoId);
+  }
 
-  );
-};
+  render() {
+    const { classes, restaurant, auth } = this.props;
+    console.log("AUTH in menuPage", auth);
+    const resto = {...restaurant}
+
+    return (
+      <div className={classes.root}>
+        <div className={classes.menuHearder}>
+          <Typography className={classes.restoName} variant="h1">
+            {resto.name}
+          </Typography>
+          <img className={classes.logo} src={resto.logo} alt="logo" />
+        </div>
+        <div className={classes.restoContact}>
+          <Typography variant="body1"> {resto.adress} </Typography>
+          <Typography variant="body1"> {resto.postalCode}  {resto.city} </Typography>
+          <Typography variant="body1"> {resto.phone} </Typography>
+          <Typography variant="body1"> {resto.email} </Typography>
+        </div>
+        <div className={classes.menuContent}>
+          <Typography variant="h1" className={classes.menuTitle}>
+            Nos salades
+          </Typography>
+        </div>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   console.log(state);
   return {
     auth: state.firebase.auth,
-    profile: state.firebase.profile,
-    restaurants: state.firestore.ordered.restaurants,
+    restaurant: state.firestore.ordered.restaurants && state.firestore.ordered.restaurants[0],
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps))(MenuPage);
+export default compose(withStyles(styles),
+connect(mapStateToProps),
+firestoreConnect(props => [
+    {
+    collection: "restaurants",
+    doc: props.restoId,
+    }
+])
+)(MenuPage);
