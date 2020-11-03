@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
-import { Typography, TextField, Button } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { createRestaurant } from "../../store/actions/restaurantActions";
 import { createMenu } from "../../store/actions/menuActions";
 // import { Redirect } from "react-router-dom";
 
@@ -32,12 +31,13 @@ class CreateMenu extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.createMenu(this.state);
-    console.log('menu created', this.state)
+    console.log('menu created', this.state);
   };
 
   render() {
-    const { classes, auth, restaurant } = this.props;
+    const { classes, auth, restaurant, menu } = this.props;
     console.log("auth uid", auth.uid);
+    console.log("menu in create menu!!!!!!!!!", menu);
     console.log("restaurant.id in createmenu", restaurant.id);
 
     return (

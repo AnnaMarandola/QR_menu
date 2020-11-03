@@ -1,7 +1,7 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Backdrop} from '@material-ui/core'
-import { LOGO } from '../assets/LogoProject.png'
+import  LOGO  from '../assets/LogoProject.png'
 
 const useStyles = makeStyles (theme => ({
 

@@ -1,6 +1,5 @@
 const initialState = {
-  restaurants: [
-  ],
+  restaurants: [],
 };
 const restaurantReducer = (state = initialState, action) => {
   switch (action.type) {

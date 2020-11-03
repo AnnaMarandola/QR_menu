@@ -39,7 +39,8 @@ const styles = (theme) => ({
   }, 
 });
 
-const MenuChipSet = ({ restaurant, classes }) => {
+const MenuChipSet = ({ restaurant, classes, menuId }) => {
+  const restoId = restaurant && restaurant.id 
 
   return (
     <div>
@@ -49,10 +50,11 @@ const MenuChipSet = ({ restaurant, classes }) => {
             Votre carte
           </Typography>
           <CardContent className={classes.cardButtons}>
-          <NavLink className={classes.links} to="/menuform">
+          <NavLink className={classes.links} to={`/menuform/${menuId}`}>
           <Button className={classes.modifyButton}>Modifier</Button>
           </NavLink>
-          <NavLink className={classes.links} to="/menuform">
+          
+          <NavLink className={classes.links} to={`/menupage/${restoId}/${menuId}`}>
           <Button className={classes.showButton}>Consulter</Button>
           </NavLink>
           </CardContent>

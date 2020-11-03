@@ -10,11 +10,11 @@ import MenuLinks from "./MenuLinks";
 
 const styles = (theme) => ({});
 
-const Dashboard = ({ restaurants, auth, profile }) => {
-  console.log('restaurants', restaurants);
-  console.log('auth dashboard', auth);
-  let restaurant = restaurants && restaurants.find((restaurant) => restaurant.ownerId === auth.uid)
-  console.log('restaurant', restaurant);
+const Dashboard = ({ restaurant, auth, profile }) => {
+  console.log('8888888888888restaurant', restaurant);
+  console.log('88888888888auth dashboard', auth);
+  let menuId = restaurant && restaurant.menuId
+  console.log('8888888888888menuID', menuId);
   console.log('profile', profile)
   
 
@@ -22,7 +22,7 @@ const Dashboard = ({ restaurants, auth, profile }) => {
   return (
     <div>
       <div>
-            <MenuLinks restaurant={restaurant}/>
+            <MenuLinks restaurant={restaurant} menuId={menuId}/>
             <RestaurantSummary restaurant={restaurant} />
             <TemplateSummary restaurant={restaurant} />
       </div>
@@ -32,14 +32,30 @@ const Dashboard = ({ restaurants, auth, profile }) => {
 const mapStateToProps = (state) => {
   console.log(state)
   return {
-    restaurants: state.firestore.ordered.restaurants,
     auth: state.firebase.auth,
-    profile: state.firebase.profile
+    profile: state.firebase.profile,
+    restaurant:
+    state.firestore.ordered.restaurants &&
+    state.firestore.ordered.restaurants[0],
+    menu:
+    state.firestore.ordered.menus &&
+    state.firestore.ordered.menus[0],
+
+
   };
 };
 
 export default compose(
   withStyles(styles),
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "restaurants" }])
+  firestoreConnect((props) => [
+    {
+      collection: "restaurants",
+      where: ["ownerId", "==", props.auth.uid]
+    },
+    {
+      collection: "menus",
+      doc: props.menuId,
+    },
+  ])
 )(Dashboard);
