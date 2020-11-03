@@ -10,34 +10,38 @@ import MenuLinks from "./MenuLinks";
 
 const styles = (theme) => ({});
 
-const Dashboard = ({ restaurant, auth, profile, menus }) => {
-  console.log("restaurant in dashboard", restaurant);
-  console.log("auth dashboard", auth);
-  console.log("*************menus in dashboard", menus);
-  let menu = menus && menus.find((menu) => menu.restoId === restaurant.id)
-  console.log("+++++++++++++menu in dashboard",  menu);
+const Dashboard = ({ restaurant, auth, profile }) => {
+  console.log('8888888888888restaurant', restaurant);
+  console.log('88888888888auth dashboard', auth);
+  let menuId = restaurant && restaurant.menuId
+  console.log('8888888888888menuID', menuId);
+  console.log('profile', profile)
+  
 
-  if (!auth.uid) return <Redirect to="/signin" />;
+  if(!auth.uid) return <Redirect to='/signin'/>
   return (
     <div>
       <div>
-        <MenuLinks restaurant={restaurant} menu={menu} />
-        <RestaurantSummary restaurant={restaurant} />
-        <TemplateSummary restaurant={restaurant} />
+            <MenuLinks restaurant={restaurant} menuId={menuId}/>
+            <RestaurantSummary restaurant={restaurant} />
+            <TemplateSummary restaurant={restaurant} />
       </div>
-    </div>
-  );
-};
+    </div>)
+}
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  console.log(state)
   return {
-    restaurant:
-      state.firestore.ordered.restaurants &&
-      state.firestore.ordered.restaurants[0],
-    menus: state.firestore.ordered.menus,
     auth: state.firebase.auth,
     profile: state.firebase.profile,
+    restaurant:
+    state.firestore.ordered.restaurants &&
+    state.firestore.ordered.restaurants[0],
+    menu:
+    state.firestore.ordered.menus &&
+    state.firestore.ordered.menus[0],
+
+
   };
 };
 
@@ -47,10 +51,11 @@ export default compose(
   firestoreConnect((props) => [
     {
       collection: "restaurants",
-      where: [["ownerId", "==", props.auth.uid]],
+      where: ["ownerId", "==", props.auth.uid]
     },
     {
       collection: "menus",
+      doc: props.menuId,
     },
   ])
 )(Dashboard);

@@ -41,10 +41,10 @@ const styles = (theme) => ({
 class MenuPage extends Component {
   componentDidMount() {
     const restoId = this.props.match.params.resto;
-    console.log("88888888888888888888params in componentDIdMount", this.props.match.params);
-    console.log("88888888888888888888restoId in componentDIdMount", restoId);
+    console.log("MMMMMMMMMMMMMMMMparams in componentDIdMount", this.props.match.params);
+    console.log("MMMMMMMMMMMMMMrestoId in componentDIdMount", restoId);
     const menuId = this.props.match.params.menu;
-    console.log("88888888888888888888menuId in componentDIdMount", menuId);
+    console.log("MMMMMMMMMMMMMMMMmenuId in componentDIdMount", menuId);
   }
 
 

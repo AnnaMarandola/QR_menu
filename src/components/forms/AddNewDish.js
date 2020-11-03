@@ -50,6 +50,7 @@ const styles = (theme) => ({
 });
 
 class AddNewDish extends Component {
+  
   state = {
     restoId: "",
     menuId: "",
@@ -59,6 +60,7 @@ class AddNewDish extends Component {
     checkedAllergens: [],
     price: "",
   };
+
   
 
   handleChange = (e) => {
@@ -90,9 +92,10 @@ class AddNewDish extends Component {
   };
 
   render() {
-    const { classes, restaurant, menu } = this.props;
-    console.log("restaurant id in AddNewDish", restaurant && restaurant.id);
-    console.log("menu  in AddNewDish", menu && menu.id);
+    const { classes, restaurant } = this.props;
+    console.log("AAAAAAAAAAAAAAAArestaurant id in AddNewDish", restaurant && restaurant.id);
+    let menuId = restaurant && restaurant.menuId
+    console.log("AAAAAAAAAAAAAAAA menuId in restaurant", menuId )
 
     return (
       <div className={classes.root}>
