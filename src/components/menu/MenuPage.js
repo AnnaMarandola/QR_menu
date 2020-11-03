@@ -41,7 +41,6 @@ const styles = (theme) => ({
 class MenuPage extends Component {
   componentDidMount() {
     const restoId = this.props.match.params.resto;
-    console.log("MMMMMMMMMMMMMMMMparams in componentDIdMount", this.props.match.params);
     console.log("MMMMMMMMMMMMMMrestoId in componentDIdMount", restoId);
     const menuId = this.props.match.params.menu;
     console.log("MMMMMMMMMMMMMMMMmenuId in componentDIdMount", menuId);
@@ -50,11 +49,12 @@ class MenuPage extends Component {
 
 
   render() {
-    const { classes, restaurant, menu } = this.props;
+    const { classes, restaurant, menu, dishes } = this.props;
     const resto = { ...restaurant };
-    console.log("RESTO IN MENUPAGE", resto);
+    console.log("++++++++RESTO IN MENUPAGE", resto);
     const menuData = { ...menu };
-    console.log("MENU IN MENUPAGE", menuData);
+    console.log("+++++++++MENU IN MENUPAGE", menuData);
+
 
     return (
       <div className={classes.root}>
@@ -77,7 +77,17 @@ class MenuPage extends Component {
           <Typography variant="h1" className={classes.menuTitle}>
             {resto.template === "template3" ? menuData.title : "La carte"}
           </Typography>
-          <DishList menu={menuData}/>
+          { dishes && dishes.map((dish) => (
+          <DishList 
+           key={dish.id}
+           menu={menuData}
+           title={dish.dishName}
+           price={dish.price}
+           ingredients={dish.ingredients}
+           description={dish.description}
+           allergens={dish.checkedAllergens}
+           />
+          ))}
         </div>
       </div>
     );
@@ -90,8 +100,9 @@ const mapStateToProps = (state) => {
     restaurant:
       state.firestore.ordered.restaurants &&
       state.firestore.ordered.restaurants[0],
-    menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
-  };
+      menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
+      dishes: state.firestore.ordered.dishes
+    };
 };
 
 export default compose(
@@ -105,6 +116,9 @@ export default compose(
     {
       collection: "menus",
       doc: props.menuId,
+    },
+    {
+      collection: "dishes",
     },
   ])
 )(MenuPage);

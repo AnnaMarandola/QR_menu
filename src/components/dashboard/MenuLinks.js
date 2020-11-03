@@ -40,10 +40,7 @@ const styles = (theme) => ({
 });
 
 const MenuChipSet = ({ restaurant, classes, menuId }) => {
-  console.log("==============restaurant in menu link", restaurant)
   const restoId = restaurant && restaurant.id 
-  console.log("=============restoId in menulinks", restoId)
-  console.log("==============menuId in menulinks", menuId)
 
   return (
     <div>
