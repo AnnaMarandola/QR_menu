@@ -67,7 +67,7 @@ class AddNewDish extends Component {
     this.setState({
       [e.target.id]: e.target.value,
       restoId: this.props.restaurant.id,
-      menuId: this.props.menu.id,
+      menuId: this.props.restaurant.menuId,
     });
   };
 
