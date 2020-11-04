@@ -4,12 +4,12 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import SignIn from "./components/authentication/SignIn";
 import SignUp from "./components/authentication/SignUp";
 import InfoResto from "./components/forms/InfoResto";
-import TemplatePage from "./components/forms/TemplatePage";
 import Dashboard from "./components/dashboard/Dashboard";
 import UserIsAuthenticated from "./HOC/UserIsAuthenticated";
 import WithTopBar from "./HOC/WithTopBar";
 import MenuFormPage from "./components/forms/MenuFormPage";
 import MenuPage from "./components/menu/MenuPage";
+import TemplateForm from "./components/forms/TemplateForm";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         />
         <Route
           path="/templatechoice"
-          component={UserIsAuthenticated(WithTopBar(TemplatePage))}
+          component={UserIsAuthenticated(WithTopBar(TemplateForm))}
         />
         <Route
           exact

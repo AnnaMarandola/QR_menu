@@ -8,9 +8,13 @@ import { Redirect } from "react-router-dom";
 import TemplateSummary from "./TemplateSummary";
 import MenuLinks from "./MenuLinks";
 
-const styles = (theme) => ({});
+const styles = (theme) => ({
+  root: {
+    marginLeft: "0.5rem",
+  }
+});
 
-const Dashboard = ({ restaurant, auth, profile }) => {
+const Dashboard = ({ classes, restaurant, auth, profile }) => {
   console.log('8888888888888restaurant', restaurant);
   console.log('88888888888auth dashboard', auth);
   let menuId = restaurant && restaurant.menuId
@@ -21,7 +25,7 @@ const Dashboard = ({ restaurant, auth, profile }) => {
   if(!auth.uid) return <Redirect to='/signin'/>
   return (
     <div>
-      <div>
+      <div className={classes.root}>
             <MenuLinks restaurant={restaurant} menuId={menuId}/>
             <RestaurantSummary restaurant={restaurant} />
             <TemplateSummary restaurant={restaurant} />
