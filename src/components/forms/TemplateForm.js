@@ -23,12 +23,11 @@ const styles = (theme) => ({
     fontSize: "1.6rem",
     marginTop: "1rem",
   },
+  goodies: {
+    fontWeight: 600,
+  },
   textForm: {
     marginTop: "1rem",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: theme.palette.primary.seaBlue,
   },
   media: {
     height: 640,
@@ -41,6 +40,13 @@ const styles = (theme) => ({
   },
   separator: {
     margin: "2rem",
+  },
+  validateButton: {
+    backgroundColor: theme.palette.primary.main,
+    // padding: '0, 1.5rem, 0, 1.5rem',
+    color: theme.palette.primary.whiteish,
+    marginLeft: "70%",
+    marginBottom: "2rem",
   },
 });
 
@@ -62,18 +68,19 @@ const TemplateForm = ({ classes, restaurant, auth, updateRestaurant }) => {
     console.log("submited template", selectedTemplate);
   };
 
-
   console.log("selected template", selectedTemplate);
 
   return (
     <form className={classes.root}>
-    <div className={classes.introForm}>
-    <Typography variant="h1" className={classes.titleForm}>Selectionnez le design adapté à votre menu .</Typography>
-    <Typography variant="body1" className={classes.textForm}>
-    Pour tous les designs :
-      <li>Un nombre illimités de plats</li>
-      <li>L'affichage des allergènes</li>
-    </Typography>
+      <div className={classes.introForm}>
+        <Typography variant="h1" className={classes.titleForm}>
+          Selectionnez le design adapté à votre menu .
+        </Typography>
+        <Typography variant="body2" className={classes.textForm}>
+          Tous les designs disposent d'
+          <span className={classes.goodies}>un nombre illimité de plats </span>
+           et de l'<span className={classes.goodies}>affichage des allergènes !</span>
+        </Typography>
       </div>
       <div className={classes.cardSection}>
         <TemplateCard
@@ -139,7 +146,9 @@ const TemplateForm = ({ classes, restaurant, auth, updateRestaurant }) => {
         </div>
       </div>
       <hr className={classes.separator} />
-      <Button onClick={selectTemplate}>valider</Button>
+      <Button className={classes.validateButton} onClick={selectTemplate}>
+        valider
+      </Button>
     </form>
   );
 };
