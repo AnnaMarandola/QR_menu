@@ -28,11 +28,13 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.primary.orange,
     padding: '0, 1.5rem, 0, 1.5rem',
     color: theme.palette.primary.whiteish,
+    marginRight: "1rem",
   },
   showButton: {
     backgroundColor: theme.palette.primary.main,
     padding: '0, 1.5rem, 0, 1.5rem',
     color: theme.palette.primary.whiteish,
+    marginLeft: "1rem",
   },
   links: {
     textDecoration: 'none',
@@ -47,9 +49,11 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
       <Card className={classes.root}>
         <CardActionArea>
           <Typography gutterBottom variant="h5">
-            Votre carte
+            Ma carte
           </Typography>
           <CardContent className={classes.cardButtons}>
+          { restaurant && restaurant.template ?
+          <div>
           <NavLink className={classes.links} to={`/menuform/${menuId}`}>
           <Button className={classes.modifyButton}>Modifier</Button>
           </NavLink>
@@ -57,6 +61,12 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
           <NavLink className={classes.links} to={`/menupage/${restoId}/${menuId}`}>
           <Button className={classes.showButton}>Consulter</Button>
           </NavLink>
+          </div>
+          : <div>
+          <NavLink className={classes.links} to='/templatechoice'>
+          <Button className={classes.showButton}>Choisir un design</Button>
+          </NavLink>
+          </div>}
           </CardContent>
         </CardActionArea>
         <CardActions>

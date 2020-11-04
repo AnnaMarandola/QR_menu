@@ -4,9 +4,9 @@ import { Typography, Radio, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { updateRestaurant } from "../../store/actions/restaurantActions";
 import TemplateCard from "./TemplateCard";
+import { Redirect } from "react-router-dom";
 import TEMP1 from "../../assets/templates/snapshotTemp1.png";
 import TEMP2 from "../../assets/templates/snapshotTemp2.png";
 import TEMP3 from "../../assets/templates/snapshotTemp3.png";
@@ -43,7 +43,6 @@ const styles = (theme) => ({
   },
   validateButton: {
     backgroundColor: theme.palette.primary.main,
-    // padding: '0, 1.5rem, 0, 1.5rem',
     color: theme.palette.primary.whiteish,
     marginLeft: "70%",
     marginBottom: "2rem",
@@ -57,6 +56,7 @@ const TemplateForm = ({ classes, restaurant, auth, updateRestaurant }) => {
   console.log("restoId", restoId);
 
   const [selectedTemplate, setSelectedTemplate] = useState("a");
+  const [submitedForm, setSubmitedForm] = useState(false)
 
   const handleChange = (event) => {
     setSelectedTemplate(event.target.value);
@@ -64,11 +64,13 @@ const TemplateForm = ({ classes, restaurant, auth, updateRestaurant }) => {
 
   const selectTemplate = (e) => {
     e.preventDefault();
+    setSubmitedForm(true) &&
     updateRestaurant({ restoId: restoId, template: selectedTemplate });
     console.log("submited template", selectedTemplate);
   };
 
   console.log("selected template", selectedTemplate);
+  if (submitedForm === true) return <Redirect to='/' />
 
   return (
     <form className={classes.root}>

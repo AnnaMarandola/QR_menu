@@ -34,7 +34,7 @@ function App() {
           path="/menuform/:menu"
           component={UserIsAuthenticated(WithTopBar(MenuFormPage))}
         />
-        <Route path="/menupage/:resto/:menu" component={UserIsAuthenticated(MenuPage)} />
+        <Route path="/menupage/:resto/:menu" component={MenuPage} />
       </Switch>
     </BrowserRouter>
   );
