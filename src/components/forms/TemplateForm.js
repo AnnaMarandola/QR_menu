@@ -50,10 +50,10 @@ const styles = (theme) => ({
 });
 
 const TemplateForm = ({ classes, restaurant, auth, updateRestaurant }) => {
-  console.log("restaurant in template form", restaurant);
-  console.log("auth in template form", auth.uid);
+  console.log("TEMPLATEFORM restaurant in template form", restaurant);
+  console.log("TEMPLATEFORM auth in template form", auth.uid);
   const restoId = restaurant && restaurant.id;
-  console.log("restoId", restoId);
+  console.log("TEMPLATEFORM restoId", restoId);
 
   const [selectedTemplate, setSelectedTemplate] = useState("a");
   const [submitedForm, setSubmitedForm] = useState(false)
@@ -64,7 +64,7 @@ const TemplateForm = ({ classes, restaurant, auth, updateRestaurant }) => {
 
   const selectTemplate = (e) => {
     e.preventDefault();
-    setSubmitedForm(true) &&
+    setSubmitedForm(true);
     updateRestaurant({ restoId: restoId, template: selectedTemplate });
     console.log("submited template", selectedTemplate);
   };

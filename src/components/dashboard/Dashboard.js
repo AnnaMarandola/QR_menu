@@ -41,11 +41,6 @@ const mapStateToProps = (state) => {
     restaurant:
     state.firestore.ordered.restaurants &&
     state.firestore.ordered.restaurants[0],
-    menu:
-    state.firestore.ordered.menus &&
-    state.firestore.ordered.menus[0],
-
-
   };
 };
 
@@ -56,10 +51,6 @@ export default compose(
     {
       collection: "restaurants",
       where: ["ownerId", "==", props.auth.uid]
-    },
-    {
-      collection: "menus",
-      doc: props.menuId,
     },
   ])
 )(Dashboard);
