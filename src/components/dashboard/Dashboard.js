@@ -7,40 +7,43 @@ import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 import TemplateSummary from "./TemplateSummary";
 import MenuLinks from "./MenuLinks";
+import CreateMenu from "../forms/CreateMenu";
 
 const styles = (theme) => ({
   root: {
     marginLeft: "0.5rem",
-  }
+  },
 });
 
 const Dashboard = ({ classes, restaurant, auth, profile }) => {
-  console.log('8888888888888restaurant', restaurant);
-  console.log('88888888888auth dashboard', auth);
-  let menuId = restaurant && restaurant.menuId
-  console.log('8888888888888menuID', menuId);
-  console.log('profile', profile)
-  
+  console.log("8888888888888restaurant", restaurant);
+  console.log("88888888888auth dashboard", auth);
+  let menuId = restaurant && restaurant.menuId;
+  console.log("8888888888888menuID", menuId);
+  console.log("profile", profile);
 
-  if(!auth.uid) return <Redirect to='/signin'/>
+  if (!auth.uid) return <Redirect to="/signin" />;
   return (
     <div>
       <div className={classes.root}>
-            <MenuLinks restaurant={restaurant} menuId={menuId}/>
+            <MenuLinks restaurant={restaurant} menuId={menuId} />
             <RestaurantSummary restaurant={restaurant} />
-            <TemplateSummary restaurant={restaurant} />
+        {restaurant && restaurant.template && (
+          <TemplateSummary restaurant={restaurant} />
+        )}
       </div>
-    </div>)
-}
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => {
-  console.log(state)
+  console.log(state);
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile,
     restaurant:
-    state.firestore.ordered.restaurants &&
-    state.firestore.ordered.restaurants[0],
+      state.firestore.ordered.restaurants &&
+      state.firestore.ordered.restaurants[0],
   };
 };
 
@@ -50,7 +53,7 @@ export default compose(
   firestoreConnect((props) => [
     {
       collection: "restaurants",
-      where: ["ownerId", "==", props.auth.uid]
+      where: ["ownerId", "==", props.auth.uid],
     },
   ])
 )(Dashboard);

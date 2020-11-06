@@ -6,7 +6,6 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import DishList from "./DishList";
 
-
 const styles = (theme) => ({
   root: {
     width: "100%",
@@ -37,17 +36,13 @@ const styles = (theme) => ({
   },
 });
 
-class MenuPage extends Component {
+const MenuPage = ({ classes, restaurant, menu, dishes }) => {
 
-
-  render() {
-    const { classes, restaurant, menu, dishes } = this.props;
-    const resto = {...restaurant}
-    const menuData = {...menu}
+    const resto = { ...restaurant };
+    const menuData = { ...menu };
 
     return (
       <div className={classes.root}>
-
         <div className={classes.menuHearder}>
           <Typography className={classes.restoName} variant="h1">
             {resto.name}
@@ -66,9 +61,9 @@ class MenuPage extends Component {
 
         <div className={classes.menuContent}>
           <Typography variant="h1" className={classes.menuTitle}>
-          {menuData.title}
+            {menuData.title}
           </Typography>
-   
+
           {dishes &&
             dishes.map((dish) => (
               <DishList
@@ -82,11 +77,10 @@ class MenuPage extends Component {
               />
             ))}
         </div>
-        
       </div>
     );
   }
-}
+
 
 const mapStateToProps = (state) => {
   console.log(state);
@@ -94,13 +88,10 @@ const mapStateToProps = (state) => {
     restaurant:
       state.firestore.ordered.restaurants &&
       state.firestore.ordered.restaurants[0],
-    menu:
-      state.firestore.ordered.menus && 
-      state.firestore.ordered.menus[0],
-      dishes: state.firestore.ordered.dishes,
+    menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
+    dishes: state.firestore.ordered.dishes,
   };
 };
-
 
 export default compose(
   withStyles(styles),
@@ -116,7 +107,7 @@ export default compose(
     },
     {
       collection: "dishes",
-      where: [ "menuId", "==", props.match.params.menu ]
+      where: ["menuId", "==", props.match.params.menu],
     },
   ])
-  )(MenuPage);
+)(MenuPage);
