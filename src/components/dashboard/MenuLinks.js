@@ -54,7 +54,7 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
           <CardContent className={classes.cardButtons}>
           { restaurant && restaurant.template ?
           <div>
-          <NavLink className={classes.links} to={`/menuform/${menuId}`}>
+          <NavLink className={classes.links} to={`/menuform/${restoId}/${menuId}`}>
           <Button className={classes.modifyButton}>Modifier</Button>
           </NavLink>
           

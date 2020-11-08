@@ -26,7 +26,7 @@ const styles = (theme) => ({
  }
 });
 
-const DishList = ({
+const DishItem = ({
   classes,
   title,
   price,
@@ -59,4 +59,4 @@ const DishList = ({
   );
 };
 
-export default compose(withStyles(styles))(DishList);
+export default compose(withStyles(styles))(DishItem);

@@ -8,6 +8,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { Typography } from "@material-ui/core";
 import CreateMenu from "./CreateMenu";
 import TitleForm from "./TitleForm";
+import DishItemEdit from "../menu/DishItemEdit";
 
 const styles = (theme) => ({
   root: {
@@ -19,16 +20,14 @@ const styles = (theme) => ({
   }
 });
 
-const MenuFormPage = ({ classes, restaurants, auth, profile, menus }) => {
+const MenuFormPage = ({ classes, restaurant, auth, profile, menu, dishes }) => {
 
-  let restaurant =restaurants &&
-    restaurants.find((restaurant) => restaurant.ownerId === auth.uid);
 
-  let menu = menus && menus.find((menu) => menu.restoId === restaurant.id);
 
-  console.log("restaurant in menuformpage", restaurant && restaurant);
+  console.log("restaurant in menuformpage", restaurant);
   console.log("profile in menuformpage", profile);
   console.log("menu in menuformpage", menu);
+  console.log("dishes in menuformpage", dishes);
 
   return (
     <div className={classes.root}>
@@ -41,16 +40,28 @@ const MenuFormPage = ({ classes, restaurants, auth, profile, menus }) => {
       {restaurant && menu &&
       restaurant.template === "template3" ? (
         <TitleForm menu={menu} restaurant={restaurant}/>
-      ) : null}
+      ) : null
+      }
+      <div>
+        {dishes && dishes.map((dish) => (
+          <DishItemEdit key={dish.id} title={dish.dishName} price={dish.price}/>
+        ))}
+      </div>
     </div>
+
   );
 };
 
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    restaurants: state.firestore.ordered.restaurants,
-    menus: state.firestore.ordered.menus,
+    restaurant:
+    state.firestore.ordered.restaurants &&
+    state.firestore.ordered.restaurants[0],
+  menu: state.firestore.ordered.menus &&
+    state.firestore.ordered.menus[0],
+  dishes: state.firestore.ordered.dishes,
+
     auth: state.firebase.auth,
     profile: state.firebase.profile,
   };
@@ -59,5 +70,18 @@ const mapStateToProps = (state) => {
 export default compose(
   withStyles(styles),
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "restaurants" }, { collection: "menus" }])
+  firestoreConnect((props) => [
+    {
+      collection: "restaurants",
+      doc: props.match.params.resto,
+    },
+    {
+      collection: "menus",
+      doc: props.match.params.menu,
+    },
+    {
+      collection: "dishes",
+      where: ["menuId", "==", props.match.params.menu],
+    },
+  ])
 )(MenuFormPage);
