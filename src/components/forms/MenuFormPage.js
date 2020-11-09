@@ -1,54 +1,107 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/styles";
-import AddNewDish from "./AddNewDish";
 import { compose } from "redux";
-
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import CreateMenu from "./CreateMenu";
 import TitleForm from "./TitleForm";
 import DishItemEdit from "../menu/DishItemEdit";
+import TitleFormTest from "./TitleFormTest";
+import AddNewDishTest from "./NewDishContainer";
+import DishAccordion from "./NewDishContainer";
+import NewDishContainer from "./NewDishContainer";
 
 const styles = (theme) => ({
   root: {
     width: "95%",
     marginLeft: "2.5%",
+    marginBottom: "2rem"
   },
   titlePage: {
-    marginBottom: '2rem',
+    marginBottom: "2rem",
+  },
+  titleSection: {
+    display: "flex",
+    flexDirection: "column",
+    marginTop: "1rem"
+  },
+  modifTitleButton: {
+    marginTop: "-2.5rem",
+  },
+  dishTitle: {
+    // fontWeight: 300
+    fontStyle: "italic",
+  },
+  dishesList: {
+    textAlign: "center"
   }
 });
 
-const MenuFormPage = ({ classes, restaurant, auth, profile, menu, dishes }) => {
+const MenuFormPage = ({
+  classes,
+  restaurant,
+  auth,
+  profile,
+  menu,
+  dishes,
+  match,
+}) => {
+  let menuData = { ...menu };
 
-
+  const menuId = match.params.menu;
 
   console.log("restaurant in menuformpage", restaurant);
   console.log("profile in menuformpage", profile);
-  console.log("menu in menuformpage", menu);
+  console.log("menuID in menuformpage", menuData);
   console.log("dishes in menuformpage", dishes);
 
   return (
     <div className={classes.root}>
-    <Typography className={classes.titlePage} variant='h1'>Votre carte</Typography>
-      {restaurant && !menu ? (
-        <CreateMenu restaurant={restaurant} />
+      <Typography className={classes.titlePage} variant="h1" >
+        Tableau de bord :
+      </Typography>
+
+      {restaurant &&
+        menu && restaurant.template === "template3" && !menu.title && (
+          <TitleFormTest restaurant={restaurant} menu={menuData} />
+        )}
+
+      {restaurant && !restaurant.menuId ? (
+        <CreateMenu restaurant={restaurant} menu={menuData} />
       ) : (
-        <AddNewDish restaurant={restaurant} />
+        <NewDishContainer
+          restaurant={restaurant}
+          menu={menuData}
+          dishes={dishes}
+        />
       )}
-      {restaurant && menu &&
-      restaurant.template === "template3" ? (
-        <TitleForm menu={menu} restaurant={restaurant}/>
-      ) : null
-      }
+
       <div>
-        {dishes && dishes.map((dish) => (
-          <DishItemEdit key={dish.id} title={dish.dishName} price={dish.price}/>
-        ))}
+        {menu && menu.title && (
+          <div className={classes.titleSection}>
+          <Typography variant="body1">
+          Titre de mon menu :
+        </Typography>
+            <Typography className={classes.dishTitle} variant="h2">
+              {menuData.title}
+            </Typography>
+            <TitleFormTest className={classes.modifTitleButton} menu={menu} restaurant={restaurant} />
+          </div>
+        )}
+        <Typography className={classes.dishesList} variant="body1">
+          actuellement à la carte :
+        </Typography>
+        {dishes &&
+          dishes.map((dish) => (
+            <DishItemEdit
+              key={dish.id}
+              title={dish.dishName}
+              price={dish.price}
+            />
+          ))}
       </div>
     </div>
-
   );
 };
 
@@ -56,11 +109,10 @@ const mapStateToProps = (state) => {
   console.log(state);
   return {
     restaurant:
-    state.firestore.ordered.restaurants &&
-    state.firestore.ordered.restaurants[0],
-  menu: state.firestore.ordered.menus &&
-    state.firestore.ordered.menus[0],
-  dishes: state.firestore.ordered.dishes,
+      state.firestore.ordered.restaurants &&
+      state.firestore.ordered.restaurants[0],
+    menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
+    dishes: state.firestore.ordered.dishes,
 
     auth: state.firebase.auth,
     profile: state.firebase.profile,

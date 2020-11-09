@@ -1,26 +1,32 @@
 import React, { useState } from "react";
-import { withStyles } from "@material-ui/core";
+import { AccordionActions, withStyles } from "@material-ui/core";
 import { Typography, Button, Card, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { updateMenu } from "../../store/actions/menuActions";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
 
 const styles = (theme) => ({
   root: {
     width: '95%',
     marginLeft: '2.5%',
     marginTop: '2rem',
+  },
+  accordion: {
     backgroundColor: 'white',
+  },
+  content: {
     display: 'flex',
     flexDirection: 'column',
-  },
-  titleSection: {
-      marginTop: '1rem',
-      marginLeft: '1rem',
 
   },
   input: {
+    marginTop: "-2rem",
      marginLeft: '1rem',
      marginRight: '1rem',
   },
@@ -58,19 +64,30 @@ const TitleForm = ({ classes, restaurant, menu, auth, updateMenu }) => {
 
 
   return (
-    <div>
-          <Card className={classes.root}>
-          <Typography className={classes.titleSection} gutterBottom variant="h2">
-              Donnez un titre à votre carte :
+    <div className={classes.root}>
+          <Accordion className={classes.accordion}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+          <Typography className={classes.heading} gutterBottom variant="h2">
+             { menuTitle.length != 0 ? "Donnez un titre à votre carte" : "modifier le titre" }
             </Typography>            
+          </AccordionSummary>
+          <AccordionDetails className={classes.content}>
             <TextField
             className={classes.input}
               id="title"
-              label={ !menu.title ? "Nos salades,  grillades, pizzas ..." : menu.title }
+              label={ !menu.title ? "Nos salades, Nos grillades, Nos pizzas ..." : menu.title }
               onChange={handleChange}
             />
-        <Button className={classes.addButton} onClick={setTitle}>{ !menu.title ? "valider" : "modifier" }</Button>
-          </Card>
+            <AccordionActions>     
+            <Button className={classes.addButton} onClick={setTitle}>valider</Button>
+            </AccordionActions>
+        </AccordionDetails>
+              </Accordion>
+
     </div>
   );
 };
