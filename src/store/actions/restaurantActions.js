@@ -22,8 +22,6 @@ export const createRestaurant = (restaurant) => {
 
 export const updateRestaurant = (payload) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    // const restaurantId = getState().firestore.restaurant
-    // console.log('resto in actions', restaurant)
     console.log("payload", payload);
     let restoId = payload.restoId;
     let template = payload.template;
@@ -41,4 +39,3 @@ export const updateRestaurant = (payload) => {
       });
   };
 };
-

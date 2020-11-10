@@ -61,13 +61,16 @@ class AddNewDish extends Component {
     price: "",
   };
 
-  
+  componentDidUpdate = () => {
+    console.log("plat ajouté")
+  }
+
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
-      restoId: this.props.restaurant.id,
-      menuId: this.props.restaurant.menuId,
+      restoId: this.props.menu.restoId,
+      menuId: this.props.menu.id,
     });
   };
 
@@ -92,22 +95,18 @@ class AddNewDish extends Component {
   };
 
   render() {
-    const { classes, restaurant } = this.props;
-    console.log("AAAAAAAAAAAAAAAArestaurant id in AddNewDish", restaurant && restaurant.id);
-    let menuId = restaurant && restaurant.menuId
-    console.log("AAAAAAAAAAAAAAAA menuId in restaurant", menuId )
+    const { classes, menu, dishes } = this.props;
+    console.log("AAAAAAAAAAAAAAAArestaurant id in AddNewDish", menu && menu.restoId);
+    console.log("PPPPPPPPPPPPPPPPP MENU", menu)
+    console.log(dishes.length)
+    
+    let menuId = menu && menu.id
+    console.log("AAAAAAAAAAAAAAAA menuId in AND", menuId )
+
 
     return (
       <div className={classes.root}>
-        <Accordion className={classes.accordion}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>ajouter un plat</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
+
             <form className={classes.form} onSubmit={this.handleSubmit}>
               <TextField
                 className={classes.input}
@@ -198,8 +197,6 @@ class AddNewDish extends Component {
                 ajouter à mon menu
               </Button>
             </form>
-          </AccordionDetails>
-        </Accordion>
       </div>
     );
   }

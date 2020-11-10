@@ -1,10 +1,10 @@
+import React from "react";
 import { Typography } from "@material-ui/core";
-import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import DishList from "./DishList";
+import DishItem from "./DishItem";
 
 const styles = (theme) => ({
   root: {
@@ -36,64 +36,49 @@ const styles = (theme) => ({
   },
 });
 
-class MenuPage extends Component {
-  componentDidMount() {
-    const restoId = this.props.match.params.resto;
-    console.log("MMMMMMMMMMMMMMrestoId in componentDIdMount", restoId);
-    const menuId = this.props.match.params.menu;
-    console.log("MMMMMMMMMMMMMMMMmenuId in componentDIdMount", menuId);
-  }
+const MenuPage = ({ classes, restaurant, menu, dishes }) => {
+  const resto = { ...restaurant };
+  const menuData = { ...menu };
 
-  render() {
-    const { classes, restaurant, menu, dishes } = this.props;
-    const resto = { ...restaurant };
-    console.log("++++++++RESTO IN MENUPAGE", resto);
-    const menuData = { ...menu };
-    console.log("+++++++++MENU IN MENUPAGE", menuData);
-    console.log("MMMMMMMMMMMMMMMMmenuData.title ", menuData.title);
+  return (
+    <div className={classes.root}>
 
-    return (
-      <div className={classes.root}>
-
-        <div className={classes.menuHearder}>
-          <Typography className={classes.restoName} variant="h1">
-            {resto.name}
-          </Typography>
-          <img className={classes.logo} src={resto.logo} alt="logo" />
-        </div>
-
-        <div className={classes.restoContact}>
-          <Typography variant="body1"> {resto.adress} </Typography>
-          <Typography variant="body1">
-            {" "}{resto.postalCode} {resto.city}{" "}
-          </Typography>
-          <Typography variant="body1"> {resto.phone} </Typography>
-          <Typography variant="body1"> {resto.email} </Typography>
-        </div>
-
-        <div className={classes.menuContent}>
-          <Typography variant="h1" className={classes.menuTitle}>
-          {menuData.title}
-          </Typography>
-   
-          {dishes &&
-            dishes.map((dish) => (
-              <DishList
-                key={dish.id}
-                menu={menuData}
-                title={dish.dishName}
-                price={dish.price}
-                ingredients={dish.ingredients}
-                description={dish.description}
-                allergens={dish.checkedAllergens}
-              />
-            ))}
-        </div>
-        
+      <div className={classes.menuHearder}>
+        <Typography className={classes.restoName} variant="h1">
+          {resto.name}
+        </Typography>
+        <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
-    );
-  }
-}
+
+      <div className={classes.restoContact}>
+        <Typography variant="body1">{resto.adress}</Typography>
+        <Typography variant="body1">
+          {resto.postalCode} - {resto.city}
+        </Typography>
+        <Typography variant="body1">{resto.phone}</Typography>
+        <Typography variant="body1">{resto.email}</Typography>
+      </div>
+
+      <div className={classes.menuContent}>
+        <Typography variant="h1" className={classes.menuTitle}>
+          {menuData.title}
+        </Typography>
+        {
+          dishes && dishes.map((dish) => (
+            <DishItem
+              key={dish.id}
+              menu={menuData}
+              title={dish.dishName}
+              price={dish.price}
+              ingredients={dish.ingredients}
+              description={dish.description}
+              allergens={dish.checkedAllergens}
+            />
+          ))}
+      </div>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => {
   console.log(state);
@@ -101,7 +86,8 @@ const mapStateToProps = (state) => {
     restaurant:
       state.firestore.ordered.restaurants &&
       state.firestore.ordered.restaurants[0],
-    menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
+    menu: state.firestore.ordered.menus &&
+      state.firestore.ordered.menus[0],
     dishes: state.firestore.ordered.dishes,
   };
 };
@@ -112,14 +98,15 @@ export default compose(
   firestoreConnect((props) => [
     {
       collection: "restaurants",
-      doc: props.restoId,
+      doc: props.match.params.resto,
     },
     {
       collection: "menus",
-      doc: props.menuId,
+      doc: props.match.params.menu,
     },
     {
       collection: "dishes",
+      where: ["menuId", "==", props.match.params.menu],
     },
   ])
 )(MenuPage);

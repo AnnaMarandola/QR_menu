@@ -4,7 +4,7 @@ import { Typography, TextField, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { createRestaurant } from "../../store/actions/restaurantActions";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {
@@ -45,6 +45,7 @@ class InfoResto extends Component {
     facebook: "",
     instagram: "",
     phone: "",
+    submited: false
   };
 
   handleChange = (e) => {
@@ -54,6 +55,7 @@ class InfoResto extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({ submited: true})
     this.props.createRestaurant(this.state);
     console.log('restaurant created', this.state)
   };
@@ -62,7 +64,7 @@ class InfoResto extends Component {
     const { classes, auth } = this.props;
     console.log("auth uid", auth.uid);
 
-    // if (!auth.uid) return <Redirect to='/signin' />
+    if (this.state.submited === true) return <Redirect to='/' />
 
     return (
       <div className={classes.root}>
