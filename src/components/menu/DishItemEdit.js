@@ -1,7 +1,10 @@
-import { Avatar, ListItemAvatar, Typography, Button } from "@material-ui/core";
 import React from "react";
+import { Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
+import { connect } from "react-redux";
+import { deleteDish } from "../../store/actions/dishActions";
+
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -25,7 +28,6 @@ const styles = (theme) => ({
   dishPrice: {
   },
   editButtons: {
-    // border: "solid 0.5px black"
   },
 
 });
@@ -36,8 +38,16 @@ const DishItemEdit = ({
   price,
   ingredients,
   description,
-  allergens,
+  id,
+  deleteDish,
 }) => {
+
+  const handleDelete = (e) => {
+    console.log("e", e);
+    deleteDish(id);
+    console.log("dish deleted !");
+  }
+
   return (
     <div className={classes.root}>
       <hr />
@@ -62,12 +72,30 @@ const DishItemEdit = ({
         <Button>
           <ArrowDropDownIcon />
         </Button>
-        <Button>
+        <Button onClick={handleDelete}>
           <DeleteForeverIcon />
         </Button>
       </div>
+      <hr />
+
     </div>
   );
 };
 
-export default compose(withStyles(styles))(DishItemEdit);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteDish: (dishId) => dispatch(deleteDish(dishId)),
+  };
+};
+
+
+export default compose(withStyles(styles),
+connect(mapStateToProps, mapDispatchToProps),
+)(DishItemEdit);

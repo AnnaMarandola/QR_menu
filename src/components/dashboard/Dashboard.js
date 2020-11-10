@@ -7,7 +7,6 @@ import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 import TemplateSummary from "./TemplateSummary";
 import MenuLinks from "./MenuLinks";
-import CreateMenu from "../forms/CreateMenu";
 
 const styles = (theme) => ({
   root: {

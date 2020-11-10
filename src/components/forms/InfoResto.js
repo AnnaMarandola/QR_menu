@@ -4,8 +4,7 @@ import { Typography, TextField, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { createRestaurant } from "../../store/actions/restaurantActions";
-import { NavLink, Redirect } from "react-router-dom";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {

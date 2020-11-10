@@ -1,9 +1,8 @@
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core";
-import { Button, TextField } from "@material-ui/core";
+import { Button  } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
 import { updateMenu } from "../../store/actions/menuActions";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -93,11 +92,4 @@ const mapStateToProps = (state) => {
 export default compose(
   withStyles(styles),
   connect(mapStateToProps, { updateMenu })
-  // firestoreConnect((props) => [
-  //   {
-  //     collection: "menus",
-  //     storeAs: "menu",
-  //     where: [["menu.restoId", "==", props.restaurant.id]],
-  //   },
-  // ])
 )(NewDishContainer);

@@ -16,3 +16,20 @@ export const createDish = (data) => {
         });
     };
   };
+
+  export const deleteDish = (dishId) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+      console.log("dish Id in ACTIONS", dishId)
+      const firestore = getFirestore();
+  
+      firestore
+        .collection("dishes")
+        .doc(dishId)
+        .delete()
+        .then(() => {
+          dispatch({ type: "CREATE_DISH", dishId });
+        }).catch((err) => {
+          dispatch({ type: 'CREATE_DISH_ERROR', err})
+        });
+    };
+  };

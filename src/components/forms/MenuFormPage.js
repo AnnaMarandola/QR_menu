@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Button, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import CreateMenu from "./CreateMenu";
-import TitleForm from "./TitleForm";
 import DishItemEdit from "../menu/DishItemEdit";
-import TitleFormTest from "./TitleFormTest";
-import AddNewDishTest from "./NewDishContainer";
-import DishAccordion from "./NewDishContainer";
+import TitleForm from "./TitleForm";
 import NewDishContainer from "./NewDishContainer";
 
 const styles = (theme) => ({
@@ -20,11 +17,16 @@ const styles = (theme) => ({
   },
   titlePage: {
     marginBottom: "2rem",
+    marginLeft: "1rem",
   },
   titleSection: {
     display: "flex",
     flexDirection: "column",
-    marginTop: "1rem"
+    marginTop: "1rem",
+    paddingTop: "1rem",
+    paddingLeft: "1rem",
+    border : "solid 1px black",
+    marginBottom: "1rem",
   },
   modifTitleButton: {
     marginTop: "-2.5rem",
@@ -35,6 +37,9 @@ const styles = (theme) => ({
   },
   dishesList: {
     textAlign: "center"
+  },
+  dishesEdited: {
+    border : "solid 1px black"
   }
 });
 
@@ -49,7 +54,6 @@ const MenuFormPage = ({
 }) => {
   let menuData = { ...menu };
 
-  const menuId = match.params.menu;
 
   console.log("restaurant in menuformpage", restaurant);
   console.log("profile in menuformpage", profile);
@@ -59,12 +63,12 @@ const MenuFormPage = ({
   return (
     <div className={classes.root}>
       <Typography className={classes.titlePage} variant="h1" >
-        Tableau de bord :
+        Tableau de bord 
       </Typography>
 
       {restaurant &&
         menu && restaurant.template === "template3" && !menu.title && (
-          <TitleFormTest restaurant={restaurant} menu={menuData} />
+          <TitleForm restaurant={restaurant} menu={menuData} />
         )}
 
       {restaurant && !restaurant.menuId ? (
@@ -86,7 +90,7 @@ const MenuFormPage = ({
             <Typography className={classes.dishTitle} variant="h2">
               {menuData.title}
             </Typography>
-            <TitleFormTest className={classes.modifTitleButton} menu={menu} restaurant={restaurant} />
+            <TitleForm className={classes.modifTitleButton} menu={menu} restaurant={restaurant} />
           </div>
         )}
         <Typography className={classes.dishesList} variant="body1">
@@ -98,9 +102,10 @@ const MenuFormPage = ({
               key={dish.id}
               title={dish.dishName}
               price={dish.price}
+              id={dish.id}
             />
           ))}
-      </div>
+          </div>
     </div>
   );
 };
