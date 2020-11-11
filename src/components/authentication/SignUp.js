@@ -113,7 +113,7 @@ class SignUp extends Component {
 
   render() {
     const { classes, auth, authError } = this.props;
-    if (auth.uid) return <Redirect to="/inforesto" />;
+    if (auth.uid) return <Redirect to="/inforesto/add" />;
 
     return (
       <div className={classes.root}>
