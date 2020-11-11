@@ -10,6 +10,7 @@ import WithTopBar from "./HOC/WithTopBar";
 import MenuFormPage from "./components/forms/MenuFormPage";
 import MenuPage from "./components/menu/MenuPage";
 import TemplateForm from "./components/forms/TemplateForm";
+import InfoRestoTest from "./components/forms/InfoRestoTest";
 
 function App() {
   return (
@@ -18,7 +19,11 @@ function App() {
         <Route path="/signin" component={SignIn} />
         <Route path="/createaccount" component={SignUp} />
         <Route
-          path="/inforesto"
+          path="/inforesto/add"
+          component={UserIsAuthenticated(WithTopBar(InfoResto))}
+        />        
+        <Route
+          path="/inforesto/edit/:resto"
           component={UserIsAuthenticated(WithTopBar(InfoResto))}
         />
         <Route

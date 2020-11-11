@@ -64,7 +64,7 @@ const RestaurantSummary = ({ restaurant, classes }) => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <NavLink className={classes.links} to="/inforesto">
+            <NavLink className={classes.links} to={`/inforesto/edit/${restaurant.id}`}>
               <Button className={classes.modifyButton}>Modifier</Button>
             </NavLink>
           </CardActions>

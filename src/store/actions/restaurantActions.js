@@ -39,3 +39,22 @@ export const updateRestaurant = (payload) => {
       });
   };
 };
+
+export const editRestaurant = (restaurant, restoId) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const ownerId = getState().firebase.auth.uid;
+    getFirestore()
+      .collection("restaurants")
+      .doc(restoId)
+      .update({
+        ...restaurant, 
+        ownerId: ownerId,
+ })
+      .then(() => {
+        dispatch({ type: "EDIT_RESTAURANT", restaurant });
+      })
+      .catch((err) => {
+        dispatch({ type: "EDIT_RESTAURANT_ERROR", err });
+      });
+  };
+};
