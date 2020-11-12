@@ -4,10 +4,6 @@ import { Button  } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { updateMenu } from "../../store/actions/menuActions";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import AddNewDish from "./AddNewDish";
 import AddCircleOutlineTwoToneIcon from '@material-ui/icons/AddCircleOutlineTwoTone';
 
@@ -17,7 +13,7 @@ const styles = (theme) => ({
     marginLeft: "2.5%",
     marginTop: "2rem",
     display: "flex",
-    justifyContent : "center"
+    justifyContent : "center",
   },
   container: {
     display: "flex",
@@ -33,14 +29,7 @@ const styles = (theme) => ({
   },
 });
 
-const NewDishContainer = ({ classes, restaurant, menu, dishes }) => {
-
-  console.log("restaurant in DISHACCORDION", restaurant);
-  console.log("menu in DISHACCORDION", menu);
-  console.log("dishes in DISHACCORDION", dishes);
-  let dLength = dishes && dishes.length
-  console.log("dishesLength in DISHACCORDION", dLength);
-
+const DishFormContainer = ({ classes, restaurant, menu }) => {
 
   const [open, setOpen] = useState(false);
 
@@ -55,28 +44,20 @@ const NewDishContainer = ({ classes, restaurant, menu, dishes }) => {
   return (
     <div className={classes.root}>
 
-      <Button onClick={handleClickOpen}>
-
+      { !open && 
+      <div>
+      <Button onClick={ handleClickOpen }>
       <AddCircleOutlineTwoToneIcon/> Ajouter un plat
       </Button>
+      </div>
+      }
 
-      <Dialog
-        disableBackdropClick
-        disableEscapeKeyDown
-        open={open}
-        onClose={handleClose}
-      >
-        <DialogTitle>Nouveau plat</DialogTitle>
-
-        <DialogContent className={classes.container}>
-          <AddNewDish close={handleClose} menu={menu} dishes={dishes} onClose={handleClose} />
-        </DialogContent>
-       
-        <DialogActions>
-          <Button onClick={handleClose}>X</Button>
-        </DialogActions>
-
-      </Dialog>
+        { open &&  
+        <div>
+        <AddNewDish restaurant={restaurant} menu={menu}  /> 
+        <Button onClick={handleClose}>CLOSE</Button>
+        </div>
+        }
 
     </div>
   );
@@ -92,4 +73,4 @@ const mapStateToProps = (state) => {
 export default compose(
   withStyles(styles),
   connect(mapStateToProps, { updateMenu })
-)(NewDishContainer);
+)(DishFormContainer);

@@ -10,7 +10,6 @@ import WithTopBar from "./HOC/WithTopBar";
 import MenuFormPage from "./components/forms/MenuFormPage";
 import MenuPage from "./components/menu/MenuPage";
 import TemplateForm from "./components/forms/TemplateForm";
-import InfoRestoTest from "./components/forms/InfoRestoTest";
 
 function App() {
   return (

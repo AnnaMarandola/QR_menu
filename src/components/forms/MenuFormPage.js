@@ -7,7 +7,7 @@ import { Typography } from "@material-ui/core";
 import CreateMenu from "./CreateMenu";
 import DishItemEdit from "../menu/DishItemEdit";
 import TitleForm from "./TitleForm";
-import NewDishContainer from "./NewDishContainer";
+import DishFormContainer from "./DishFormContainer";
 
 const styles = (theme) => ({
   root: {
@@ -74,7 +74,7 @@ const MenuFormPage = ({
       {restaurant && !restaurant.menuId ? (
         <CreateMenu restaurant={restaurant} menu={menuData} />
       ) : (
-        <NewDishContainer
+        <DishFormContainer
           restaurant={restaurant}
           menu={menuData}
           dishes={dishes}
@@ -98,12 +98,7 @@ const MenuFormPage = ({
         </Typography>
         {dishes &&
           dishes.map((dish) => (
-            <DishItemEdit
-              key={dish.id}
-              title={dish.dishName}
-              price={dish.price}
-              id={dish.id}
-            />
+            <DishItemEdit dish={dish} />
           ))}
           </div>
     </div>

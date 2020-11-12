@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
@@ -9,6 +9,7 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import AddNewDish from "../forms/AddNewDish";
 
 const styles = (theme) => ({
   root: {
@@ -20,50 +21,45 @@ const styles = (theme) => ({
   dishInfos: {
     display: "flex",
     justifyContent: "space-between",
-    padding: "0.4rem"
+    padding: "0.4rem",
   },
-  dishTitle: {
-
-  },
-  dishPrice: {
-  },
-  editButtons: {
-  },
-
+  dishTitle: {},
+  dishPrice: {},
+  editButtons: {},
 });
 
-const DishItemEdit = ({
-  classes,
-  title,
-  price,
-  ingredients,
-  description,
-  id,
-  deleteDish,
-}) => {
+const DishItemEdit = ({ classes, dish, deleteDish }) => {
+
+  const [edited, setEdited] = useState(false);
 
   const handleDelete = (e) => {
     console.log("e", e);
-    deleteDish(id);
+    deleteDish(dish.id);
     console.log("dish deleted !");
-  }
+  };
+
+  const handleOpen = (e) => {
+    setEdited(true);
+  };
+
+  const handleClose = (e) => {
+    setEdited(false);
+  };
 
   return (
     <div className={classes.root}>
       <hr />
       <div className={classes.dishInfos}>
         <Typography className={classes.dishTitle} variant="body1">
-          {title}
+          {dish.dishName}
         </Typography>
         <Typography className={classes.dishPrice} variant="body1">
-          {price}
+          {dish.price}
         </Typography>
-        <Typography variant="body2">{ingredients}</Typography>
-        <Typography variant="body2">{description}</Typography>
       </div>
-      
+
       <div className={classes.editButtons}>
-        <Button>
+        <Button onClick={handleOpen}>
           <EditRoundedIcon />
         </Button>
         <Button>
@@ -75,9 +71,14 @@ const DishItemEdit = ({
         <Button onClick={handleDelete}>
           <DeleteForeverIcon />
         </Button>
+        {edited && 
+        <div>
+        <AddNewDish restaurant={dish.restoId} menu={dish.menuId} dish={dish} />
+        <Button onClick={handleClose} >X</Button>
+        </div>
+        }
       </div>
       <hr />
-
     </div>
   );
 };
@@ -95,7 +96,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-
-export default compose(withStyles(styles),
-connect(mapStateToProps, mapDispatchToProps),
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps)
 )(DishItemEdit);
