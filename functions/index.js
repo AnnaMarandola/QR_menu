@@ -17,3 +17,16 @@ exports.onMenuCreate = functions.firestore
       .update({ menuId: menuId });
   });
 
+
+  exports.onUploadLogo = functions.storage.object().onFinalize(object => {
+    console.log(object)
+    const restoId = object.name
+      .split('/')
+      .pop()
+      .split('-')[0]
+      .split('.')[0]
+    return admin.firestore()
+      .collection('restaurants')
+      .doc(restoId)
+      .update({ logo: object.mediaLink })
+  })

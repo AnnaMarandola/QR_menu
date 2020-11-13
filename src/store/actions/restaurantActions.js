@@ -47,9 +47,9 @@ export const editRestaurant = (restaurant, restoId) => {
       .collection("restaurants")
       .doc(restoId)
       .update({
-        ...restaurant, 
+        ...restaurant,
         ownerId: ownerId,
- })
+      })
       .then(() => {
         dispatch({ type: "EDIT_RESTAURANT", restaurant });
       })
@@ -57,4 +57,32 @@ export const editRestaurant = (restaurant, restoId) => {
         dispatch({ type: "EDIT_RESTAURANT_ERROR", err });
       });
   };
+};
+
+// https://firebase.google.com/docs/storage/web/start
+export const uploadLogoPicture = (file, restoId) => 
+(dispatch,getState,{ getFirebase }) => {
+  console.log("file and resto in upload action", file, restoId)
+  const firebase = getFirebase();
+  firebase
+    .storage()
+    .ref(
+      `logo-pictures/${restoId}-${new Date().getMilliseconds()}.${file.name.split(".").pop()}`
+    )
+    .put(file)
+    .on(
+      "state_changed",
+      function progress(snapshot) {
+        dispatch({
+          type: "UPLOAD_PROGRESS",
+          progress: (100 * snapshot.bytesTransferred) / snapshot.totalBytes,
+        });
+      },
+      function error(err) {
+        dispatch({ type: "UPLOAD_ERROR", err });
+      },
+      function complete() {
+        dispatch({ type: "UPLOAD_COMPLETE" });
+      }
+    );
 };

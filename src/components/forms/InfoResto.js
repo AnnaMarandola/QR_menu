@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { createRestaurant, editRestaurant } from "../../store/actions/restaurantActions";
 import { Redirect } from "react-router-dom";
+import UploadLogo from "./UploadLogo";
 
 const styles = (theme) => ({
   root: {
@@ -42,7 +43,6 @@ class InfoResto extends Component {
     adress: "",
     city: "",
     postalCode: null,
-    logo: "",
     facebook: "",
     instagram: "",
     phone: "",
@@ -50,13 +50,12 @@ class InfoResto extends Component {
   };
 
   componentDidMount() {
-    if (this.props.match.params.resto){
+    if (this.props.match.params.resto && this.props.restaurant){
       this.setState({
         name: this.props.restaurant.name, 
         adress: this.props.restaurant.adress,
         city: this.props.restaurant.city,
         postalCode: this.props.restaurant.postalCode,
-        logo: this.props.restaurant.logo,
         facebook:  this.props.restaurant.facebook,
         instagram: this.props.restaurant.instagram,
         template: this.props.restaurant.template,
@@ -64,6 +63,7 @@ class InfoResto extends Component {
       })
     }
   }
+
   
   handleChange = (e) => {
     this.setState({
@@ -105,6 +105,8 @@ class InfoResto extends Component {
             Ces informations seront disponibles sur votre page.{" "}
           </Typography>
 
+          <UploadLogo restaurant={restaurant}/>
+
           <div className={classes.inputs}>
             <TextField
               id="name"
@@ -135,12 +137,6 @@ class InfoResto extends Component {
               label="numéro de téléphone"
               onChange={this.handleChange}
               defaultValue={resto ? resto.phone : ""}
-            />
-            <TextField
-              id="logo"
-              label="votre logo"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.logo : ""}
             />
             <TextField
               id="instagram"

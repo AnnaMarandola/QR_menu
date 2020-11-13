@@ -1,5 +1,6 @@
 const initialState = {
   restaurants: [],
+  uploadProgress: null,
 };
 const restaurantReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,13 +16,30 @@ const restaurantReducer = (state = initialState, action) => {
     case "UPDATE_RESTAURANT_ERROR":
       console.log("update restaurant error", action.err);
       return state;
-      case "EDIT_RESTAURANT":
-        console.log("edit restaurant success", action.restaurant);
-        return state;
-      case "EDIT_RESTAURANT_ERROR":
-        console.log("edit restaurant error", action.err);
-        return state;
-  
+    case "EDIT_RESTAURANT":
+      console.log("edit restaurant success", action.restaurant);
+      return state;
+    case "EDIT_RESTAURANT_ERROR":
+      console.log("edit restaurant error", action.err);
+      return state;
+    case "UPLOAD_PROGRESS":
+      return {
+        ...state,
+        uploadProgress: action.progress,
+      };
+    case "UPLOAD_ERROR":
+      console.log("upload error");
+      console.log(action.err);
+      return {
+        ...state,
+        authError: action.err,
+      };
+    case "UPLOAD_COMPLETE":
+      console.log("upload complete");
+      return {
+        ...state,
+        uploadProgress: null,
+      };
     default:
       return state;
   }

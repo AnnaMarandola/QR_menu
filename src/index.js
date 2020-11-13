@@ -18,6 +18,7 @@ import { getFirebase, ReactReduxFirebaseProvider } from "react-redux-firebase";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import "firebase/storage";
 
 const raleway = {
   fontFamily: "Raleway",
