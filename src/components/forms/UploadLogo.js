@@ -5,21 +5,7 @@ import {uploadLogoPicture} from '../../store/actions/restaurantActions'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-
-
-
 const styles = theme => ({
-  root: {
-    maxWidth: '200px',
-    margin: '15% auto',
-  },
-  formContent: {
-    width: '200px',
-    [theme.breakpoints.down('xs')]: {
-      width: '100%',
-      padding: '0 1rem',
-    },
-  },
   imgContainer: {
     height: '200px',
     display: 'flex',
@@ -32,8 +18,11 @@ const styles = theme => ({
       height: '100%',
     },
   },
+  uploadForm: {
+    maxWidth: '200px',
+    marginTop: "1rem",
+  },
 })
-
 
 const INITIAL_STATE = {
     file: null,
@@ -47,8 +36,10 @@ class UploadLogo extends Component {
   }
 
   componentDidMount(){
-    if(this.props.restaurant){
+    if(this.props.restaurant.logo){
     this.setState({ file: this.props.restaurant.logo })
+    } else {
+      this.setState({ file: "https://via.placeholder.com/300x150"})
     }
   }
 
@@ -63,7 +54,7 @@ class UploadLogo extends Component {
   }
 
   render () {
-    const { classes, profile, restaurant } = this.props
+    const { classes, restaurant } = this.props
     const { file } = this.state
     console.log("file in uploadLogo", restaurant && restaurant.logo)
     return (
@@ -71,17 +62,10 @@ class UploadLogo extends Component {
       <div className={classes.imgContainer}>
       { restaurant && restaurant.logo
           ? <img src={restaurant.logo} alt="logo"/>
-          : <img src={file} alt="avatar" />
+          : <img src="https://via.placeholder.com/300x150" alt="avatar" />
       }
     </div>
-      <form className={classes.root} noValidate autoComplete="off">
-        <div className={classes.formContent}>
-
-          <div className="box">
-
-               <label htmlFor="file" className={classes.button} id="SelectImageLabel">
-                  Votre logo :
-                </label>
+      <form className={classes.uploadForm} noValidate autoComplete="off">
             <input
               type="file"
               name="file"
@@ -89,9 +73,6 @@ class UploadLogo extends Component {
               className={classes.inputfile}
               onChange={this.handleChange}
             />
-          </div>
-
-        </div>
       </form>
       </div>
     )

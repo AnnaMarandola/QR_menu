@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { NavLink } from "react-router-dom";
+import UploadLogo from "../forms/UploadLogo";
 
 const styles = (theme) => ({
   root: {
@@ -38,13 +39,9 @@ const RestaurantSummary = ({ restaurant, classes }) => {
         <Card className={classes.root}>
           <CardActionArea>
             <Typography gutterBottom variant="h5">
-              Votre établissement :
+              Mon établissement :
             </Typography>
-            <CardMedia
-              className={classes.media}
-              image={restaurant.logo}
-              title="Contemplative Reptile"
-            />
+            <UploadLogo restaurant={restaurant}/>
             <CardContent>
               <Typography gutterBottom variant="h5">
                 {restaurant.name}

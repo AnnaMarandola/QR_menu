@@ -4,7 +4,6 @@ import { Typography, Radio, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { updateRestaurant } from "../../store/actions/restaurantActions";
 import TemplateCard from "./TemplateCard";
 import { Redirect } from "react-router-dom";
 import TEMP1 from "../../assets/templates/snapshotTemp1.png";
@@ -51,13 +50,10 @@ const styles = (theme) => ({
 });
 
 const TemplateForm = ({ classes, restaurant, auth, createMenu }) => {
-  console.log("TEMPLATEFORM restaurant in template form", restaurant);
-  console.log("TEMPLATEFORM auth in template form", auth.uid);
   const restoId = restaurant && restaurant.id;
-  console.log("TEMPLATEFORM restoId", restoId);
 
   const [selectedTemplate, setSelectedTemplate] = useState("a");
-  const [submitedForm, setSubmitedForm] = useState(false)
+  const [submitedForm, setSubmitedForm] = useState(false);
 
   const handleChange = (event) => {
     setSelectedTemplate(event.target.value);
@@ -66,16 +62,15 @@ const TemplateForm = ({ classes, restaurant, auth, createMenu }) => {
   const selectTemplate = (e) => {
     e.preventDefault();
     setSubmitedForm(true);
-    if (restaurant && restaurant.menuId !== null){
-      console.log("TODO : update menu.template & restaurant.template")
+    if (restaurant.menuId != null) {
+      console.log("TODO : update menu.template & restaurant.template");
     } else {
       createMenu({ restoId: restoId, template: selectedTemplate });
-      console.log("submited template", selectedTemplate);
+      console.log("menu created", selectedTemplate);
     }
   };
-
   console.log("selected template", selectedTemplate);
-  if (submitedForm === true) return <Redirect to='/' />
+  if (submitedForm === true) return <Redirect to="/" />;
 
   return (
     <form className={classes.root}>
@@ -86,7 +81,8 @@ const TemplateForm = ({ classes, restaurant, auth, createMenu }) => {
         <Typography variant="body2" className={classes.textForm}>
           Tous les designs disposent d'
           <span className={classes.goodies}>un nombre illimité de plats </span>
-           et de l'<span className={classes.goodies}>affichage des allergènes !</span>
+          et de l'
+          <span className={classes.goodies}>affichage des allergènes !</span>
         </Typography>
       </div>
       <div className={classes.cardSection}>

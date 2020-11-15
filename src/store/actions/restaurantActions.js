@@ -48,6 +48,7 @@ export const editRestaurant = (restaurant, restoId) => {
       .doc(restoId)
       .update({
         ...restaurant,
+        template: restaurant.template || null,
         ownerId: ownerId,
       })
       .then(() => {

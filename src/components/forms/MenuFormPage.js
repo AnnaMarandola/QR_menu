@@ -45,19 +45,10 @@ const styles = (theme) => ({
 const MenuFormPage = ({
   classes,
   restaurant,
-  auth,
-  profile,
   menu,
   dishes,
-  match,
 }) => {
   let menuData = { ...menu };
-
-
-  console.log("restaurant in menuformpage", restaurant);
-  console.log("profile in menuformpage", profile);
-  console.log("menuID in menuformpage", menuData);
-  console.log("dishes in menuformpage", dishes);
 
   return (
     <div className={classes.root}>
@@ -65,12 +56,11 @@ const MenuFormPage = ({
         Tableau de bord 
       </Typography>
 
-      {restaurant &&
-        menu && restaurant.template === "template3" && !menu.title && (
+      {restaurant && menu && restaurant.template === "template3" && !menu.title &&
           <TitleForm restaurant={restaurant} menu={menuData} />
-        )}
+      }
 
-      {restaurant && !restaurant.menuId &&
+      {restaurant &&
         <DishFormContainer
           restaurant={restaurant}
           menu={menuData}
@@ -110,9 +100,6 @@ const mapStateToProps = (state) => {
       state.firestore.ordered.restaurants[0],
     menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
     dishes: state.firestore.ordered.dishes,
-
-    auth: state.firebase.auth,
-    profile: state.firebase.profile,
   };
 };
 

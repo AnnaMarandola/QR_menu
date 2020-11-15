@@ -104,9 +104,6 @@ class InfoResto extends Component {
           <Typography variant="body1">
             Ces informations seront disponibles sur votre page.{" "}
           </Typography>
-
-          <UploadLogo restaurant={restaurant}/>
-
           <div className={classes.inputs}>
             <TextField
               id="name"
