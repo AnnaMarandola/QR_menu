@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { createRestaurant, editRestaurant } from "../../store/actions/restaurantActions";
 import { Redirect } from "react-router-dom";
-import UploadLogo from "./UploadLogo";
 
 const styles = (theme) => ({
   root: {

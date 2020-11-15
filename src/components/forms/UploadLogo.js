@@ -55,8 +55,6 @@ class UploadLogo extends Component {
 
   render () {
     const { classes, restaurant } = this.props
-    const { file } = this.state
-    console.log("file in uploadLogo", restaurant && restaurant.logo)
     return (
       <div>
       <div className={classes.imgContainer}>
@@ -93,12 +91,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-UploadLogo.propTypes = {
-  classes: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired,
-}
 
 export default compose (
   withStyles (styles),

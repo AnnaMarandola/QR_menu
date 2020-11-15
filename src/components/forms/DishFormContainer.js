@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { withStyles } from "@material-ui/core";
-import { Button  } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { updateMenu } from "../../store/actions/menuActions";
 import AddNewDish from "./AddNewDish";
-import AddCircleOutlineTwoToneIcon from '@material-ui/icons/AddCircleOutlineTwoTone';
+import AddCircleOutlineTwoToneIcon from "@material-ui/icons/AddCircleOutlineTwoTone";
 
 const styles = (theme) => ({
   root: {
@@ -13,7 +13,7 @@ const styles = (theme) => ({
     marginLeft: "2.5%",
     marginTop: "2rem",
     display: "flex",
-    justifyContent : "center",
+    justifyContent: "center",
   },
   container: {
     display: "flex",
@@ -30,7 +30,6 @@ const styles = (theme) => ({
 });
 
 const DishFormContainer = ({ classes, restaurant, menu }) => {
-
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -43,22 +42,20 @@ const DishFormContainer = ({ classes, restaurant, menu }) => {
 
   return (
     <div className={classes.root}>
-
-      { !open && 
-      <div>
-      <Button onClick={ handleClickOpen }>
-      <AddCircleOutlineTwoToneIcon/> Ajouter un plat
-      </Button>
-      </div>
-      }
-
-        { open &&  
+      {!open && (
         <div>
-        <AddNewDish restaurant={restaurant} menu={menu}  /> 
-        <Button onClick={handleClose}>CLOSE</Button>
+          <Button onClick={handleClickOpen}>
+            <AddCircleOutlineTwoToneIcon /> Ajouter un plat
+          </Button>
         </div>
-        }
+      )}
 
+      {open && (
+        <div>
+          <AddNewDish restaurant={restaurant} menu={menu} />
+          <Button onClick={handleClose}>CLOSE</Button>
+        </div>
+      )}
     </div>
   );
 };

@@ -5,6 +5,8 @@ import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import DishItem from "./DishItem";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { NavLink } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {
@@ -29,21 +31,30 @@ const styles = (theme) => ({
   restoName: {
     marginTop: "3rem",
   },
-  menuContent: {},
   menuTitle: {
     marginTop: "2rem",
     textAlign: "center",
   },
+  gobackButton: {
+    marginTop: "2rem",
+    marginLeft: "-8rem",
+  },
 });
 
-const MenuPage = ({ classes, restaurant, menu, dishes }) => {
+const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const resto = { ...restaurant };
   const menuData = { ...menu };
+  console.log("MenuPage restaurant", restaurant);
+  console.log("MenuPage auth", auth);
 
   return (
     <div className={classes.root}>
-
       <div className={classes.menuHearder}>
+        {auth && restaurant && auth.uid === restaurant.ownerId && (
+          <NavLink to="/">
+            <ArrowBackIosIcon className={classes.gobackButton} />
+          </NavLink>
+        )}
         <Typography className={classes.restoName} variant="h1">
           {resto.name}
         </Typography>
@@ -59,12 +70,12 @@ const MenuPage = ({ classes, restaurant, menu, dishes }) => {
         <Typography variant="body1">{resto.email}</Typography>
       </div>
 
-      <div className={classes.menuContent}>
+      <div>
         <Typography variant="h1" className={classes.menuTitle}>
           {menuData.title}
         </Typography>
-        {
-          dishes && dishes.map((dish) => (
+        {dishes &&
+          dishes.map((dish) => (
             <DishItem
               key={dish.id}
               menu={menuData}
@@ -83,11 +94,11 @@ const MenuPage = ({ classes, restaurant, menu, dishes }) => {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
+    auth: state.firebase.auth,
     restaurant:
       state.firestore.ordered.restaurants &&
       state.firestore.ordered.restaurants[0],
-    menu: state.firestore.ordered.menus &&
-      state.firestore.ordered.menus[0],
+    menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
     dishes: state.firestore.ordered.dishes,
   };
 };
