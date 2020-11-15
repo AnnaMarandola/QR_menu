@@ -58,7 +58,7 @@ const RestaurantSummary = ({ restaurant, classes }) => {
     { restaurant &&
       <Card className={classes.root}>
           <Typography gutterBottom variant="h5">
-            Modèle choisi :
+            Design 
           </Typography>
           <img className={classes.templatePic} src={getImage(template)} alt="modele" />
             <Typography gutterBottom variant="h5">

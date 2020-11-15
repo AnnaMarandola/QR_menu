@@ -38,7 +38,7 @@ const RestaurantSummary = ({ restaurant, classes }) => {
         <Card className={classes.root}>
           <CardActionArea>
             <Typography gutterBottom variant="h5">
-              Mon établissement :
+              Mon établissement 
             </Typography>
             <UploadLogo restaurant={restaurant}/>
             <CardContent>
