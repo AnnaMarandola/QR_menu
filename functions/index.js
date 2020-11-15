@@ -14,7 +14,7 @@ exports.onMenuCreate = functions.firestore
     return admin.firestore()
       .collection("restaurants")
       .doc(restoId)
-      .update({ menuId: menuId });
+      .update({ menuId: menuId, template: data.template });
   });
 
 

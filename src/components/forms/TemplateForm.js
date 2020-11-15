@@ -10,6 +10,7 @@ import { Redirect } from "react-router-dom";
 import TEMP1 from "../../assets/templates/snapshotTemp1.png";
 import TEMP2 from "../../assets/templates/snapshotTemp2.png";
 import TEMP3 from "../../assets/templates/snapshotTemp3.png";
+import { createMenu } from "../../store/actions/menuActions";
 
 const styles = (theme) => ({
   root: {
@@ -49,7 +50,7 @@ const styles = (theme) => ({
   },
 });
 
-const TemplateForm = ({ classes, restaurant, auth, updateRestaurant }) => {
+const TemplateForm = ({ classes, restaurant, auth, createMenu }) => {
   console.log("TEMPLATEFORM restaurant in template form", restaurant);
   console.log("TEMPLATEFORM auth in template form", auth.uid);
   const restoId = restaurant && restaurant.id;
@@ -65,8 +66,12 @@ const TemplateForm = ({ classes, restaurant, auth, updateRestaurant }) => {
   const selectTemplate = (e) => {
     e.preventDefault();
     setSubmitedForm(true);
-    updateRestaurant({ restoId: restoId, template: selectedTemplate });
-    console.log("submited template", selectedTemplate);
+    if (restaurant && restaurant.menuId !== null){
+      console.log("TODO : update menu.template & restaurant.template")
+    } else {
+      createMenu({ restoId: restoId, template: selectedTemplate });
+      console.log("submited template", selectedTemplate);
+    }
   };
 
   console.log("selected template", selectedTemplate);
@@ -164,9 +169,15 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createMenu: (menu) => dispatch(createMenu(menu)),
+  };
+};
+
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { updateRestaurant }),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect((props) => [
     {
       collection: "restaurants",

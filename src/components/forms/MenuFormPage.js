@@ -4,7 +4,6 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Typography } from "@material-ui/core";
-import CreateMenu from "./CreateMenu";
 import DishItemEdit from "../menu/DishItemEdit";
 import TitleForm from "./TitleForm";
 import DishFormContainer from "./DishFormContainer";
@@ -71,15 +70,13 @@ const MenuFormPage = ({
           <TitleForm restaurant={restaurant} menu={menuData} />
         )}
 
-      {restaurant && !restaurant.menuId ? (
-        <CreateMenu restaurant={restaurant} menu={menuData} />
-      ) : (
+      {restaurant && !restaurant.menuId &&
         <DishFormContainer
           restaurant={restaurant}
           menu={menuData}
           dishes={dishes}
         />
-      )}
+      }
 
       <div>
         {menu && menu.title && (
