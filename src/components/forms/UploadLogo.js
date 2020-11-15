@@ -3,7 +3,6 @@ import {withStyles} from '@material-ui/core'
 import {compose} from 'redux'
 import {uploadLogoPicture} from '../../store/actions/restaurantActions'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
 
 const styles = theme => ({
   imgContainer: {

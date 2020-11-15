@@ -85,7 +85,7 @@ const MenuFormPage = ({
         </Typography>
         {dishes &&
           dishes.map((dish) => (
-            <DishItemEdit dish={dish} />
+            <DishItemEdit dish={dish} key={dish.id} />
           ))}
           </div>
     </div>
