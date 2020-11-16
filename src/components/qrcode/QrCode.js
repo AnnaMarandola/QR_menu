@@ -1,21 +1,22 @@
 import React from "react";
 import useQrCode from "react-qrcode-hook";
-import { makeStyles } from "@material-ui/styles";
+import { withStyles } from "@material-ui/styles";
+import { compose } from "redux";
 
-const useStyles = makeStyles({
+
+const styles = (theme) => ({
   root: {
     width: "100%",
-    height: "100%",
+    height: "auto",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    marginTop: "6rem",
+    padding: "2rem",
+    backgroundColor: theme.palette.primary.main,
   },
-  download: {
-    backgroundColor: "#f51735",
-    color: "#F8F0D7",
-    marginTop: "1rem",
+  qrImg: {
+    width: "30%",
+    marginBottom: "4rem"
   },
 });
 
@@ -28,16 +29,14 @@ const options = {
   },
 };
 
-const QrCode = (restoId) => {
-
+const QrCode = ({classes, restoId}) => {
   const url = `http://localhost:3000/menupage/${restoId.restoId}/${restoId.menuId}`;
-  const classes = useStyles();
   const qrCode = useQrCode(url, options);
   return (
     <div className={classes.root}>
-      <img alt="qr code" src={qrCode} />
+      <img alt="qr code" src={qrCode} className={classes.qrImg} />
     </div>
   );
 };
 
-export default QrCode;
+export default compose(withStyles(styles))(QrCode);

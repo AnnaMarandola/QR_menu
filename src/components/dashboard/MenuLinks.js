@@ -21,19 +21,26 @@ const styles = (theme) => ({
   },
   cardButtons: {
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between'
   },
   modifyButton: {
     backgroundColor: theme.palette.primary.orange,
     padding: '0, 1.5rem, 0, 1.5rem',
     color: theme.palette.primary.whiteish,
-    marginRight: "1rem",
+    marginRight: "1rem"
   },
   showButton: {
     backgroundColor: theme.palette.primary.main,
     padding: '0, 1.5rem, 0, 1.5rem',
     color: theme.palette.primary.whiteish,
-    marginLeft: "1rem",
+    marginRight: "1rem"
+
+  },
+  qrcodeButton: {
+    backgroundColor: theme.palette.primary.main,
+    padding: '0, 1.5rem, 0, 1.5rem',
+    color: theme.palette.primary.whiteish,
+    width: "5rem"
   },
   links: {
     textDecoration: 'none',

@@ -4,48 +4,80 @@ import Pdf from "react-to-pdf";
 import { compose } from "redux";
 import QrCode from "./QrCode";
 import { firestoreConnect } from "react-redux-firebase";
-import { Typography } from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
+import { Button, Typography } from "@material-ui/core";
 
-
+const styles = (theme) => ({
+  root: {
+    textAlign: "center",
+    width: "50%",
+    marginLeft: "25%",
+  },
+  restoContainer: {
+    backgroundColor: theme.palette.primary.main,
+  },
+  restoName: {
+    color: theme.palette.primary.red,
+    margin: "2rem",
+    paddingTop: "4rem",
+  },
+  qrcodeLabel: {
+    color: theme.palette.primary.red,
+    marginTop: "4rem",
+  },
+  downloadButton: {
+    backgroundColor: theme.palette.primary.red,
+    padding: "0, 1.5rem, 0, 1.5rem",
+    color: theme.palette.primary.whiteish,
+    marginTop: "2rem"
+  },
+});
 
 const ref = React.createRef();
 
-const QrCodePdf = ({match, restaurant}) => {
-    console.log("params", match.params)
-    const resto = {...restaurant}
-    const restoId = match.params.resto;
-    const menuId = match.params.menu;
+const QrCodePdf = ({ classes, match, restaurant }) => {
+  console.log("params", match.params);
+  const resto = { ...restaurant };
+  const restoId = match.params.resto;
+  const menuId = match.params.menu;
 
-    return (
-    <>
-    <div ref={ref}>
-        <Typography variant="h1">{resto.name}</Typography>
-        <img src={resto.logo} width="50%" alt="logo resto" />
-        <h1>La carte</h1>
+  return (
+    <div className={classes.root}>
+      <div ref={ref} className={classes.restoContainer}>
+        <Typography variant="h2" className={classes.restoName}>
+          {resto.name}
+        </Typography>
+        <img src={resto.logo} width="40%" alt="logo resto" />
+        <h1 className={classes.qrcodeLabel}>La carte</h1>
         <QrCode restoId={restoId} menuId={menuId} />
+      </div>
+      <Pdf targetRef={ref} filename="qrmenu.pdf">
+        {({ toPdf }) => (
+          <Button className={classes.downloadButton} onClick={toPdf}>
+            Télécharger PDF
+          </Button>
+        )}
+      </Pdf>
     </div>
-    <Pdf targetRef={ref} filename="qrmenu.pdf">
-    {({ toPdf }) => (<button onClick={toPdf} >Télécharger le PDF</button>)}
-    </Pdf>
-    </>
-    )
-}
+  );
+};
 
 const mapStateToProps = (state) => {
-    console.log(state);
-    return {
-      restaurant:
-        state.firestore.ordered.restaurants &&
-        state.firestore.ordered.restaurants[0],
-    };
+  console.log(state);
+  return {
+    restaurant:
+      state.firestore.ordered.restaurants &&
+      state.firestore.ordered.restaurants[0],
   };
+};
 
 export default compose(
-    connect(mapStateToProps),
-    firestoreConnect((props) => [
-        {
-          collection: "restaurants",
-          doc: props.match.params.resto,
-        },
-    ])
+  withStyles(styles),
+  connect(mapStateToProps),
+  firestoreConnect((props) => [
+    {
+      collection: "restaurants",
+      doc: props.match.params.resto,
+    },
+  ])
 )(QrCodePdf);
