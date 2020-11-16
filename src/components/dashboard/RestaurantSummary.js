@@ -31,7 +31,6 @@ const styles = (theme) => ({
 });
 
 const RestaurantSummary = ({ restaurant, classes }) => {
-  console.log("restaurant summary", restaurant);
   return (
     <div>
       {restaurant ? (

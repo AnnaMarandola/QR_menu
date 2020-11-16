@@ -15,7 +15,6 @@ const styles = (theme) => ({
   root: {
     maxWidth: 345,
     backgroundColor: 'white',
-
   },
   media: {
     height: 140,
@@ -60,6 +59,10 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
           
           <NavLink className={classes.links} to={`/menupage/${restoId}/${menuId}`}>
           <Button className={classes.showButton}>Consulter</Button>
+          </NavLink>
+
+          <NavLink className={classes.links} to={`/qrcode/${restoId}/${menuId}`}>
+          <Button className={classes.qrcodeButton}>QR CODE</Button>
           </NavLink>
           </div>
           : <div>

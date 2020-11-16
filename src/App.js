@@ -10,6 +10,7 @@ import WithTopBar from "./HOC/WithTopBar";
 import MenuFormPage from "./components/forms/MenuFormPage";
 import MenuPage from "./components/menu/MenuPage";
 import TemplateForm from "./components/forms/TemplateForm";
+import QrCodePdf from "./components/qrcode/QrCodePdf";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route
           path="/inforesto/add"
           component={UserIsAuthenticated(WithTopBar(InfoResto))}
-        />        
+        />
         <Route
           path="/inforesto/edit/:resto"
           component={UserIsAuthenticated(WithTopBar(InfoResto))}
@@ -37,6 +38,10 @@ function App() {
         <Route
           path="/menuform/:resto/:menu"
           component={UserIsAuthenticated(WithTopBar(MenuFormPage))}
+        />
+        <Route
+          path="/qrcode/:resto/:menu"
+          component={UserIsAuthenticated(WithTopBar(QrCodePdf))}
         />
         <Route path="/menupage/:resto/:menu" component={MenuPage} />
       </Switch>

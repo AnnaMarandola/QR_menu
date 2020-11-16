@@ -44,8 +44,6 @@ const styles = (theme) => ({
 const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const resto = { ...restaurant };
   const menuData = { ...menu };
-  console.log("MenuPage restaurant", restaurant);
-  console.log("MenuPage auth", auth);
 
   return (
     <div className={classes.root}>
