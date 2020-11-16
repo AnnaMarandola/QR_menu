@@ -89,30 +89,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-// const MyMenu = (props) => {
-//   const { profile } = props;
-//   console.log('profile', profile)
-//   return (
-//     <div>
-//       <ul>
-//         <li>
-//           <a onClick={props.signOut} href="logout">
-//             Déconnexion
-//           </a>
-//         </li>
-//         <li>
-//           <NavLink to="./myaccount">Mon compte</NavLink>
-//         </li>
-//         <li>
-//           <NavLink to="./inforesto">Ma carte en ligne</NavLink>
-//         </li>
-//         <li>
-//           <NavLink to="./">Modifier ma carte</NavLink>
-//         </li>
-//       </ul>
-//     </div>
-//   );
-// };
+
 
 function MyMenu({ classes, signOut, profile, history }) {
   const [anchorEl, setAnchorEl] = React.useState(null);

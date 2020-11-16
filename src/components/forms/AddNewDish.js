@@ -12,7 +12,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
-import { createDish } from "../../store/actions/dishActions";
+import { createDish, updateDish } from "../../store/actions/dishActions";
 import { compose } from "redux";
 import { connect } from "react-redux";
 
@@ -61,77 +61,92 @@ class AddNewDish extends Component {
     price: "",
   };
 
-  
+  componentDidMount() {
+    if (this.props.dish){
+      this.setState({
+        restoId: this.props.dish.restoId, 
+        menuId: this.props.dish.menuId,
+        dishName: this.props.dish.dishName,
+        ingredients: this.props.dish.ingredients,
+        description: this.props.dish.description,
+        checkedAllergens:  this.props.dish.checkedAllergens,
+        price: this.props.dish.price,
+    })
+  }
+}
+
+  componentDidUpdate = () => {
+    console.log("plat ajouté")
+  }
+
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
-      restoId: this.props.restaurant.id,
-      menuId: this.props.restaurant.menuId,
+      restoId: this.props.menu.restoId || this.props.dish.restoId,
+      menuId: this.props.menu.id || this.props.dish.menuId,
     });
   };
+
 
   handleToggle = (value) => () => {
     const currentIndex = this.state.checkedAllergens.indexOf(value);
     const newChecked = [...this.state.checkedAllergens];
-
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
     this.setState({ checkedAllergens: newChecked });
     console.log("checked", this.checkedAllergens);
   };
 
+
+
   handleSubmit = (e) => {
     e.preventDefault();
+    if(!this.props.dish){
     this.props.createDish(this.state);
-    console.log("dish created", this.state);
+    } else {
+    this.props.updateDish(this.state, this.props.dish.id)
+    }
   };
 
   render() {
-    const { classes, restaurant } = this.props;
-    console.log("AAAAAAAAAAAAAAAArestaurant id in AddNewDish", restaurant && restaurant.id);
-    let menuId = restaurant && restaurant.menuId
-    console.log("AAAAAAAAAAAAAAAA menuId in restaurant", menuId )
+    
+    const { classes, dish } = this.props;
 
     return (
       <div className={classes.root}>
-        <Accordion className={classes.accordion}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>ajouter un plat</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
+
             <form className={classes.form} onSubmit={this.handleSubmit}>
               <TextField
                 className={classes.input}
                 id="dishName"
                 label="nom du plat"
                 onChange={this.handleChange}
+                defaultValue={ dish ? dish.dishName : ""}
               />
               <TextField
                 className={classes.input}
                 id="ingredients"
                 label="ingredients"
                 onChange={this.handleChange}
+                defaultValue={ dish ? dish.ingredients : ""}
               />
               <TextField
                 className={classes.input}
                 id="description"
                 label="description"
                 onChange={this.handleChange}
+                defaultValue={ dish ? dish.description : ""}
               />
               <TextField
                 className={classes.input}
                 id="price"
                 label="prix"
                 onChange={this.handleChange}
+                defaultValue={ dish ? dish.price : ""}
               />
               <Accordion className={classes.rootAllergens}>
                 <AccordionSummary
@@ -182,6 +197,7 @@ class AddNewDish extends Component {
                                 -1
                               }
                               inputProps={{ "aria-labelledby": labelId }}
+                              defaultValue={ dish ? dish.checkedAllergens : []}
                             />
                           </ListItemSecondaryAction>
                         </ListItem>
@@ -193,13 +209,11 @@ class AddNewDish extends Component {
               <Button
                 className={classes.addButton}
                 type="submit"
-                onClick={this.handleSubmit}
+                onClick={this.handleClose}
               >
-                ajouter à mon menu
+                { dish ? "Modifier" : "ajouter à mon menu" }
               </Button>
             </form>
-          </AccordionDetails>
-        </Accordion>
       </div>
     );
   }
@@ -213,6 +227,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createDish: (dish) => dispatch(createDish(dish)),
+    updateDish: (dish, dishId) => dispatch(updateDish(dish, dishId)),
   };
 };
 

@@ -18,6 +18,7 @@ import { getFirebase, ReactReduxFirebaseProvider } from "react-redux-firebase";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import "firebase/storage";
 
 const raleway = {
   fontFamily: "Raleway",
@@ -40,13 +41,12 @@ const theme = createMuiTheme({
     h1: {
       color: "#031627",
       fontSize: "2rem",
-      fontWeight: "800",
+      fontWeight: "550",
     },
     h2: {
-      fontSize: "1rem",
-      fontWeight: "700",
+      fontSize: "1.5rem",
+      fontWeight: 550,
       color: "#031627",
-      marginBottom: "30px",
     },
     body1: {
       fontSize: "14px",
