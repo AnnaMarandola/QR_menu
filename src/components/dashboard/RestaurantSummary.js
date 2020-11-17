@@ -13,6 +13,7 @@ import UploadLogo from "../forms/UploadLogo";
 
 const styles = (theme) => ({
   root: {
+    minWidth: 345,
     maxWidth: 345,
     marginTop: "1rem",
     backgroundColor: "white",

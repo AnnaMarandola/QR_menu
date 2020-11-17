@@ -1,7 +1,7 @@
 import React from "react";
 import RestaurantSummary from "./RestaurantSummary";
 import { connect } from "react-redux";
-import { withStyles } from "@material-ui/core";
+import { Divider, Typography, withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
@@ -10,23 +10,54 @@ import MenuLinks from "./MenuLinks";
 
 const styles = (theme) => ({
   root: {
-    marginLeft: "0.5rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    paddingTop: "4rem",
+    [theme.breakpoints.up('sm')]: {
+
+    },
+  },
+  container: {
+    paddingTop: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: "6rem",
+      flexDirection: "row",
+      justifyContent: "space-evenly",
+      alignItems: 'start',
+      width: "80%"
+    },
+  },
+  dashboardTitle: {
+    marginTop: "3rem",
+    width: "80%",
+    display: "flex",
+    flexDirection: "column"
+  },
+  titleText: {
+    textAlign: "center",
   },
 });
 
 const Dashboard = ({ classes, restaurant, auth, profile }) => {
-  console.log("8888888888888restaurant", restaurant);
-  console.log("88888888888auth dashboard", auth);
   let menuId = restaurant && restaurant.menuId;
-  console.log("8888888888888menuID", menuId);
   console.log("profile", profile);
 
   if (!auth.uid) return <Redirect to="/signin" />;
   return (
-    <div>
-      <div className={classes.root}>
-            <MenuLinks restaurant={restaurant} menuId={menuId} />
+    <div className={classes.root}>
+
+    <div className={classes.dashboardTitle}>
+    <Typography variant="h1" className={classes.titleText}>
+    <hr/>Tableau de bord<hr/>
+    </Typography>
+    </div>
+      <div className={classes.container}>
             <RestaurantSummary restaurant={restaurant} />
+            <MenuLinks restaurant={restaurant} menuId={menuId} />
         {restaurant && restaurant.template && (
           <TemplateSummary restaurant={restaurant} />
         )}

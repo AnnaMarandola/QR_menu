@@ -12,6 +12,7 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    paddingTop: "6rem"
   },
   form: {
     width: "90%",

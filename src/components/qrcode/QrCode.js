@@ -16,7 +16,7 @@ const styles = (theme) => ({
   },
   qrImg: {
     width: "30%",
-    marginBottom: "4rem"
+    marginBottom: "4 rem"
   },
 });
 

@@ -15,6 +15,7 @@ const styles = (theme) => ({
   root: {
     maxWidth: 345,
     backgroundColor: 'white',
+    marginTop: "1rem",
   },
   media: {
     height: 140,
