@@ -3,20 +3,38 @@ import { Link } from "react-router-dom";
 import LOGO from "../../assets/LogoProject.png";
 import "../../App.css";
 import { connect } from "react-redux";
-import MyMenu from '../nav/MyMenu';
+import MyMenu from "../nav/MyMenu";
+import { withStyles } from "@material-ui/core";
+import { compose } from "redux";
+
+const styles = (theme) => ({
+  navbar: {
+    width: "100%",
+    height: "4rem",
+    backgroundColor: theme.palette.primary.whiteish,
+    position: "fixed",
+    zIndex: 2,
+  },
+  logo: {
+    width: "60px",
+    marginTop: "0.5rem",
+    marginLeft: "0.5rem",
+  }
+});
 
 const Navbar = (props) => {
-  const { auth, history } = props;
-  const isLogged = auth.uid ? <MyMenu history={history}/> : null
-  console.log('authUid', auth.uid);
+  const { auth, history, classes } = props;
+  console.log("authUid", auth.uid);
   return (
-    <nav>
-      <div className="navbar">
+    <nav className={classes.navbar}>
         <Link to="/">
-          <img src={LOGO} alt="logo" className="logo" />
+          <img src={LOGO} alt="logo" className={classes.logo} />
         </Link>
-    { isLogged  }
-      </div>
+        {auth.uid ? 
+        <div className={classes.menu}>
+        <MyMenu history={history} />
+        </div>
+         : null}
     </nav>
   );
 };
@@ -27,6 +45,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-
-
-export default connect(mapStateToProps)(Navbar);
+export default compose(connect(mapStateToProps), withStyles(styles))(Navbar);

@@ -12,12 +12,14 @@ import  MENU  from "../../assets/menu-icon.png";
 
 const styles = (theme) => ({
   root: {
+    backgroundColor: theme.palette.primary.whiteish,
     float: "right",
+    top: "-4rem",
     height: "90%",
     width: "80px",
     "& span": {
-      height: "64px",
-      width: "64px",
+      height: "54px",
+      width: "54px",
       borderRadius: "32px",
       overflow: "hidden",
       "& img": {

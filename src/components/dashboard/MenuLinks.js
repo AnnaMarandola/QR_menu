@@ -15,26 +15,33 @@ const styles = (theme) => ({
   root: {
     maxWidth: 345,
     backgroundColor: 'white',
-
+    marginTop: "1rem",
   },
   media: {
     height: 140,
   },
   cardButtons: {
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between'
   },
   modifyButton: {
     backgroundColor: theme.palette.primary.orange,
     padding: '0, 1.5rem, 0, 1.5rem',
     color: theme.palette.primary.whiteish,
-    marginRight: "1rem",
+    marginRight: "1rem"
   },
   showButton: {
     backgroundColor: theme.palette.primary.main,
     padding: '0, 1.5rem, 0, 1.5rem',
     color: theme.palette.primary.whiteish,
-    marginLeft: "1rem",
+    marginRight: "1rem"
+
+  },
+  qrcodeButton: {
+    backgroundColor: theme.palette.primary.main,
+    padding: '0, 1.5rem, 0, 1.5rem',
+    color: theme.palette.primary.whiteish,
+    width: "5rem"
   },
   links: {
     textDecoration: 'none',
@@ -60,6 +67,10 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
           
           <NavLink className={classes.links} to={`/menupage/${restoId}/${menuId}`}>
           <Button className={classes.showButton}>Consulter</Button>
+          </NavLink>
+
+          <NavLink className={classes.links} to={`/qrcode/${restoId}/${menuId}`}>
+          <Button className={classes.qrcodeButton}>QR CODE</Button>
           </NavLink>
           </div>
           : <div>
