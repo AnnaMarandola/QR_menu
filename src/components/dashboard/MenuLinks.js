@@ -14,6 +14,7 @@ import { NavLink } from "react-router-dom";
 const styles = (theme) => ({
   root: {
     maxWidth: 345,
+    minWidth: 345,
     backgroundColor: 'white',
     marginTop: "1rem",
   },
@@ -22,8 +23,9 @@ const styles = (theme) => ({
   },
   cardButtons: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
+  
   modifyButton: {
     backgroundColor: theme.palette.primary.orange,
     padding: '0, 1.5rem, 0, 1.5rem',

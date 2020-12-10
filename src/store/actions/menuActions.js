@@ -22,7 +22,7 @@ export const createMenu = (menu) => {
   export const updateMenu = (payload) =>  {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
       let menuId = payload.menuId
-      let title = payload.title
+      let title = payload.title 
       getFirestore()
       .collection('menus')
       .doc(menuId)
@@ -34,4 +34,21 @@ export const createMenu = (menu) => {
       });
     }
   }
+
   
+  export const selectColor =(payload) => {
+    console.log("payload in select color ACTION", payload)
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+      let menuId = payload.menuId
+      let color = payload.color
+      getFirestore()
+      .collection('menus')
+      .doc(menuId)
+      .update({ headerColor: color})
+      .then(() => {
+        dispatch({ type: "SELECT_COLOR", payload});
+      }).catch((err) => {
+        dispatch({ type: "SELECT_COLOR_ERROR", err})
+      })
+    }
+  }

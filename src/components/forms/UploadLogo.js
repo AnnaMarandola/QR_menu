@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Fab, Input, withStyles } from "@material-ui/core";
+import { Fab, withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { uploadLogoPicture } from "../../store/actions/restaurantActions";
 import { connect } from "react-redux";

@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./store/reducers/rootReducer";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
@@ -15,6 +15,7 @@ import {
   getFirestore,
 } from "redux-firestore";
 import { getFirebase, ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { composeWithDevTools } from "redux-devtools-extension";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
@@ -95,9 +96,10 @@ firebase.initializeApp({
 });
 firebase.firestore();
 
+
 const store = createStore(
   rootReducer,
-  compose(
+  composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     reduxFirestore(firebase)
   )

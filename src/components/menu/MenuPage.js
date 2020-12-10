@@ -13,7 +13,6 @@ const styles = (theme) => ({
     width: "100%",
   },
   menuHearder: {
-    backgroundColor: theme.palette.primary.red,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -22,7 +21,6 @@ const styles = (theme) => ({
     maxWidth: "55%",
   },
   restoContact: {
-    backgroundColor: theme.palette.primary.red,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -47,9 +45,9 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.menuHearder}>
+      <div className={classes.menuHearder} style={{ backgroundColor: menuData.headerColor || "#272727" }}>
         {auth && restaurant && auth.uid === restaurant.ownerId && (
-          <NavLink to="/">
+          <NavLink to="/"> 
             <ArrowBackIosIcon className={classes.gobackButton} />
           </NavLink>
         )}
@@ -59,7 +57,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
 
-      <div className={classes.restoContact}>
+      <div className={classes.restoContact} style={{ backgroundColor: menuData.headerColor || "#272727" }}>
         <Typography variant="body1">{resto.adress}</Typography>
         <Typography variant="body1">
           {resto.postalCode} - {resto.city}

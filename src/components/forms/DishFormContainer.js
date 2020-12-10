@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withStyles } from "@material-ui/core";
+import { Typography, withStyles } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -12,8 +12,13 @@ const styles = (theme) => ({
     width: "95%",
     marginLeft: "2.5%",
     marginTop: "2rem",
+    marginBottom: '2rem',
     display: "flex",
     justifyContent: "center",
+  },
+  addButton: {
+    color: theme.palette.primary.whiteish,
+    backgroundColor: theme.palette.primary.main,
   },
   container: {
     display: "flex",
@@ -43,15 +48,16 @@ const DishFormContainer = ({ classes, restaurant, menu }) => {
   return (
     <div className={classes.root}>
       {!open && (
-        <div>
-          <Button onClick={handleClickOpen}>
-            <AddCircleOutlineTwoToneIcon /> Ajouter un plat
+        <div >
+          <Button onClick={handleClickOpen} className={classes.addButton}>
+            <AddCircleOutlineTwoToneIcon style={{fill: "white"}} /> Ajouter un plat
           </Button>
         </div>
       )}
 
       {open && (
         <div>
+        <Typography variant="h2" className={classes.ne}>Nouveau plat :</Typography>
           <AddNewDish restaurant={restaurant} menu={menu} />
           <Button onClick={handleClose}>CLOSE</Button>
         </div>
