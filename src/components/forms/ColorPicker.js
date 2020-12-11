@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ColorPicker from "material-ui-color-picker";
-import { Button, withStyles } from "@material-ui/core";
+import { Button, withStyles,Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { selectColor } from "../../store/actions/menuActions";
+import { selectHeaderColor, selectFontColor } from "../../store/actions/menuActions";
 
 const styles = (theme) => ({
   colorInput: {
@@ -11,33 +11,64 @@ const styles = (theme) => ({
   },
 });
 
-const SelectColor = ({ classes, menu, selectColor }) => {
+const SelectColor = ({ classes, menu, selectHeaderColor, selectFontColor }) => {
   let menuColor = menu && menu.headerColor
   const [headerColor, setHeaderColor] = useState("");
+  const [fontColor, setFontColor] = useState("");
 
-  const handleChange = (color) => {
+  const handleChangeHeaderColor = (color) => {
     setHeaderColor(color);
     console.log("headerColor", headerColor);
   };
 
-  const setColor = (e) => {
-    e.preventDefault();
-    selectColor({ menuId: menu.id, color: headerColor });
+  const handleChangeFontColor = (color) => {
+    setFontColor(color);
+    console.log("fontColor", fontColor);
   };
+
+  const submitHeaderColor = (e) => {
+    e.preventDefault();
+    selectHeaderColor({ menuId: menu.id, color: headerColor });
+  };
+
+  const submitFontColor = (e) => {
+    e.preventDefault();
+    selectFontColor({ menuId: menu.id, fontColor: fontColor });
+  };
+
+
 
   return (
     <div>
-      <form className={classes.colorForm}>
+      <form className={classes.headerColorForm}>
+      <Typography variant="body2">Couleur de fond</Typography>     
+
         <ColorPicker
           className={classes.colorInput}
           style={{ backgroundColor: menuColor || headerColor }}
           name="color"
           defaultValue={headerColor}
           value={headerColor}
-          onChange={handleChange}
+          onChange={handleChangeHeaderColor}
         />
         { headerColor !== menuColor &&
-        <Button onClick={setColor}>valider</Button>
+        <Button onClick={submitHeaderColor}>valider</Button>
+        }
+      </form>
+
+      <form className={classes.fontColorForm}>
+      <Typography variant="body2">Couleur du texte</Typography>     
+
+        <ColorPicker
+          className={classes.colorInput}
+          style={{ backgroundColor: (menu && menu.fontColor) || fontColor }}
+          name="color"
+          defaultValue={fontColor}
+          value={fontColor}
+          onChange={handleChangeFontColor}
+        />
+        { headerColor !== menuColor &&
+        <Button onClick={submitFontColor}>valider</Button>
         }
         
       </form>
@@ -53,7 +84,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectColor: (menuId, color) => dispatch(selectColor(menuId, color)),
+    selectHeaderColor: (menuId, color) => dispatch(selectHeaderColor(menuId, color)),
+    selectFontColor: (menuId, fontColor) => dispatch(selectFontColor(menuId, fontColor))
   };
 };
 

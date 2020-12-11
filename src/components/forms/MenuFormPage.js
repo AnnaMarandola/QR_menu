@@ -55,7 +55,7 @@ const styles = (theme) => ({
   },
 });
 
-const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
+const MenuFormPage = ({ classes, restaurant, menu, dishes, theme }) => {
   let menuData = { ...menu };
   const resto = { ...restaurant };
 
@@ -66,14 +66,14 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
         <Typography className={classes.titlePage} variant="h1">
           Tableau de bord
         </Typography>
-        <Typography className={classes.restoName} variant="h1">
+        <Typography className={classes.restoName} variant="h1" style={{ color: menuData.fontColor || "#272727" }}>
           {resto.name}
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
 
       <div className={classes.colorSection}>
-      <Typography variant="body1">Personnalisez la couleur de l'en-tête</Typography>     
+      <Typography variant="body1">Personnalisez le design de votre carte :</Typography>     
       <SelectColor menu={menu}/>
       </div>
 

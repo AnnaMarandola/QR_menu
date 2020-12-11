@@ -51,13 +51,13 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             <ArrowBackIosIcon className={classes.gobackButton} />
           </NavLink>
         )}
-        <Typography className={classes.restoName} variant="h1">
+        <Typography className={classes.restoName} variant="h1" style={{ color: menuData.fontColor || "#272727" }}>
           {resto.name}
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
 
-      <div className={classes.restoContact} style={{ backgroundColor: menuData.headerColor || "#272727" }}>
+      <div className={classes.restoContact} style={{ backgroundColor: menuData.headerColor || "#272727", color: menuData.fontColor || "#272727" }}>
         <Typography variant="body1">{resto.adress}</Typography>
         <Typography variant="body1">
           {resto.postalCode} - {resto.city}

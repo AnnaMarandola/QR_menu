@@ -15,12 +15,18 @@ const menuReducer = (state = initialState, action) => {
     case "UPDATE_MENU_ERROR":
       console.log("update menu error", action.err);
       return state;
-    case "SELECT_COLOR":
-      console.log("select color success", action.menu);
+    case "SELECT_HEADER_COLOR":
+      console.log("select header color success", action.menu);
       return state;
-    case "SELECT_COLOR_ERROR":
-      console.log("select color error", action.err);
+    case "SELECT_HEADER_COLOR_ERROR":
+      console.log("select header color error", action.err);
       return state;
+      case "SELECT_FONT_COLOR":
+        console.log("select font color success", action.menu);
+        return state;
+      case "SELECT_FONT_COLOR_ERROR":
+        console.log("select font color error", action.err);
+        return state;
     default:
       return state;
   }

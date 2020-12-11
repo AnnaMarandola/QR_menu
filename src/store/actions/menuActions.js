@@ -36,7 +36,7 @@ export const createMenu = (menu) => {
   }
 
   
-  export const selectColor =(payload) => {
+  export const selectHeaderColor =(payload) => {
     console.log("payload in select color ACTION", payload)
     return (dispatch, getState, {getFirebase, getFirestore}) => {
       let menuId = payload.menuId
@@ -46,9 +46,26 @@ export const createMenu = (menu) => {
       .doc(menuId)
       .update({ headerColor: color})
       .then(() => {
-        dispatch({ type: "SELECT_COLOR", payload});
+        dispatch({ type: "SELECT_HEADER_COLOR", payload});
       }).catch((err) => {
-        dispatch({ type: "SELECT_COLOR_ERROR", err})
+        dispatch({ type: "SELECT_HEADER_COLOR_ERROR", err})
+      })
+    }
+  }
+
+  export const selectFontColor =(payload) => {
+    console.log("payload in select color ACTION", payload)
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+      let menuId = payload.menuId
+      let color = payload.fontColor
+      getFirestore()
+      .collection('menus')
+      .doc(menuId)
+      .update({ fontColor: color})
+      .then(() => {
+        dispatch({ type: "SELECT_FONT_COLOR", payload});
+      }).catch((err) => {
+        dispatch({ type: "SELECT_FONT_COLOR_ERROR", err})
       })
     }
   }
