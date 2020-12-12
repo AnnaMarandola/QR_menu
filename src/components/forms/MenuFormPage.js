@@ -8,6 +8,7 @@ import DishItemEdit from "../menu/DishItemEdit";
 import TitleForm from "./TitleForm";
 import DishFormContainer from "./DishFormContainer";
 import SelectColor from "./ColorPicker";
+import SelectFont from "./FontSelect";
 
 const styles = (theme) => ({
 
@@ -66,7 +67,7 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes, theme }) => {
         <Typography className={classes.titlePage} variant="h1">
           Tableau de bord
         </Typography>
-        <Typography className={classes.restoName} variant="h1" style={{ color: menuData.fontColor || "#272727" }}>
+        <Typography className={classes.restoName} variant="h1" style={{ color: menuData.fontColor || "#272727", fontFamily: menuData.fontFamily || "Roboto" }}>
           {resto.name}
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
@@ -75,6 +76,7 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes, theme }) => {
       <div className={classes.colorSection}>
       <Typography variant="body1">Personnalisez le design de votre carte :</Typography>     
       <SelectColor menu={menu}/>
+      <SelectFont menu={menu} restaurant={restaurant}/>
       </div>
 
       {restaurant &&

@@ -51,23 +51,31 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             <ArrowBackIosIcon className={classes.gobackButton} />
           </NavLink>
         )}
-        <Typography className={classes.restoName} variant="h1" style={{ color: menuData.fontColor || "#272727" }}>
+        <Typography 
+        className={classes.restoName} 
+        variant="h1" 
+        style={{ color: menuData.fontColor || "#272727", fontFamily: menuData.fontFamily || "Roboto" }}>
           {resto.name}
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
 
-      <div className={classes.restoContact} style={{ backgroundColor: menuData.headerColor || "#272727", color: menuData.fontColor || "#272727" }}>
-        <Typography variant="body1">{resto.adress}</Typography>
-        <Typography variant="body1">
+      <div 
+      className={classes.restoContact} 
+      style={{ 
+        backgroundColor: menuData.headerColor || "#272727", 
+        color: menuData.fontColor || "#272727",
+         }}>
+        <Typography variant="body1" style={{fontFamily: menuData.fontFamily || "Roboto"}}>{resto.adress}</Typography>
+        <Typography variant="body1" style={{fontFamily: menuData.fontFamily || "Roboto"}}>
           {resto.postalCode} - {resto.city}
         </Typography>
-        <Typography variant="body1">{resto.phone}</Typography>
-        <Typography variant="body1">{resto.email}</Typography>
+        <Typography variant="body1" style={{fontFamily: menuData.fontFamily || "Roboto"}}>{resto.phone}</Typography>
+        <Typography variant="body1" style={{fontFamily: menuData.fontFamily || "Roboto"}}>{resto.email}</Typography>
       </div>
 
       <div>
-        <Typography variant="h1" className={classes.menuTitle}>
+        <Typography variant="h1" className={classes.menuTitle} style={{fontFamily: menuData.fontFamily || "Roboto"}}>
           {menuData.title}
         </Typography>
         {dishes &&
