@@ -3,32 +3,37 @@ import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Typography } from "@material-ui/core";
+import { Card, Typography } from "@material-ui/core";
 import DishItemEdit from "../menu/DishItemEdit";
 import TitleForm from "./TitleForm";
 import DishFormContainer from "./DishFormContainer";
-import SelectColor from "./ColorPicker";
-import SelectFont from "./FontSelect";
+import SelectColor from "./DesignForm";
+import DesignForm from "./DesignForm";
+import DesignFormContainer from "./DesignFormContainer";
 
 const styles = (theme) => ({
 
   root: {
     width: "95%",
     marginLeft: "2.5%",
-    marginBottom: "2rem",
   },
   header: {
-    height: "20rem",
+    height: "17rem",
+    width: "70%",
+    marginLeft: "15%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+
   },
   titlePage: {
     paddingTop: "5rem",
-    color: theme.palette.primary.whiteish,
+    paddingBottom: "2rem",
+    color: theme.palette.primary.main,
   },
   restoName: {
     marginTop: "2rem",
+    marginBottom: "2rem",
   },
   logo: {
     width: "10rem",
@@ -62,21 +67,18 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes, theme }) => {
 
   return (
     <div className={classes.root}>
-
-      <div className={classes.header} style={{backgroundColor: menuData.headerColor || "#272727" }}>
         <Typography className={classes.titlePage} variant="h1">
           Tableau de bord
         </Typography>
+      <Card className={classes.header} style={{backgroundColor: menuData.headerColor || "#272727" }}>
         <Typography className={classes.restoName} variant="h1" style={{ color: menuData.fontColor || "#272727", fontFamily: menuData.fontFamily || "Roboto" }}>
           {resto.name}
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
-      </div>
+      </Card>
 
       <div className={classes.colorSection}>
-      <Typography variant="body1">Personnalisez le design de votre carte :</Typography>     
-      <SelectColor menu={menu}/>
-      <SelectFont menu={menu} restaurant={restaurant}/>
+      <DesignFormContainer menu={menu} restaurant={restaurant}/>
       </div>
 
       {restaurant &&

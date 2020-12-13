@@ -10,12 +10,13 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import AddNewDish from "../forms/AddNewDish";
+import Switch from '@material-ui/core/Switch';
 
 const styles = (theme) => ({
   root: {
     width: "100%",
-    paddingLeft: "2rem",
-    paddingRight: "2rem",
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
     marginTop: "1rem",
   },
   dishInfos: {
@@ -29,8 +30,15 @@ const styles = (theme) => ({
 });
 
 const DishItemEdit = ({ classes, dish, deleteDish }) => {
-
   const [edited, setEdited] = useState(false);
+  const [published, setPublished] = useState({
+    checkedA: true,
+    checkedB: true,
+  });
+
+  const handleChange = (event) => {
+    setPublished({ ...published, [event.target.name]: event.target.checked });
+  };
 
   const handleDelete = (e) => {
     console.log("e", e);
@@ -68,15 +76,26 @@ const DishItemEdit = ({ classes, dish, deleteDish }) => {
         <Button>
           <ArrowDropDownIcon />
         </Button>
+        <Switch
+        size="small"
+          checked={published.checkedA}
+          onChange={handleChange}
+          name="checkedA"
+          inputProps={{ "aria-label": "secondary checkbox" }}
+        />
         <Button onClick={handleDelete}>
           <DeleteForeverIcon />
         </Button>
-        {edited && 
-        <div>
-        <AddNewDish restaurant={dish.restoId} menu={dish.menuId} dish={dish} />
-        <Button onClick={handleClose} >X</Button>
-        </div>
-        }
+        {edited && (
+          <div>
+            <AddNewDish
+              restaurant={dish.restoId}
+              menu={dish.menuId}
+              dish={dish}
+            />
+            <Button onClick={handleClose}>X</Button>
+          </div>
+        )}
       </div>
       <hr />
     </div>
