@@ -7,8 +7,6 @@ import { Card, Typography } from "@material-ui/core";
 import DishItemEdit from "../menu/DishItemEdit";
 import TitleForm from "./TitleForm";
 import DishFormContainer from "./DishFormContainer";
-import SelectColor from "./DesignForm";
-import DesignForm from "./DesignForm";
 import DesignFormContainer from "./DesignFormContainer";
 
 const styles = (theme) => ({

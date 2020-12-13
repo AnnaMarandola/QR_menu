@@ -122,6 +122,7 @@ export default compose(
     {
       collection: "dishes",
       where: ["menuId", "==", props.match.params.menu],
+      where: ["published", "==", true]
     },
   ])
 )(MenuPage);

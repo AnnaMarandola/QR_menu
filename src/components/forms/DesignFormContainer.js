@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { updateMenu } from "../../store/actions/menuActions";
 import DesignForm from "../forms/DesignForm";
-import AddCircleOutlineTwoToneIcon from "@material-ui/icons/AddCircleOutlineTwoTone";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 

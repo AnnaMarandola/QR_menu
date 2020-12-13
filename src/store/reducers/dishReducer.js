@@ -21,6 +21,12 @@ const dishReducer = (state = initialState, action) => {
     case "DELETE_DISH_ERROR":
       console.log("update dish error", action.err);
       return state;
+    case "SWITCH_STATUS":
+      console.log("switch status success", action.dish);
+      return state;
+    case "SWITCH_STATUS_ERROR":
+      console.log("switch status error", action.err);
+      return state;
     default:
       return state;
   }

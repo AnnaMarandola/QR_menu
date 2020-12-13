@@ -3,8 +3,7 @@ import { Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { deleteDish } from "../../store/actions/dishActions";
-
+import { deleteDish, switchStatus } from "../../store/actions/dishActions";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -29,16 +28,18 @@ const styles = (theme) => ({
   editButtons: {},
 });
 
-const DishItemEdit = ({ classes, dish, deleteDish }) => {
+const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
   const [edited, setEdited] = useState(false);
-  const [published, setPublished] = useState({
-    checkedA: true,
-    checkedB: true,
-  });
+  const [isPublished, setPublished] = useState(dish.published);
+  console.log("isPublished", isPublished)
 
   const handleChange = (event) => {
-    setPublished({ ...published, [event.target.name]: event.target.checked });
+    let status = event.target.checked 
+    console.log("status", status)
+    setPublished(status);
+    switchStatus({ dishId: dish.id, status: status})
   };
+  console.log("published", isPublished)
 
   const handleDelete = (e) => {
     console.log("e", e);
@@ -78,9 +79,10 @@ const DishItemEdit = ({ classes, dish, deleteDish }) => {
         </Button>
         <Switch
         size="small"
-          checked={published.checkedA}
+          checked={isPublished}
+          value={isPublished}
           onChange={handleChange}
-          name="checkedA"
+          name="checked"
           inputProps={{ "aria-label": "secondary checkbox" }}
         />
         <Button onClick={handleDelete}>
@@ -112,6 +114,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteDish: (dishId) => dispatch(deleteDish(dishId)),
+    switchStatus: (menuId, status) =>
+    dispatch(switchStatus(menuId, status)),
+
   };
 };
 

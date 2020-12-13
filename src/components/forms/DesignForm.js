@@ -54,7 +54,6 @@ const DesignForm = ({
 }) => {
   let menuColor = menu && menu.headerColor;
   let menuFontColor = menu && menu.fontColor;
-  let menuFontFamily = menu && menu.fontFamily;
   let resto = {...restaurant}
   const [headerColor, setHeaderColor] = useState("");
   const [fontColor, setFontColor] = useState("");

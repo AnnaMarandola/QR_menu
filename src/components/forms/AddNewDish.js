@@ -59,6 +59,7 @@ class AddNewDish extends Component {
     description: "",
     checkedAllergens: [],
     price: "",
+    published: false,
   };
 
   componentDidMount() {
@@ -71,6 +72,7 @@ class AddNewDish extends Component {
         description: this.props.dish.description,
         checkedAllergens:  this.props.dish.checkedAllergens,
         price: this.props.dish.price,
+        published: this.props.dish.published
     })
   }
 }
