@@ -7,34 +7,19 @@ import { updateMenu } from "../../store/actions/menuActions";
 import DesignForm from "../forms/DesignForm";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
-
 const styles = (theme) => ({
   root: {
-    width: "95%",
-    marginLeft: "2.5%",
     marginTop: "2rem",
-    marginBottom: '2rem',
+    marginBottom: "2rem",
     display: "flex",
     justifyContent: "center",
-},
-designButton: {
+  },
+  designButton: {
     color: theme.palette.primary.whiteish,
     backgroundColor: theme.palette.primary.main,
-},
-designTitle: {
-    marginBottom: "1rem"
-},
-container: {
-    display: "flex",
-    flexDirection: "column",
-    overflowY: "initial",
   },
-  formControl: {
-    minWidth: 320,
-  },
-  input: {
-    marginTop: "-2rem",
-    minWidth: "60%",
+  designTitle: {
+    marginBottom: "1rem",
   },
 });
 
@@ -52,16 +37,19 @@ const DesignFormContainer = ({ classes, restaurant, menu }) => {
   return (
     <div className={classes.root}>
       {!open && (
-        <div >
+        <div>
           <Button onClick={handleClickOpen} className={classes.designButton}>
-            <EditRoundedIcon style={{fill: "white"}} /> Personnaliser le design
+            <EditRoundedIcon style={{ fill: "white" }} /> Personnaliser le
+            design
           </Button>
         </div>
       )}
 
       {open && (
         <div>
-        <Typography variant="h2" className={classes.designTitle}>Personnaliser le design</Typography>
+          <Typography variant="h2" className={classes.designTitle}>
+            Personnaliser le design
+          </Typography>
           <DesignForm restaurant={restaurant} menu={menu} />
           <Button onClick={handleClose}>X</Button>
         </div>

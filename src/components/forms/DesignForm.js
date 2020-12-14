@@ -12,11 +12,11 @@ import {
 const styles = (theme, menu) => ({
   root: {
     backgroundColor: "white",
-    paddingTop: "2rem",
-    paddingLeft: "2rem",
+    padding: "2rem",
+    overflow: "visible",
   },
   colorInput: {
-    width: "4rem",
+    width: "3rem",
     marginBottom: "1rem",
   },
   fontForm: {
@@ -26,6 +26,8 @@ const styles = (theme, menu) => ({
   },
   fontInput: {
     fontFamily: menu && menu.fontFamily,
+    minWidth: "10rem",
+    textAlign: "center"
   },
   fontLabel: {
     marginLeft: "1rem",

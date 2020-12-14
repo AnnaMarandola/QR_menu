@@ -34,13 +34,15 @@ const styles = (theme) => ({
   logo: {
     width: "10rem",
   },
+  colorSection: {
+    width: "100%"
+  },
   titleSection: {
     display: "flex",
     flexDirection: "column",
     marginTop: "1rem",
     paddingTop: "1rem",
     paddingLeft: "1rem",
-    border: "solid 1px black",
     marginBottom: "1rem",
   },
   modifTitleButton: {

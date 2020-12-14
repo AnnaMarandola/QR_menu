@@ -12,7 +12,7 @@ import  MENU  from "../../assets/menu-icon.png";
 
 const styles = (theme) => ({
   root: {
-    backgroundColor: theme.palette.primary.whiteish,
+    backgroundColor: "white",
     float: "right",
     top: "-4rem",
     height: "90%",
