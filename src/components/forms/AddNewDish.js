@@ -15,6 +15,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { createDish, updateDish } from "../../store/actions/dishActions";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 
 const styles = (theme) => ({
   root: {
@@ -105,8 +106,14 @@ class AddNewDish extends Component {
     if (!this.props.dish) {
       this.props.createDish(this.state);
       this.props.handleClose();
+      toast.success("Votre plat est enregistré !", {
+        position: toast.POSITION.TOP_LEFT,
+      })
     } else {
       this.props.updateDish(this.state, this.props.dish.id);
+      toast.success("Votre plat mis à jour !", {
+        position: toast.POSITION.TOP_LEFT,
+      })
     }
   };
 

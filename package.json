@@ -26,6 +26,7 @@
     "react-select": "^3.1.0",
     "react-swipeable-views": "^0.13.9",
     "react-to-pdf": "0.0.13",
+    "react-toastify": "^6.2.0",
     "redux": "^4.0.5",
     "redux-auth-wrapper": "^3.0.0",
     "redux-devtools-extension": "^2.13.8",

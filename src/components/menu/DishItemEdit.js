@@ -10,6 +10,8 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import AddNewDish from "../forms/AddNewDish";
 import Switch from "@material-ui/core/Switch";
+import { toast } from "react-toastify";
+
 
 const styles = (theme) => ({
   root: {
@@ -41,6 +43,9 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
   const handleDelete = (e) => {
     console.log("e", e);
     deleteDish(dish.id);
+    toast.warning("Plat supprimé !", {
+      position: toast.POSITION.TOP_LEFT,
+    })
   };
 
   const handleOpen = (e) => {

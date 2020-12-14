@@ -14,6 +14,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 
+
 const styles = (theme) => ({
   root: {
     display: "flex",

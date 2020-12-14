@@ -11,6 +11,7 @@ import MenuFormPage from "./components/forms/MenuFormPage";
 import MenuPage from "./components/menu/MenuPage";
 import TemplateForm from "./components/forms/TemplateForm";
 import QrCodePdf from "./components/qrcode/QrCodePdf";
+import ToastComponent from "./constants/Toast";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         />
         <Route path="/menupage/:resto/:menu" component={MenuPage} />
       </Switch>
+      <ToastComponent/>
     </BrowserRouter>
   );
 }
