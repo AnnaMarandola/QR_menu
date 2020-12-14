@@ -50,7 +50,6 @@ const styles = (theme) => ({
 });
 
 class AddNewDish extends Component {
-  
   state = {
     restoId: "",
     menuId: "",
@@ -63,24 +62,23 @@ class AddNewDish extends Component {
   };
 
   componentDidMount() {
-    if (this.props.dish){
+    if (this.props.dish) {
       this.setState({
-        restoId: this.props.dish.restoId, 
+        restoId: this.props.dish.restoId,
         menuId: this.props.dish.menuId,
         dishName: this.props.dish.dishName,
         ingredients: this.props.dish.ingredients,
         description: this.props.dish.description,
-        checkedAllergens:  this.props.dish.checkedAllergens,
+        checkedAllergens: this.props.dish.checkedAllergens,
         price: this.props.dish.price,
-        published: this.props.dish.published
-    })
+        published: this.props.dish.published,
+      });
+    }
   }
-}
 
   componentDidUpdate = () => {
-    console.log("plat ajouté")
-  }
-
+    console.log("plat ajouté");
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -89,7 +87,6 @@ class AddNewDish extends Component {
       menuId: this.props.menu.id || this.props.dish.menuId,
     });
   };
-
 
   handleToggle = (value) => () => {
     const currentIndex = this.state.checkedAllergens.indexOf(value);
@@ -103,119 +100,113 @@ class AddNewDish extends Component {
     console.log("checked", this.checkedAllergens);
   };
 
-
-
   handleSubmit = (e) => {
     e.preventDefault();
-    if(!this.props.dish){
-    this.props.createDish(this.state);
+    if (!this.props.dish) {
+      this.props.createDish(this.state);
+      this.props.handleClose();
     } else {
-    this.props.updateDish(this.state, this.props.dish.id)
+      this.props.updateDish(this.state, this.props.dish.id);
     }
   };
 
   render() {
-    
     const { classes, dish } = this.props;
 
     return (
       <div className={classes.root}>
-
-            <form className={classes.form} onSubmit={this.handleSubmit}>
-              <TextField
-                className={classes.input}
-                id="dishName"
-                label="nom du plat"
-                onChange={this.handleChange}
-                defaultValue={ dish ? dish.dishName : ""}
-              />
-              <TextField
-                className={classes.input}
-                id="ingredients"
-                label="ingredients"
-                onChange={this.handleChange}
-                defaultValue={ dish ? dish.ingredients : ""}
-              />
-              <TextField
-                className={classes.input}
-                id="description"
-                label="description"
-                onChange={this.handleChange}
-                defaultValue={ dish ? dish.description : ""}
-              />
-              <TextField
-                className={classes.input}
-                id="price"
-                label="prix"
-                onChange={this.handleChange}
-                defaultValue={ dish ? dish.price : ""}
-              />
-              <Accordion className={classes.rootAllergens}>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography className={classes.heading}>
-                    allergènes
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Sélectionnez les allergènes présents dans ce plat
-                  </Typography>
-                  <List>
-                    {[
-                      "celeri",
-                      "crustace",
-                      "poisson",
-                      "gluten",
-                      "lupin",
-                      "lait",
-                      "molusque",
-                      "moutarde",
-                      "fruits-a-coques",
-                      "cacahuette",
-                      "sesame",
-                      "sulfites",
-                      "soja",
-                    ].map((value) => {
-                      const labelId = `checkbox-list-secondary-label-${value}`;
-                      return (
-                        <ListItem key={value} button>
-                          <ListItemAvatar>
-                            <Avatar
-                              alt={`${value}`}
-                              src={require(`../../assets/allergens/${value}.png`)}
-                            />
-                          </ListItemAvatar>
-                          <ListItemText id={labelId} primary={` ${value}`} />
-                          <ListItemSecondaryAction>
-                            <Checkbox
-                              edge="end"
-                              onChange={this.handleToggle(value)}
-                              checked={
-                                this.state.checkedAllergens.indexOf(value) !==
-                                -1
-                              }
-                              inputProps={{ "aria-labelledby": labelId }}
-                              defaultValue={ dish ? dish.checkedAllergens : []}
-                            />
-                          </ListItemSecondaryAction>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                </AccordionDetails>
-              </Accordion>
-              <Button
-                className={classes.addButton}
-                type="submit"
-                onClick={this.handleClose}
-              >
-                { dish ? "Modifier" : "ajouter à mon menu" }
-              </Button>
-            </form>
+        <form className={classes.form}>
+          <TextField
+            className={classes.input}
+            id="dishName"
+            label="nom du plat"
+            onChange={this.handleChange}
+            defaultValue={dish ? dish.dishName : ""}
+          />
+          <TextField
+            className={classes.input}
+            id="ingredients"
+            label="ingredients"
+            onChange={this.handleChange}
+            defaultValue={dish ? dish.ingredients : ""}
+          />
+          <TextField
+            className={classes.input}
+            id="description"
+            label="description"
+            onChange={this.handleChange}
+            defaultValue={dish ? dish.description : ""}
+          />
+          <TextField
+            className={classes.input}
+            id="price"
+            label="prix"
+            onChange={this.handleChange}
+            defaultValue={dish ? dish.price : ""}
+          />
+          <Accordion className={classes.rootAllergens}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>allergènes</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                Sélectionnez les allergènes présents dans ce plat
+              </Typography>
+              <List>
+                {[
+                  "celeri",
+                  "crustace",
+                  "poisson",
+                  "gluten",
+                  "lupin",
+                  "lait",
+                  "molusque",
+                  "moutarde",
+                  "fruits-a-coques",
+                  "cacahuette",
+                  "sesame",
+                  "sulfites",
+                  "soja",
+                ].map((value) => {
+                  const labelId = `checkbox-list-secondary-label-${value}`;
+                  return (
+                    <ListItem key={value} button>
+                      <ListItemAvatar>
+                        <Avatar
+                          alt={`${value}`}
+                          src={require(`../../assets/allergens/${value}.png`)}
+                        />
+                      </ListItemAvatar>
+                      <ListItemText id={labelId} primary={` ${value}`} />
+                      <ListItemSecondaryAction>
+                        <Checkbox
+                          edge="end"
+                          onChange={this.handleToggle(value)}
+                          checked={
+                            this.state.checkedAllergens.indexOf(value) !== -1
+                          }
+                          inputProps={{ "aria-labelledby": labelId }}
+                          defaultValue={dish ? dish.checkedAllergens : []}
+                        />
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </AccordionDetails>
+          </Accordion>
+          <Button
+            className={classes.addButton}
+            type="submit"
+            onClick={this.handleSubmit}
+          >
+            {dish ? "Modifier" : "ajouter à mon menu"}
+          </Button>
+        </form>
       </div>
     );
   }

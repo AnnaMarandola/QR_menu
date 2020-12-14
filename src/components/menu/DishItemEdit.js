@@ -9,7 +9,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import AddNewDish from "../forms/AddNewDish";
-import Switch from '@material-ui/core/Switch';
+import Switch from "@material-ui/core/Switch";
 
 const styles = (theme) => ({
   root: {
@@ -31,20 +31,16 @@ const styles = (theme) => ({
 const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
   const [edited, setEdited] = useState(false);
   const [isPublished, setPublished] = useState(dish.published);
-  console.log("isPublished", isPublished)
 
   const handleChange = (event) => {
-    let status = event.target.checked 
-    console.log("status", status)
+    let status = event.target.checked;
     setPublished(status);
-    switchStatus({ dishId: dish.id, status: status})
+    switchStatus({ dishId: dish.id, status: status });
   };
-  console.log("published", isPublished)
 
   const handleDelete = (e) => {
     console.log("e", e);
     deleteDish(dish.id);
-    console.log("dish deleted !");
   };
 
   const handleOpen = (e) => {
@@ -78,7 +74,7 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
           <ArrowDropDownIcon />
         </Button>
         <Switch
-        size="small"
+          size="small"
           checked={isPublished}
           value={isPublished}
           onChange={handleChange}
@@ -114,9 +110,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteDish: (dishId) => dispatch(deleteDish(dishId)),
-    switchStatus: (menuId, status) =>
-    dispatch(switchStatus(menuId, status)),
-
+    switchStatus: (menuId, status) => dispatch(switchStatus(menuId, status)),
   };
 };
 

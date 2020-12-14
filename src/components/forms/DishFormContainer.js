@@ -12,7 +12,7 @@ const styles = (theme) => ({
     width: "95%",
     marginLeft: "2.5%",
     marginTop: "2rem",
-    marginBottom: '2rem',
+    marginBottom: "2rem",
     display: "flex",
     justifyContent: "center",
   },
@@ -48,17 +48,24 @@ const DishFormContainer = ({ classes, restaurant, menu }) => {
   return (
     <div className={classes.root}>
       {!open && (
-        <div >
+        <div>
           <Button onClick={handleClickOpen} className={classes.addButton}>
-            <AddCircleOutlineTwoToneIcon style={{fill: "white"}} /> Ajouter un plat
+            <AddCircleOutlineTwoToneIcon style={{ fill: "white" }} /> Ajouter un
+            plat
           </Button>
         </div>
       )}
 
       {open && (
         <div>
-        <Typography variant="h2" className={classes.ne}>Nouveau plat :</Typography>
-          <AddNewDish restaurant={restaurant} menu={menu} />
+          <Typography variant="h2" className={classes.ne}>
+            Nouveau plat :
+          </Typography>
+          <AddNewDish
+            restaurant={restaurant}
+            menu={menu}
+            handleClose={handleClose}
+          />
           <Button onClick={handleClose}>CLOSE</Button>
         </div>
       )}

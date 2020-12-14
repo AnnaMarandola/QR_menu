@@ -63,7 +63,7 @@ const DesignFormContainer = ({ classes, restaurant, menu }) => {
         <div>
         <Typography variant="h2" className={classes.designTitle}>Personnaliser le design</Typography>
           <DesignForm restaurant={restaurant} menu={menu} />
-          <Button variant="body1" onClick={handleClose}>X</Button>
+          <Button onClick={handleClose}>X</Button>
         </div>
       )}
     </div>

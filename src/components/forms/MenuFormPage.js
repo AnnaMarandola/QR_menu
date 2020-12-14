@@ -10,7 +10,6 @@ import DishFormContainer from "./DishFormContainer";
 import DesignFormContainer from "./DesignFormContainer";
 
 const styles = (theme) => ({
-
   root: {
     width: "95%",
     marginLeft: "2.5%",
@@ -22,7 +21,6 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-
   },
   titlePage: {
     paddingTop: "5rem",
@@ -59,24 +57,38 @@ const styles = (theme) => ({
   },
 });
 
-const MenuFormPage = ({ classes, restaurant, menu, dishes, theme }) => {
+const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
   let menuData = { ...menu };
-  const resto = { ...restaurant };
+  let resto = { ...restaurant };
 
   return (
     <div className={classes.root}>
-        <Typography className={classes.titlePage} variant="h1">
-          Tableau de bord
-        </Typography>
-      <Card className={classes.header} style={{backgroundColor: menuData.headerColor || "#272727" }}>
-        <Typography className={classes.restoName} variant="h1" style={{ color: menuData.fontColor || "#272727", fontFamily: menuData.fontFamily || "Roboto" }}>
+      <Typography className={classes.titlePage} variant="h1">
+        Tableau de bord
+      </Typography>
+      <Card
+        className={classes.header}
+        style={{ backgroundColor: menuData.headerColor || "#272727" }}
+      >
+        <Typography
+          className={classes.restoName}
+          variant="h1"
+          style={{
+            color: menuData.fontColor || "#272727",
+            fontFamily: menuData.fontFamily || "Roboto",
+          }}
+        >
           {resto.name}
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </Card>
 
       <div className={classes.colorSection}>
-      <DesignFormContainer menu={menu} restaurant={restaurant}/>
+        <DesignFormContainer
+          menu={menu}
+          restaurant={restaurant}
+          dsihes={dishes}
+        />
       </div>
 
       {restaurant &&

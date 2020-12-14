@@ -77,15 +77,14 @@ class UploadLogo extends Component {
             onChange={this.handleChange}
           />
           <Fab
-          color="primary"
-          size="small"
-          component="span"
-          aria-label="add"
-          variant="extended"
-        >
-         <AddIcon /> Logo 
-        </Fab>
-
+            color="primary"
+            size="small"
+            component="span"
+            aria-label="add"
+            variant="extended"
+          >
+            <AddIcon /> Logo
+          </Fab>
         </label>
       </div>
     );

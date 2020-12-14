@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ColorPicker from "material-ui-color-picker";
-import { Button, withStyles, Typography, MenuItem, Select, Card } from "@material-ui/core";
+import { withStyles, Typography, MenuItem, Select, Card } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import {
@@ -53,7 +53,6 @@ const DesignForm = ({
   selectFontFamily,
 }) => {
   let menuColor = menu && menu.headerColor;
-  let menuFontColor = menu && menu.fontColor;
   let resto = {...restaurant}
   const [headerColor, setHeaderColor] = useState("");
   const [fontColor, setFontColor] = useState("");
@@ -61,31 +60,20 @@ const DesignForm = ({
 
   const handleChangeHeaderColor = (color) => {
     setHeaderColor(color);
-    console.log("headerColor", headerColor);
+    selectHeaderColor({ menuId: menu.id, color: headerColor });
   };
 
   const handleChangeFontColor = (color) => {
     setFontColor(color);
-    console.log("fontColor", fontColor);
+    selectFontColor({ menuId: menu.id, fontColor: fontColor });
   };
 
   const handleChangeFontFamily = (e) => {
     setFont(e.target.value);
+    selectFontFamily({ menuId: menu.id, fontFamily: e.target.value });
+
   };
 
-  const submitHeaderColor = (e) => {
-    e.preventDefault();
-    selectHeaderColor({ menuId: menu.id, color: headerColor });
-  };
-
-  const submitFontColor = (e) => {
-    e.preventDefault();
-    selectFontColor({ menuId: menu.id, fontColor: fontColor });
-  };
-
-  const submitFontFamily = (e) => {
-    selectFontFamily({ menuId: menu.id, fontFamily: font });
-  };
   return (
     <div>
     <Card className={classes.root}>
@@ -100,12 +88,7 @@ const DesignForm = ({
           value={headerColor}
           onChange={handleChangeHeaderColor}
         />
-        {headerColor !== menuColor && (
-          <Button onClick={submitHeaderColor}>valider</Button>
-        )}
-      </form>
 
-      <form className={classes.fontColorForm}>
         <Typography variant="body2">Couleur du texte</Typography>
 
         <ColorPicker
@@ -116,12 +99,7 @@ const DesignForm = ({
           value={fontColor}
           onChange={handleChangeFontColor}
         />
-        {fontColor !== menuFontColor && (
-          <Button onClick={submitFontColor}>valider</Button>
-        )}
-      </form>
 
-      <form className={classes.fontForm}>
         <Typography variant="body2">Police d'écriture</Typography>
         <Select
           className={classes.fontInput}
@@ -146,7 +124,6 @@ const DesignForm = ({
             {resto.name}
           </MenuItem>
         </Select>
-        <Button onClick={submitFontFamily}>Valider</Button>
       </form>
     </Card>
     </div>

@@ -42,44 +42,76 @@ const styles = (theme) => ({
 const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const resto = { ...restaurant };
   const menuData = { ...menu };
+  let publishedDishes =
+    dishes && dishes.filter((dish) => dish.published === true);
 
   return (
     <div className={classes.root}>
-      <div className={classes.menuHearder} style={{ backgroundColor: menuData.headerColor || "#272727" }}>
+      <div
+        className={classes.menuHearder}
+        style={{ backgroundColor: menuData.headerColor || "#272727" }}
+      >
         {auth && restaurant && auth.uid === restaurant.ownerId && (
-          <NavLink to="/"> 
+          <NavLink to="/">
             <ArrowBackIosIcon className={classes.gobackButton} />
           </NavLink>
         )}
-        <Typography 
-        className={classes.restoName} 
-        variant="h1" 
-        style={{ color: menuData.fontColor || "#272727", fontFamily: menuData.fontFamily || "Roboto" }}>
+        <Typography
+          className={classes.restoName}
+          variant="h1"
+          style={{
+            color: menuData.fontColor || "#272727",
+            fontFamily: menuData.fontFamily || "Roboto",
+          }}
+        >
           {resto.name}
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
 
-      <div 
-      className={classes.restoContact} 
-      style={{ 
-        backgroundColor: menuData.headerColor || "#272727", 
-        color: menuData.fontColor || "#272727",
-         }}>
-        <Typography variant="body1" style={{fontFamily: menuData.fontFamily || "Roboto"}}>{resto.adress}</Typography>
-        <Typography variant="body1" style={{fontFamily: menuData.fontFamily || "Roboto"}}>
+      <div
+        className={classes.restoContact}
+        style={{
+          backgroundColor: menuData.headerColor || "#272727",
+          color: menuData.fontColor || "#272727",
+        }}
+      >
+        <Typography
+          variant="body1"
+          style={{ fontFamily: menuData.fontFamily || "Roboto" }}
+        >
+          {resto.adress}
+        </Typography>
+        <Typography
+          variant="body1"
+          style={{ fontFamily: menuData.fontFamily || "Roboto" }}
+        >
           {resto.postalCode} - {resto.city}
         </Typography>
-        <Typography variant="body1" style={{fontFamily: menuData.fontFamily || "Roboto"}}>{resto.phone}</Typography>
-        <Typography variant="body1" style={{fontFamily: menuData.fontFamily || "Roboto"}}>{resto.email}</Typography>
+        <Typography
+          variant="body1"
+          style={{ fontFamily: menuData.fontFamily || "Roboto" }}
+        >
+          {resto.phone}
+        </Typography>
+        <Typography
+          variant="body1"
+          style={{ fontFamily: menuData.fontFamily || "Roboto" }}
+        >
+          {resto.email}
+        </Typography>
       </div>
 
       <div>
-        <Typography variant="h1" className={classes.menuTitle} style={{fontFamily: menuData.fontFamily || "Roboto"}}>
+        <Typography
+          variant="h1"
+          className={classes.menuTitle}
+          style={{ fontFamily: menuData.fontFamily || "Roboto" }}
+        >
           {menuData.title}
         </Typography>
-        {dishes &&
-          dishes.map((dish) => (
+        {publishedDishes &&
+          publishedDishes.map((dish) => (
             <DishItem
               key={dish.id}
               menu={menuData}
@@ -122,7 +154,6 @@ export default compose(
     {
       collection: "dishes",
       where: ["menuId", "==", props.match.params.menu],
-      where: ["published", "==", true]
     },
   ])
 )(MenuPage);
