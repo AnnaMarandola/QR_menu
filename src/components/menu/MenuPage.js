@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { IconButton, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
@@ -35,7 +35,7 @@ const styles = (theme) => ({
   },
   gobackButton: {
     marginTop: "2rem",
-    marginLeft: "-8rem",
+    marginLeft: "-15rem",
   },
 });
 
@@ -53,7 +53,9 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
       >
         {auth && restaurant && auth.uid === restaurant.ownerId && (
           <NavLink to="/">
-            <ArrowBackIosIcon className={classes.gobackButton} />
+            <IconButton aria-label="goBack" className={classes.gobackButton}>
+              <ArrowBackIosIcon  />
+            </IconButton>
           </NavLink>
         )}
         <Typography

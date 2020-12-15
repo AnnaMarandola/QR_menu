@@ -44,7 +44,7 @@ function App() {
           path="/qrcode/:resto/:menu"
           component={UserIsAuthenticated(WithTopBar(QrCodePdf))}
         />
-        <Route path="/menupage/:resto/:menu" component={MenuPage} />
+        <Route path="/menupage/:resto/:menu" component={WithTopBar(MenuPage)} />
       </Switch>
       <ToastComponent/>
     </BrowserRouter>
