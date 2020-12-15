@@ -3,12 +3,13 @@ import { history } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { Fade, withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/authActions";
-import  MENU  from "../../assets/menu-icon.png";
+import MENU from "../../assets/menu-icon.png";
+import { firestoreConnect } from "react-redux-firebase";
 
 const styles = (theme) => ({
   root: {
@@ -91,9 +92,15 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-
-
-function MyMenu({ classes, signOut, profile, history }) {
+function MyMenu({
+  classes,
+  signOut,
+  profile,
+  history,
+  auth,
+  restaurant,
+  menu,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -103,7 +110,10 @@ function MyMenu({ classes, signOut, profile, history }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log('MyMenu profile', profile)
+
+  const restoId = restaurant && restaurant.id;
+  const menuId = menu && menu.id;
+
   return (
     <React.Fragment>
       <Button
@@ -123,13 +133,17 @@ function MyMenu({ classes, signOut, profile, history }) {
         TransitionComponent={Fade}
         elevation={0}
       >
-        <StyledMenuItem onClick={() => history.push('/')}>
+        <StyledMenuItem onClick={() => history.push("/")}>
           Tableau de bord
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => history.push('/menupage')}>
+        { menu &&
+        <StyledMenuItem
+          onClick={() => history.push(`/menupage/${restoId}/${menuId}`)}
+        >
           Ma carte en ligne
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => history.push('/shop')}>
+        }
+        <StyledMenuItem onClick={() => history.push("/shop")}>
           Panier
         </StyledMenuItem>
         <StyledMenuItem onClick={signOut}>Déconnexion</StyledMenuItem>
@@ -141,6 +155,11 @@ function MyMenu({ classes, signOut, profile, history }) {
 const mapStateToProps = (state) => {
   return {
     profile: state.firebase.profile,
+    auth: state.firebase.auth,
+    restaurant:
+      state.firestore.ordered.restaurants &&
+      state.firestore.ordered.restaurants[0],
+    menu: state.firestore.ordered.menus && state.firestore.ordered.menus[0],
   };
 };
 
@@ -155,9 +174,19 @@ MyMenu.propTypes = {
   signOut: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-}
+};
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withStyles(styles),
+  firestoreConnect((props) => [
+    {
+      collection: "restaurants",
+      where: ["ownerId", "==", props.auth.uid],
+    },
+    {
+      collection: "menus",
+      where: ["ownerId", "==", props.auth.uid],
+    },
+  ])
 )(MyMenu);
