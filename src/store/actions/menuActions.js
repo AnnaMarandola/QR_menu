@@ -90,3 +90,21 @@ export const selectFontFamily = (payload) => {
       });
   };
 };
+
+export const updateMenuTemplate = (payload) => {
+  console.log("payload in select fontFamily ACTION", payload);
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    let menuId = payload.menuId;
+    let template = payload.template;
+    getFirestore()
+      .collection("menus")
+      .doc(menuId)
+      .update({ template: template })
+      .then(() => {
+        dispatch({ type: "UPDATE_MENU_TEMPLATE", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "UPDATE_MENU_ERROR", err });
+      });
+  };
+};

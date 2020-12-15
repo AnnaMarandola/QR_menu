@@ -21,6 +21,7 @@ export const createRestaurant = (restaurant) => {
 };
 
 export const updateRestaurant = (payload) => {
+  console.log("payload TEMPLATE IN ACTIONS", payload)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     console.log("payload", payload);
     let restoId = payload.restoId;

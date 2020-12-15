@@ -33,6 +33,12 @@ const menuReducer = (state = initialState, action) => {
     case "SELECT_FONT_FAMILY_ERROR":
       console.log("select font family error", action.err);
       return state;
+      case "UPDATE_MENU_TEMPLATE":
+        console.log("update menu template success", action.menu);
+        return state;
+      case "UPDATE_MENU_TMEPLATE_ERROR":
+        console.log("update menu template error", action.err);
+        return state;
     default:
       return state;
   }
