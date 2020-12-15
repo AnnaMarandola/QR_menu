@@ -11,7 +11,6 @@ import TEMP2 from "../../assets/templates/snapshotTemp2.png";
 import TEMP3 from "../../assets/templates/snapshotTemp3.png";
 import {
   createMenu,
-  updateMenu,
   updateMenuTemplate,
 } from "../../store/actions/menuActions";
 import { updateRestaurant } from "../../store/actions/restaurantActions";

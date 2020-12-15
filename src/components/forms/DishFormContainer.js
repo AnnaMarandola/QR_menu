@@ -66,7 +66,7 @@ const DishFormContainer = ({ classes, restaurant, menu }) => {
             menu={menu}
             handleClose={handleClose}
           />
-          <Button onClick={handleClose}>CLOSE</Button>
+          <Button onClick={handleClose}>x</Button>
         </div>
       )}
     </div>

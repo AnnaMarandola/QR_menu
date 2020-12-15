@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Button, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+  InputLabel,
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -21,17 +28,27 @@ const styles = (theme) => ({
   root: {
     width: "95%",
     marginLeft: "2.5%",
+    marginTop: "2rem",
+    marginBottom: "2rem",
   },
   form: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     backgroundColor: "white",
+    paddingLeft: "10%",
   },
+  categoryInput: {
+    width: "8rem",
+    alignItems: "flex-end",
+    paddingTop: "10%",
+  },
+
   input: {
     width: "90%",
   },
   accordion: {
+    display: "flex",
+    flexDirection: "column",
     backgroundColor: "white",
   },
   heading: {
@@ -39,12 +56,14 @@ const styles = (theme) => ({
   },
   addButton: {
     backgroundColor: theme.palette.primary.main,
-    padding: "0, 1.5rem, 0, 1.5rem",
+    padding: "0, 1rem, 0, 1rem",
     color: theme.palette.primary.whiteish,
-    marginTop: "1rem",
+    marginTop: "2rem",
+    marginRight: "2rem",
+    marginBottom: "2rem",
   },
   rootAllergens: {
-    width: "94%",
+    width: "90%",
     marginTop: "1rem",
     backgroundColor: "white",
   },
@@ -57,6 +76,7 @@ class AddNewDish extends Component {
     dishName: "",
     ingredients: "",
     description: "",
+    category: "",
     checkedAllergens: [],
     price: "",
     published: false,
@@ -68,6 +88,7 @@ class AddNewDish extends Component {
         restoId: this.props.dish.restoId,
         menuId: this.props.dish.menuId,
         dishName: this.props.dish.dishName,
+        category: this.props.dish.category,
         ingredients: this.props.dish.ingredients,
         description: this.props.dish.description,
         checkedAllergens: this.props.dish.checkedAllergens,
@@ -78,12 +99,20 @@ class AddNewDish extends Component {
   }
 
   componentDidUpdate = () => {
-    console.log("plat ajouté");
+    console.log("plat ajouté/ mis à jour");
   };
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
+      restoId: this.props.menu.restoId || this.props.dish.restoId,
+      menuId: this.props.menu.id || this.props.dish.menuId,
+    });
+  };
+
+  handleCategory = (e) => {
+    this.setState({
+      category: e.target.value,
       restoId: this.props.menu.restoId || this.props.dish.restoId,
       menuId: this.props.menu.id || this.props.dish.menuId,
     });
@@ -108,21 +137,39 @@ class AddNewDish extends Component {
       this.props.handleClose();
       toast.success("Votre plat est enregistré !", {
         position: toast.POSITION.TOP_LEFT,
-      })
+      });
     } else {
       this.props.updateDish(this.state, this.props.dish.id);
       toast.success("Votre plat mis à jour !", {
         position: toast.POSITION.TOP_LEFT,
-      })
+      });
     }
   };
 
   render() {
-    const { classes, dish } = this.props;
+    const { classes, dish, menu } = this.props;
+    console.log("menu in ADDNEWDISH", menu.template);
+    const template = menu.template;
 
     return (
       <div className={classes.root}>
         <form className={classes.form}>
+          {template !== "template3" && (
+            <div className={classes.categoryInput}>
+              <InputLabel id="category">Catégorie</InputLabel>
+              <Select
+                className={classes.categoryInput}
+                id="category"
+                value={dish ? dish.category : ""}
+                onChange={this.handleCategory}
+              >
+                <MenuItem value={"starter"}>Entrée</MenuItem>
+                <MenuItem value={"main"}>Plat</MenuItem>
+                <MenuItem value={"dessert"}>Dessert</MenuItem>
+              </Select>
+            </div>
+          )}
+
           <TextField
             className={classes.input}
             id="dishName"
@@ -130,6 +177,7 @@ class AddNewDish extends Component {
             onChange={this.handleChange}
             defaultValue={dish ? dish.dishName : ""}
           />
+
           <TextField
             className={classes.input}
             id="ingredients"
@@ -137,6 +185,7 @@ class AddNewDish extends Component {
             onChange={this.handleChange}
             defaultValue={dish ? dish.ingredients : ""}
           />
+
           <TextField
             className={classes.input}
             id="description"
@@ -144,6 +193,7 @@ class AddNewDish extends Component {
             onChange={this.handleChange}
             defaultValue={dish ? dish.description : ""}
           />
+
           <TextField
             className={classes.input}
             id="price"
@@ -151,16 +201,17 @@ class AddNewDish extends Component {
             onChange={this.handleChange}
             defaultValue={dish ? dish.price : ""}
           />
+
           <Accordion className={classes.rootAllergens}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography className={classes.heading}>allergènes</Typography>
+              <Typography>allergènes</Typography>
             </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
+            <AccordionDetails className={classes.accordion}>
+              <Typography className={classes.heading}>
                 Sélectionnez les allergènes présents dans ce plat
               </Typography>
               <List>
@@ -206,6 +257,7 @@ class AddNewDish extends Component {
               </List>
             </AccordionDetails>
           </Accordion>
+
           <Button
             className={classes.addButton}
             type="submit"
