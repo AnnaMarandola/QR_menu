@@ -29,10 +29,12 @@ const styles = (theme) => ({
     marginTop: "3rem",
   },
   menuTitle: {
-    marginTop: "1rem",
+    marginTop: "2rem",
+    marginBottom: "2rem",
     textAlign: "center",
   },
   menuBody: {
+    marginBottom: "6rem",
   },
   categoryHeader: {
     backgroundColor: "white",
@@ -52,6 +54,8 @@ const styles = (theme) => ({
     height: "4rem",
     width: "100%",
     marginTop: "1rem",
+    position: "fixed",
+    bottom: 0,
   },
   mediaLogo: {
     width: "60px",
@@ -215,9 +219,6 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
         className={classes.footerSection}
         style={{ backgroundColor: menuData.headerColor || "#272727" }}
       >
-        <Typography variant="body1" className={classes.contactTitle}>
-          Retrouvez-nous !
-        </Typography>
         <FooterResto
           adress={resto.adress}
           postalCode={resto.postalCode}

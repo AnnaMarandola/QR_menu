@@ -19,10 +19,16 @@ const styles = (theme) => ({
   },
   contactLogo: {
     width: "30px",
-  },
-  mediaLogo: {
-    width: "30px",
     marginTop: "0.5rem",
+
+  },
+  instaLogo: {
+    width: "30px",
+    marginTop: "1rem",
+  },
+  facebookLogo: {
+    width: "38px",
+    marginTop: "1rem",
   },
   popperPaper: {
     backgroundColor: "white",
@@ -89,14 +95,14 @@ const FooterResto = ({
 
       <a href={instagram} target="_blank" rel="noopener noreferrer">
         <img
-          className={classes.mediaLogo}
+          className={classes.instaLogo}
           src={INSTAGRAM}
           alt="instagram logo"
         />
       </a>
 
       <a href={facebook} target="_blank" rel="noopener noreferrer">
-        <img className={classes.mediaLogo} src={FACEBOOK} alt="facebook logo" />
+        <img className={classes.facebookLogo} src={FACEBOOK} alt="facebook logo" />
       </a>
 
       <div>
