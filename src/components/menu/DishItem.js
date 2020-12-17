@@ -52,7 +52,7 @@ const DishItem = ({
       <div className={classes.allergenList}>
         {allergens.map((allergen, i) => (
           <ListItemAvatar key={i}>
-            <Tooltip title={`${allergen}`} ariaLabel={allergen}>
+            <Tooltip title={`${allergen}`} ariaLabel={`${allergen}`}>
               <Avatar
                 alt={`${allergen}`}
                 src={require(`../../assets/allergens/${allergen}.png`)}
