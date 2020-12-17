@@ -9,7 +9,11 @@ import { Redirect } from "react-router-dom";
 import TEMP1 from "../../assets/templates/snapshotTemp1.png";
 import TEMP2 from "../../assets/templates/snapshotTemp2.png";
 import TEMP3 from "../../assets/templates/snapshotTemp3.png";
-import { createMenu } from "../../store/actions/menuActions";
+import {
+  createMenu,
+  updateMenuTemplate,
+} from "../../store/actions/menuActions";
+import { updateRestaurant } from "../../store/actions/restaurantActions";
 
 const styles = (theme) => ({
   root: {
@@ -49,10 +53,21 @@ const styles = (theme) => ({
   },
 });
 
-const TemplateForm = ({ classes, restaurant, auth, createMenu }) => {
+const TemplateForm = ({
+  classes,
+  restaurant,
+  auth,
+  createMenu,
+  updateRestaurant,
+  updateMenuTemplate,
+}) => {
   const restoId = restaurant && restaurant.id;
+  const menuId = restaurant && restaurant.menuId;
+  console.log("resto in templateform", restaurant);
 
-  const [selectedTemplate, setSelectedTemplate] = useState("a");
+  const [selectedTemplate, setSelectedTemplate] = useState(
+    (restaurant && restaurant.template) || "template3"
+  );
   const [submitedForm, setSubmitedForm] = useState(false);
 
   const handleChange = (event) => {
@@ -63,6 +78,8 @@ const TemplateForm = ({ classes, restaurant, auth, createMenu }) => {
     e.preventDefault();
     setSubmitedForm(true);
     if (restaurant.menuId != null) {
+      updateRestaurant({ restoId: restoId, template: selectedTemplate });
+      updateMenuTemplate({ menuId: menuId, template: selectedTemplate });
       console.log("TODO : update menu.template & restaurant.template");
     } else {
       createMenu({ restoId: restoId, template: selectedTemplate });
@@ -168,6 +185,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createMenu: (menu) => dispatch(createMenu(menu)),
+    updateRestaurant: (payload) => dispatch(updateRestaurant(payload)),
+    updateMenuTemplate: (payload) => dispatch(updateMenuTemplate(payload)),
   };
 };
 

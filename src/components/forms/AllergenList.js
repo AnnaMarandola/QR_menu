@@ -18,8 +18,9 @@ const useStyles = makeStyles((theme) => ({
     width: "98%",
     backgroundColor: 'white',
   },
-  heading: {
+  accordion: {
 
+    
   },
 }));
 
@@ -43,7 +44,7 @@ function AllergenList() {
 
   return (
     <div className={classes.root}>
-      <Accordion className={classes.root}>
+      <Accordion className={classes.accordion}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

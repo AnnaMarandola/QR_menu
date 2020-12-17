@@ -11,6 +11,7 @@ import MenuFormPage from "./components/forms/MenuFormPage";
 import MenuPage from "./components/menu/MenuPage";
 import TemplateForm from "./components/forms/TemplateForm";
 import QrCodePdf from "./components/qrcode/QrCodePdf";
+import ToastComponent from "./constants/Toast";
 
 function App() {
   return (
@@ -43,8 +44,9 @@ function App() {
           path="/qrcode/:resto/:menu"
           component={UserIsAuthenticated(WithTopBar(QrCodePdf))}
         />
-        <Route path="/menupage/:resto/:menu" component={MenuPage} />
+        <Route path="/menupage/:resto/:menu" component={WithTopBar(MenuPage)} />
       </Switch>
+      <ToastComponent/>
     </BrowserRouter>
   );
 }

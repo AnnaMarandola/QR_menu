@@ -1,7 +1,7 @@
 import React from "react";
 import RestaurantSummary from "./RestaurantSummary";
 import { connect } from "react-redux";
-import { Divider, Typography, withStyles } from "@material-ui/core";
+import { Typography, withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
@@ -56,8 +56,8 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
     </Typography>
     </div>
       <div className={classes.container}>
-            <RestaurantSummary restaurant={restaurant} />
             <MenuLinks restaurant={restaurant} menuId={menuId} />
+            <RestaurantSummary restaurant={restaurant} />
         {restaurant && restaurant.template && (
           <TemplateSummary restaurant={restaurant} />
         )}

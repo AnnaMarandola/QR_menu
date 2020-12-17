@@ -14,6 +14,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 
+
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -88,9 +89,6 @@ class SignUp extends Component {
   state = {
     lastName: "",
     firstName: "",
-    restoName: "",
-    city: "",
-    postalCode: null,
     email: "",
     password: "",
     cguAccepted: false,
@@ -143,24 +141,7 @@ class SignUp extends Component {
               label="email"
               onChange={this.handleChange}
             />
-            <TextField
-              id="restoName"
-              type="text"
-              label="nom de votre établissement"
-              onChange={this.handleChange}
-            />
-            <TextField
-              id="city"
-              type="text"
-              label="ville"
-              onChange={this.handleChange}
-            />
-            <TextField
-              id="postalCode"
-              type="number"
-              label="code postal"
-              onChange={this.handleChange}
-            />
+
             <TextField
               id="password"
               type="password"

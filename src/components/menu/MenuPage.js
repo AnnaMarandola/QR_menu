@@ -1,28 +1,31 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import DishItem from "./DishItem";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import { NavLink } from "react-router-dom";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import FooterResto from "./FooterResto";
 
 const styles = (theme) => ({
   root: {
     width: "100%",
+    backgroundColor: "white",
   },
   menuHearder: {
-    backgroundColor: theme.palette.primary.red,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    paddingTop: "2.5rem",
   },
   logo: {
-    maxWidth: "55%",
+    maxWidth: "40%",
+    marginBottom: "2rem",
   },
   restoContact: {
-    backgroundColor: theme.palette.primary.red,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -35,9 +38,36 @@ const styles = (theme) => ({
     marginTop: "2rem",
     textAlign: "center",
   },
-  gobackButton: {
-    marginTop: "2rem",
-    marginLeft: "-8rem",
+  menuSection: {
+    height: "auto",
+  },
+  categoryHeader: {
+    backgroundColor: "white",
+  },
+  categoryTitle: {
+    width: "10rem",
+    height: "2rem",
+    margin: "auto",
+    color: "white",
+  },
+  dishList: {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "white",
+  },
+  footerSection: {
+    height: "5rem",
+    width: "100%",
+    position: "relative",
+    bottom: "0",
+    marginTop: "1rem",
+    paddingTop: "1rem",
+  },
+  mediaLogo: {
+    width: "60px",
+  },
+  contactTitle: {
+    textAlign: "center",
   },
 });
 
@@ -45,45 +75,166 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const resto = { ...restaurant };
   const menuData = { ...menu };
 
+  let publishedDishes =
+    dishes && dishes.filter((dish) => dish.published === true);
+
+  const sortedDishes =
+    publishedDishes &&
+    publishedDishes.reduce(
+      (acc, val) => {
+        if (val.category) acc[val.category].push(val);
+        return acc;
+      },
+      { starter: [], main: [], dessert: [] }
+    );
+  const sorts = { ...sortedDishes };
+  const starters = sorts && sorts.starter;
+  const mains = sorts && sorts.main;
+  const desserts = sorts && sorts.dessert;
+
   return (
     <div className={classes.root}>
-      <div className={classes.menuHearder}>
-        {auth && restaurant && auth.uid === restaurant.ownerId && (
-          <NavLink to="/">
-            <ArrowBackIosIcon className={classes.gobackButton} />
-          </NavLink>
-        )}
-        <Typography className={classes.restoName} variant="h1">
+      <div
+        className={classes.menuHearder}
+        style={{ backgroundColor: menuData.headerColor || "#272727" }}
+      >
+        <Typography
+          className={classes.restoName}
+          variant="h1"
+          style={{
+            color: menuData.fontColor || "#272727",
+            fontFamily: menuData.fontFamily || "Roboto",
+          }}
+        >
           {resto.name}
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
 
-      <div className={classes.restoContact}>
-        <Typography variant="body1">{resto.adress}</Typography>
-        <Typography variant="body1">
-          {resto.postalCode} - {resto.city}
-        </Typography>
-        <Typography variant="body1">{resto.phone}</Typography>
-        <Typography variant="body1">{resto.email}</Typography>
-      </div>
-
       <div>
-        <Typography variant="h1" className={classes.menuTitle}>
-          {menuData.title}
+        <Typography
+          variant="h1"
+          className={classes.menuTitle}
+          style={{
+            fontFamily: menuData.fontFamily || "Roboto",
+          }}
+        >
+          {menuData.title || "La Carte"}
         </Typography>
-        {dishes &&
-          dishes.map((dish) => (
-            <DishItem
-              key={dish.id}
-              menu={menuData}
-              title={dish.dishName}
-              price={dish.price}
-              ingredients={dish.ingredients}
-              description={dish.description}
-              allergens={dish.checkedAllergens}
-            />
-          ))}
+        {menu && menu.template === "template3" && (
+          <div>
+            {publishedDishes &&
+              publishedDishes.map((dish) => (
+                <DishItem
+                  key={dish.id}
+                  menu={menuData}
+                  title={dish.dishName}
+                  price={dish.price}
+                  ingredients={dish.ingredients}
+                  description={dish.description}
+                  allergens={dish.checkedAllergens}
+                />
+              ))}
+          </div>
+        )}
+        {menu && menu.template === "template1" && (
+          <div className={classes.menuSection}>
+            <Accordion className={classes.accordion}>
+              <AccordionSummary className={classes.categoryHeader}>
+                <Button
+                  className={classes.categoryTitle}
+                  style={{
+                    backgroundColor: menuData.headerColor || "#272727",
+                  }}
+                >
+                  Entrée
+                </Button>
+              </AccordionSummary>
+              <AccordionDetails className={classes.dishList}>
+                {starters &&
+                  starters.map((starter) => (
+                    <DishItem
+                      key={starter.id}
+                      menu={menuData}
+                      title={starter.dishName}
+                      price={starter.price}
+                      ingredients={starter.ingredients}
+                      description={starter.description}
+                      allergens={starter.checkedAllergens}
+                    />
+                  ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion className={classes.accordion}>
+              <AccordionSummary className={classes.categoryHeader}>
+                <Button
+                  className={classes.categoryTitle}
+                  style={{
+                    backgroundColor: menuData.headerColor || "#272727",
+                  }}
+                >
+                  Plats
+                </Button>
+              </AccordionSummary>
+              <AccordionDetails className={classes.dishList}>
+                {mains &&
+                  mains.map((main) => (
+                    <DishItem
+                      key={main.id}
+                      menu={menuData}
+                      title={main.dishName}
+                      price={main.price}
+                      ingredients={main.ingredients}
+                      description={main.description}
+                      allergens={main.checkedAllergens}
+                    />
+                  ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion className={classes.accordion}>
+              <AccordionSummary className={classes.categoryHeader}>
+                <Button
+                  className={classes.categoryTitle}
+                  style={{
+                    backgroundColor: menuData.headerColor || "#272727",
+                  }}
+                >
+                  Desserts
+                </Button>
+              </AccordionSummary>
+              <AccordionDetails className={classes.dishList}>
+                {desserts &&
+                  desserts.map((dessert) => (
+                    <DishItem
+                      key={dessert.id}
+                      menu={menuData}
+                      title={dessert.dishName}
+                      price={dessert.price}
+                      ingredients={dessert.ingredients}
+                      description={dessert.description}
+                      allergens={dessert.checkedAllergens}
+                    />
+                  ))}
+              </AccordionDetails>
+            </Accordion>
+          </div>
+        )}
+      </div>
+      <div
+        className={classes.footerSection}
+        style={{ backgroundColor: menuData.headerColor || "#272727" }}
+      >
+        <Typography variant="body1" className={classes.contactTitle}>
+          Retrouvez-nous !
+        </Typography>
+        <FooterResto
+          adress={resto.adress}
+          postalCode={resto.postalCode}
+          city={resto.city}
+          phone={resto.phone}
+          facebook={resto.facebook}
+          instagram={resto.instagram}
+        />
       </div>
     </div>
   );

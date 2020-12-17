@@ -36,6 +36,25 @@ export const updateDish = (dish, dishId) => {
   };
 };
 
+export const switchStatus = (payload) => {
+  console.log("payload in select switchStatus ACTION", payload);
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    let dishId = payload.dishId;
+    let status = payload.status;
+    getFirestore()
+      .collection("dishes")
+      .doc(dishId)
+      .update({ published: status })
+      .then(() => {
+        dispatch({ type: "SWITCH_STATUS", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "SWITCH_STATUS_ERROR", err });
+      });
+  };
+
+}
+
 export const deleteDish = (dishId) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     console.log("dish Id in ACTIONS", dishId);

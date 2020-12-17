@@ -11,7 +11,7 @@ const styles = (theme) => ({
   navbar: {
     width: "100%",
     height: "4rem",
-    backgroundColor: theme.palette.primary.whiteish,
+    backgroundColor: "white",
     position: "fixed",
     zIndex: 2,
   },

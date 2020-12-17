@@ -35,7 +35,8 @@ const styles = (theme) => ({
   },
   input: {
     marginTop: "-2rem",
-    minWidth: "60%",
+    minWidth: "50%",
+    width: "fit-content"
 
   },
 });

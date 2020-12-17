@@ -4,37 +4,26 @@ import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { updateMenu } from "../../store/actions/menuActions";
-import AddNewDish from "./AddNewDish";
-import AddCircleOutlineTwoToneIcon from "@material-ui/icons/AddCircleOutlineTwoTone";
+import DesignForm from "../forms/DesignForm";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 const styles = (theme) => ({
   root: {
-    width: "95%",
-    marginLeft: "2.5%",
     marginTop: "2rem",
     marginBottom: "2rem",
     display: "flex",
     justifyContent: "center",
   },
-  addButton: {
+  designButton: {
     color: theme.palette.primary.whiteish,
     backgroundColor: theme.palette.primary.main,
   },
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    overflowY: "initial",
-  },
-  formControl: {
-    minWidth: 320,
-  },
-  input: {
-    marginTop: "-2rem",
-    minWidth: "60%",
+  designTitle: {
+    marginBottom: "1rem",
   },
 });
 
-const DishFormContainer = ({ classes, restaurant, menu }) => {
+const DesignFormContainer = ({ classes, restaurant, menu }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -49,24 +38,20 @@ const DishFormContainer = ({ classes, restaurant, menu }) => {
     <div className={classes.root}>
       {!open && (
         <div>
-          <Button onClick={handleClickOpen} className={classes.addButton}>
-            <AddCircleOutlineTwoToneIcon style={{ fill: "white" }} /> Ajouter un
-            plat
+          <Button onClick={handleClickOpen} className={classes.designButton}>
+            <EditRoundedIcon style={{ fill: "white" }} /> Personnaliser le
+            design
           </Button>
         </div>
       )}
 
       {open && (
         <div>
-          <Typography variant="h2" className={classes.ne}>
-            Nouveau plat :
+          <Typography variant="h2" className={classes.designTitle}>
+            Personnaliser le design
           </Typography>
-          <AddNewDish
-            restaurant={restaurant}
-            menu={menu}
-            handleClose={handleClose}
-          />
-          <Button onClick={handleClose}>x</Button>
+          <DesignForm restaurant={restaurant} menu={menu} />
+          <Button onClick={handleClose}>X</Button>
         </div>
       )}
     </div>
@@ -83,4 +68,4 @@ const mapStateToProps = (state) => {
 export default compose(
   withStyles(styles),
   connect(mapStateToProps, { updateMenu })
-)(DishFormContainer);
+)(DesignFormContainer);

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Button, Fab, Input, withStyles } from "@material-ui/core";
+import { Fab, withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { uploadLogoPicture } from "../../store/actions/restaurantActions";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
+import { toast } from "react-toastify";
+
 
 const styles = (theme) => ({
   imgContainer: {
@@ -55,6 +57,10 @@ class UploadLogo extends Component {
       event.target.files[0],
       this.props.restaurant.id
     );
+    toast.info("upload en cours ...", {
+      position: toast.POSITION.TOP_CENTER
+    })
+    
   }
 
   render() {
@@ -77,15 +83,14 @@ class UploadLogo extends Component {
             onChange={this.handleChange}
           />
           <Fab
-          color="primary"
-          size="small"
-          component="span"
-          aria-label="add"
-          variant="extended"
-        >
-         <AddIcon /> Logo 
-        </Fab>
-
+            color="primary"
+            size="small"
+            component="span"
+            aria-label="add"
+            variant="extended"
+          >
+            <AddIcon /> Logo
+          </Fab>
         </label>
       </div>
     );
