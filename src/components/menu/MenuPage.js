@@ -23,23 +23,16 @@ const styles = (theme) => ({
   },
   logo: {
     maxWidth: "40%",
-    marginBottom: "2rem",
-  },
-  restoContact: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    paddingBottom: "1rem",
+    marginBottom: "1rem",
   },
   restoName: {
     marginTop: "3rem",
   },
   menuTitle: {
-    marginTop: "2rem",
+    marginTop: "1rem",
     textAlign: "center",
   },
-  menuSection: {
-    height: "auto",
+  menuBody: {
   },
   categoryHeader: {
     backgroundColor: "white",
@@ -56,12 +49,9 @@ const styles = (theme) => ({
     backgroundColor: "white",
   },
   footerSection: {
-    height: "5rem",
+    height: "4rem",
     width: "100%",
-    position: "relative",
-    bottom: "0",
     marginTop: "1rem",
-    paddingTop: "1rem",
   },
   mediaLogo: {
     width: "60px",
@@ -111,7 +101,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
 
-      <div>
+      <div className={classes.menuBody}>
         <Typography
           variant="h1"
           className={classes.menuTitle}
@@ -220,6 +210,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
           </div>
         )}
       </div>
+
       <div
         className={classes.footerSection}
         style={{ backgroundColor: menuData.headerColor || "#272727" }}
