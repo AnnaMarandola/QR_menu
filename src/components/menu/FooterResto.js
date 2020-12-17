@@ -24,6 +24,10 @@ const styles = (theme) => ({
     width: "30px",
     marginTop: "0.5rem",
   },
+  popperPaper: {
+    backgroundColor: "white",
+    padding: "1rem",
+  }
 });
 
 const FooterResto = ({
@@ -65,7 +69,7 @@ const FooterResto = ({
         >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
-              <Paper>
+              <Paper className={classes.popperPaper}>
                 <Typography className={classes.typography}>{adress}</Typography>
                 <Typography className={classes.typography}>
                   {postalCode} - {city}
@@ -104,7 +108,7 @@ const FooterResto = ({
         >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
-              <Paper>
+              <Paper className={classes.popperPaper}>
                 <Typography className={classes.typography}>{phone}</Typography>
               </Paper>
             </Fade>
