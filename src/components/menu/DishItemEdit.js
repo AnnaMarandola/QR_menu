@@ -24,10 +24,14 @@ const styles = (theme) => ({
     display: "flex",
     justifyContent: "space-between",
     padding: "0.4rem",
+    backgroundColor: "white"
   },
   dishTitle: {},
   dishPrice: {},
-  editButtons: {},
+  editButtons: {
+    backgroundColor: "white"
+
+  },
 });
 
 const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {

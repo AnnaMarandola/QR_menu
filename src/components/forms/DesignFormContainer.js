@@ -9,14 +9,15 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 const styles = (theme) => ({
   root: {
-    marginTop: "2rem",
+    marginTop: "1rem",
     marginBottom: "2rem",
     display: "flex",
     justifyContent: "center",
   },
   designButton: {
     color: theme.palette.primary.whiteish,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.red,
+    marginTop: "-8rem",
   },
   designTitle: {
     marginBottom: "1rem",
@@ -48,7 +49,7 @@ const DesignFormContainer = ({ classes, restaurant, menu }) => {
       {open && (
         <div>
           <Typography variant="h2" className={classes.designTitle}>
-            Personnaliser le design
+            Personnalisation du design
           </Typography>
           <DesignForm restaurant={restaurant} menu={menu} />
           <Button onClick={handleClose}>X</Button>

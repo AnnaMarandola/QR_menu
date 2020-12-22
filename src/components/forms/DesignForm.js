@@ -15,22 +15,30 @@ const styles = (theme, menu) => ({
     padding: "2rem",
     overflow: "visible",
   },
+  headerForm: {
+  },
+  table: {
+    width: "100%"
+  },
+  colors: {
+    display: "flex",
+  },
   colorInput: {
     width: "3rem",
-    marginBottom: "1rem",
+    marginBottom: "2rem",
   },
   fontForm: {
     width: "20rem",
     marginBottom: "2rem",
-    marginTop: "2rem"
+    marginTop: "3rem",
+    marginLeft: "2rem",
   },
   fontInput: {
     fontFamily: menu && menu.fontFamily,
     minWidth: "10rem",
-    textAlign: "center"
-  },
-  fontLabel: {
-    marginLeft: "1rem",
+    textAlign: "center",
+    marginLeft: "1.5rem"
+
   },
   police1: {
     fontFamily: "Lobster",
@@ -79,21 +87,28 @@ const DesignForm = ({
   return (
     <div>
     <Card className={classes.root}>
-      <form className={classes.headerColorForm}>
-        <Typography variant="body2">Couleur de fond</Typography>
-
-        <ColorPicker
+      <form className={classes.headerForm}>
+        <div className={classes.colors}>
+        <table className={classes.table}>
+    <thead>
+        <tr>
+        <th><Typography variant="body2" >Couleur de fond</Typography></th>
+        <th><Typography variant="body2" >Couleur du texte</Typography></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">        
+            <ColorPicker
           className={classes.colorInput}
           style={{ backgroundColor: menuColor || headerColor }}
           name="color"
           defaultValue={headerColor}
           value={headerColor}
           onChange={handleChangeHeaderColor}
-        />
-
-        <Typography variant="body2">Couleur du texte</Typography>
-
-        <ColorPicker
+        /></td>
+            <td align="center">
+            <ColorPicker
           className={classes.colorInput}
           style={{ backgroundColor: (menu && menu.fontColor) || fontColor }}
           name="color"
@@ -101,8 +116,13 @@ const DesignForm = ({
           value={fontColor}
           onChange={handleChangeFontColor}
         />
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </div>
 
-        <Typography variant="body2">Police d'écriture</Typography>
+        <Typography variant="body2" align="center">Police d'écriture</Typography>
         <Select
           className={classes.fontInput}
           variant="outlined"

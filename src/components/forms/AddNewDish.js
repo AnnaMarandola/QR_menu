@@ -17,6 +17,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
 import { createDish, updateDish } from "../../store/actions/dishActions";
@@ -148,7 +149,6 @@ class AddNewDish extends Component {
 
   render() {
     const { classes, dish, menu } = this.props;
-    console.log("menu in ADDNEWDISH", menu.template);
     const template = menu.template;
 
     return (
@@ -160,7 +160,7 @@ class AddNewDish extends Component {
               <Select
                 className={classes.categoryInput}
                 id="category"
-                value={dish ? dish.category : ""}
+                value={dish !== this.state.category ? this.state.category : ""}
                 onChange={this.handleCategory}
               >
                 <MenuItem value={"starter"}>Entrée</MenuItem>
@@ -196,6 +196,9 @@ class AddNewDish extends Component {
 
           <TextField
             className={classes.input}
+            type="number"
+            step="0.01"
+            endAdornment={<InputAdornment position="end">€</InputAdornment>}
             id="price"
             label="prix"
             onChange={this.handleChange}

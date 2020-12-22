@@ -14,18 +14,19 @@ const styles = (theme) => ({
     width: "95%",
     marginLeft: "2.5%",
   },
+  titlePage: {
+    width: "80%",
+    paddingTop: "7rem",
+    paddingBottom: "2rem",
+    marginLeft: "10%",
+    color: theme.palette.primary.main,
+  },
   header: {
     height: "17rem",
-    width: "70%",
-    marginLeft: "15%",
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
-  titlePage: {
-    paddingTop: "5rem",
-    paddingBottom: "2rem",
-    color: theme.palette.primary.main,
   },
   restoName: {
     marginTop: "2rem",
@@ -40,33 +41,52 @@ const styles = (theme) => ({
   titleSection: {
     display: "flex",
     flexDirection: "column",
-    marginTop: "1rem",
     paddingTop: "1rem",
     paddingLeft: "1rem",
-    marginBottom: "1rem",
   },
+
   modifTitleButton: {
     marginTop: "-2.5rem",
   },
-  dishTitle: {
+  menuTitle: {
     fontStyle: "italic",
   },
-  dishesList: {
+  titleCategory: {
     textAlign: "center",
+    marginTop: "1rem",
+    backgroundColor: theme.palette.primary.main,
+    color: "white"
   },
-  dishesEdited: {
-    border: "solid 1px black",
-  },
+  dishesTable: {
+    paddingTop: "1rem",
+    marginBottom: "2rem"
+
+  }
 });
 
 const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
   let menuData = { ...menu };
   let resto = { ...restaurant };
 
+  const sortedDishes =
+  dishes &&
+  dishes.reduce(
+    (acc, val) => {
+      if (val.category) acc[val.category].push(val);
+      return acc;
+    },
+    { starter: [], main: [], dessert: [] }
+  );
+const sorts = { ...sortedDishes };
+const starters = sorts && sorts.starter;
+const mains = sorts && sorts.main;
+const desserts = sorts && sorts.dessert;
+
   return (
     <div className={classes.root}>
+    
       <Typography className={classes.titlePage} variant="h1">
-        Tableau de bord
+      <hr/> Gérer votre carte !<hr/>
       </Typography>
       <Card
         className={classes.header}
@@ -102,7 +122,7 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
         {menu && menu.title && (
           <div className={classes.titleSection}>
             <Typography variant="body1">Titre de mon menu :</Typography>
-            <Typography className={classes.dishTitle} variant="h2">
+            <Typography className={classes.menuTitle} variant="h2">
               {menuData.title}
             </Typography>
             <TitleForm
@@ -112,18 +132,28 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
             />
           </div>
         )}
-        {restaurant && (
+        {restaurant &&  (
           <DishFormContainer
             restaurant={restaurant}
             menu={menuData}
             dishes={dishes}
           />
         )}
-        <Typography className={classes.dishesList} variant="body1">
-          actuellement à la carte :
-        </Typography>
-        {dishes &&
-          dishes.map((dish) => <DishItemEdit dish={dish} key={dish.id} />)}
+
+        {restaurant && restaurant.template === "template3" && dishes &&
+          dishes.map((dish) => <DishItemEdit dish={dish} key={dish.id} />)
+          }
+        {restaurant && restaurant.template === ("template1" || "template2") && dishes &&
+        <div className={classes.dishesTable}>
+        <Typography className={classes.titleCategory}>Les entrées</Typography>
+        {starters.map((starter) => <DishItemEdit dish={starter} key={starter.id} />)}        
+        <Typography className={classes.titleCategory}>Les plats</Typography>
+        {mains.map((main) => <DishItemEdit dish={main} key={main.id} />)}
+        <Typography className={classes.titleCategory}>Les desserts</Typography>
+        {desserts.map((dessert) => <DishItemEdit dish={dessert} key={dessert.id} />)}
+        </div>
+        }
+
       </div>
     </div>
   );

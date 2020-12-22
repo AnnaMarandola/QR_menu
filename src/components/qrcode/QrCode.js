@@ -12,11 +12,13 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
     padding: "2rem",
-    backgroundColor: theme.palette.primary.main,
   },
   qrImg: {
-    width: "30%",
-    marginBottom: "4 rem"
+    width: "60%",
+    margin: "4 rem",
+    border: "solid 6px",
+    borderColor: theme.palette.primary.main,
+    borderRadius: "10px",
   },
 });
 

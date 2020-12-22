@@ -131,18 +131,21 @@ class InfoResto extends Component {
             />
             <TextField
               id="phone"
+              type="tel"
               label="numéro de téléphone"
               onChange={this.handleChange}
               defaultValue={resto ? resto.phone : ""}
             />
             <TextField
               id="instagram"
+              type="url"
               label="votre instagram"
               onChange={this.handleChange}
               defaultValue={resto ? resto.instagram : ""}
             />
             <TextField
               id="facebook"
+              type="url"
               label="votre facebook"
               onChange={this.handleChange}
               defaultValue={resto ? resto.facebook : ""}

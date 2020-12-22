@@ -18,7 +18,7 @@ const styles = (theme) => ({
   },
   addButton: {
     color: theme.palette.primary.whiteish,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.red,
   },
   container: {
     display: "flex",
