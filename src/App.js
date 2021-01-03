@@ -12,12 +12,14 @@ import MenuPage from "./components/menu/MenuPage";
 import TemplateForm from "./components/forms/TemplateForm";
 import QrCodePdf from "./components/qrcode/QrCodePdf";
 import ToastComponent from "./constants/Toast";
+import LandingPage from "./components/landingPage/LandingPage";
 
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/signin" component={SignIn} />
+    <Switch>
+      <Route path="/" component={LandingPage} />
+      <Route path="/signin" component={SignIn} />
         <Route path="/createaccount" component={SignUp} />
         <Route
           path="/inforesto/add"
@@ -33,7 +35,7 @@ function App() {
         />
         <Route
           exact
-          path="/"
+          path="/dashboard"
           component={UserIsAuthenticated(WithTopBar(Dashboard))}
         />
         <Route
