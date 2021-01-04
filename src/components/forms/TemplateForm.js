@@ -87,7 +87,7 @@ const TemplateForm = ({
     }
   };
   console.log("selected template", selectedTemplate);
-  if (submitedForm === true) return <Redirect to="/" />;
+  if (submitedForm === true) return <Redirect to="/dashboard" />;
 
   return (
     <form className={classes.root}>
