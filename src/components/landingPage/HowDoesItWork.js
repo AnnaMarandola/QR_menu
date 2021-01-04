@@ -8,12 +8,13 @@ import HDIW3 from "../../assets/landingPage/HDIW3.png";
 const styles = (theme) => ({
   root: {
     textAlign: "center",
-    backgroundColor: "#84e4fb",
+    // backgroundColor: "#84e4fb",
     marginTop: "2rem",
+    paddingBottom: "3rem",
     paddingTop: "2rem",
     [theme.breakpoints.up("sm")]: {
-    marginTop: "6rem",
-    }
+      marginTop: "6rem",
+    },
   },
   explanations: {
     display: "flex",
@@ -27,9 +28,8 @@ const styles = (theme) => ({
   stepSection: {
     marginBottom: "5rem",
     [theme.breakpoints.up("sm")]: {
-        width: "33%",
-
-    }
+      width: "33%",
+    },
   },
   HTitle: {
     marginTop: "2rem",
@@ -37,7 +37,8 @@ const styles = (theme) => ({
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
     [theme.breakpoints.up("sm")]: {
-        marginTop: "4rem",
+      marginTop: "4rem",
+      fontSize: "3rem",
     },
   },
   HTitleSpan: {
@@ -47,25 +48,25 @@ const styles = (theme) => ({
     width: "30%",
   },
   stepTitle: {
-      fontSize: "1rem",
-      width: "70%",
-      marginLeft: "15%",
-      marginBottom:"0.5rem",
+    fontSize: "1rem",
+    width: "70%",
+    marginLeft: "15%",
+    marginBottom: "0.5rem",
   },
   stepText: {
-      width: "80%",
-      marginTop: "1rem",
-      marginLeft: "10%",
-      textAlign: "justify",
+    width: "80%",
+    marginTop: "1rem",
+    marginLeft: "10%",
+    textAlign: "justify",
   },
   shopButton: {
+    marginTop: "-6rem",
+    backgroundColor: "#ee1c80",
+    color: "white",
+    [theme.breakpoints.up("sm")]: {
       marginTop: "-6rem",
-      border: "solid 1.5px #ee1c80",
-      color: "#ee1c80",
-      [theme.breakpoints.up('sm')]: {
-          marginTop: "-6rem",
-          marginLeft: "82%",
-      }
+      marginLeft: "65%",
+    },
   },
 });
 
@@ -73,17 +74,20 @@ const steps = [
   {
     image: HDIW1,
     title: "1. Je crée mon compte",
-    text: "Choisissez un modèle pour votre carte en ligne. Vous pouvez maintenant personnaliser votre page à votre guise ! logo, charte graphique, gallerie d'images, contact, réseaux sociaux... ",
+    text:
+      "Choisissez un modèle pour votre carte en ligne. Vous pouvez maintenant personnaliser votre page à votre guise ! logo, charte graphique, gallerie d'images, contact, réseaux sociaux... ",
   },
   {
     image: HDIW2,
     title: "2. Je gère ma carte en ligne",
-    text: "Depuis votre compte, vous pouvez facilement ajouter, modifier ou supprimer les plats de votre carte ! Mise à jour instantanée, assistance téléphonique 24h/24.",
+    text:
+      "Depuis votre compte, vous pouvez facilement ajouter, modifier ou supprimer les plats de votre carte ! Mise à jour instantanée, assistance téléphonique 24h/24.",
   },
   {
     image: HDIW3,
     title: "3. Les clients flashent le QR code !",
-    text: "Les clients utilisent leur smartphone pour consulter la carte. Vous pouvez télécharger gratuitement le QR code, ou visiter notre boutique pour commander des supports personnalisés (chevalets, stickers, cartes de visites, flyers...).",
+    text:
+      "Les clients utilisent leur smartphone pour consulter la carte. Vous pouvez télécharger gratuitement le QR code, ou visiter notre boutique pour commander des supports personnalisés (chevalets, stickers, cartes de visites, flyers...).",
   },
 ];
 

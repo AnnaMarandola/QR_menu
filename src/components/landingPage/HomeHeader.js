@@ -21,7 +21,7 @@ const styles = (theme) => ({
     marginBottom: "2rem",
     marginTop: "-3rem",
     fontFamily: "Archivo narrow",
-    fontSize: "3rem",
+    fontSize: "4rem",
     [theme.breakpoints.up('sm')]: {
         marginTop: "5rem",
         fontSize: "6rem",

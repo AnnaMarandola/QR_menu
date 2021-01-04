@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history'
 import Loading from '../components/Loading'
 
 const locationHelper = locationHelperBuilder({})
-const browserHistory = createBrowserHistory()
+const browserHistory = createBrowserHistory( )
 
 export default connectedRouterRedirect({
   wrapperDisplayName: 'UserIsAuthenticated',
