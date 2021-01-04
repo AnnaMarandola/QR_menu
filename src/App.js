@@ -18,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
     <Switch>
-      <Route path="/" component={LandingPage} />
+      <Route exact path="/" component={LandingPage} />
       <Route path="/signin" component={SignIn} />
         <Route path="/createaccount" component={SignUp} />
         <Route

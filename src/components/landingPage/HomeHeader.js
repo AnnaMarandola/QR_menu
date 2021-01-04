@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Typography, withStyles, Button } from "@material-ui/core";
@@ -86,14 +86,14 @@ const HomeHeader = ({ classes, auth }) => {
             Crééz votre carte en ligne en quelques clics{" "}
           </Typography>
           <div className={classes.buttonSection}>
-            <NavLink to="./signin" className={classes.links} >
+            <Link to="./signin" className={classes.links} >
               <Button className={classes.connectButton}>Connexion</Button>
-            </NavLink>
-            <NavLink className={classes.links} to="./createaccount">
+            </Link>
+            <Link className={classes.links} to="./createaccount">
               <Button className={classes.registerButton}>
                 Essai gratuit de 14 jours
               </Button>
-            </NavLink>
+            </Link>
           </div>
         </div>
         <div className={classes.headerImage}>
