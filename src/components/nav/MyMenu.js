@@ -132,7 +132,7 @@ function MyMenu({
         TransitionComponent={Fade}
         elevation={0}
       >
-        <StyledMenuItem onClick={() => history.push("/")}>
+        <StyledMenuItem onClick={() => history.push("/dashboard")}>
           Tableau de bord
         </StyledMenuItem>
         { menu &&

@@ -46,8 +46,9 @@ const styles = (theme) => ({
     marginBottom: "4rem",
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
+    fontWeight: 300,
     [theme.breakpoints.up("sm")]: {
-      fontSize: "3rem",
+      fontSize: "4rem",
     },
   },
   priceTitleSpan: {

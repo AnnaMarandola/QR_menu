@@ -13,7 +13,7 @@ const styles = (theme) => ({
     paddingBottom: "3rem",
     paddingTop: "2rem",
     [theme.breakpoints.up("sm")]: {
-      marginTop: "6rem",
+      marginTop: "3rem",
     },
   },
   explanations: {
@@ -23,6 +23,7 @@ const styles = (theme) => ({
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
       justifyContent: "center",
+      marginTop: "6rem",
     },
   },
   stepSection: {
@@ -36,9 +37,10 @@ const styles = (theme) => ({
     marginBottom: "4rem",
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
+    fontWeight: 300,
     [theme.breakpoints.up("sm")]: {
       marginTop: "4rem",
-      fontSize: "3rem",
+      fontSize: "4rem",
     },
   },
   HTitleSpan: {

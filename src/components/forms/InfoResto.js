@@ -93,7 +93,7 @@ class InfoResto extends Component {
     console.log("restO ", restaurant);
 
 
-    if (this.state.submited === true) return <Redirect to="/" />;
+    if (this.state.submited === true) return <Redirect to="/dashboard" />;
 
     return (
       <div className={classes.root}>
