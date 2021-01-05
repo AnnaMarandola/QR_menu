@@ -68,7 +68,7 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
           {dish.dishName}
         </Typography>
         <Typography className={classes.dishPrice} variant="body1">
-          {dish.price}
+          {dish.price} €
         </Typography>
       </div>
 

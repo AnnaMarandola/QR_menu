@@ -80,7 +80,7 @@ class AddNewDish extends Component {
     category: "",
     checkedAllergens: [],
     price: "",
-    published: false,
+    published: true,
   };
 
   componentDidMount() {
