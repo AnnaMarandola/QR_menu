@@ -25,7 +25,7 @@ const styles = (theme) => ({
   },
   titleForm: {
     fontSize: "1.6rem",
-    marginTop: "1rem",
+    paddingTop: "5rem",
   },
   goodies: {
     fontWeight: 600,
@@ -93,7 +93,7 @@ const TemplateForm = ({
     <form className={classes.root}>
       <div className={classes.introForm}>
         <Typography variant="h1" className={classes.titleForm}>
-          Selectionnez le design adapté à votre menu .
+          Selectionnez un modèle de mise en page du menu :
         </Typography>
         <Typography variant="body2" className={classes.textForm}>
           Tous les designs disposent d'
