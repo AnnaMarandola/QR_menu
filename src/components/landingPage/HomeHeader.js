@@ -40,6 +40,11 @@ const styles = (theme) => ({
   buttonSection: {
     marginTop: "2rem",
     width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row",
+    },
   },
   connectButton: {
     backgroundColor: "#5ce1e6",
