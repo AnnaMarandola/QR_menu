@@ -8,6 +8,8 @@ import Commitments from "./Commitments";
 import Pricing from "./Pricing";
 import AVATAR from "../../assets/landingPage/Sans titre (9).png";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import { NavLink } from "react-router-dom";
+
 
 const styles = (theme) => ({
   root: {
@@ -63,9 +65,9 @@ const LandingPage = ({ classes, auth }) => {
           {/* <AnchorLink href="#contact" className={classes.navlink}> */}
             <Typography className={classes.menuItem}>CONTACT</Typography>
           {/* </AnchorLink> */}
-          {/* <AnchorLink href="#shop" className={classes.navlink}> */}
+          <NavLink to="./shop" className={classes.navlink}>
             <Typography className={classes.menuItem}>BOUTIQUE</Typography>
-          {/* </AnchorLink> */}
+          </NavLink>
           {/* <NavLink to="./signin"> */}
           <img src={AVATAR} alt="avatar" className={classes.avatarImg} />
           {/* </NavLink> */}

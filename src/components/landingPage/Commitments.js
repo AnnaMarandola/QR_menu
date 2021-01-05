@@ -5,6 +5,7 @@ import MARKETING from "../../assets/landingPage/marketing.png";
 import ALLERGENS from "../../assets/landingPage/allergens-smartphone.png";
 import COVID from "../../assets/landingPage/covid.png";
 import CHECKED from "../../assets/landingPage/checked.png";
+import { NavLink } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {
@@ -89,6 +90,9 @@ const styles = (theme) => ({
     marginTop: "1rem",
     marginLeft: "10%",
     textAlign: "justify",
+  },
+  links: {
+    textDecoration: "none",
   },
   showButton: {
     marginTop: "2rem",
@@ -175,9 +179,11 @@ const Commitments = ({ classes }) => {
           </div>
           <div>
             {commitment && commitment.button && (
+              <NavLink to="./shop" className={classes.links}>
               <Button className={classes.showButton}>
                 {commitment.button}
               </Button>
+              </NavLink>
             )}
           </div>
         </div>
