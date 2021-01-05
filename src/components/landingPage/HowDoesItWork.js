@@ -71,6 +71,9 @@ const styles = (theme) => ({
       marginLeft: "65%",
     },
   },
+  links: {
+    textDecoration: "none",
+  },
 });
 
 const steps = [
@@ -118,7 +121,7 @@ const HowDoesItWork = ({ classes }) => {
           </div>
         ))}
       </div>
-      <NavLink to="./shop">
+      <NavLink to="./shop" className={classes.links}>
         <Button className={classes.shopButton}>BOUTIQUE</Button>
       </NavLink>
     </div>
