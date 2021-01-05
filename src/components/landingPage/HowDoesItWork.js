@@ -4,6 +4,7 @@ import { Button, Typography, withStyles } from "@material-ui/core";
 import HDIW1 from "../../assets/landingPage/HDIW1.png";
 import HDIW2 from "../../assets/landingPage/HDIW2.png";
 import HDIW3 from "../../assets/landingPage/HDIW3.png";
+import { NavLink } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {
@@ -117,7 +118,9 @@ const HowDoesItWork = ({ classes }) => {
           </div>
         ))}
       </div>
-      <Button className={classes.shopButton}>BOUTIQUE</Button>
+      <NavLink to="./shop">
+        <Button className={classes.shopButton}>BOUTIQUE</Button>
+      </NavLink>
     </div>
   );
 };
