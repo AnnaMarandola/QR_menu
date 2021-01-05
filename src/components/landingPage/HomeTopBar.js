@@ -6,7 +6,7 @@ import AVATAR from "../../assets/landingPage/Sans titre (9).png";
 import { NavLink } from "react-router-dom";
 
 const styles = (theme) => ({
-  root: {
+  rootNav: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "flex",
@@ -36,7 +36,7 @@ const styles = (theme) => ({
 
 const HomeTopBar = ({ classes, auth }) => {
   return (
-    <div className={classes.root}>
+    <div className={classes.rootNav}>
       <div className={classes.homeNav}>
         <Typography className={classes.menuItem}>BOUTIQUE</Typography>
         <Typography className={classes.menuItem}>ABONNEMENTS</Typography>

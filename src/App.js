@@ -13,6 +13,7 @@ import TemplateForm from "./components/forms/TemplateForm";
 import QrCodePdf from "./components/qrcode/QrCodePdf";
 import ToastComponent from "./constants/Toast";
 import LandingPage from "./components/landingPage/LandingPage";
+import ShopPage from "./components/shop/ShopPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
     <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route path="/signin" component={SignIn} />
+      <Route path="/shop" component={ShopPage} />
         <Route path="/createaccount" component={SignUp} />
         <Route
           path="/inforesto/add"

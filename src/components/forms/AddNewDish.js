@@ -47,6 +47,9 @@ const styles = (theme) => ({
   input: {
     width: "90%",
   },
+  priceInput: {
+    width: "30%"
+  },
   accordion: {
     display: "flex",
     flexDirection: "column",
@@ -80,7 +83,7 @@ class AddNewDish extends Component {
     category: "",
     checkedAllergens: [],
     price: "",
-    published: false,
+    published: true,
   };
 
   componentDidMount() {
@@ -195,10 +198,10 @@ class AddNewDish extends Component {
           />
 
           <TextField
-            className={classes.input}
+            className={classes.priceInput}
             type="number"
             step="0.01"
-            endAdornment={<InputAdornment position="end">€</InputAdornment>}
+            InputProps = {{endAdornment : <InputAdornment position="start">€</InputAdornment>}}
             id="price"
             label="prix"
             onChange={this.handleChange}

@@ -41,7 +41,7 @@ const DishItem = ({
         {title}
       </Typography>
       <Typography className={classes.dishPrice} variant="body1">
-        {price}
+        {price} €
       </Typography>
       <Typography variant="body2">{ingredients}</Typography>
       <Typography variant="body2">{description}</Typography>
