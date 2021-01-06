@@ -179,7 +179,7 @@ const Commitments = ({ classes }) => {
           </div>
           <div>
             {commitment && commitment.button && (
-              <NavLink to="./shop" className={classes.links}>
+              <NavLink to="./project" className={classes.links}>
               <Button className={classes.showButton}>
                 {commitment.button}
               </Button>

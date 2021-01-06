@@ -14,6 +14,7 @@ import QrCodePdf from "./components/qrcode/QrCodePdf";
 import ToastComponent from "./constants/Toast";
 import LandingPage from "./components/landingPage/LandingPage";
 import ShopPage from "./components/shop/ShopPage";
+import projectPage from "./components/shop/projectPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route exact path="/" component={LandingPage} />
       <Route path="/signin" component={SignIn} />
       <Route path="/shop" component={ShopPage} />
+      <Route path="/project" component={projectPage} />
         <Route path="/createaccount" component={SignUp} />
         <Route
           path="/inforesto/add"
