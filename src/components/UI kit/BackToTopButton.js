@@ -10,14 +10,13 @@ const styles = (theme) => ({
     height: "4rem",
     marginLeft: "80%",
     marginBottom: "2rem",
-    '&hover': {
-        border: "solid 1px #ee1c80",
-    }, 
+    "&hover": {
+      border: "solid 1px #ee1c80",
+    },
     [theme.breakpoints.up("sm")]: {
-        marginLeft: "90%",
-    }
+      marginLeft: "90%",
+    },
   },
-
 });
 
 const backToTopButton = ({ classes }) => {
