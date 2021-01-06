@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { compose } from "redux";
 import { Typography, withStyles, Button } from "@material-ui/core";
 import HEADER from "../../assets/landingPage/illustration-header.png";
@@ -13,8 +12,8 @@ const styles = (theme) => ({
     marginTop: "3rem",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
-      width: "80%",
-      marginLeft: "10%",
+      width: "95%",
+      marginLeft: "2.5%",
     },
   },
   headerTitle: {
@@ -78,7 +77,7 @@ const styles = (theme) => ({
   },
 });
 
-const HomeHeader = ({ classes, auth }) => {
+const HomeHeader = ({ classes }) => {
   return (
     <div className={classes.header}>
       <div className={classes.headerText}>
@@ -115,14 +114,8 @@ const HomeHeader = ({ classes, auth }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-    auth: state.firebase.auth,
-  };
-};
+
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
 )(HomeHeader);
