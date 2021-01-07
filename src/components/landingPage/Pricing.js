@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { compose } from "redux";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
+import BackToTopButton from "../UI kit/BackToTopButton";
 
 const styles = (theme) => ({
   "@global": {
@@ -21,6 +21,10 @@ const styles = (theme) => ({
     },
   },
   root: {
+    marginBottom: "0.5rem",
+    backgroundColor: "#acfcbd",
+  },
+  container: {
     marginBottom: "6rem",
   },
   titleContent: {
@@ -101,6 +105,7 @@ const tiers = [
 const Pricing = ({ classes }) => {
   return (
     <div className={classes.root}>
+    <div className={classes.container}>
       <Container
         maxWidth="sm"
         component="main"
@@ -162,6 +167,8 @@ const Pricing = ({ classes }) => {
           ))}
         </Grid>
       </Container>
+    </div>
+      <BackToTopButton />
     </div>
   );
 };

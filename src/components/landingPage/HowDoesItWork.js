@@ -5,13 +5,13 @@ import HDIW1 from "../../assets/landingPage/HDIW1.png";
 import HDIW2 from "../../assets/landingPage/HDIW2.png";
 import HDIW3 from "../../assets/landingPage/HDIW3.png";
 import { NavLink } from "react-router-dom";
+import BackToTopButton from "../UI kit/BackToTopButton";
 
 const styles = (theme) => ({
   root: {
     textAlign: "center",
-    // backgroundColor: "#84e4fb",
-    marginTop: "2rem",
-    paddingBottom: "3rem",
+    backgroundColor: "#e1d0d4",
+    paddingBottom: "0.5rem",
     paddingTop: "2rem",
     [theme.breakpoints.up("sm")]: {
       marginTop: "3rem",
@@ -124,6 +124,7 @@ const HowDoesItWork = ({ classes }) => {
       <NavLink to="./shop" className={classes.links}>
         <Button className={classes.shopButton}>BOUTIQUE</Button>
       </NavLink>
+      <BackToTopButton />
     </div>
   );
 };

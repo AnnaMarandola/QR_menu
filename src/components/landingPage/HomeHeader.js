@@ -9,11 +9,11 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column-reverse",
     justifyContent: "space-around",
-    marginTop: "3rem",
+    paddingTop: "6rem",
+    paddingBottom: "3rem",
+    backgroundColor: "#cef3fd",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
-      width: "95%",
-      marginLeft: "2.5%",
     },
   },
   headerTitle: {
@@ -114,8 +114,4 @@ const HomeHeader = ({ classes }) => {
   );
 };
 
-
-
-export default compose(
-  withStyles(styles),
-)(HomeHeader);
+export default compose(withStyles(styles))(HomeHeader);

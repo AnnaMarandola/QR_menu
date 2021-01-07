@@ -6,11 +6,14 @@ import ALLERGENS from "../../assets/landingPage/allergens-smartphone.png";
 import COVID from "../../assets/landingPage/covid.png";
 import CHECKED from "../../assets/landingPage/checked.png";
 import { NavLink } from "react-router-dom";
+import BackToTopButton from "../UI kit/BackToTopButton";
 
 const styles = (theme) => ({
   root: {
     textAlign: "center",
-    marginTop: "2rem",
+    paddingTop: "2rem",
+    paddingBottom: "0.5rem",    
+    backgroundColor: "#fbe998",
     [theme.breakpoints.up("sm")]: {
       marginTop: "6rem",
       width: "80%",
@@ -188,6 +191,7 @@ const Commitments = ({ classes }) => {
           </div>
         </div>
       ))}
+      <BackToTopButton />
     </div>
   );
 };

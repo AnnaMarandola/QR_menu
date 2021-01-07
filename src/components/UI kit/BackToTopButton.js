@@ -6,10 +6,10 @@ import ArrowUpwardSharpIcon from "@material-ui/icons/ArrowUpwardSharp";
 
 const styles = (theme) => ({
   backToTopButton: {
+    backgroundColor: "grey",
     borderRadius: "50%",
     height: "4rem",
     marginLeft: "80%",
-    marginBottom: "2rem",
     "&hover": {
       border: "solid 1px #ee1c80",
     },
