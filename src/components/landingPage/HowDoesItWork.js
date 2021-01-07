@@ -14,7 +14,6 @@ const styles = (theme) => ({
     paddingBottom: "0.5rem",
     paddingTop: "2rem",
     [theme.breakpoints.up("sm")]: {
-      marginTop: "3rem",
     },
   },
   explanations: {

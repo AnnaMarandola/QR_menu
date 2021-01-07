@@ -14,6 +14,8 @@ const styles = (theme) => ({
     backgroundColor: "#cef3fd",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
+      paddingLeft: "10%",
+      paddingRight: "10%",
     },
   },
   headerTitle: {
@@ -68,7 +70,7 @@ const styles = (theme) => ({
     width: "80%",
     marginLeft: "2rem",
     [theme.breakpoints.up("sm")]: {
-      width: "100%",
+      width: "120%",
       margin: "0",
     },
   },
