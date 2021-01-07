@@ -22,7 +22,7 @@ const styles = (theme) => ({
   },
   root: {
     marginBottom: "0.5rem",
-    backgroundColor: "#acfcbd",
+    backgroundColor: "#c7def5",
   },
   container: {
     marginBottom: "6rem",
@@ -105,69 +105,71 @@ const tiers = [
 const Pricing = ({ classes }) => {
   return (
     <div className={classes.root}>
-    <div className={classes.container}>
-      <Container
-        maxWidth="sm"
-        component="main"
-        className={classes.titleContent}
-      >
-        <Typography className={classes.priceTitle}>
-          <span className={classes.priceTitleSpan}>A</span>bonnements
-        </Typography>
-        <Typography className={classes.titleText}>Paiement sécurisé</Typography>
-        <Typography className={classes.titleText}>
-          Abonnements sans engagements{" "}
-        </Typography>
-        <Typography className={classes.titleText}>
-          Profitez de l'essai gratuit de 14 jours !
-        </Typography>
-      </Container>
+      <div className={classes.container}>
+        <Container
+          maxWidth="sm"
+          component="main"
+          className={classes.titleContent}
+        >
+          <Typography className={classes.priceTitle}>
+            <span className={classes.priceTitleSpan}>A</span>bonnements
+          </Typography>
+          <Typography className={classes.titleText}>
+            Paiement sécurisé
+          </Typography>
+          <Typography className={classes.titleText}>
+            Abonnements sans engagements{" "}
+          </Typography>
+          <Typography className={classes.titleText}>
+            Profitez de l'essai gratuit de 14 jours !
+          </Typography>
+        </Container>
 
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier) => (
-            <Grid
-              item
-              key={tier.title}
-              xs={12}
-              sm={tier.title === "Enterprise" ? 12 : 6}
-              md={4}
-            >
-              <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  action={tier.title === "Premium" ? <StarIcon /> : null}
-                  className={classes.cardHeader}
-                />
-                <CardContent>
-                  <div className={classes.cardPricing}>
-                    <Typography variant="h3">{tier.price}€</Typography>
-                    <Typography variant="h6">/mois</Typography>
-                  </div>
-                  <ul>
-                    {tier.description.map((line) => (
-                      <Typography className={classes.line} key={line}>
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    fullWidth
-                    variant={tier.buttonVariant}
-                    color="primary"
-                  >
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </div>
+        <Container maxWidth="md" component="main">
+          <Grid container spacing={5} alignItems="flex-end">
+            {tiers.map((tier) => (
+              <Grid
+                item
+                key={tier.title}
+                xs={12}
+                sm={tier.title === "Enterprise" ? 12 : 6}
+                md={4}
+              >
+                <Card>
+                  <CardHeader
+                    title={tier.title}
+                    subheader={tier.subheader}
+                    action={tier.title === "Premium" ? <StarIcon /> : null}
+                    className={classes.cardHeader}
+                  />
+                  <CardContent>
+                    <div className={classes.cardPricing}>
+                      <Typography variant="h3">{tier.price}€</Typography>
+                      <Typography variant="h6">/mois</Typography>
+                    </div>
+                    <ul>
+                      {tier.description.map((line) => (
+                        <Typography className={classes.line} key={line}>
+                          {line}
+                        </Typography>
+                      ))}
+                    </ul>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      fullWidth
+                      variant={tier.buttonVariant}
+                      color="primary"
+                    >
+                      {tier.buttonText}
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </div>
       <BackToTopButton />
     </div>
   );

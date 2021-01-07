@@ -11,7 +11,6 @@ const styles = (theme) => ({
     justifyContent: "space-around",
     paddingTop: "6rem",
     paddingBottom: "3rem",
-    backgroundColor: "#cef3fd",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
       paddingLeft: "10%",

@@ -10,10 +10,11 @@ import BackToTopButton from "../UI kit/BackToTopButton";
 const styles = (theme) => ({
   root: {
     textAlign: "center",
-    backgroundColor: "#e1d0d4",
     paddingBottom: "0.5rem",
     paddingTop: "2rem",
+    backgroundColor: "#c7def5",
     [theme.breakpoints.up("sm")]: {
+
     },
   },
   explanations: {
