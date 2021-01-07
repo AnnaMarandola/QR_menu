@@ -19,6 +19,10 @@ const styles = (theme) => ({
     flexDirection: "column",
   },
   mobile: {
+    zIndex: 99,
+    position: "fixed",
+    width: "100%",
+    right: 0,
     [theme.breakpoints.up("sm")]: {
       display: "none",
     }

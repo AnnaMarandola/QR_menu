@@ -117,13 +117,13 @@ function MobileMenu({ classes }) {
         TransitionComponent={Fade}
         elevation={0}
       >
-        <AnchorLink href="#product" className={classes.navlink}>
+        <AnchorLink offset={() => 100} href="#product" className={classes.navlink}>
           <StyledMenuItem>Produits</StyledMenuItem>
         </AnchorLink>
-        <AnchorLink href="#pricing" className={classes.navlink}>
+        <AnchorLink  offset={() => 100} href="#pricing" className={classes.navlink}>
           <StyledMenuItem>Abonnements</StyledMenuItem>
         </AnchorLink>
-        <AnchorLink href="#engagements" className={classes.navlink}>
+        <AnchorLink offset={() => 100} href="#engagements" className={classes.navlink}>
           <StyledMenuItem>Nos engagements</StyledMenuItem>
         </AnchorLink>
         <AnchorLink href="#contact" className={classes.navlink}>

@@ -22,7 +22,7 @@ const styles = (theme) => ({
 const backToTopButton = ({ classes }) => {
   return (
     <div>
-      <AnchorLink href="#top" className={classes.navlink}>
+      <AnchorLink offset={() => 10000} href="#top" className={classes.navlink}>
         <Button className={classes.backToTopButton}>
           <ArrowUpwardSharpIcon style={{ color: "#ee1c80" }} />
         </Button>
