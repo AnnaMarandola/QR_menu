@@ -10,13 +10,14 @@ import BackToTopButton from "../UI kit/BackToTopButton";
 
 const styles = (theme) => ({
   root: {
-    textAlign: "center",
     paddingTop: "2rem",
     paddingBottom: "0.5rem",    
     backgroundColor: "#fbe998",
+    
+  },
+  bigContainer: {
+    textAlign: "center",
     [theme.breakpoints.up("sm")]: {
-      width: "80%",
-      marginLeft: "10%",
     },
   },
   container: {
@@ -26,6 +27,8 @@ const styles = (theme) => ({
     marginBottom: "5rem",
     [theme.breakpoints.up("sm")]: {
       justifyContent: "center",
+      paddingLeft: "10%",
+      paddingRight: "10%",
     },
   },
   textAndImgOdd: {
@@ -139,6 +142,7 @@ const commitments = [
 const Commitments = ({ classes }) => {
   return (
     <div className={classes.root}>
+    <div className={classes.bigContainer}>
       <Typography className={classes.CTitle}>
         <span className={classes.CTitleSpan}>Pourquoi</span> utiliser
         l'application <span className={classes.CTitleSpan}>QR</span>Menu{" "}
@@ -190,8 +194,9 @@ const Commitments = ({ classes }) => {
           </div>
         </div>
       ))}
-      <BackToTopButton />
     </div>
+      <BackToTopButton />
+      </div>
   );
 };
 
