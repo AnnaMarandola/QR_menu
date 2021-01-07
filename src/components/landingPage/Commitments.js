@@ -6,16 +6,16 @@ import ALLERGENS from "../../assets/landingPage/allergens-smartphone.png";
 import COVID from "../../assets/landingPage/covid.png";
 import CHECKED from "../../assets/landingPage/checked.png";
 import { NavLink } from "react-router-dom";
+import BackToTopButton from "../UI kit/BackToTopButton";
 
 const styles = (theme) => ({
   root: {
+    paddingTop: "2rem",
+    paddingBottom: "0.5rem",
+  },
+  bigContainer: {
     textAlign: "center",
-    marginTop: "2rem",
-    [theme.breakpoints.up("sm")]: {
-      marginTop: "6rem",
-      width: "80%",
-      marginLeft: "10%",
-    },
+    [theme.breakpoints.up("sm")]: {},
   },
   container: {
     display: "flex",
@@ -24,6 +24,8 @@ const styles = (theme) => ({
     marginBottom: "5rem",
     [theme.breakpoints.up("sm")]: {
       justifyContent: "center",
+      paddingLeft: "10%",
+      paddingRight: "10%",
     },
   },
   textAndImgOdd: {
@@ -45,6 +47,8 @@ const styles = (theme) => ({
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
     fontWeight: 300,
+    paddingLeft: "10%",
+    paddingRight: "10%",
     [theme.breakpoints.up("sm")]: {
       marginTop: "4rem",
       fontSize: "4rem",
@@ -98,9 +102,7 @@ const styles = (theme) => ({
     marginTop: "2rem",
     backgroundColor: "#ee1c80",
     color: "white",
-    [theme.breakpoints.up("sm")]: {
-
-    }
+    [theme.breakpoints.up("sm")]: {},
   },
 });
 
@@ -137,57 +139,62 @@ const commitments = [
 const Commitments = ({ classes }) => {
   return (
     <div className={classes.root}>
-      <Typography className={classes.CTitle}>
-        <span className={classes.CTitleSpan}>Pourquoi</span> utiliser
-        l'application <span className={classes.CTitleSpan}>QR</span>Menu{" "}
-        <span className={classes.CTitleSpan}>?</span>
-      </Typography>
-      {commitments.map((commitment) => (
-        <div className={classes.container}>
-          <div className={
-            commitment.id % 2 === 0
-              ? classes.textAndImgOdd
-              : classes.textAndImgEven
-          }>
-            <img
-              className={classes.commitImg}
-              src={commitment.image}
-              alt={commitment.title}
-            />
-            <div className={classes.text}>
-              <div className={classes.titleContainer}>
-                <img
-                  src={CHECKED}
-                  alt="checked icon"
-                  className={classes.checkedIcon}
-                />
-                <Typography className={classes.commitTitle} variant="body1">
-                  {commitment.title}
+      <div className={classes.bigContainer}>
+        <Typography className={classes.CTitle}>
+          <span className={classes.CTitleSpan}>Pourquoi</span> utiliser
+          l'application <span className={classes.CTitleSpan}>QR</span>Menu{" "}
+          <span className={classes.CTitleSpan}>?</span>
+        </Typography>
+        {commitments.map((commitment) => (
+          <div className={classes.container}>
+            <div
+              className={
+                commitment.id % 2 === 0
+                  ? classes.textAndImgOdd
+                  : classes.textAndImgEven
+              }
+            >
+              <img
+                className={classes.commitImg}
+                src={commitment.image}
+                alt={commitment.title}
+              />
+              <div className={classes.text}>
+                <div className={classes.titleContainer}>
+                  <img
+                    src={CHECKED}
+                    alt="checked icon"
+                    className={classes.checkedIcon}
+                  />
+                  <Typography className={classes.commitTitle} variant="body1">
+                    {commitment.title}
+                  </Typography>
+                </div>
+
+                <Typography className={classes.commitText} variant="body2">
+                  {commitment.firstParagraph}
+                </Typography>
+                <Typography className={classes.commitText} variant="body2">
+                  {commitment.secondParagraph}
+                </Typography>
+                <Typography className={classes.commitText} variant="body2">
+                  {commitment.thirdParagraph}
                 </Typography>
               </div>
-
-              <Typography className={classes.commitText} variant="body2">
-                {commitment.firstParagraph}
-              </Typography>
-              <Typography className={classes.commitText} variant="body2">
-                {commitment.secondParagraph}
-              </Typography>
-              <Typography className={classes.commitText} variant="body2">
-                {commitment.thirdParagraph}
-              </Typography>
+            </div>
+            <div>
+              {commitment && commitment.button && (
+                <NavLink to="./project" className={classes.links}>
+                  <Button className={classes.showButton}>
+                    {commitment.button}
+                  </Button>
+                </NavLink>
+              )}
             </div>
           </div>
-          <div>
-            {commitment && commitment.button && (
-              <NavLink to="./project" className={classes.links}>
-              <Button className={classes.showButton}>
-                {commitment.button}
-              </Button>
-              </NavLink>
-            )}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <BackToTopButton />
     </div>
   );
 };

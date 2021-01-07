@@ -9,11 +9,12 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column-reverse",
     justifyContent: "space-around",
-    marginTop: "3rem",
+    paddingTop: "6rem",
+    paddingBottom: "3rem",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
-      width: "95%",
-      marginLeft: "2.5%",
+      paddingLeft: "10%",
+      paddingRight: "10%",
     },
   },
   headerTitle: {
@@ -46,11 +47,11 @@ const styles = (theme) => ({
     },
   },
   connectButton: {
-    backgroundColor: "#5ce1e6",
-    color: "grey",
+    backgroundColor: "#c7def5",
+    color: "black",
     marginBottom: "1rem",
     marginRight: "1rem",
-    fontWeight: "600",
+    fontWeight: "300",
     [theme.breakpoints.up("sm")]: {
       marginBottom: "0",
     },
@@ -68,7 +69,7 @@ const styles = (theme) => ({
     width: "80%",
     marginLeft: "2rem",
     [theme.breakpoints.up("sm")]: {
-      width: "100%",
+      width: "120%",
       margin: "0",
     },
   },
@@ -114,8 +115,4 @@ const HomeHeader = ({ classes }) => {
   );
 };
 
-
-
-export default compose(
-  withStyles(styles),
-)(HomeHeader);
+export default compose(withStyles(styles))(HomeHeader);

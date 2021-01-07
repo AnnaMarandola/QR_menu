@@ -6,11 +6,8 @@ import HomeHeader from "./HomeHeader";
 import HowDoesItWork from "./HowDoesItWork";
 import Commitments from "./Commitments";
 import Pricing from "./Pricing";
-import BackToTopButton from "../UI kit/BackToTopButton";
 import HomeTopBar from "./HomeTopBar";
 import MobileMenu from "./MobileMenu";
-
-
 
 const styles = (theme) => ({
   root: {
@@ -25,8 +22,8 @@ const styles = (theme) => ({
     right: 0,
     [theme.breakpoints.up("sm")]: {
       display: "none",
-    }
-  }
+    },
+  },
 });
 
 const LandingPage = ({ classes, auth }) => {
@@ -39,15 +36,12 @@ const LandingPage = ({ classes, auth }) => {
       <HomeHeader />
       <section id="product">
         <HowDoesItWork />
-        <BackToTopButton />
       </section>
       <section id="engagements">
         <Commitments />
-        <BackToTopButton />
       </section>
       <section id="pricing">
         <Pricing />
-        <BackToTopButton />
       </section>
     </div>
   );

@@ -9,7 +9,6 @@ const styles = (theme) => ({
     borderRadius: "50%",
     height: "4rem",
     marginLeft: "80%",
-    marginBottom: "2rem",
     "&hover": {
       border: "solid 1px #ee1c80",
     },
