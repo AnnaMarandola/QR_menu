@@ -47,11 +47,11 @@ const styles = (theme) => ({
     },
   },
   connectButton: {
-    backgroundColor: "#5ce1e6",
-    color: "grey",
+    backgroundColor: "#c7def5",
+    color: "black",
     marginBottom: "1rem",
     marginRight: "1rem",
-    fontWeight: "600",
+    fontWeight: "300",
     [theme.breakpoints.up("sm")]: {
       marginBottom: "0",
     },
