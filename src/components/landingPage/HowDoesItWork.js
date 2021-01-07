@@ -24,6 +24,8 @@ const styles = (theme) => ({
       flexDirection: "row",
       justifyContent: "center",
       marginTop: "6rem",
+      paddingLeft: "10%",
+      paddingRight: "10%",
     },
   },
   stepSection: {
