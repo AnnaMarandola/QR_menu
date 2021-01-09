@@ -12,14 +12,13 @@ const styles = (theme) => ({
     display: "flex",
     backgroundColor: "#eeeeee",
     flexDirection: "column",
-    margin: "1rem",
-    padding: "2rem",
+    paddingBottom: "2rem",
     [theme.breakpoints.up("sm")]: {
       margin: 0,
     },
   },
   textArea: {
-    margin: "1rem",
+    margin: "0.5rem",
     marginTop: "2rem",
     minHeight: "7rem",
     [theme.breakpoints.up("sm")]: {
@@ -29,9 +28,7 @@ const styles = (theme) => ({
     },
   },
   contactInputs: {
-    [theme.breakpoints.up("sm")]: {
-      width: "80%",
-    },
+    width: "80%",
   },
   submitButton: {
     width: "35%",
