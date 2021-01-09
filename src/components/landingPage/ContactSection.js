@@ -79,9 +79,9 @@ const styles = (theme) => ({
   },
   contactButton: {
     [theme.breakpoints.up("sm")]: {
-    width: "4rem",
+      width: "4rem",
+    },
   },
-},
   contactIcons: {
     width: "50%",
     [theme.breakpoints.up("sm")]: {
@@ -118,6 +118,7 @@ const ContactSection = ({ classes }) => {
           <Typography className={classes.contactText}>
             Référencement, SEO
           </Typography>
+
           <div className={classes.socialContact}>
             <Button className={classes.contactButton}>
               <img
@@ -149,6 +150,7 @@ const ContactSection = ({ classes }) => {
             </Button>
           </div>
         </div>
+
         <div className={classes.formContainer}>
           <img src={MAIL} alt="mail icon" className={classes.mailIcon} />
           <ContactForm />

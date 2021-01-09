@@ -4,8 +4,6 @@ import {
   TextField,
   Button,
   TextareaAutosize,
-  Select,
-  InputLabel,
 } from "@material-ui/core";
 import { compose } from "redux";
 
@@ -17,7 +15,7 @@ const styles = (theme) => ({
     margin: "1rem",
     padding: "2rem",
     [theme.breakpoints.up("sm")]: {
-    margin: 0,
+      margin: 0,
     },
   },
   textArea: {
@@ -25,20 +23,20 @@ const styles = (theme) => ({
     marginTop: "2rem",
     minHeight: "7rem",
     [theme.breakpoints.up("sm")]: {
-        width: "80%",
-        marginLeft: "10%",
-        marginBottom: "2rem",
-      },
+      width: "80%",
+      marginLeft: "10%",
+      marginBottom: "2rem",
+    },
   },
   contactInputs: {
-      [theme.breakpoints.up("sm")]: {
-          width: "80%",
-        },
+    [theme.breakpoints.up("sm")]: {
+      width: "80%",
+    },
   },
   submitButton: {
     width: "35%",
     marginLeft: "32.5%",
-    color: "white",    
+    color: "white",
   },
 });
 
@@ -53,27 +51,11 @@ const ContactForm = ({ classes }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoader(true);
-
-    // db.collection("contacts")
-    //   .add({
-    //     name: name,
-    //     email: email,
-    //     message: message,
-    //   })
-    //   .then(() => {
-    //     setLoader(false);
-    //     alert("Your message has been submitted👍");
-    //   })
-    //   .catch((error) => {
-    //     alert(error.message);
-    //     setLoader(false);
-    //   });
-
     setName("");
     setEmail("");
     setMessage("");
     setSubject("");
-    console.log("MAIL SUBMITED", name, email, message);
+    console.log("MAIL SENT", name, email, message);
   };
 
   return (
