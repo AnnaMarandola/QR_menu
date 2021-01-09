@@ -9,6 +9,7 @@ import Pricing from "./Pricing";
 import HomeTopBar from "./HomeTopBar";
 import MobileMenu from "./MobileMenu";
 import ContactSection from "./ContactSection";
+import HomeFooter from "./HomeFooter";
 
 const styles = (theme) => ({
   root: {
@@ -47,6 +48,7 @@ const LandingPage = ({ classes, auth }) => {
       <section id="contact">
         <ContactSection />
       </section>
+      <HomeFooter />
     </div>
   );
 };
