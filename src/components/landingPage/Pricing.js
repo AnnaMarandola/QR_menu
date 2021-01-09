@@ -21,7 +21,6 @@ const styles = (theme) => ({
     },
   },
   root: {
-    marginBottom: "0.5rem",
     backgroundColor: "#c7def5",
   },
   container: {

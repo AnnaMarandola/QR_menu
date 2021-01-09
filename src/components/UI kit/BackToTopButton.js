@@ -13,7 +13,7 @@ const styles = (theme) => ({
       border: "solid 1px #ee1c80",
     },
     [theme.breakpoints.up("sm")]: {
-      marginLeft: "90%",
+      marginLeft: "95%",
     },
   },
 });
