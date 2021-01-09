@@ -8,6 +8,7 @@ import Commitments from "./Commitments";
 import Pricing from "./Pricing";
 import HomeTopBar from "./HomeTopBar";
 import MobileMenu from "./MobileMenu";
+import ContactSection from "./ContactSection";
 
 const styles = (theme) => ({
   root: {
@@ -42,6 +43,9 @@ const LandingPage = ({ classes, auth }) => {
       </section>
       <section id="pricing">
         <Pricing />
+      </section>
+      <section id="contact">
+        <ContactSection />
       </section>
     </div>
   );
