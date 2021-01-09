@@ -107,8 +107,8 @@ const HowDoesItWork = ({ classes }) => {
         <span className={classes.HTitleSpan}>?</span>
       </Typography>
       <div className={classes.explanations}>
-        {steps.map((step) => (
-          <div className={classes.stepSection}>
+        {steps.map((step, key) => (
+          <div className={classes.stepSection} key={key}>
             <Typography className={classes.stepTitle} variant="body1">
               {step.title}
             </Typography>
