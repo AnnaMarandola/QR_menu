@@ -8,6 +8,7 @@ import {
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { sendMessage } from "../../store/actions/messageActions"
+import { toast } from "react-toastify";
 
 const styles = (theme) => ({
   root: {
@@ -61,6 +62,10 @@ const ContactForm = ({ classes, sendMessage }) => {
       subject: subject,
       message: message,
     });
+    toast.success("Votre message a bien été envoyé, nous vous répondrons rapidement.", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+
   };
 
   return (
