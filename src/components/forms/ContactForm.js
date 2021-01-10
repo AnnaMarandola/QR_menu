@@ -6,6 +6,9 @@ import {
   TextareaAutosize,
 } from "@material-ui/core";
 import { compose } from "redux";
+import { connect } from "react-redux";
+import { sendMessage } from "../../store/actions/messageActions"
+import { toast } from "react-toastify";
 
 const styles = (theme) => ({
   root: {
@@ -37,7 +40,7 @@ const styles = (theme) => ({
   },
 });
 
-const ContactForm = ({ classes }) => {
+const ContactForm = ({ classes, sendMessage }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -53,6 +56,16 @@ const ContactForm = ({ classes }) => {
     setMessage("");
     setSubject("");
     console.log("MAIL SENT", name, email, message);
+    sendMessage({
+      email: email,
+      name: name,
+      subject: subject,
+      message: message,
+    });
+    toast.success("Votre message a bien été envoyé, nous vous répondrons rapidement.", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+
   };
 
   return (
@@ -95,7 +108,7 @@ const ContactForm = ({ classes }) => {
 
       <Button
         type="submit"
-        style={{ background: loader ? "yellow" : "#031627" }}
+        style={{ background: loader ? "#eeeeee" : "#031627" }}
         className={classes.submitButton}
       >
         Envoyer
@@ -104,4 +117,13 @@ const ContactForm = ({ classes }) => {
   );
 };
 
-export default compose(withStyles(styles))(ContactForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sendMessage: (message) => dispatch(sendMessage(message)),
+  };
+};
+
+export default compose(
+  withStyles(styles),
+  connect(null, mapDispatchToProps)
+)(ContactForm);
