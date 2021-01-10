@@ -86,7 +86,7 @@ const desserts = sorts && sorts.dessert;
     <div className={classes.root}>
     
       <Typography className={classes.titlePage} variant="h1">
-      <hr/> Gérer votre carte !<hr/>
+      <hr/> Gérez votre carte !<hr/>
       </Typography>
       <Card
         className={classes.header}
