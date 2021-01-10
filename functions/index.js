@@ -1,5 +1,6 @@
 
 const functions = require("firebase-functions");
+const nodemailer = require("nodemailer");
 const admin = require("firebase-admin");
 
 admin.initializeApp();
@@ -30,3 +31,41 @@ exports.onMenuCreate = functions.firestore
       .doc(restoId)
       .update({ logo: object.mediaLink })
   })
+
+
+
+
+  exports.onMessageCreate = functions.firestore
+      .document("messages/{messageID}")
+      .onCreate( async(snapshot) => {
+
+        const message = snapshot.data()
+        console.log("message", message)
+        
+        const gmailEmail = functions.config().gmail.email;
+        const gmailPassword = functions.config().gmail.password;
+        console.log("gmail", gmailEmail)
+        
+
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: 'qrmenu.contact',
+            pass: gmailPassword,
+          },
+        });
+
+        const messageOptions = {
+          from: message.email,
+          to: gmailEmail,
+          subject: message.subject || `${message.name} just messaged me from my app`,
+          text: message.message,
+          html: `<p>${message.message}</p>
+                 <p>${message.name}</p>
+                 <p>${message.email}</p>`
+        };
+
+
+        return transporter.sendMail(messageOptions)
+    
+      });
