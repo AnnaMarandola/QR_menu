@@ -109,7 +109,7 @@ const desserts = sorts && sorts.dessert;
         <DesignFormContainer
           menu={menu}
           restaurant={restaurant}
-          dsihes={dishes}
+          dishes={dishes}
         />
       </div>
 

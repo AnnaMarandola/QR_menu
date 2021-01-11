@@ -17,7 +17,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import InputAdornment from '@material-ui/core/InputAdornment';
+import InputAdornment from "@material-ui/core/InputAdornment";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
 import { createDish, updateDish } from "../../store/actions/dishActions";
@@ -26,12 +26,12 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 
 const styles = (theme) => ({
-  root: {
-    width: "95%",
-    marginLeft: "2.5%",
-    marginTop: "2rem",
-    marginBottom: "2rem",
-  },
+  // root: {
+  //   width: "95%",
+  //   marginLeft: "2.5%",
+  //   marginTop: "2rem",
+  //   marginBottom: "2rem",
+  // },
   form: {
     display: "flex",
     flexDirection: "column",
@@ -48,7 +48,7 @@ const styles = (theme) => ({
     width: "90%",
   },
   priceInput: {
-    width: "30%"
+    width: "30%",
   },
   accordion: {
     display: "flex",
@@ -137,16 +137,28 @@ class AddNewDish extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (!this.props.dish) {
-      this.props.createDish(this.state);
-      this.props.handleClose();
-      toast.success("Votre plat est enregistré !", {
-        position: toast.POSITION.TOP_LEFT,
-      });
+      if (this.state.checkedAllergens.length) {
+        this.props.createDish(this.state);
+        this.props.handleClose();
+        toast.success("Votre plat est enregistré !", {
+          position: toast.POSITION.TOP_LEFT,
+        });
+      } else {
+        toast.info("veuillez renseigner les allergènes présents dans le plat", {
+          position: toast.POSITION.TOP_LEFT,
+        });
+      }
     } else {
-      this.props.updateDish(this.state, this.props.dish.id);
-      toast.success("Votre plat mis à jour !", {
-        position: toast.POSITION.TOP_LEFT,
-      });
+      if (this.state.checkedAllergens.length) {
+        this.props.updateDish(this.state, this.props.dish.id);
+        toast.warning("Votre plat mis à jour !", {
+          position: toast.POSITION.TOP_LEFT,
+        });
+      } else {
+        toast.warning("veuillez renseigner les allergènes présents dans le plat", {
+          position: toast.POSITION.TOP_LEFT,
+        });
+      }
     }
   };
 
@@ -155,8 +167,8 @@ class AddNewDish extends Component {
     const template = menu.template;
 
     return (
-      <div className={classes.root}>
-        <form className={classes.form}>
+      // <div className={classes.root} >
+        <form className={classes.form} onSubmit={this.handleSubmit}>
           {template !== "template3" && (
             <div className={classes.categoryInput}>
               <InputLabel id="category">Catégorie</InputLabel>
@@ -179,6 +191,8 @@ class AddNewDish extends Component {
             label="nom du plat"
             onChange={this.handleChange}
             defaultValue={dish ? dish.dishName : ""}
+            required="required"
+            type="text"
           />
 
           <TextField
@@ -201,11 +215,14 @@ class AddNewDish extends Component {
             className={classes.priceInput}
             type="number"
             step="0.01"
-            InputProps = {{endAdornment : <InputAdornment position="start">€</InputAdornment>}}
+            InputProps={{
+              endAdornment: <InputAdornment position="start">€</InputAdornment>,
+            }}
             id="price"
             label="prix"
             onChange={this.handleChange}
             defaultValue={dish ? dish.price : ""}
+            required="required"
           />
 
           <Accordion className={classes.rootAllergens}>
@@ -272,7 +289,7 @@ class AddNewDish extends Component {
             {dish ? "Modifier" : "ajouter à mon menu"}
           </Button>
         </form>
-      </div>
+      // </div>
     );
   }
 }

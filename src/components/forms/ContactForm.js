@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { sendMessage } from "../../store/actions/messageActions"
+import { sendMessage } from "../../store/actions/messageActions";
 import { toast } from "react-toastify";
 
 const styles = (theme) => ({
@@ -62,10 +62,12 @@ const ContactForm = ({ classes, sendMessage }) => {
       subject: subject,
       message: message,
     });
-    toast.success("Votre message a bien été envoyé, nous vous répondrons rapidement.", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-
+    toast.success(
+      "Votre message a bien été envoyé, nous vous répondrons rapidement.",
+      {
+        position: toast.POSITION.TOP_RIGHT,
+      }
+    );
   };
 
   return (
@@ -77,6 +79,8 @@ const ContactForm = ({ classes, sendMessage }) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           className={classes.contactInputs}
+          required="required"
+          type="text"
         />
 
         <TextField
@@ -85,6 +89,8 @@ const ContactForm = ({ classes, sendMessage }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className={classes.contactInputs}
+          required="required"
+          type="mail"
         />
 
         <TextField
@@ -104,6 +110,7 @@ const ContactForm = ({ classes, sendMessage }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         className={classes.textArea}
+        required="required"
       />
 
       <Button
