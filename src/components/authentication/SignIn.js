@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { Typography, TextField, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
-import Logo from "../../assets/LogoProject.png";
-import Handphone from "../../assets/handphone.png";
+import Header from "../../assets/landingPage/illustration-header.png";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { signIn } from "../../store/actions/authActions";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
-
+import HomeTopBar from "../landingPage/HomeTopBar";
 
 const styles = (theme) => ({
   root: {
@@ -25,10 +24,6 @@ const styles = (theme) => ({
   },
   logo: {
     width: "50%",
-    marginTop: "2rem",
-  },
-  iconQr: {
-    width: "20%",
     marginTop: "2rem",
   },
   form: {
@@ -99,13 +94,15 @@ class SignIn extends Component {
 
   render() {
     const { classes, authError, auth } = this.props;
-    if(auth.uid) return <Redirect to='/dashboard'/>
+    if (auth.uid) return <Redirect to="/dashboard" />;
 
     return (
       <div className={classes.root}>
         <div className={classes.header}>
-          <img src={Logo} alt="logo" className={classes.logo} />
-          <img src={Handphone} alt="icon qrcode" className={classes.iconQr} />
+          <HomeTopBar />
+          <Link to="/">
+            <img src={Header} alt="logo" className={classes.logo} />
+          </Link>
         </div>
         <form onSubmit={this.handleSubmit} className={classes.form}>
           <Typography variant="h1">Connectez-vous</Typography>
@@ -120,14 +117,19 @@ class SignIn extends Component {
             </Link>
           </div>
           <div className={classes.inputs}>
-            <TextField id="email" type="email" label="email" onChange={this.handleChange} />
+            <TextField
+              id="email"
+              type="email"
+              label="email"
+              onChange={this.handleChange}
+            />
             <TextField
               id="password"
               type="password"
               label="mot de passe"
               onChange={this.handleChange}
             />
-            { authError ? <Typography>{authError}</Typography> : null}
+            {authError ? <Typography>{authError}</Typography> : null}
           </div>
           <div className={classes.buttonsContainer}>
             <Button
@@ -165,7 +167,7 @@ class SignIn extends Component {
 const mapStateToProps = (state) => {
   return {
     authError: state.auth.authError,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
   };
 };
 
@@ -179,7 +181,7 @@ SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
   authError: PropTypes.string,
   auth: PropTypes.object,
-}
+};
 
 export default compose(
   withStyles(styles),
