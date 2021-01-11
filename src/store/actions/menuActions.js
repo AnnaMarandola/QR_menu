@@ -10,6 +10,9 @@ export const createMenu = (menu) => {
         ownerId: ownerId,
         ownerRef: firestore.collection("users").doc(ownerId),
         createAt: new Date(),
+        headerColor: "#031627",
+        fontColor: "#fdfffc",
+        fontFamily: "Roboto"
       })
       .then(() => {
         dispatch({ type: "CREATE_MENU", menu });

@@ -31,6 +31,7 @@ const styles = (theme) => ({
   restoName: {
     marginTop: "2rem",
     marginBottom: "2rem",
+    zIndex: 99,
   },
   logo: {
     width: "10rem",
@@ -67,6 +68,7 @@ const styles = (theme) => ({
 const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
   let menuData = { ...menu };
   let resto = { ...restaurant };
+  console.log("menuData", menuData.fontColor)
 
   const sortedDishes =
   dishes &&
@@ -90,14 +92,14 @@ const desserts = sorts && sorts.dessert;
       </Typography>
       <Card
         className={classes.header}
-        style={{ backgroundColor: menuData.headerColor || "#272727" }}
+        style={{ backgroundColor: menuData.headerColor }}
       >
         <Typography
           className={classes.restoName}
           variant="h1"
           style={{
-            color: menuData.fontColor || "#272727",
-            fontFamily: menuData.fontFamily || "Roboto",
+            color: menuData.fontColor,
+            fontFamily: menuData.fontFamily,
           }}
         >
           {resto.name}
