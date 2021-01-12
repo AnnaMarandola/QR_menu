@@ -37,6 +37,7 @@ const styles = (theme) => ({
   commentInput: {
     width: "80%",
     marginBottom: "3rem",
+    marginLeft: "-5rem",
   },
   submitButton: {
     backgroundColor: "blue",
@@ -64,13 +65,14 @@ const FormulaForm = ({ classes, restaurant, menu, updateMenuFormula, handleClose
     e.preventDefault();
     updateMenuFormula({
       menuId: menu.id,
-      formula1: formula1,
-      formula1Price: formula1Price,
-      formula1Comment: formula1Comment,
-      formula2: formula2,
-      formula2Price: formula2Price,
-      formula2Comment: formula2Comment,
+      formula1: formula1 || menu.formula1,
+      formula1Price: formula1Price || menu.formula1Price,
+      formula1Comment: formula1Comment || menu.formula1Comment,
+      formula2: formula2 || menu.formula2,
+      formula2Price: formula2Price || menu.formula2Price,
+      formula2Comment: formula2Comment || menu.formula2Comment,
     });
+    handleClose();
   };
 
   return (
@@ -96,23 +98,23 @@ const FormulaForm = ({ classes, restaurant, menu, updateMenuFormula, handleClose
           id="priceFormula1"
           label="prix"
           onChange={(e) => setFormula1Price(e.target.value)}
-          defaultValue={formula1Price}
+          defaultValue={menu.formula1Price || formula1Price}
           required="required"
         />
         <TextField
           id="formula1Comment"
           label="commentaires, supplements"
-          value={formula1Comment}
+          value={menu.formula1Comment || formula1Comment}
           onChange={(e) => setFormula1Comment(e.target.value)}
-          className={classes.commentInput}
+          className={classes.comment1Input}
           type="text"
         />
 
         <TextField
           id="formula2"
           label="Formule 2"
-          value={formula2}
-          defaultValue={formula2}
+          value={menu.formula2 || formula2}
+          defaultValue={menu.formula2 || formula2}
           onChange={(e) => setFormula2(e.target.value)}
           className={classes.formulaInput}
           type="text"
@@ -127,13 +129,13 @@ const FormulaForm = ({ classes, restaurant, menu, updateMenuFormula, handleClose
           id="priceFormula2"
           label="prix"
           onChange={(e) => setFormula2Price(e.target.value)}
-          defaultValue={formula2Price}
+          defaultValue={menu.formula2Price || formula2Price}
           required="required"
         />
         <TextField
           id="formula2Comment"
           label="commentaires, supplements"
-          value={formula2Comment}
+          value={menu.formula2Comment || formula2Comment}
           onChange={(e) => setFormula2Comment(e.target.value)}
           className={classes.formulaInput}
           type="text"

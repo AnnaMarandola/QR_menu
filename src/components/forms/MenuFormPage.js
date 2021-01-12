@@ -8,7 +8,6 @@ import DishItemEdit from "../menu/DishItemEdit";
 import TitleForm from "./TitleForm";
 import DishFormContainer from "./DishFormContainer";
 import DesignFormContainer from "./DesignFormContainer";
-import FormulaForm from "./FormulaForm";
 import FormulaFormContainer from "./FormulaFormContainer";
 
 const styles = (theme) => ({
@@ -55,6 +54,7 @@ const styles = (theme) => ({
   },
   formulaSection: {
     textAlign: "center",
+    paddingBottom: "2rem",
   },
   formula: {
     margin: "1rem",
@@ -62,6 +62,12 @@ const styles = (theme) => ({
   formulaAndPrice: {
     display: "flex",
     justifyContent: "space-between",
+    marginTop: "2rem",
+  },
+  comment: {
+    // marginLeft: "-10rem",
+    position: "absolute",
+    left: 50,
   },
   titleCategory: {
     textAlign: "center",
@@ -154,14 +160,14 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
                   <Typography>{menu.formula1}</Typography>
                   <Typography>{menu.formula1Price} €</Typography>
                 </div>
-                <Typography>{menu.formula1Comment}</Typography>
+                <Typography className={classes.comment}>{menu.formula1Comment}</Typography>
               </div>
               <div className={classes.formula}>
                 <div className={classes.formulaAndPrice}>
                   <Typography>{menu.formula2}</Typography>
                   <Typography>{menu.formula2Price} €</Typography>
                 </div>
-                <Typography>{menu.formula2Comment}</Typography>
+                <Typography className={classes.comment}>{menu.formula2Comment}</Typography>
               </div>
             </div>
           </div>
