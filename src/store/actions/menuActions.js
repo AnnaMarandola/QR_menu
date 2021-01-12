@@ -12,7 +12,7 @@ export const createMenu = (menu) => {
         createAt: new Date(),
         headerColor: "#031627",
         fontColor: "#fdfffc",
-        fontFamily: "Roboto"
+        fontFamily: "Roboto",
       })
       .then(() => {
         dispatch({ type: "CREATE_MENU", menu });
@@ -95,7 +95,6 @@ export const selectFontFamily = (payload) => {
 };
 
 export const updateMenuTemplate = (payload) => {
-  console.log("payload in select fontFamily ACTION", payload);
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let menuId = payload.menuId;
     let template = payload.template;
@@ -108,6 +107,29 @@ export const updateMenuTemplate = (payload) => {
       })
       .catch((err) => {
         dispatch({ type: "UPDATE_MENU_ERROR", err });
+      });
+  };
+};
+
+export const updateMenuFormula = (payload) => {
+  console.log("PAYLOAD!!!!!!!!!!", payload)
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    getFirestore()
+      .collection("menus")
+      .doc(payload.menuId)
+      .update({
+        formula1: payload.formula1,
+        formula1Price: payload.formula1Price,
+        formula1Comment: payload.formula1Comment,        
+        formula2: payload.formula2,
+        formula2Price: payload.formula2Price,
+        formula2Comment: payload.formula2Comment,
+      })
+      .then(() => {
+        dispatch({ type: "UPDATE_MENU_FORMULA", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "UPDATE_MENU_FORMULA_ERROR", err });
       });
   };
 };

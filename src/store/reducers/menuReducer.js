@@ -36,9 +36,15 @@ const menuReducer = (state = initialState, action) => {
       case "UPDATE_MENU_TEMPLATE":
         console.log("update menu template success", action.menu);
         return state;
-      case "UPDATE_MENU_TMEPLATE_ERROR":
+      case "UPDATE_MENU_TEMPLATE_ERROR":
         console.log("update menu template error", action.err);
         return state;
+        case "UPDATE_MENU_FORMULA":
+          console.log("update menu formula success", action.menu);
+          return state;
+        case "UPDATE_MENU_FORMULA_ERROR":
+          console.log("update menu formula error", action.err);
+          return state;
     default:
       return state;
   }

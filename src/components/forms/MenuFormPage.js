@@ -8,6 +8,8 @@ import DishItemEdit from "../menu/DishItemEdit";
 import TitleForm from "./TitleForm";
 import DishFormContainer from "./DishFormContainer";
 import DesignFormContainer from "./DesignFormContainer";
+import FormulaForm from "./FormulaForm";
+import FormulaFormContainer from "./FormulaFormContainer";
 
 const styles = (theme) => ({
   root: {
@@ -31,13 +33,12 @@ const styles = (theme) => ({
   restoName: {
     marginTop: "2rem",
     marginBottom: "2rem",
-    zIndex: 99,
   },
   logo: {
     width: "10rem",
   },
   colorSection: {
-    width: "100%"
+    width: "100%",
   },
   titleSection: {
     display: "flex",
@@ -56,39 +57,37 @@ const styles = (theme) => ({
     textAlign: "center",
     marginTop: "1rem",
     backgroundColor: theme.palette.primary.main,
-    color: "white"
+    color: "white",
   },
   dishesTable: {
     paddingTop: "1rem",
-    marginBottom: "2rem"
-
-  }
+    marginBottom: "2rem",
+  },
 });
 
 const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
   let menuData = { ...menu };
   let resto = { ...restaurant };
-  console.log("menuData", menuData.fontColor)
+  console.log("menuData", menuData.fontColor);
 
   const sortedDishes =
-  dishes &&
-  dishes.reduce(
-    (acc, val) => {
-      if (val.category) acc[val.category].push(val);
-      return acc;
-    },
-    { starter: [], main: [], dessert: [] }
-  );
-const sorts = { ...sortedDishes };
-const starters = sorts && sorts.starter;
-const mains = sorts && sorts.main;
-const desserts = sorts && sorts.dessert;
+    dishes &&
+    dishes.reduce(
+      (acc, val) => {
+        if (val.category) acc[val.category].push(val);
+        return acc;
+      },
+      { starter: [], main: [], dessert: [] }
+    );
+  const sorts = { ...sortedDishes };
+  const starters = sorts && sorts.starter;
+  const mains = sorts && sorts.main;
+  const desserts = sorts && sorts.dessert;
 
   return (
     <div className={classes.root}>
-    
       <Typography className={classes.titlePage} variant="h1">
-      <hr/> Gérez votre carte !<hr/>
+        <hr /> Gérez votre carte !<hr />
       </Typography>
       <Card
         className={classes.header}
@@ -134,7 +133,12 @@ const desserts = sorts && sorts.dessert;
             />
           </div>
         )}
-        {restaurant &&  (
+
+        {restaurant && restaurant.template === "template2" && dishes && (
+          <FormulaFormContainer />
+        )}
+
+        {restaurant && (
           <DishFormContainer
             restaurant={restaurant}
             menu={menuData}
@@ -142,20 +146,35 @@ const desserts = sorts && sorts.dessert;
           />
         )}
 
-        {restaurant && restaurant.template === "template3" && dishes &&
-          dishes.map((dish) => <DishItemEdit dish={dish} key={dish.id} />)
-          }
-        {restaurant && restaurant.template === ("template1" || "template2") && dishes &&
-        <div className={classes.dishesTable}>
-        <Typography className={classes.titleCategory}>Les entrées</Typography>
-        {starters.map((starter) => <DishItemEdit dish={starter} key={starter.id} />)}        
-        <Typography className={classes.titleCategory}>Les plats</Typography>
-        {mains.map((main) => <DishItemEdit dish={main} key={main.id} />)}
-        <Typography className={classes.titleCategory}>Les desserts</Typography>
-        {desserts.map((dessert) => <DishItemEdit dish={dessert} key={dessert.id} />)}
-        </div>
-        }
+        {restaurant &&
+          restaurant.template === "template3" &&
+          dishes &&
+          dishes.map((dish) => <DishItemEdit dish={dish} key={dish.id} />)}
 
+        {restaurant &&
+          (restaurant.template === "template1" || "template2") &&
+          dishes && (
+            <div className={classes.dishesTable}>
+              <Typography className={classes.titleCategory}>
+                Les entrées
+              </Typography>
+              {starters.map((starter) => (
+                <DishItemEdit dish={starter} key={starter.id} />
+              ))}
+              <Typography className={classes.titleCategory}>
+                Les plats
+              </Typography>
+              {mains.map((main) => (
+                <DishItemEdit dish={main} key={main.id} />
+              ))}
+              <Typography className={classes.titleCategory}>
+                Les desserts
+              </Typography>
+              {desserts.map((dessert) => (
+                <DishItemEdit dish={dessert} key={dessert.id} />
+              ))}
+            </div>
+          )}
       </div>
     </div>
   );
