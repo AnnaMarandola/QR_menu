@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { updateMenu } from "../../store/actions/menuActions";
 import AddNewDish from "./AddNewDish";
-import AddCircleOutlineTwoToneIcon from "@material-ui/icons/AddCircleOutlineTwoTone";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import FormulaForm from "./FormulaForm";
 
 const styles = (theme) => ({
@@ -14,8 +14,13 @@ const styles = (theme) => ({
     marginLeft: "2.5%",
     marginTop: "2rem",
     marginBottom: "2rem",
+  },
+  titleContainer: {
     display: "flex",
-    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: "1.5rem",
   },
   addButton: {
     color: theme.palette.primary.whiteish,
@@ -49,9 +54,10 @@ const FormulaFormContainer = ({ classes, restaurant, menu }) => {
   return (
     <div className={classes.root}>
       {!open && (
-        <div>
-          <Button onClick={handleClickOpen} className={classes.addButton}>
-            <AddCircleOutlineTwoToneIcon style={{ fill: "white" }} />Les formules
+        <div className={classes.titleContainer}>
+        <Typography className={classes.title}>Les formules</Typography>
+          <Button onClick={handleClickOpen} className={classes.editButton}>
+            <EditRoundedIcon style={{ fill: "grey" }} />
           </Button>
         </div>
       )}
@@ -63,7 +69,6 @@ const FormulaFormContainer = ({ classes, restaurant, menu }) => {
             menu={menu}
             handleClose={handleClose}
           />
-          <Button onClick={handleClose}>x</Button>
         </div>
       )}
     </div>

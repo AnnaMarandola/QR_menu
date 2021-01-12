@@ -53,6 +53,16 @@ const styles = (theme) => ({
   menuTitle: {
     fontStyle: "italic",
   },
+  formulaSection: {
+    textAlign: "center",
+  },
+  formula: {
+    margin: "1rem",
+  },
+  formulaAndPrice: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
   titleCategory: {
     textAlign: "center",
     marginTop: "1rem",
@@ -135,7 +145,26 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
         )}
 
         {restaurant && restaurant.template === "template2" && dishes && (
-          <FormulaFormContainer />
+          <div className={classes.formulaSection}>
+            <FormulaFormContainer />
+              <Typography>Menu du jour</Typography>
+            <div className={classes.formulaContainer}>
+              <div className={classes.formula}>
+                <div className={classes.formulaAndPrice}>
+                  <Typography>{menu.formula1}</Typography>
+                  <Typography>{menu.formula1Price} €</Typography>
+                </div>
+                <Typography>{menu.formula1Comment}</Typography>
+              </div>
+              <div className={classes.formula}>
+                <div className={classes.formulaAndPrice}>
+                  <Typography>{menu.formula2}</Typography>
+                  <Typography>{menu.formula2Price} €</Typography>
+                </div>
+                <Typography>{menu.formula2Comment}</Typography>
+              </div>
+            </div>
+          </div>
         )}
 
         {restaurant && (
