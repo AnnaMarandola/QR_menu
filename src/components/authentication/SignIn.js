@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/styles";
 import Header from "../../assets/landingPage/illustration-header.png";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { signIn } from "../../store/actions/authActions";
+import { signIn, signInWithGoogle, signInWithFacebook } from "../../store/actions/authActions";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import HomeTopBar from "../landingPage/HomeTopBar";
@@ -88,8 +88,15 @@ class SignIn extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
     this.props.signIn(this.state);
+  };
+  handleGoogleAuth = (e) => {
+    e.preventDefault();
+    this.props.signInWithGoogle();
+  };  
+  handleFacebookAuth = (e) => {
+    e.preventDefault();
+    this.props.signInWithFacebook();
   };
 
   render() {
@@ -142,7 +149,11 @@ class SignIn extends Component {
             <Typography variant="h5" className={classes.separation}>
               ou
             </Typography>
-            <Button variant="contained" className={classes.googleButton}>
+            <Button
+              variant="contained"
+              className={classes.googleButton}
+              onClick={this.handleGoogleAuth}
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
                 alt="logo google"
@@ -150,7 +161,12 @@ class SignIn extends Component {
               />
               s'identifier avec Google
             </Button>
-            <Button variant="contained" className={classes.facebookButton}>
+            <Button 
+            variant="contained" 
+            className={classes.facebookButton}
+            onClick={this.handleFacebookAuth}
+
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Facebook_logo_36x36.svg"
                 alt="logo facebook"
@@ -174,6 +190,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     signIn: (creds) => dispatch(signIn(creds)),
+    signInWithGoogle: (creds) => dispatch(signInWithGoogle(creds)),
+    signInWithFacebook: (creds) => dispatch(signInWithFacebook(creds)),
   };
 };
 

@@ -5,15 +5,14 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
+  Link,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
-import Logo from "../../assets/LogoProject.png";
-import Handphone from "../../assets/handphone.png";
-import { Redirect } from "react-router-dom";
+import HEADER from "../../assets/landingPage/illustration-header.png";
+import { NavLink, Redirect } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
-
 
 const styles = (theme) => ({
   root: {
@@ -28,12 +27,10 @@ const styles = (theme) => ({
     margin: "3rem",
   },
   logo: {
-    width: "50%",
-    marginTop: "2rem",
-  },
-  iconQr: {
-    width: "20%",
-    marginTop: "2rem",
+    width: "70%",
+    marginTop: "1rem",
+    marginLeft: "15%",
+
   },
   form: {
     width: "90%",
@@ -42,6 +39,10 @@ const styles = (theme) => ({
     display: "flex",
     marginTop: "1rem",
     marginBottom: "1rem",
+  },
+  title: {
+    fontFamily: "Archivo narrow",
+    fontSize: "2rem",
   },
   createAccountLink: {
     marginLeft: "0.5rem",
@@ -59,7 +60,7 @@ const styles = (theme) => ({
   connectionButton: {
     marginTop: "2rem",
     position: "right",
-    backgroundColor: theme.palette.primary.red,
+    backgroundColor: "#E81B7D",
     color: theme.palette.primary.whiteish,
   },
   googleButton: {
@@ -116,11 +117,12 @@ class SignUp extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.header}>
-          <img src={Logo} alt="logo" className={classes.logo} />
-          <img src={Handphone} alt="icon qrcode" className={classes.iconQr} />
+          <NavLink to="/">
+            <img src={HEADER} alt="logo" className={classes.logo} />
+          </NavLink>
         </div>
         <form onSubmit={this.handleSubmit} className={classes.form}>
-          <Typography variant="h1">Créez votre compte</Typography>
+          <Typography variant="h1" className={classes.title}>Créez votre compte</Typography>
 
           <div className={classes.inputs}>
             <TextField
@@ -128,18 +130,21 @@ class SignUp extends Component {
               type="text"
               label="nom"
               onChange={this.handleChange}
+              required
             />
             <TextField
               id="firstName"
               type="text"
               label="prénom"
               onChange={this.handleChange}
+              required
             />
             <TextField
               id="email"
               type="email"
               label="email"
               onChange={this.handleChange}
+              required
             />
 
             <TextField
@@ -148,6 +153,7 @@ class SignUp extends Component {
               label="choisir un mot de passe"
               onChange={this.handleChange}
               className={classes.passwordInput}
+              required
             />
             <FormControlLabel
               control={
@@ -165,28 +171,13 @@ class SignUp extends Component {
           </div>
 
           <div className={classes.buttonsContainer}>
-            <Button variant="contained" type="submit" className={classes.connectionButton}>
+            <Button
+              variant="contained"
+              type="submit"
+              className={classes.connectionButton}
+            >
               valider
             </Button>
-            {/* <Typography variant="h5" className={classes.separation}>
-              ou
-            </Typography>
-            <Button variant="contained" className={classes.googleButton}>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                alt="logo google"
-                className={classes.googleIcon}
-              />
-              utiliser mon compte Google
-            </Button>
-            <Button variant="contained" className={classes.facebookButton}>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Facebook_logo_36x36.svg"
-                alt="logo facebook"
-                className={classes.facebookIcon}
-              />
-              utiliser mon compte facebook
-            </Button> */}
           </div>
         </form>
       </div>

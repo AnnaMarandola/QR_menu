@@ -52,3 +52,29 @@ export const signUp = (newUser) => {
       });
   };
 };
+
+
+export const signInWithGoogle = (creds) => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(googleProvider)
+      .then(() => dispatch({ type: "LOGIN_SUCCESS" }))
+      .catch(error => dispatch({ type: "LOGIN_ERROR", error }));
+  };
+};
+
+export const signInWithFacebook = (creds) => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+    const facebookProvider = new firebase.auth.FacebookAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(facebookProvider)
+      .then(() => dispatch({ type: "LOGIN_SUCCESS" }))
+      .catch(error => dispatch({ type: "LOGIN_ERROR", error }));
+  };
+};
+
