@@ -23,11 +23,16 @@ const styles = (theme) => ({
     margin: "3rem",
   },
   logo: {
-    width: "50%",
-    marginTop: "2rem",
+    width: "70%",
+    marginTop: "1rem",
+    marginLeft: "15%",
   },
   form: {
     width: "90%",
+  },
+  title: {
+    fontFamily: "Archivo narrow",
+    fontSize: "2rem",
   },
   instruction: {
     display: "flex",
@@ -45,16 +50,19 @@ const styles = (theme) => ({
   },
   separation: {
     textAlign: "center",
-    margin: "1.5rem",
+    marginTop: "1.5rem",
   },
   connectionButton: {
     marginTop: "2rem",
     position: "right",
-    backgroundColor: theme.palette.primary.red,
+    backgroundColor: "#E81B7D",
     color: theme.palette.primary.whiteish,
   },
   googleButton: {
     marginBottom: "1rem",
+    backgroundColor: "white",
+    marginTop: "2rem",
+
   },
   facebookButton: {
     backgroundColor: "#3B5997",
@@ -112,7 +120,7 @@ class SignIn extends Component {
           </Link>
         </div>
         <form onSubmit={this.handleSubmit} className={classes.form}>
-          <Typography variant="h1">Connectez-vous</Typography>
+          <Typography variant="h1" className={classes.title}>Connectez-vous</Typography>
           <div className={classes.instruction}>
             <Typography variant="body2">
               Vous êtes un nouvel utilisateur ?{" "}
@@ -124,32 +132,7 @@ class SignIn extends Component {
             </Link>
           </div>
           <div className={classes.inputs}>
-            <TextField
-              id="email"
-              type="email"
-              label="email"
-              onChange={this.handleChange}
-            />
-            <TextField
-              id="password"
-              type="password"
-              label="mot de passe"
-              onChange={this.handleChange}
-            />
-            {authError ? <Typography>{authError}</Typography> : null}
-          </div>
-          <div className={classes.buttonsContainer}>
-            <Button
-              type="submit"
-              variant="contained"
-              className={classes.connectionButton}
-            >
-              connexion
-            </Button>
-            <Typography variant="h5" className={classes.separation}>
-              ou
-            </Typography>
-            <Button
+          <Button
               variant="contained"
               className={classes.googleButton}
               onClick={this.handleGoogleAuth}
@@ -173,6 +156,32 @@ class SignIn extends Component {
                 className={classes.facebookIcon}
               />
               s'identifier avec facebook
+            </Button>
+            <Typography variant="h5" className={classes.separation}>
+              ou
+            </Typography>
+
+            <TextField
+              id="email"
+              type="email"
+              label="email"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="password"
+              type="password"
+              label="mot de passe"
+              onChange={this.handleChange}
+            />
+            {authError ? <Typography>{authError}</Typography> : null}
+          </div>
+          <div className={classes.buttonsContainer}>
+            <Button
+              type="submit"
+              variant="contained"
+              className={classes.connectionButton}
+            >
+              connexion
             </Button>
           </div>
         </form>
