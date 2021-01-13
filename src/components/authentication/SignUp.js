@@ -5,7 +5,6 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
-  Link,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import HEADER from "../../assets/landingPage/illustration-header.png";
@@ -118,7 +117,7 @@ class SignUp extends Component {
       <div className={classes.root}>
         <div className={classes.header}>
           <NavLink to="/">
-            <img src={HEADER} alt="logo" className={classes.logo} />
+            <img src={HEADER} alt="header illustration" className={classes.logo} />
           </NavLink>
         </div>
         <form onSubmit={this.handleSubmit} className={classes.form}>
