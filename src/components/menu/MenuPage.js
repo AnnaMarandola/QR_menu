@@ -135,14 +135,14 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             <div className={classes.formula}>
               <div className={classes.formulaAndPrice}>
                 <Typography>{menuData.formula1}</Typography>
-                <Typography>{menuData.formula1Price} €</Typography>
+                <Typography>{menuData.formula1Price} {menuData.formula2 ? "€" : null}</Typography>
               </div>
               <Typography className={classes.formulaComment}>{menuData.formula1Comment}</Typography>
             </div>
             <div className={classes.formula}>
               <div className={classes.formulaAndPrice}>
                 <Typography>{menuData.formula2}</Typography>
-                <Typography>{menuData.formula2Price} €</Typography>
+                <Typography>{menuData.formula2Price} {menuData.formula2 ? "€" : null}</Typography>
               </div>
               <Typography>{menuData.formula2Comment}</Typography>
             </div>
