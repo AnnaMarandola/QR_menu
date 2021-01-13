@@ -67,10 +67,10 @@ const FormulaForm = ({ classes, restaurant, menu, updateMenuFormula, handleClose
       menuId: menu.id,
       formula1: formula1 || menu.formula1,
       formula1Price: formula1Price || menu.formula1Price,
-      formula1Comment: formula1Comment || menu.formula1Comment,
+      formula1Comment: formula1Comment || menu.formula1Comment || "",
       formula2: formula2 || menu.formula2,
       formula2Price: formula2Price || menu.formula2Price,
-      formula2Comment: formula2Comment || menu.formula2Comment,
+      formula2Comment: formula2Comment || menu.formula2Comment || "",
     });
     handleClose();
   };
@@ -103,7 +103,7 @@ const FormulaForm = ({ classes, restaurant, menu, updateMenuFormula, handleClose
         <TextField
           id="formula1Comment"
           label="commentaires, supplements"
-          defaultValue={menu.formula1Comment || formula1Comment}
+          defaultValue={menu.formula1Comment || formula1Comment }
           onChange={(e) => setFormula1Comment(e.target.value)}
           className={classes.comment1Input}
           type="text"
