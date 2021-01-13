@@ -63,26 +63,31 @@ const TemplateForm = ({
 }) => {
   const restoId = restaurant && restaurant.id;
   const menuId = restaurant && restaurant.menuId;
-  console.log("resto in templateform", restaurant);
 
   const [selectedTemplate, setSelectedTemplate] = useState(
     (restaurant && restaurant.template) || "template3"
   );
   const [submitedForm, setSubmitedForm] = useState(false);
+  const [menuTitle, setMenuTitle] = useState("")
+  console.log(menuTitle)
 
   const handleChange = (event) => {
     setSelectedTemplate(event.target.value);
+    if(event.target.value === "template2"){
+      setMenuTitle("Menu du jour")
+    }else {
+      setMenuTitle("La carte")
+    }
   };
 
   const selectTemplate = (e) => {
     e.preventDefault();
     setSubmitedForm(true);
     if (restaurant.menuId != null) {
-      updateRestaurant({ restoId: restoId, template: selectedTemplate });
-      updateMenuTemplate({ menuId: menuId, template: selectedTemplate });
-      console.log("TODO : update menu.template & restaurant.template");
+      updateRestaurant({ restoId: restoId, template: selectedTemplate, menuTitle: menuTitle });
+      updateMenuTemplate({ menuId: menuId, template: selectedTemplate, menuTitle: menuTitle });
     } else {
-      createMenu({ restoId: restoId, template: selectedTemplate });
+      createMenu({ restoId: restoId, template: selectedTemplate, menuTitle: menuTitle });
       console.log("menu created", selectedTemplate);
     }
   };
