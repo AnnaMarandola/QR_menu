@@ -65,7 +65,6 @@ const styles = (theme) => ({
     marginTop: "2rem",
   },
   comment: {
-    // marginLeft: "-10rem",
     position: "absolute",
     left: 50,
   },
@@ -158,14 +157,14 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
               <div className={classes.formula}>
                 <div className={classes.formulaAndPrice}>
                   <Typography>{menu.formula1}</Typography>
-                  <Typography>{menu.formula1Price} €</Typography>
+                  <Typography>{menu.formula1Price} { menu.formula1Price ? "€" : null}</Typography>
                 </div>
                 <Typography className={classes.comment}>{menu.formula1Comment}</Typography>
               </div>
               <div className={classes.formula}>
                 <div className={classes.formulaAndPrice}>
                   <Typography>{menu.formula2}</Typography>
-                  <Typography>{menu.formula2Price} €</Typography>
+                  <Typography>{menu.formula2Price} { menu.formula2Price ? "€" : null}</Typography>
                 </div>
                 <Typography className={classes.comment}>{menu.formula2Comment}</Typography>
               </div>

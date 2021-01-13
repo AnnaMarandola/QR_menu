@@ -95,13 +95,15 @@ export const selectFontFamily = (payload) => {
 };
 
 export const updateMenuTemplate = (payload) => {
+  console.log("PPPPPPPPPP", payload)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let menuId = payload.menuId;
     let template = payload.template;
+    let menuTitle = payload.menuTitle
     getFirestore()
       .collection("menus")
       .doc(menuId)
-      .update({ template: template })
+      .update({ template: template, menuTitle: menuTitle })
       .then(() => {
         dispatch({ type: "UPDATE_MENU_TEMPLATE", payload });
       })

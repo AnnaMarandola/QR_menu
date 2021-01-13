@@ -33,6 +33,21 @@ const styles = (theme) => ({
     marginBottom: "2rem",
     textAlign: "center",
   },
+  formulaContainer: {
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: "3rem",
+  },
+  formula: {
+    textAlign: "center",
+  },
+  formulaAndPrice: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  formulaComment: {
+    marginBottom: "1rem"
+  },
   menuBody: {
     marginBottom: "6rem",
   },
@@ -113,8 +128,26 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             fontFamily: menuData.fontFamily || "Roboto",
           }}
         >
-          {menuData.title || "La Carte"}
+          {menuData.menuTitle}
         </Typography>
+        {menu && menu.template === "template2" && (
+          <div className={classes.formulaContainer}>
+            <div className={classes.formula}>
+              <div className={classes.formulaAndPrice}>
+                <Typography>{menuData.formula1}</Typography>
+                <Typography>{menuData.formula1Price} €</Typography>
+              </div>
+              <Typography className={classes.formulaComment}>{menuData.formula1Comment}</Typography>
+            </div>
+            <div className={classes.formula}>
+              <div className={classes.formulaAndPrice}>
+                <Typography>{menuData.formula2}</Typography>
+                <Typography>{menuData.formula2Price} €</Typography>
+              </div>
+              <Typography>{menuData.formula2Comment}</Typography>
+            </div>
+          </div>
+        )}
         {menu && menu.template === "template3" && (
           <div>
             {publishedDishes &&
@@ -131,7 +164,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
               ))}
           </div>
         )}
-        {menu && menu.template === "template1" && (
+        {menu && (menu.template === "template1" || menu.template === "template2") && (
           <div className={classes.menuSection}>
             <Accordion className={classes.accordion}>
               <AccordionSummary className={classes.categoryHeader}>
