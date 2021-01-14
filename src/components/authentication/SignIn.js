@@ -14,16 +14,11 @@ import {
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import HomeTopBar from "../landingPage/HomeTopBar";
+import SocialSignIn from "./SocialSignIn";
 
 const styles = (theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
+  root: {},
   header: {
-    display: "flex",
-    flexDirection: "column",
     alignItems: "center",
     margin: "3rem",
   },
@@ -33,64 +28,39 @@ const styles = (theme) => ({
     marginLeft: "15%",
   },
   form: {
-    width: "90%",
+    width: "80%",
+    marginLeft: "10%",
+    display: "flex",
+    flexDirection: "column",
   },
   title: {
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
+    margin: "1rem",
   },
   instruction: {
     display: "flex",
-    marginTop: "1rem",
-    marginBottom: "1rem",
+    margin: "1rem",
   },
   createAccountLink: {
     marginLeft: "0.5rem",
-  },
-  inputs: {
-    display: "flex",
-    flexDirection: "column",
-    width: "90%",
-    marginLeft: "5%",
   },
   separation: {
     textAlign: "center",
     marginTop: "1.5rem",
   },
   connectionButton: {
+    width: "100%",
     marginTop: "2rem",
     position: "right",
     backgroundColor: "#E81B7D",
     color: theme.palette.primary.whiteish,
   },
-  googleButton: {
-    marginBottom: "1rem",
-    backgroundColor: "white",
-    marginTop: "2rem",
-  },
-  facebookButton: {
-    backgroundColor: "#3B5997",
-    color: theme.palette.primary.whiteish,
-  },
-  googleIcon: {
-    width: "20px",
-    marginRight: "2rem",
-  },
-  facebookIcon: {
-    width: "20px",
-    marginRight: "1.5rem",
-    marginBottom: "0.5rem",
-  },
-  buttonsContainer: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: "3rem",
-  },
   forgotPassword: {
     marginTop: "2rem",
     marginLeft: "45%",
     width: "11rem",
-    fontSize: "0.8rem"
+    fontSize: "0.8rem",
   },
 });
 
@@ -99,23 +69,28 @@ class SignIn extends Component {
     email: "",
     password: "",
   };
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
     });
   };
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.signIn(this.state);
   };
+
   handleGoogleAuth = (e) => {
     e.preventDefault();
     this.props.signInWithGoogle();
   };
+
   handleFacebookAuth = (e) => {
     e.preventDefault();
     this.props.signInWithFacebook();
   };
+
   handleForgotPassword = (e) => {
     e.preventDefault();
     this.props.sendPasswordReset(this.state);
@@ -133,70 +108,49 @@ class SignIn extends Component {
             <img src={Header} alt="logo" className={classes.logo} />
           </Link>
         </div>
-        <form onSubmit={this.handleSubmit} className={classes.form}>
-          <Typography variant="h1" className={classes.title}>
-            Connectez-vous
-          </Typography>
-          <div className={classes.instruction}>
-            <Typography variant="body2">
-              Vous êtes un nouvel utilisateur ?{" "}
-            </Typography>
-            <Link to="./createaccount">
-              <Typography variant="body1" className={classes.createAccountLink}>
-                Créez un compte
-              </Typography>
-            </Link>
-          </div>
-          <div className={classes.inputs}>
-            <Button
-              variant="contained"
-              className={classes.googleButton}
-              onClick={this.handleGoogleAuth}
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                alt="logo google"
-                className={classes.googleIcon}
-              />
-              s'identifier avec Google
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.facebookButton}
-              onClick={this.handleFacebookAuth}
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Facebook_logo_36x36.svg"
-                alt="logo facebook"
-                className={classes.facebookIcon}
-              />
-              s'identifier avec facebook
-            </Button>
-            <Typography variant="h5" className={classes.separation}>
-              ou
-            </Typography>
 
-            <TextField
-              id="email"
-              type="email"
-              label="email"
-              onChange={this.handleChange}
-              required
-            />
-            <TextField
-              id="password"
-              type="password"
-              label="mot de passe"
-              onChange={this.handleChange}
-            />
-            {authError ? <Typography>{authError}</Typography> : null}
-            <Button
-              className={classes.forgotPassword}
-              onClick={this.handleForgotPassword}
-            >
-              Mot de passe oublié ?
-            </Button>
-          </div>
+        <Typography variant="h1" className={classes.title}>
+          Connectez-vous
+        </Typography>
+        <div className={classes.instruction}>
+          <Typography variant="body2">
+            Vous êtes un nouvel utilisateur ?{" "}
+          </Typography>
+          <Link to="./createaccount">
+            <Typography variant="body1" className={classes.createAccountLink}>
+              Créez un compte
+            </Typography>
+          </Link>
+        </div>
+
+        <div>
+          <SocialSignIn />
+          <Typography variant="h5" className={classes.separation}>
+            ou
+          </Typography>
+        </div>
+
+        <form onSubmit={this.handleSubmit} className={classes.form}>
+          <TextField
+            id="email"
+            type="email"
+            label="email"
+            onChange={this.handleChange}
+            required
+          />
+          <TextField
+            id="password"
+            type="password"
+            label="mot de passe"
+            onChange={this.handleChange}
+          />
+          {authError ? <Typography>{authError}</Typography> : null}
+          <Button
+            className={classes.forgotPassword}
+            onClick={this.handleForgotPassword}
+          >
+            Mot de passe oublié ?
+          </Button>
           <div className={classes.buttonsContainer}>
             <Button
               type="submit"
