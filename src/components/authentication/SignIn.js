@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Typography, TextField, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import Header from "../../assets/landingPage/illustration-header.png";
 import { connect } from "react-redux";
@@ -12,9 +12,10 @@ import {
   sendPasswordReset,
 } from "../../store/actions/authActions";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
 import HomeTopBar from "../landingPage/HomeTopBar";
 import SocialSignIn from "./SocialSignIn";
+import { toast } from "react-toastify";
+
 
 const styles = (theme) => ({
   root: {},
@@ -94,11 +95,15 @@ class SignIn extends Component {
   handleForgotPassword = (e) => {
     e.preventDefault();
     this.props.sendPasswordReset(this.state);
+    toast.info(`Un email contenant un lien de réinitialisation du mot de passe vous a été envoyé à ${this.state.email}`, {
+      position: toast.POSITION.TOP_LEFT,
+    });
   };
 
   render() {
     const { classes, authError, auth } = this.props;
     if (auth.uid) return <Redirect to="/dashboard" />;
+    console.log(this.state);
 
     return (
       <div className={classes.root}>
