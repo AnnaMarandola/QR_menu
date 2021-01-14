@@ -4,7 +4,6 @@ import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { updateMenu } from "../../store/actions/menuActions";
-import AddNewDish from "./AddNewDish";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import FormulaForm from "./FormulaForm";
 

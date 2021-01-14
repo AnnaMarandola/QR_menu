@@ -5,7 +5,12 @@ import { withStyles } from "@material-ui/styles";
 import Header from "../../assets/landingPage/illustration-header.png";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { signIn, signInWithGoogle, signInWithFacebook } from "../../store/actions/authActions";
+import {
+  signIn,
+  signInWithGoogle,
+  signInWithFacebook,
+  sendPasswordReset,
+} from "../../store/actions/authActions";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import HomeTopBar from "../landingPage/HomeTopBar";
@@ -62,7 +67,6 @@ const styles = (theme) => ({
     marginBottom: "1rem",
     backgroundColor: "white",
     marginTop: "2rem",
-
   },
   facebookButton: {
     backgroundColor: "#3B5997",
@@ -81,6 +85,12 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     marginBottom: "3rem",
+  },
+  forgotPassword: {
+    marginTop: "2rem",
+    marginLeft: "45%",
+    width: "11rem",
+    fontSize: "0.8rem"
   },
 });
 
@@ -101,10 +111,14 @@ class SignIn extends Component {
   handleGoogleAuth = (e) => {
     e.preventDefault();
     this.props.signInWithGoogle();
-  };  
+  };
   handleFacebookAuth = (e) => {
     e.preventDefault();
     this.props.signInWithFacebook();
+  };
+  handleForgotPassword = (e) => {
+    e.preventDefault();
+    this.props.sendPasswordReset(this.state);
   };
 
   render() {
@@ -120,7 +134,9 @@ class SignIn extends Component {
           </Link>
         </div>
         <form onSubmit={this.handleSubmit} className={classes.form}>
-          <Typography variant="h1" className={classes.title}>Connectez-vous</Typography>
+          <Typography variant="h1" className={classes.title}>
+            Connectez-vous
+          </Typography>
           <div className={classes.instruction}>
             <Typography variant="body2">
               Vous êtes un nouvel utilisateur ?{" "}
@@ -132,7 +148,7 @@ class SignIn extends Component {
             </Link>
           </div>
           <div className={classes.inputs}>
-          <Button
+            <Button
               variant="contained"
               className={classes.googleButton}
               onClick={this.handleGoogleAuth}
@@ -144,11 +160,10 @@ class SignIn extends Component {
               />
               s'identifier avec Google
             </Button>
-            <Button 
-            variant="contained" 
-            className={classes.facebookButton}
-            onClick={this.handleFacebookAuth}
-
+            <Button
+              variant="contained"
+              className={classes.facebookButton}
+              onClick={this.handleFacebookAuth}
             >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Facebook_logo_36x36.svg"
@@ -166,6 +181,7 @@ class SignIn extends Component {
               type="email"
               label="email"
               onChange={this.handleChange}
+              required
             />
             <TextField
               id="password"
@@ -174,6 +190,12 @@ class SignIn extends Component {
               onChange={this.handleChange}
             />
             {authError ? <Typography>{authError}</Typography> : null}
+            <Button
+              className={classes.forgotPassword}
+              onClick={this.handleForgotPassword}
+            >
+              Mot de passe oublié ?
+            </Button>
           </div>
           <div className={classes.buttonsContainer}>
             <Button
@@ -201,6 +223,7 @@ const mapDispatchToProps = (dispatch) => {
     signIn: (creds) => dispatch(signIn(creds)),
     signInWithGoogle: (creds) => dispatch(signInWithGoogle(creds)),
     signInWithFacebook: (creds) => dispatch(signInWithFacebook(creds)),
+    sendPasswordReset: (creds) => dispatch(sendPasswordReset(creds)),
   };
 };
 

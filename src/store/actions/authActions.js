@@ -78,3 +78,19 @@ export const signInWithFacebook = (creds) => {
   };
 };
 
+export const sendPasswordReset = (credentials) => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+
+    firebase
+      .auth()
+      .sendPasswordResetEmail(credentials.email)
+      .then(() => {
+        dispatch({ type: "SEND_PASSWORD_RESET_SUCCESS" });
+      })
+      .catch((err) => {
+        dispatch({ type: "SEND_PASSWORD_RESET_ERROR", err });
+      });
+  };
+};
+
