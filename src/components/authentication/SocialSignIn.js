@@ -1,19 +1,14 @@
 import React, { Component } from "react";
-import { Typography, TextField, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import {  Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
-import Header from "../../assets/landingPage/illustration-header.png";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import {
-  signIn,
   signInWithGoogle,
   signInWithFacebook,
-  sendPasswordReset,
 } from "../../store/actions/authActions";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
-import HomeTopBar from "../landingPage/HomeTopBar";
 
 const styles = (theme) => ({
   root: {
@@ -25,6 +20,10 @@ const styles = (theme) => ({
     marginBottom: "1rem",
     backgroundColor: "white",
     marginTop: "2rem",
+    border: "solid 3px white",
+    [theme.breakpoints.up("sm")]: {
+      marginTop: 0,
+    }
   },
   facebookButton: {
     backgroundColor: "#3B5997",

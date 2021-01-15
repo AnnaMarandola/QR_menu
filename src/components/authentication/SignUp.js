@@ -8,75 +8,104 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import HEADER from "../../assets/landingPage/illustration-header.png";
+import LOGO from "../../assets/logoIcon.png";
 import { NavLink, Redirect } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
+import HomeFooter from "../landingPage/HomeFooter";
 
 const styles = (theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row",
+      height: "100vh",
+    },
+  },
+  logo: {
+    width: "10%",
+    marginTop: "0.5rem",
+    marginRight: "0.5rem",
+    position: "absolute",
+    right: "0",
+    [theme.breakpoints.up("sm")]: {
+      width: "3%",
+      margin: "1rem",
+    },
   },
   header: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    margin: "3rem",
+    marginTop: "4rem",
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row",
+      marginTop: 0,
+      height: "100%",
+      width: "40%",
+      marginLeft: "10%",
+    },
   },
-  logo: {
+  headerImg: {
     width: "70%",
     marginTop: "1rem",
     marginLeft: "15%",
-
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+      marginLeft: "10%",
+    },
   },
   form: {
-    width: "90%",
-  },
-  instruction: {
-    display: "flex",
-    marginTop: "1rem",
-    marginBottom: "1rem",
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      height: "100%",
+      width: "80%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+    },
   },
   title: {
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
+    marginLeft: "1.5rem",
+    marginTop: "2rem",
+    fontColor: "#192b34",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "20%",
+      fontSize: "4rem",
+      marginBottom: "4rem",
+    },
   },
-  createAccountLink: {
-    marginLeft: "0.5rem",
+  spanTitle: {
+    color: "#E81B7D",
   },
   inputs: {
     display: "flex",
     flexDirection: "column",
-    width: "90%",
-    marginLeft: "5%",
-  },
-  separation: {
-    textAlign: "center",
-    margin: "1.5rem",
+    width: "70%",
+    marginLeft: "15%",
+    [theme.breakpoints.up("sm")]: {
+      width: "30%",
+      marginLeft: "35%",
+      marginBottom: "2rem",
+      marginTop: "2rem",
+    },
   },
   connectionButton: {
     marginTop: "2rem",
     position: "right",
     backgroundColor: "#E81B7D",
     color: theme.palette.primary.whiteish,
-  },
-  googleButton: {
-    marginBottom: "1rem",
-  },
-  facebookButton: {
-    backgroundColor: "#3B5997",
-    color: theme.palette.primary.whiteish,
-  },
-  googleIcon: {
-    width: "20px",
-    marginRight: "2rem",
-  },
-  facebookIcon: {
-    width: "20px",
-    marginRight: "1.5rem",
-    marginBottom: "0.5rem",
+    width: "80%",
+    marginLeft: "10%",
+    [theme.breakpoints.up("sm")]: {
+      width: "20%",
+      marginLeft: "40%",
+    },
   },
   buttonsContainer: {
     display: "flex",
@@ -114,71 +143,84 @@ class SignUp extends Component {
     if (auth.uid) return <Redirect to="/inforesto/add" />;
 
     return (
-      <div className={classes.root}>
-        <div className={classes.header}>
-          <NavLink to="/">
-            <img src={HEADER} alt="header illustration" className={classes.logo} />
-          </NavLink>
+      <div>
+        <NavLink to="/">
+          <img className={classes.logo} src={LOGO} alt="logo back to home" />
+        </NavLink>
+
+        <div className={classes.root}>
+          <div className={classes.header}>
+            <NavLink to="/">
+              <img
+                src={HEADER}
+                alt="header illustration"
+                className={classes.headerImg}
+              />
+            </NavLink>
+          </div>
+          <form onSubmit={this.handleSubmit} className={classes.form}>
+            <Typography variant="h1" className={classes.title}>
+              <span className={classes.spanTitle}>C</span>réez votre compte
+            </Typography>
+
+            <div className={classes.inputs}>
+              <TextField
+                id="lastName"
+                type="text"
+                label="nom"
+                onChange={this.handleChange}
+                required
+              />
+              <TextField
+                id="firstName"
+                type="text"
+                label="prénom"
+                onChange={this.handleChange}
+                required
+              />
+              <TextField
+                id="email"
+                type="email"
+                label="email"
+                onChange={this.handleChange}
+                required
+              />
+
+              <TextField
+                id="password"
+                type="password"
+                label="choisir un mot de passe"
+                onChange={this.handleChange}
+                className={classes.passwordInput}
+                required
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    id="cguAccepted"
+                    checked={this.cguAccepted}
+                    type="checkbox"
+                    onChange={this.acceptCGU}
+                    name="checkedA"
+                  />
+                }
+                label="j'ai lu et j'accepte les CGU."
+              />
+              {authError ? <Typography>{authError}</Typography> : null}
+            </div>
+
+            <div className={classes.buttonsContainer}>
+              <Button
+                variant="contained"
+                type="submit"
+                className={classes.connectionButton}
+              >
+                valider
+              </Button>
+            </div>
+          </form>
         </div>
-        <form onSubmit={this.handleSubmit} className={classes.form}>
-          <Typography variant="h1" className={classes.title}>Créez votre compte</Typography>
-
-          <div className={classes.inputs}>
-            <TextField
-              id="lastName"
-              type="text"
-              label="nom"
-              onChange={this.handleChange}
-              required
-            />
-            <TextField
-              id="firstName"
-              type="text"
-              label="prénom"
-              onChange={this.handleChange}
-              required
-            />
-            <TextField
-              id="email"
-              type="email"
-              label="email"
-              onChange={this.handleChange}
-              required
-            />
-
-            <TextField
-              id="password"
-              type="password"
-              label="choisir un mot de passe"
-              onChange={this.handleChange}
-              className={classes.passwordInput}
-              required
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  id="cguAccepted"
-                  checked={this.cguAccepted}
-                  type="checkbox"
-                  onChange={this.acceptCGU}
-                  name="checkedA"
-                />
-              }
-              label="j'ai lu et j'accepte les CGU."
-            />
-            {authError ? <Typography>{authError}</Typography> : null}
-          </div>
-
-          <div className={classes.buttonsContainer}>
-            <Button
-              variant="contained"
-              type="submit"
-              className={classes.connectionButton}
-            >
-              valider
-            </Button>
-          </div>
-        </form>
+        <HomeFooter />
       </div>
     );
   }

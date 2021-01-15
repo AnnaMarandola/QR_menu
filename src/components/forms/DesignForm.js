@@ -45,16 +45,16 @@ const styles = (theme, menu) => ({
     marginLeft: "1.5rem",
   },
   police1: {
-    fontFamily: "Lobster",
+    fontFamily: "Archivo narrow",
   },
   police2: {
     fontFamily: "Great Vibes",
   },
   police3: {
-    fontFamily: "Anton Roboto",
+    fontFamily: "Roboto",
   },
   police4: {
-    fontFamily: "Cantarell",
+    fontFamily: "Lobster",
   },
 });
 
@@ -142,7 +142,7 @@ const DesignForm = ({
             defaultValue="Roboto"
             style={{ fontFamily: font }}
           >
-            <MenuItem value={"Lobster"} className={classes.police1}>
+            <MenuItem value={ "Archivo narrow"} className={classes.police1}>
               {resto.name}
             </MenuItem>
             <MenuItem value={"Great Vibes"} className={classes.police2}>
@@ -151,12 +151,12 @@ const DesignForm = ({
             <MenuItem value={"Anton Roboto"} className={classes.police3}>
               {resto.name}
             </MenuItem>
-            <MenuItem value={"Oxygen"} className={classes.police4}>
+            <MenuItem value={"Lobster"} className={classes.police4}>
               {resto.name}
             </MenuItem>
-            <MenuItem value={"Roboto"} className={classes.police4}>
+            {/* <MenuItem value={"Roboto"} className={classes.police}>
               {resto.name}
-            </MenuItem>
+            </MenuItem> */}
           </Select>
         </form>
       </Card>
