@@ -13,6 +13,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
+import HomeFooter from "../landingPage/HomeFooter";
 
 const styles = (theme) => ({
   root: {
@@ -31,7 +32,7 @@ const styles = (theme) => ({
     position: "absolute",
     right: "0",
     [theme.breakpoints.up("sm")]: {
-      left: "0",
+      // left: "0",
       width: "3%",
       margin: "1rem",
     },
@@ -47,6 +48,8 @@ const styles = (theme) => ({
       flexDirection: "row",
       marginTop: 0,
       height: "100%",
+      width: "40%",
+      marginLeft: "5rem",
     },
   },
   headerImg: {
@@ -55,8 +58,8 @@ const styles = (theme) => ({
     marginLeft: "15%",
     // backgroundColor: "pink",
     [theme.breakpoints.up("sm")]: {
-      width: "120%",
-      marginLeft: "45%",
+      width: "100%",
+      marginLeft: "10%",
     },
   },
   form: {
@@ -68,7 +71,6 @@ const styles = (theme) => ({
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
-      backgroundColor: "#83e4fa",
     },
   },
   title: {
@@ -78,7 +80,7 @@ const styles = (theme) => ({
     marginTop: "2rem",
     fontColor: "#192b34",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: "7rem",
+      marginLeft: "5rem",
       fontSize: "4rem",
     },
   },
@@ -223,6 +225,7 @@ class SignUp extends Component {
             </div>
           </form>
         </div>
+        <HomeFooter />
       </div>
     );
   }
