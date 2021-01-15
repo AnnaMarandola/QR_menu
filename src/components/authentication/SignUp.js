@@ -19,7 +19,6 @@ const styles = (theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    // backgroundColor: "red",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
       height: "100vh",
@@ -41,7 +40,6 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
     marginTop: "4rem",
-    // backgroundColor: "blue",
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
@@ -55,7 +53,6 @@ const styles = (theme) => ({
     width: "70%",
     marginTop: "1rem",
     marginLeft: "15%",
-    // backgroundColor: "pink",
     [theme.breakpoints.up("sm")]: {
       width: "100%",
       marginLeft: "10%",
@@ -63,7 +60,6 @@ const styles = (theme) => ({
   },
   form: {
     width: "100%",
-    // backgroundColor: "yellow",
     [theme.breakpoints.up("sm")]: {
       height: "100%",
       width: "80%",
