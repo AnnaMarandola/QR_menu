@@ -32,7 +32,6 @@ const styles = (theme) => ({
     position: "absolute",
     right: "0",
     [theme.breakpoints.up("sm")]: {
-      // left: "0",
       width: "3%",
       margin: "1rem",
     },
@@ -49,7 +48,7 @@ const styles = (theme) => ({
       marginTop: 0,
       height: "100%",
       width: "40%",
-      marginLeft: "5rem",
+      marginLeft: "10%",
     },
   },
   headerImg: {
@@ -80,8 +79,9 @@ const styles = (theme) => ({
     marginTop: "2rem",
     fontColor: "#192b34",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: "5rem",
+      marginLeft: "20%",
       fontSize: "4rem",
+      marginBottom: "4rem",
     },
   },
   spanTitle: {
@@ -90,11 +90,11 @@ const styles = (theme) => ({
   inputs: {
     display: "flex",
     flexDirection: "column",
-    width: "80%",
-    marginLeft: "10%",
+    width: "70%",
+    marginLeft: "15%",
     [theme.breakpoints.up("sm")]: {
-      width: "60%",
-      marginLeft: "20%",
+      width: "30%",
+      marginLeft: "35%",
       marginBottom: "2rem",
       marginTop: "2rem",
     },
@@ -107,15 +107,14 @@ const styles = (theme) => ({
     width: "80%",
     marginLeft: "10%",
     [theme.breakpoints.up("sm")]: {
-      width: "40%",
-      marginLeft: "30%",
+      width: "20%",
+      marginLeft: "40%",
     },
   },
   buttonsContainer: {
     display: "flex",
     flexDirection: "column",
     marginBottom: "3rem",
-    [theme.breakpoints.up("sm")]: {},
   },
 });
 

@@ -20,6 +20,10 @@ const styles = (theme) => ({
     marginBottom: "1rem",
     backgroundColor: "white",
     marginTop: "2rem",
+    border: "solid 3px white",
+    [theme.breakpoints.up("sm")]: {
+      marginTop: 0,
+    }
   },
   facebookButton: {
     backgroundColor: "#3B5997",
