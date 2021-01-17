@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LOGO from "../../assets/LogoProject.png";
+import LOGO from "../../assets/logoIcon.png";
 import "../../App.css";
 import { connect } from "react-redux";
 import MyMenu from "../nav/MyMenu";
@@ -16,7 +16,7 @@ const styles = (theme) => ({
     zIndex: 2,
   },
   logo: {
-    width: "60px",
+    width: "50px",
     marginTop: "0.5rem",
     marginLeft: "0.5rem",
   }

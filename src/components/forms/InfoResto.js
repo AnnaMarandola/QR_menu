@@ -4,15 +4,26 @@ import { Typography, TextField, Button } from "@material-ui/core";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { createRestaurant, editRestaurant } from "../../store/actions/restaurantActions";
+import {
+  createRestaurant,
+  editRestaurant,
+} from "../../store/actions/restaurantActions";
 import { Redirect } from "react-router-dom";
+import UploadLogo from "./UploadLogo";
 
 const styles = (theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    paddingTop: "6rem"
+  },
+  title: {
+    marginTop: "6rem",
+    marginBottom: "1rem",
+    fontFamily: "Archivo narrow",
+  },
+  titleSpan: {
+    color: "#E81B7D",
   },
   form: {
     width: "90%",
@@ -26,13 +37,16 @@ const styles = (theme) => ({
   validationButton: {
     marginTop: "2rem",
     position: "right",
-    backgroundColor: theme.palette.primary.red,
-    color: theme.palette.primary.whiteish,
+    color: "#e81b7d",
   },
   buttonsContainer: {
     display: "flex",
     flexDirection: "column",
     marginBottom: "3rem",
+  },
+  logoUpload: {
+    marginTop: "1rem",
+    marginBottom: "1rem",
   },
 });
 
@@ -50,24 +64,25 @@ class InfoResto extends Component {
   };
 
   componentDidMount() {
-    if (this.props.match.params.resto && this.props.restaurant){
+    console.log("RESTOCDM", this.props.restaurant)
+    if (this.props.match.params.resto && this.props.restaurant) {
       this.setState({
-        name: this.props.restaurant.name, 
+        name: this.props.restaurant.name,
         adress: this.props.restaurant.adress,
         city: this.props.restaurant.city,
         postalCode: this.props.restaurant.postalCode,
-        facebook:  this.props.restaurant.facebook,
+        facebook: this.props.restaurant.facebook,
         instagram: this.props.restaurant.instagram,
         template: this.props.restaurant.template,
         submited: false,
-      })
+      });
     }
   }
 
-  
+
   handleChange = (e) => {
     this.setState({
-      [e.target.id]: e.target.value   
+      [e.target.id]: e.target.value,
     });
   };
 
@@ -75,41 +90,45 @@ class InfoResto extends Component {
     e.preventDefault();
     const restoId = this.props.match.params.resto;
     this.setState({ submited: true });
-    if(!restoId){
-    this.props.createRestaurant(this.state);
-    console.log("restaurant created", this.state);
+    if (!restoId) {
+      this.props.createRestaurant(this.state);
+      console.log("restaurant created", this.state);
     } else {
-    this.props.editRestaurant(this.state, restoId)
-    console.log("restaurant updated", this.state);
-
+      this.props.editRestaurant(this.state, restoId);
+      console.log("restaurant updated", this.state);
     }
   };
 
   render() {
-    const { classes, auth, match, restaurant } = this.props;
+    const { classes, auth, restaurant } = this.props;
     console.log("auth uid", auth.uid);
-    const restoId = match.params.resto;
-    const resto = (restaurant && restaurant) || null;
-    console.log("restO ", restaurant);
-
+    const resto = (restaurant && restaurant ) || null;
+    console.log("restO ", resto && resto.name);
 
     if (this.state.submited === true) return <Redirect to="/dashboard" />;
 
     return (
       <div className={classes.root}>
-        <form className={classes.form} onSubmit={this.handleSubmit} >
-          <Typography variant="h1">
-           { restoId ? "Modifiez les informations sur votre établissement"   : "Informations sur votre établissement"}
+        <form className={classes.form} onSubmit={this.handleSubmit}>
+          <Typography variant="h1" className={classes.title}>
+            <span className={classes.titleSpan}>L</span>es informations sur
+            votre établissement
           </Typography>
           <Typography variant="body1">
             Ces informations seront disponibles sur votre page.{" "}
           </Typography>
           <div className={classes.inputs}>
+            {restaurant && (
+              <div className={classes.logoUpload}>
+                <Typography>Logo</Typography>
+                <UploadLogo restaurant={resto} />
+              </div>
+            )}
             <TextField
               id="name"
               label="nom de l'établisement"
               onChange={this.handleChange}
-              defaultValue={resto ? resto.name : ""}
+              defaultValue={resto && resto.name}
             />
             <TextField
               id="adress"
@@ -179,7 +198,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createRestaurant: (restaurant) => dispatch(createRestaurant(restaurant)),
-    editRestaurant: (restaurant, restoId) => dispatch(editRestaurant(restaurant, restoId)),
+    editRestaurant: (restaurant, restoId) =>
+      dispatch(editRestaurant(restaurant, restoId)),
   };
 };
 
@@ -189,7 +209,7 @@ export default compose(
   firestoreConnect((props) => [
     {
       collection: "restaurants",
-      doc: props.match.params.resto,
+      where: ["ownerId", "==", props.auth.uid],
     },
   ])
 )(InfoResto);

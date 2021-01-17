@@ -16,6 +16,7 @@ const styles = (theme) => ({
     minWidth: 345,
     maxWidth: 345,
     marginTop: "1rem",
+    padding: "1rem",
     backgroundColor: "white",
   },
   media: {
