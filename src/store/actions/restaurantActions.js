@@ -20,6 +20,27 @@ export const createRestaurant = (restaurant) => {
   };
 };
 
+export const updateRestaurantMenu = (payload) => {
+  console.log("payload MMMMMMMM IN ACTIONS", payload)
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    console.log("payload", payload);
+    let restoId = payload.restoId;
+    let menuId = payload.menuId;
+    console.log("restoId in actions", restoId);
+    console.log("MENU in actions", menuId);
+    getFirestore()
+      .collection("restaurants")
+      .doc(restoId)
+      .update({ menuId: menuId })
+      .then(() => {
+        dispatch({ type: "UPDATE_RESTAURANT_MENU", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "UPDATE_RESTAURANT_MENU_ERROR", err });
+      });
+  };
+};
+
 export const updateRestaurant = (payload) => {
   console.log("payload TEMPLATE IN ACTIONS", payload)
   return (dispatch, getState, { getFirebase, getFirestore }) => {

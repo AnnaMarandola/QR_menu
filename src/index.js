@@ -40,6 +40,7 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontFamily: "Raleway",
     h1: {
+      fontFamily: "Archivo narrow",
       color: "#031627",
       fontSize: "2rem",
       fontWeight: "550",

@@ -1,4 +1,5 @@
 export const createMenu = (menu) => {
+  console.log("ppppppp", menu)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const ownerId = getState().firebase.auth.uid;

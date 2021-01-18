@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
-import { Typography, TextField, Button } from "@material-ui/core";
+import {
+  Typography,
+  TextField,
+  Button,
+  TextareaAutosize,
+} from "@material-ui/core";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -10,34 +15,69 @@ import {
 } from "../../store/actions/restaurantActions";
 import { Redirect } from "react-router-dom";
 import UploadLogo from "./UploadLogo";
+import HEADER from "../../assets/landingPage/illustration-header.png";
 
 const styles = (theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row",
+    },
+  },
+  restoIllustration: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+      width: "60%",
+      justifyContent: "center",
+      paddingLeft: "4rem",
+    },
   },
   title: {
     marginTop: "6rem",
     marginBottom: "1rem",
     fontFamily: "Archivo narrow",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "4rem",
+      fontSize: "3rem"
+    },
   },
   titleSpan: {
     color: "#E81B7D",
   },
+  subtitle: {
+    fontFamily: "Archivo narrow",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "4rem",
+    },
+  },
   form: {
     width: "90%",
+    [theme.breakpoints.up("sm")]: {
+      width: "60%",
+      paddingRight: "4rem",
+    },
   },
   inputs: {
     display: "flex",
     flexDirection: "column",
     width: "90%",
     marginLeft: "5%",
+    [theme.breakpoints.up("sm")]: {
+      width: "50%",
+      marginLeft: "15%",
+    },
   },
   validationButton: {
     marginTop: "2rem",
     position: "right",
     color: "#e81b7d",
+    [theme.breakpoints.up("sm")]: {
+      width: "40%",
+      marginLeft: "20%",
+    },
   },
   buttonsContainer: {
     display: "flex",
@@ -64,8 +104,7 @@ class InfoResto extends Component {
   };
 
   componentDidMount() {
-    console.log("RESTOCDM", this.props.restaurant)
-    if (this.props.match.params.resto && this.props.restaurant) {
+    if (this.props.restaurant) {
       this.setState({
         name: this.props.restaurant.name,
         adress: this.props.restaurant.adress,
@@ -79,7 +118,6 @@ class InfoResto extends Component {
     }
   }
 
-
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -92,29 +130,28 @@ class InfoResto extends Component {
     this.setState({ submited: true });
     if (!restoId) {
       this.props.createRestaurant(this.state);
-      console.log("restaurant created", this.state);
     } else {
       this.props.editRestaurant(this.state, restoId);
-      console.log("restaurant updated", this.state);
     }
   };
 
   render() {
     const { classes, auth, restaurant } = this.props;
-    console.log("auth uid", auth.uid);
-    const resto = (restaurant && restaurant ) || null;
-    console.log("restO ", resto && resto.name);
+    const resto = (restaurant && restaurant) || null;
 
     if (this.state.submited === true) return <Redirect to="/dashboard" />;
 
     return (
       <div className={classes.root}>
+        <div className={classes.restoIllustration}>
+          <img src={HEADER} alt="illustration" />
+        </div>
         <form className={classes.form} onSubmit={this.handleSubmit}>
           <Typography variant="h1" className={classes.title}>
             <span className={classes.titleSpan}>L</span>es informations sur
             votre établissement
           </Typography>
-          <Typography variant="body1">
+          <Typography className={classes.subtitle}>
             Ces informations seront disponibles sur votre page.{" "}
           </Typography>
           <div className={classes.inputs}>
@@ -126,27 +163,35 @@ class InfoResto extends Component {
             )}
             <TextField
               id="name"
+              type="text"
               label="nom de l'établisement"
               onChange={this.handleChange}
               defaultValue={resto && resto.name}
+              required
             />
             <TextField
               id="adress"
+              type="text"
               label="adresse"
               onChange={this.handleChange}
               defaultValue={resto ? resto.adress : ""}
+              required
             />
             <TextField
               id="city"
               label="ville"
+              type="text"
               onChange={this.handleChange}
               defaultValue={resto ? resto.city : ""}
+              required
             />
             <TextField
               id="postalCode"
               label="code postal"
+              type="number"
               onChange={this.handleChange}
               defaultValue={resto ? resto.postalCode : ""}
+              required
             />
             <TextField
               id="phone"
@@ -154,6 +199,7 @@ class InfoResto extends Component {
               label="numéro de téléphone"
               onChange={this.handleChange}
               defaultValue={resto ? resto.phone : ""}
+              required
             />
             <TextField
               id="instagram"
