@@ -141,6 +141,8 @@ class InfoResto extends Component {
 
     if (this.state.submited === true) return <Redirect to="/dashboard" />;
 
+    window.scrollTo(0, 0)
+
     return (
       <div className={classes.root}>
         <div className={classes.restoIllustration}>

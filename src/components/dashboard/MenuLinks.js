@@ -66,6 +66,13 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
 
                 <NavLink
                   className={classes.links}
+                  to={`/design/${restoId}/${menuId}`}
+                >
+                  <Button className={classes.modifyButton}>Design</Button>
+                </NavLink>
+
+                <NavLink
+                  className={classes.links}
                   to={`/menupage/${restoId}/${menuId}`}
                 >
                   <Button className={classes.showButton}>Consulter</Button>

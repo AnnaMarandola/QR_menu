@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Button, Link, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { NavLink } from "react-router-dom";
@@ -25,44 +25,60 @@ const styles = (theme) => ({
   },
 });
 
-
-
-const StartMenu = ({ restaurant, classes, menu, createMenu, updateRestaurantMenu }) => {
+const StartMenu = ({
+  restaurant,
+  classes,
+  menu,
+  createMenu,
+  updateRestaurantMenu,
+}) => {
   console.log("restooooo", restaurant);
   const resto = { ...restaurant };
-  const restoId = resto.id
+  const restoId = resto.id;
   console.log("resto id", resto.id);
   const menuData = { ...menu };
   console.log("menu id", menuData.id);
 
-  const [started, setStarted] = useState(false)
+  const [started, setStarted] = useState(false);
 
   const handleStart = (e) => {
     e.preventDefault();
     createMenu({ restoId: restoId });
-    setStarted(true)
-}
+    setStarted(true);
+  };
 
-    const handleNext = (e) => {
-        updateRestaurantMenu({ restoId: restoId, menuId: menuData.id })
-    }
+  const handleNext = (e) => {
+    updateRestaurantMenu({ restoId: restoId, menuId: menuData.id });
+  };
 
   return (
     <div>
-     { !started &&
-      <div>
-          <Button className={classes.startButton} onClick={handleStart}>Commencer</Button>
-      </div>
-      }
-      { started &&
-       <div>
-      <Typography>Commencez par choisir un modèle de mise en page pour votre carte.</Typography>
-      <Typography>Vous pourrez ensuite ajouter vos plats et personnaliser le design de la page.</Typography>
-      <NavLink to="/templateChoice" className={classes.links}>
-      <Button onClick={handleNext} className={classes.nextButton}>Suivant</Button>
-      </NavLink>
-      </div>
-     }
+      {!started && (
+        <div>
+          <Button className={classes.startButton} onClick={handleStart}>
+            Commencer
+          </Button>
+        </div>
+      )}
+      {started && (
+        <div>
+          <Typography>
+            Commencez par choisir un modèle de mise en page pour votre carte.
+          </Typography>
+          <Typography>
+            Vous pourrez ensuite ajouter vos plats et personnaliser le design de
+            la page.
+          </Typography>
+          <NavLink
+            to={`/design/${restoId}/${menuData.id}`}
+            className={classes.links}
+          >
+            <Button onClick={handleNext} className={classes.nextButton}>
+              Suivant
+            </Button>
+          </NavLink>
+        </div>
+      )}
     </div>
   );
 };
@@ -77,7 +93,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createMenu: (menu) => dispatch(createMenu(menu)),
-    updateRestaurantMenu: (payload) => dispatch(updateRestaurantMenu(payload))
+    updateRestaurantMenu: (payload) => dispatch(updateRestaurantMenu(payload)),
   };
 };
 
