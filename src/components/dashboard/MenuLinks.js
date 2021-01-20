@@ -9,49 +9,43 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { NavLink } from "react-router-dom";
-
+import StartMenu from "./StartMenu";
 
 const styles = (theme) => ({
   root: {
     maxWidth: 345,
     minWidth: 345,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     marginTop: "1rem",
+    padding: "1rem",
   },
   media: {
     height: 140,
   },
   cardButtons: {
-    display: 'flex',
-    justifyContent: 'space-between',
+    display: "flex",
+    justifyContent: "center",
   },
-  
-  modifyButton: {
-    backgroundColor: theme.palette.primary.orange,
-    padding: '0, 1.5rem, 0, 1.5rem',
-    color: theme.palette.primary.whiteish,
-    marginRight: "1rem"
-  },
-  showButton: {
-    backgroundColor: theme.palette.primary.main,
-    padding: '0, 1.5rem, 0, 1.5rem',
-    color: theme.palette.primary.whiteish,
-    marginRight: "1rem"
 
+  modifyButton: {
+    backgroundColor:"#E81B7D",
+    padding: "0, 1.5rem, 0, 1.5rem",
+    color: theme.palette.primary.whiteish,
+    marginRight: "1rem",
   },
   qrcodeButton: {
     backgroundColor: theme.palette.primary.red,
-    padding: '0, 1.5rem, 0, 1.5rem',
+    padding: "0, 1.5rem, 0, 1.5rem",
     color: theme.palette.primary.whiteish,
-    width: "5rem"
+    width: "5rem",
   },
   links: {
-    textDecoration: 'none',
-  }, 
+    textDecoration: "none",
+  },
 });
 
 const MenuChipSet = ({ restaurant, classes, menuId }) => {
-  const restoId = restaurant && restaurant.id 
+  const restoId = restaurant && restaurant.id;
 
   return (
     <div>
@@ -61,29 +55,44 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
             Ma carte
           </Typography>
           <CardContent className={classes.cardButtons}>
-          { restaurant && restaurant.template ?
-          <div>
-          <NavLink className={classes.links} to={`/menuform/${restoId}/${menuId}`}>
-          <Button className={classes.modifyButton}>Modifier</Button>
-          </NavLink>
-          
-          <NavLink className={classes.links} to={`/menupage/${restoId}/${menuId}`}>
-          <Button className={classes.showButton}>Consulter</Button>
-          </NavLink>
+            {restaurant && restaurant.menuId && restaurant.template ? (
+              <div>
+                <NavLink
+                  className={classes.links}
+                  to={`/menuform/${restoId}/${menuId}`}
+                >
+                  <Button className={classes.modifyButton}>Menu</Button>
+                </NavLink>
 
-          <NavLink className={classes.links} to={`/qrcode/${restoId}/${menuId}`}>
-          <Button className={classes.qrcodeButton}>QR CODE</Button>
-          </NavLink>
-          </div>
-          : <div>
-          <NavLink className={classes.links} to='/templatechoice'>
-          <Button className={classes.showButton}>Choisir un design</Button>
-          </NavLink>
-          </div>}
+                <NavLink
+                  className={classes.links}
+                  to={`/design/${restoId}/${menuId}`}
+                >
+                  <Button className={classes.modifyButton}>Design</Button>
+                </NavLink>
+
+                <NavLink
+                  className={classes.links}
+                  to={`/menupage/${restoId}/${menuId}`}
+                >
+                  <Button className={classes.showButton}>Consulter</Button>
+                </NavLink>
+
+                <NavLink
+                  className={classes.links}
+                  to={`/qrcode/${restoId}/${menuId}`}
+                >
+                  <Button className={classes.qrcodeButton}>QR CODE</Button>
+                </NavLink>
+              </div>
+            ) : (
+              <div>
+                <StartMenu restaurant={restaurant} />
+              </div>
+            )}
           </CardContent>
         </CardActionArea>
-        <CardActions>
-        </CardActions>
+        <CardActions></CardActions>
       </Card>
     </div>
   );

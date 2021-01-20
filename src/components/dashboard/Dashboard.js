@@ -5,7 +5,6 @@ import { Typography, withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
-import TemplateSummary from "./TemplateSummary";
 import MenuLinks from "./MenuLinks";
 
 const styles = (theme) => ({
@@ -47,6 +46,8 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
   console.log("profile", profile);
 
   if (!auth.uid) return <Redirect to="/signin" />;
+
+  window.scrollTo(0, 0)
   return (
     <div className={classes.root}>
 
@@ -58,9 +59,6 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
       <div className={classes.container}>
             <MenuLinks restaurant={restaurant} menuId={menuId} />
             <RestaurantSummary restaurant={restaurant} />
-        {restaurant && restaurant.template && (
-          <TemplateSummary restaurant={restaurant} />
-        )}
       </div>
     </div>
   );

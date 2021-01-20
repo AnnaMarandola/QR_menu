@@ -3,12 +3,12 @@ import { Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { deleteDish, switchStatus } from "../../store/actions/dishActions";
+import { deleteDish, switchStatus } from "../../../store/actions/dishActions";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import AddNewDish from "../forms/AddNewDish";
+import AddNewDish from "./AddNewDish";
 import Switch from "@material-ui/core/Switch";
 import { toast } from "react-toastify";
 

@@ -7,14 +7,14 @@ import InfoResto from "./components/forms/InfoResto";
 import Dashboard from "./components/dashboard/Dashboard";
 import UserIsAuthenticated from "./HOC/UserIsAuthenticated";
 import WithTopBar from "./HOC/WithTopBar";
-import MenuFormPage from "./components/forms/MenuFormPage";
+import MenuFormPage from "./components/dashboard/menu/MenuFormPage";
 import MenuPage from "./components/menu/MenuPage";
-import TemplateForm from "./components/forms/TemplateForm";
 import QrCodePdf from "./components/qrcode/QrCodePdf";
 import ToastComponent from "./constants/Toast";
 import LandingPage from "./components/landingPage/LandingPage";
 import ShopPage from "./components/shop/ShopPage";
 import projectPage from "./components/shop/projectPage";
+import DesignPage from "./components/dashboard/design/DesignPage";
 
 function App() {
   return (
@@ -34,14 +34,14 @@ function App() {
           component={UserIsAuthenticated(WithTopBar(InfoResto))}
         />
         <Route
-          path="/templatechoice"
-          component={UserIsAuthenticated(WithTopBar(TemplateForm))}
-        />
-        <Route
           exact
           path="/dashboard"
           component={UserIsAuthenticated(WithTopBar(Dashboard))}
         />
+        <Route
+          path="/design/:resto/:menu"
+          component={UserIsAuthenticated(WithTopBar(DesignPage))}
+        />        
         <Route
           path="/menuform/:resto/:menu"
           component={UserIsAuthenticated(WithTopBar(MenuFormPage))}

@@ -41,7 +41,6 @@ export const updateMenu = (payload) => {
 };
 
 export const selectHeaderColor = (payload) => {
-  console.log("payload in select color ACTION", payload);
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let menuId = payload.menuId;
     let color = payload.color;
@@ -59,7 +58,6 @@ export const selectHeaderColor = (payload) => {
 };
 
 export const selectFontColor = (payload) => {
-  console.log("payload in select color ACTION", payload);
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let menuId = payload.menuId;
     let color = payload.fontColor;
@@ -77,7 +75,6 @@ export const selectFontColor = (payload) => {
 };
 
 export const selectFontFamily = (payload) => {
-  console.log("payload in select fontFamily ACTION", payload);
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let menuId = payload.menuId;
     let fontFamily = payload.fontFamily;
@@ -94,8 +91,24 @@ export const selectFontFamily = (payload) => {
   };
 };
 
+export const selectFontSize = (payload) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    let menuId = payload.menuId;
+    let fontSize = payload.fontSize;
+    getFirestore()
+      .collection("menus")
+      .doc(menuId)
+      .update({ fontSize: fontSize })
+      .then(() => {
+        dispatch({ type: "SELECT_FONT_SIZE", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "SELECT_FONT_SIZE_ERROR", err });
+      });
+  };
+};
+
 export const updateMenuTemplate = (payload) => {
-  console.log("PPPPPPPPPP", payload)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let menuId = payload.menuId;
     let template = payload.template;

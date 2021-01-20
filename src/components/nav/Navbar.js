@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LOGO from "../../assets/LogoProject.png";
+import LOGO from "../../assets/logoIcon.png";
 import "../../App.css";
 import { connect } from "react-redux";
 import MyMenu from "../nav/MyMenu";
@@ -10,13 +10,13 @@ import { compose } from "redux";
 const styles = (theme) => ({
   navbar: {
     width: "100%",
-    height: "4rem",
+    height: "4.2rem",
     backgroundColor: "white",
     position: "fixed",
     zIndex: 2,
   },
   logo: {
-    width: "60px",
+    width: "50px",
     marginTop: "0.5rem",
     marginLeft: "0.5rem",
   }

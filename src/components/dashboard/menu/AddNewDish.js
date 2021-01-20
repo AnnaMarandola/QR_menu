@@ -20,7 +20,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
-import { createDish, updateDish } from "../../store/actions/dishActions";
+import { createDish, updateDish } from "../../../store/actions/dishActions";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
@@ -167,9 +167,8 @@ class AddNewDish extends Component {
     const template = menu.template;
 
     return (
-      // <div className={classes.root} >
         <form className={classes.form} onSubmit={this.handleSubmit}>
-          {template !== "template3" && (
+          {template !== "Carte thématique" && (
             <div className={classes.categoryInput}>
               <InputLabel id="category">Catégorie</InputLabel>
               <Select
@@ -259,7 +258,7 @@ class AddNewDish extends Component {
                       <ListItemAvatar>
                         <Avatar
                           alt={`${value}`}
-                          src={require(`../../assets/allergens/${value}.png`)}
+                          src={require(`../../../assets/allergens/${value}.png`)}
                         />
                       </ListItemAvatar>
                       <ListItemText id={labelId} primary={` ${value}`} />
@@ -289,7 +288,6 @@ class AddNewDish extends Component {
             {dish ? "Modifier" : "ajouter à mon menu"}
           </Button>
         </form>
-      // </div>
     );
   }
 }
