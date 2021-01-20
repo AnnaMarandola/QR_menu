@@ -8,6 +8,7 @@ import DishItemEdit from "../../menu/DishItemEdit";
 import TitleForm from "./TitleForm";
 import DishFormContainer from "../../forms/DishFormContainer";
 import FormulaFormContainer from "../../forms/FormulaFormContainer";
+import NewDishContainer from "./NewDishContainer";
 
 const styles = (theme) => ({
   root: {
@@ -145,7 +146,7 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
         )}
 
         {restaurant && (
-          <DishFormContainer
+          <NewDishContainer
             restaurant={restaurant}
             menu={menuData}
             dishes={dishes}
