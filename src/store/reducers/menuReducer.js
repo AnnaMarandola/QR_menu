@@ -33,18 +33,24 @@ const menuReducer = (state = initialState, action) => {
     case "SELECT_FONT_FAMILY_ERROR":
       console.log("select font family error", action.err);
       return state;
-      case "UPDATE_MENU_TEMPLATE":
-        console.log("update menu template success", action.menu);
-        return state;
-      case "UPDATE_MENU_TEMPLATE_ERROR":
-        console.log("update menu template error", action.err);
-        return state;
-        case "UPDATE_MENU_FORMULA":
-          console.log("update menu formula success", action.menu);
-          return state;
-        case "UPDATE_MENU_FORMULA_ERROR":
-          console.log("update menu formula error", action.err);
-          return state;
+    case "SELECT_FONT_SIZE":
+      console.log("select font size success", action.menu);
+      return state;
+    case "SELECT_FONT_SIZE_ERROR":
+      console.log("select font size error", action.err);
+      return state;
+    case "UPDATE_MENU_TEMPLATE":
+      console.log("update menu template success", action.menu);
+      return state;
+    case "UPDATE_MENU_TEMPLATE_ERROR":
+      console.log("update menu template error", action.err);
+      return state;
+    case "UPDATE_MENU_FORMULA":
+      console.log("update menu formula success", action.menu);
+      return state;
+    case "UPDATE_MENU_FORMULA_ERROR":
+      console.log("update menu formula error", action.err);
+      return state;
     default:
       return state;
   }

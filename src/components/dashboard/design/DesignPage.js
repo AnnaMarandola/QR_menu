@@ -4,21 +4,27 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Card, Typography } from "@material-ui/core";
-import DesignFormContainer from "../../forms/DesignFormContainer";
-import TemplateForm from "../../forms/TemplateForm";
-import TemplateFormContainer from "./TemplateFormContainer";
+import HeaderDesignForm from "./HeaderDesignForm";
+import TemplateForm from "./TemplateForm";
 
 const styles = (theme) => ({
   root: {
     width: "95%",
     marginLeft: "2.5%",
+    paddingTop: "4rem",
+    paddingBottom: "4rem",
+    // backgroundColor: "yellow",
   },
   titlePage: {
-    width: "80%",
-    paddingTop: "7rem",
-    paddingBottom: "2rem",
-    marginLeft: "10%",
-    color: theme.palette.primary.main,
+    paddingTop: "2rem",
+    paddingBottom: "1rem",
+    fontFamily: "Archivo narrow",
+    fontSize: "2rem",
+    fontWeight: 500,
+    textAlign: "center",
+  },
+  spanTitle: {
+    color: "#E81B7D",
   },
   header: {
     height: "17rem",
@@ -34,8 +40,11 @@ const styles = (theme) => ({
   logo: {
     width: "10rem",
   },
-  colorSection: {
+  headerDesign: {
     width: "100%",
+  },
+  templateCard: {
+    marginBottom: "1rem",
   },
   titleSection: {
     display: "flex",
@@ -43,14 +52,6 @@ const styles = (theme) => ({
     paddingTop: "1rem",
     paddingLeft: "1rem",
   },
-
-  modifTitleButton: {
-    marginTop: "-2.5rem",
-  },
-  menuTitle: {
-    fontStyle: "italic",
-  },
-
 });
 
 const DesignPage = ({ classes, restaurant, menu }) => {
@@ -60,40 +61,22 @@ const DesignPage = ({ classes, restaurant, menu }) => {
 
   return (
     <div className={classes.root}>
-      <Typography className={classes.titlePage} variant="h1">
-        <span>P</span>ersonnalisez le  design de votre carte !
-      </Typography>
-      { !menuData.template &&
-      <TemplateForm />}
-      { menuData.template &&
-      <div>
-      <Card
-        className={classes.header}
-        style={{ backgroundColor: menuData.headerColor }}
-      >
-        <Typography
-          className={classes.restoName}
-          variant="h1"
-          style={{
-            color: menuData.fontColor,
-            fontFamily: menuData.fontFamily,
-          }}
-        >
-          {resto.name}
-        </Typography>
-        <img className={classes.logo} src={resto.logo} alt="logo" />
-      </Card>
-
-      <div className={classes.colorSection}>
-        <DesignFormContainer
-          menu={menu}
-          restaurant={restaurant}
-        />
-      </div>
-      <TemplateForm/>
-      </div>
-      }
-
+          <Typography className={classes.titlePage}>Mon <span className={classes.spanTitle}>Design</span></Typography>
+      {!menuData.template && (
+        <div>
+          <TemplateForm />
+        </div>
+      )}
+      {menuData.template && (
+        <div>
+          <div className={classes.headerDesign}>
+            <HeaderDesignForm menu={menu} restaurant={restaurant} />
+          </div>
+          <div className={classes.templateCard}>
+          <TemplateForm menu={menu}/>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,31 +1,32 @@
 import React, { useState } from "react";
-import { withStyles } from "@material-ui/core";
-import { Typography, Radio, Button } from "@material-ui/core";
+import { CardHeader, withStyles } from "@material-ui/core";
+import { Typography, Radio, Button, Card } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import TemplateCard from "./TemplateCard";
-// import { Redirect } from "react-router-dom";
-import TEMP1 from "../../assets/templates/snapshotTemp1.png";
-import TEMP2 from "../../assets/templates/snapshotTemp2.png";
-import TEMP3 from "../../assets/templates/snapshotTemp3.png";
+import TEMP1 from "../../../assets/templates/snapshotTemp1.png";
+import TEMP2 from "../../../assets/templates/snapshotTemp2.png";
+import TEMP3 from "../../../assets/templates/snapshotTemp3.png";
 import {
   createMenu,
   updateMenuTemplate,
-} from "../../store/actions/menuActions";
-import { updateRestaurant } from "../../store/actions/restaurantActions";
+} from "../../../store/actions/menuActions";
+import { updateRestaurant } from "../../../store/actions/restaurantActions";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 const styles = (theme) => ({
-  root: {
+  rootCard: {
+    backgroundColor: "white",
     marginTop: "1rem",
-    marginBottom: "2rem",
-    display: "flex",
-    justifyContent: "center",
+    marginBottom: "1rem",
   },
-  designButton: {
-    color: theme.palette.primary.red,
-    marginTop: "-8rem",
+  cardHeader: {
+    fontFamily: "Archivo narrow",
+    fontSize: "1.2rem",
+    color: "#E81B7D",
+    padding: "1rem",
+    fontWeight: 400,
   },
   designTitle: {
     marginBottom: "1rem",
@@ -39,9 +40,8 @@ const styles = (theme) => ({
   },
   titleForm: {
     fontSize: "1.6rem",
-    paddingTop: "5rem",
   },
-  goodies: {
+  subtitle: {
     fontWeight: 600,
   },
   textForm: {
@@ -56,8 +56,10 @@ const styles = (theme) => ({
     marginLeft: "1.5rem",
     marginTop: "1rem",
   },
-  separator: {
-    margin: "2rem",
+  templateSection: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   validateButton: {
     backgroundColor: theme.palette.primary.main,
@@ -70,20 +72,21 @@ const styles = (theme) => ({
 const TemplateForm = ({
   classes,
   restaurant,
-  auth,
-  createMenu,
+  menu,
   updateRestaurant,
   updateMenuTemplate,
 }) => {
   const restoId = restaurant && restaurant.id;
   const menuId = restaurant && restaurant.menuId;
+  const menuTemplate = menu && menu.template;
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(
+    restaurant && restaurant.menuId ? false : true
+  );
 
   const [selectedTemplate, setSelectedTemplate] = useState(
-    (restaurant && restaurant.template) || "template3"
+    (restaurant && restaurant.template) || "Carte thématique"
   );
-  // const [submitedForm, setSubmitedForm] = useState(false);
   const [menuTitle, setMenuTitle] = useState("");
   console.log(menuTitle);
 
@@ -97,7 +100,7 @@ const TemplateForm = ({
 
   const handleChange = (event) => {
     setSelectedTemplate(event.target.value);
-    if (event.target.value === "template2") {
+    if (event.target.value === "Menu du jour") {
       setMenuTitle("Menu du jour");
     } else {
       setMenuTitle("La carte");
@@ -106,7 +109,6 @@ const TemplateForm = ({
 
   const selectTemplate = (e) => {
     e.preventDefault();
-    // setSubmitedForm(true);
     updateRestaurant({
       restoId: restoId,
       template: selectedTemplate,
@@ -121,26 +123,24 @@ const TemplateForm = ({
   };
 
   console.log("selected template", selectedTemplate);
-  // if (submitedForm === true) return <Redirect to="/dashboard" />;
 
   return (
-    <div>
-      <div className={classes.root}>
+    <Card className={classes.rootCard}>
+      <Typography className={classes.cardHeader}>
+      Modèle de mise en page
+      </Typography>
+      <div>
         {!open && (
-          <div>
-            <Button onClick={handleClickOpen} className={classes.designButton}>
-              <EditRoundedIcon style={{ fill: "white" }} /> Modèle de mise en
-              page
+          <div className={classes.templateSection}>
+            <Typography>{menuTemplate}</Typography>
+            <Button onClick={handleClickOpen}>
+              <EditRoundedIcon style={{ fill: "#E81B7D" }} />
             </Button>
           </div>
         )}
 
         {open && (
           <div>
-            <Typography variant="h2" className={classes.designTitle}>
-              Selectionnez un modèle de mise en page pour votre carte :
-            </Typography>
-
             <form className={classes.rootForm}>
               <div className={classes.introForm}>
                 <Typography variant="h1" className={classes.titleForm}>
@@ -148,7 +148,7 @@ const TemplateForm = ({
                 </Typography>
                 <Typography variant="body2" className={classes.textForm}>
                   Tous les designs disposent d'
-                  <span className={classes.goodies}>
+                  <span className={classes.subtitle}>
                     un nombre illimité de plats{" "}
                   </span>
                   et de l'
@@ -167,9 +167,9 @@ const TemplateForm = ({
                 />
                 <div className={classes.selectSection}>
                   <Radio
-                    checked={selectedTemplate === "template1"}
+                    checked={selectedTemplate === "Carte complète"}
                     onChange={handleChange}
-                    value="template1"
+                    value="Carte complète"
                     name="radio-button-demo"
                     inputProps={{ "aria-label": "carte complète" }}
                   />
@@ -187,9 +187,9 @@ const TemplateForm = ({
                 />
                 <div className={classes.selectSection}>
                   <Radio
-                    checked={selectedTemplate === "template2"}
+                    checked={selectedTemplate === "Menu du jour"}
                     onChange={handleChange}
-                    value="template2"
+                    value="Menu du jour"
                     name="radio-button-demo"
                     inputProps={{ "aria-label": "carte formule du jour" }}
                   />
@@ -209,9 +209,9 @@ const TemplateForm = ({
                 />
                 <div className={classes.selectSection}>
                   <Radio
-                    checked={selectedTemplate === "template3"}
+                    checked={selectedTemplate === "Carte thématique"}
                     onChange={handleChange}
-                    value="template3"
+                    value="Carte thématique"
                     name="radio-button-demo"
                     inputProps={{ "aria-label": "carte thématique" }}
                   />
@@ -233,7 +233,7 @@ const TemplateForm = ({
           </div>
         )}
       </div>
-    </div>
+    </Card>
   );
 };
 

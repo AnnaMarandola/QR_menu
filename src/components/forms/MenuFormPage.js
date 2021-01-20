@@ -181,12 +181,12 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
         )}
 
         {restaurant &&
-          restaurant.template === "template3" &&
+          restaurant.template === "Carte thématique" &&
           dishes &&
           dishes.map((dish) => <DishItemEdit dish={dish} key={dish.id} />)}
 
         {restaurant &&
-          (restaurant.template === "template1" || "template2") &&
+          (restaurant.template === "Carte complète" || "Menu du jour") &&
           dishes && (
             <div className={classes.dishesTable}>
               <Typography className={classes.titleCategory}>

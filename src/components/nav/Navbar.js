@@ -10,7 +10,7 @@ import { compose } from "redux";
 const styles = (theme) => ({
   navbar: {
     width: "100%",
-    height: "4rem",
+    height: "4.2rem",
     backgroundColor: "white",
     position: "fixed",
     zIndex: 2,

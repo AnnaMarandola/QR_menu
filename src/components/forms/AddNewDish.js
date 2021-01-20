@@ -167,9 +167,8 @@ class AddNewDish extends Component {
     const template = menu.template;
 
     return (
-      // <div className={classes.root} >
         <form className={classes.form} onSubmit={this.handleSubmit}>
-          {template !== "template3" && (
+          {template !== "Carte thématique" && (
             <div className={classes.categoryInput}>
               <InputLabel id="category">Catégorie</InputLabel>
               <Select
@@ -289,7 +288,6 @@ class AddNewDish extends Component {
             {dish ? "Modifier" : "ajouter à mon menu"}
           </Button>
         </form>
-      // </div>
     );
   }
 }

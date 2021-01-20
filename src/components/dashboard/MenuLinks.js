@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { NavLink } from "react-router-dom";
-import StartMenu from "../forms/StartMenu";
+import StartMenu from "./StartMenu";
 
 const styles = (theme) => ({
   root: {

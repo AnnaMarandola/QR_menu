@@ -4,7 +4,6 @@ import {
   Typography,
   TextField,
   Button,
-  TextareaAutosize,
 } from "@material-ui/core";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
@@ -136,7 +135,7 @@ class InfoResto extends Component {
   };
 
   render() {
-    const { classes, auth, restaurant } = this.props;
+    const { classes, restaurant } = this.props;
     const resto = (restaurant && restaurant) || null;
 
     if (this.state.submited === true) return <Redirect to="/dashboard" />;
@@ -237,7 +236,6 @@ class InfoResto extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.firebase.auth,
     restaurant:
       state.firestore.ordered.restaurants &&
       state.firestore.ordered.restaurants[0],

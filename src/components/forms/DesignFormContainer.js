@@ -17,7 +17,6 @@ const styles = (theme) => ({
   designButton: {
     color: theme.palette.primary.whiteish,
     backgroundColor: theme.palette.primary.red,
-    marginTop: "-8rem",
   },
   designTitle: {
     marginBottom: "1rem",
