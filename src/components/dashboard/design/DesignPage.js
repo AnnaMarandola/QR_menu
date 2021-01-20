@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Card, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import HeaderDesignForm from "./HeaderDesignForm";
 import TemplateForm from "./TemplateForm";
 
@@ -56,7 +56,6 @@ const styles = (theme) => ({
 
 const DesignPage = ({ classes, restaurant, menu }) => {
   let menuData = { ...menu };
-  let resto = { ...restaurant };
   console.log("menuData", menuData.fontColor);
 
   return (
@@ -73,7 +72,7 @@ const DesignPage = ({ classes, restaurant, menu }) => {
             <HeaderDesignForm menu={menu} restaurant={restaurant} />
           </div>
           <div className={classes.templateCard}>
-          <TemplateForm menu={menu}/>
+          <TemplateForm menu={menu} restaurant={restaurant}/>
           </div>
         </div>
       )}

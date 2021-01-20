@@ -6,7 +6,6 @@ import {
   MenuItem,
   Select,
   Card,
-  CardHeader,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -227,7 +226,7 @@ const HeaderDesignForm = ({
               className={classes.fontSizeInput}
               variant="outlined"
               onChange={handleChangeFontSize}
-              defaultValue="Roboto"
+              defaultValue={fontSize}
             >
               <MenuItem value={"small"} className={classes.small}>
                 petit

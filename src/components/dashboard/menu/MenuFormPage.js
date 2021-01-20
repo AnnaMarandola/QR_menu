@@ -3,24 +3,30 @@ import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Card, Typography } from "@material-ui/core";
-import DishItemEdit from "../menu/DishItemEdit";
+import { Typography } from "@material-ui/core";
+import DishItemEdit from "../../menu/DishItemEdit";
 import TitleForm from "./TitleForm";
-import DishFormContainer from "./DishFormContainer";
-import DesignFormContainer from "./DesignFormContainer";
-import FormulaFormContainer from "./FormulaFormContainer";
+import DishFormContainer from "../../forms/DishFormContainer";
+import FormulaFormContainer from "../../forms/FormulaFormContainer";
 
 const styles = (theme) => ({
   root: {
     width: "95%",
     marginLeft: "2.5%",
+    paddingTop: "4rem",
+    paddingBottom: "4rem",
+    backgroundColor: "yellow",
   },
   titlePage: {
-    width: "80%",
-    paddingTop: "7rem",
+    paddingTop: "2rem",
     paddingBottom: "2rem",
-    marginLeft: "10%",
-    color: theme.palette.primary.main,
+    fontFamily: "Archivo narrow",
+    fontSize: "2rem",
+    fontWeight: 500,
+    textAlign: "center",  
+  },
+  spanTitle: {
+    color: "#E81B7D",
   },
   header: {
     height: "17rem",
@@ -39,19 +45,17 @@ const styles = (theme) => ({
   colorSection: {
     width: "100%",
   },
-  titleSection: {
-    display: "flex",
-    flexDirection: "column",
-    paddingTop: "1rem",
-    paddingLeft: "1rem",
-  },
-
-  modifTitleButton: {
-    marginTop: "-2.5rem",
-  },
-  menuTitle: {
-    fontStyle: "italic",
-  },
+  // titleSection: {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   paddingTop: "1rem",
+  // },
+  // modifTitleButton: {
+  //   marginTop: "-2.5rem",
+  // },
+  // menuTitle: {
+  //   fontStyle: "italic",
+  // },
   formulaSection: {
     textAlign: "center",
     paddingBottom: "2rem",
@@ -102,51 +106,19 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
   return (
     <div className={classes.root}>
       <Typography className={classes.titlePage} variant="h1">
-        <hr /> Gérez votre carte !<hr />
+        Mon <span className={classes.spanTitle}>Menu</span>
       </Typography>
-      <Card
-        className={classes.header}
-        style={{ backgroundColor: menuData.headerColor }}
-      >
-        <Typography
-          className={classes.restoName}
-          variant="h1"
-          style={{
-            color: menuData.fontColor,
-            fontFamily: menuData.fontFamily,
-          }}
-        >
-          {resto.name}
-        </Typography>
-        <img className={classes.logo} src={resto.logo} alt="logo" />
-      </Card>
 
-      <div className={classes.colorSection}>
-        <DesignFormContainer
-          menu={menu}
-          restaurant={restaurant}
-          dishes={dishes}
-        />
-      </div>
 
-      {restaurant &&
-        menu &&
-        restaurant.template === "template3" &&
-        !menu.title && <TitleForm restaurant={restaurant} menu={menuData} />}
+
 
       <div>
-        {menu && menu.title && (
-          <div className={classes.titleSection}>
-            <Typography variant="body1">Titre de mon menu :</Typography>
-            <Typography className={classes.menuTitle} variant="h2">
-              {menuData.title}
-            </Typography>
+        {menu && menu.template !== "Menu du jour" && (
             <TitleForm
               className={classes.modifTitleButton}
               menu={menu}
               restaurant={restaurant}
             />
-          </div>
         )}
 
         {restaurant && restaurant.template === "template2" && dishes && (

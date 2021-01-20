@@ -7,7 +7,7 @@ import InfoResto from "./components/forms/InfoResto";
 import Dashboard from "./components/dashboard/Dashboard";
 import UserIsAuthenticated from "./HOC/UserIsAuthenticated";
 import WithTopBar from "./HOC/WithTopBar";
-import MenuFormPage from "./components/forms/MenuFormPage";
+import MenuFormPage from "./components/dashboard/menu/MenuFormPage";
 import MenuPage from "./components/menu/MenuPage";
 import QrCodePdf from "./components/qrcode/QrCodePdf";
 import ToastComponent from "./constants/Toast";
@@ -43,7 +43,7 @@ function App() {
           component={UserIsAuthenticated(WithTopBar(DesignPage))}
         />        
         <Route
-          path="/menuformpage/:resto/:menu"
+          path="/menuform/:resto/:menu"
           component={UserIsAuthenticated(WithTopBar(MenuFormPage))}
         />
         <Route

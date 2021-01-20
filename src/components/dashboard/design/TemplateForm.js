@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CardHeader, withStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/core";
 import { Typography, Radio, Button, Card } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -56,10 +56,11 @@ const styles = (theme) => ({
     marginLeft: "1.5rem",
     marginTop: "1rem",
   },
-  templateSection: {
+  templateSelected: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginBottom: "1rem",
   },
   validateButton: {
     backgroundColor: theme.palette.primary.main,
@@ -88,7 +89,6 @@ const TemplateForm = ({
     (restaurant && restaurant.template) || "Carte thématique"
   );
   const [menuTitle, setMenuTitle] = useState("");
-  console.log(menuTitle);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -131,7 +131,7 @@ const TemplateForm = ({
       </Typography>
       <div>
         {!open && (
-          <div className={classes.templateSection}>
+          <div className={classes.templateSelected}>
             <Typography>{menuTemplate}</Typography>
             <Button onClick={handleClickOpen}>
               <EditRoundedIcon style={{ fill: "#E81B7D" }} />

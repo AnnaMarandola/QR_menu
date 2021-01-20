@@ -28,7 +28,7 @@ const styles = (theme) => ({
   },
 
   modifyButton: {
-    backgroundColor: theme.palette.primary.orange,
+    backgroundColor:"#E81B7D",
     padding: "0, 1.5rem, 0, 1.5rem",
     color: theme.palette.primary.whiteish,
     marginRight: "1rem",
@@ -61,7 +61,7 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                   className={classes.links}
                   to={`/menuform/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.modifyButton}>Modifier</Button>
+                  <Button className={classes.modifyButton}>Menu</Button>
                 </NavLink>
 
                 <NavLink
