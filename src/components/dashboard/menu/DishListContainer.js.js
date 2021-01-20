@@ -1,11 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Typography, withStyles } from "@material-ui/core";
-import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { updateMenu } from "../../../store/actions/menuActions";
-import AddNewDish from "./AddNewDish";
 import DishItemEdit from "./DishItemEdit";
 
 
@@ -14,6 +10,7 @@ const styles = (theme) => ({
   rootCard: {
     marginBottom: "1rem",
     backgroundColor: "white",
+    paddingBottom: "1rem",
   },
   cardHeader: {
     fontFamily: "Archivo narrow",
@@ -23,17 +20,17 @@ const styles = (theme) => ({
     paddingBottom: 0,
     fontWeight: 400,
   },
-  addButton: {
-    position: "relative",
-    right: "-12rem",
-    top: "-1.9rem",
+  titleCategory: {
+    textAlign: "center",
+    fontFamily: "Archivo narrow",
+    backgroundColor: "#c7def5",
+    padding: "0.5rem",
+    marginTop: "0.5rem",
   },
-
 });
 
-const DishFormContainer = ({ classes, restaurant, menu, dishes }) => {
+const DishListContainer = ({ classes, restaurant, dishes }) => {
 
-  const menuId = menu && menu.id;
   const sortedDishes =
     dishes &&
     dishes.reduce(
@@ -47,8 +44,7 @@ const DishFormContainer = ({ classes, restaurant, menu, dishes }) => {
   const starters = sorts && sorts.starter;
   const mains = sorts && sorts.main;
   const desserts = sorts && sorts.dessert;
-
-
+  
   return (
     <Card className={classes.rootCard}>
       <Typography className={classes.cardHeader}>
@@ -95,12 +91,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { updateMenu }),
-  firestoreConnect((props) => [
-    {
-      collection: "menus",
-      storeAs: "menu",
-      where: [["menu.restoId", "==", props.restaurant.id]],
-    },
-  ])
-)(DishFormContainer);
+  connect(mapStateToProps),
+)(DishListContainer);
