@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
-import {
-  Typography,
-  TextField,
-  Button,
-} from "@material-ui/core";
+import { Typography, TextField, Button } from "@material-ui/core";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -40,7 +36,7 @@ const styles = (theme) => ({
     fontFamily: "Archivo narrow",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "4rem",
-      fontSize: "3rem"
+      fontSize: "3rem",
     },
   },
   titleSpan: {
@@ -140,7 +136,7 @@ class InfoResto extends Component {
 
     if (this.state.submited === true) return <Redirect to="/dashboard" />;
 
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
 
     return (
       <div className={classes.root}>
@@ -236,6 +232,7 @@ class InfoResto extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    auth: state.firebase.auth,
     restaurant:
       state.firestore.ordered.restaurants &&
       state.firestore.ordered.restaurants[0],
