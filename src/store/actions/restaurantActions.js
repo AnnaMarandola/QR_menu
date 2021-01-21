@@ -109,3 +109,30 @@ export const uploadLogoPicture = (file, restoId) =>
       }
     );
 };
+
+export const uploadCarouselPicture = (file, restoId) => 
+(dispatch,getState,{ getFirebase }) => {
+  console.log("file and resto in upload action", file, restoId)
+  const firebase = getFirebase();
+  firebase
+    .storage()
+    .ref(
+      `carousel-pictures/${restoId}-${new Date().getMilliseconds()}.${file.name.split(".").pop()}`
+    )
+    .put(file)
+    .on(
+      "state_changed",
+      function progress(snapshot) {
+        dispatch({
+          type: "UPLOAD_PROGRESS",
+          progress: (100 * snapshot.bytesTransferred) / snapshot.totalBytes,
+        });
+      },
+      function error(err) {
+        dispatch({ type: "UPLOAD_ERROR", err });
+      },
+      function complete() {
+        dispatch({ type: "UPLOAD_COMPLETE" });
+      }
+    );
+};
