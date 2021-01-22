@@ -11,6 +11,8 @@ const styles = (theme) => ({
   rootCard: {
     marginBottom: "1rem",
     backgroundColor: "white",
+    height: "fit-content",
+    width: "100%",
   },
   cardHeader: {
     fontFamily: "Archivo narrow",
@@ -36,8 +38,8 @@ const GalleryCard = ({ classes, restaurant }) => {
       </Typography>
       <div className={classes.uploadButton}>
         <UploadCarouselImg restaurant={restaurant} />
-        <Gallery restaurant={restaurant}/>
       </div>
+        <Gallery restaurant={restaurant}/>
     </Card>
   );
 };

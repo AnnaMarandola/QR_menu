@@ -136,3 +136,21 @@ export const uploadCarouselPicture = (file, restoId) =>
       }
     );
 };
+
+export const removeCarouselPicture = (payload) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    let restoId = payload.restoId;
+    let image = payload.image;
+    console.log("payload inREMOVE", payload)
+    getFirestore()
+      .collection("restaurants")
+      .doc(restoId)
+      .update({ carousel: getFirestore().FieldValue.arrayRemove(image)})
+      .then(() => {
+        dispatch({ type: "REMOVE_PICTURE", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "REMOVE_PICTURE_ERROR", err });
+      });
+  };
+};
