@@ -23,6 +23,7 @@
     "react-qrcode-hook": "^1.1.0",
     "react-redux": "^5.1.1",
     "react-redux-firebase": "^3.0.0",
+    "react-responsive-carousel": "^3.2.11",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-select": "^3.1.0",

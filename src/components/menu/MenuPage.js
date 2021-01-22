@@ -9,6 +9,7 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import FooterResto from "./FooterResto";
+import RestoCarousel from "./RestoCarousel";
 
 const styles = (theme) => ({
   root: {
@@ -29,7 +30,7 @@ const styles = (theme) => ({
     marginTop: "3rem",
   },
   menuTitle: {
-    marginTop: "2rem",
+    marginTop: "3rem",
     marginBottom: "2rem",
     textAlign: "center",
   },
@@ -50,9 +51,12 @@ const styles = (theme) => ({
   },
   menuBody: {
     marginBottom: "6rem",
+    // marginTop: "18rem",
   },
   categoryHeader: {
     backgroundColor: "white",
+  },
+  carouselSection: {
   },
   categoryTitle: {
     width: "10rem",
@@ -118,6 +122,9 @@ const MenuPage = ({ classes, restaurant, menu, dishes }) => {
           {resto.name}
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
+      </div>
+      <div className={classes.carouselSection}>
+      <RestoCarousel restaurant={resto}/>
       </div>
 
       <div className={classes.menuBody}>

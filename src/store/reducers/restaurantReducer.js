@@ -46,6 +46,12 @@ const restaurantReducer = (state = initialState, action) => {
         ...state,
         uploadProgress: null,
       };
+      case "REMOVE_PICTURE":
+        console.log("remove picture success", action.restaurant);
+        return state;
+      case "REMOVE_PICTURE_ERROR":
+        console.log("remove picture error", action.err);
+        return state;
     default:
       return state;
   }
