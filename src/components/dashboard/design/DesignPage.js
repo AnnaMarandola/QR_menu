@@ -6,7 +6,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { Typography } from "@material-ui/core";
 import HeaderDesignForm from "./HeaderDesignForm";
 import TemplateForm from "./TemplateForm";
-import CarouselCard from "./add-carousel/CarouselCard";
+import GalleryCard from "./add-carousel/GalleryCard";
 
 const styles = (theme) => ({
   root: {
@@ -76,7 +76,7 @@ const DesignPage = ({ classes, restaurant, menu }) => {
           <TemplateForm menu={menu} restaurant={restaurant}/>
           </div>
           <div>
-          <CarouselCard restaurant={restaurant}/>
+          <GalleryCard restaurant={restaurant}/>
           </div>
         </div>
       )}

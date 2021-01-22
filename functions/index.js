@@ -76,8 +76,7 @@ exports.onUploadCarouselPicture = functions.storage
         .firestore()
         .collection("restaurants")
         .doc(restoId)
-        .collection("carousel")
-        .add({imgSrc: object.mediaLink});
+        .update({ carousel: admin.firestore.FieldValue.arrayUnion(object.mediaLink)});
     } else {
       return false;
     }

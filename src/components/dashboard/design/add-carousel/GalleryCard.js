@@ -5,6 +5,7 @@ import { compose } from "redux";
 import AddCircleOutlineTwoToneIcon from "@material-ui/icons/AddCircleOutlineTwoTone";
 import UploadLogo from "../../../forms/UploadLogo";
 import UploadCarouselImg from "./UploadCarouselImg";
+import Gallery from "./Gallery";
 
 const styles = (theme) => ({
   rootCard: {
@@ -27,7 +28,7 @@ const styles = (theme) => ({
   },
 });
 
-const CarouselCard = ({ classes, restaurant }) => {
+const GalleryCard = ({ classes, restaurant }) => {
   return (
     <Card className={classes.rootCard}>
       <Typography className={classes.cardHeader}>
@@ -35,9 +36,10 @@ const CarouselCard = ({ classes, restaurant }) => {
       </Typography>
       <div className={classes.uploadButton}>
         <UploadCarouselImg restaurant={restaurant} />
+        <Gallery restaurant={restaurant}/>
       </div>
     </Card>
   );
 };
 
-export default compose(withStyles(styles))(CarouselCard);
+export default compose(withStyles(styles))(GalleryCard);
