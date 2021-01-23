@@ -14,7 +14,6 @@ const styles = (theme) => ({
     marginLeft: "2.5%",
     paddingTop: "4rem",
     paddingBottom: "4rem",
-    // backgroundColor: "yellow",
   },
   titlePage: {
     paddingTop: "2rem",

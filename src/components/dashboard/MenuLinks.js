@@ -9,6 +9,9 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { NavLink } from "react-router-dom";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import CropFreeIcon from "@material-ui/icons/CropFree";
 import StartMenu from "./StartMenu";
 
 const styles = (theme) => ({
@@ -19,25 +22,32 @@ const styles = (theme) => ({
     marginTop: "1rem",
     padding: "1rem",
   },
-  media: {
-    height: 140,
-  },
   cardButtons: {
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "column",
+    height: "7rem",
+    flexWrap: "wrap",
+    alignItems: "center",
   },
-
   modifyButton: {
-    backgroundColor:"#E81B7D",
-    padding: "0, 1.5rem, 0, 1.5rem",
-    color: theme.palette.primary.whiteish,
-    marginRight: "1rem",
+    border: "solid 1px #e81b7d",
+    margin: "0.4rem",
+    padding: "0.4rem",
+    fontFamily: "Archivo narrow",
   },
-  qrcodeButton: {
-    backgroundColor: theme.palette.primary.red,
-    padding: "0, 1.5rem, 0, 1.5rem",
-    color: theme.palette.primary.whiteish,
-    width: "5rem",
+  showButton: {
+    margin: "0.4rem",
+    padding: "0.4rem",
+    border: "solid 1px grey",
+    fontFamily: "Archivo narrow",
+  },
+  modifyIcon: {
+    marginRight: "0.3rem",
+    fill: "#E81B7D"
+  },
+  showIcon: {
+    marginRight: "0.3rem",
+    fill: "#82e3fb"
   },
   links: {
     textDecoration: "none",
@@ -54,35 +64,48 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
           <Typography gutterBottom variant="h5">
             Ma carte
           </Typography>
-          <CardContent className={classes.cardButtons}>
+          <CardContent>
             {restaurant && restaurant.menuId && restaurant.template ? (
-              <div>
+              <div className={classes.cardButtons}>
                 <NavLink
                   className={classes.links}
                   to={`/menuform/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.modifyButton}>Menu</Button>
+                  <Button className={classes.modifyButton}>
+                    {" "}
+                    <EditRoundedIcon  className={classes.modifyIcon} />
+                    Menu
+                  </Button>
                 </NavLink>
 
                 <NavLink
                   className={classes.links}
                   to={`/design/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.modifyButton}>Design</Button>
+                  <Button className={classes.modifyButton}>
+                    <EditRoundedIcon className={classes.modifyIcon} />
+                    Design
+                  </Button>
                 </NavLink>
 
                 <NavLink
                   className={classes.links}
                   to={`/menupage/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.showButton}>Consulter</Button>
+                  <Button className={classes.showButton}>
+                    <VisibilityIcon className={classes.showIcon} />
+                    Consulter
+                  </Button>
                 </NavLink>
 
                 <NavLink
                   className={classes.links}
                   to={`/qrcode/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.qrcodeButton}>QR CODE</Button>
+                  <Button className={classes.showButton}>
+                    <CropFreeIcon className={classes.showIcon} />
+                    QR CODE
+                  </Button>
                 </NavLink>
               </div>
             ) : (
