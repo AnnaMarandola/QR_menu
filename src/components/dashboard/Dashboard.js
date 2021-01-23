@@ -18,7 +18,7 @@ const styles = (theme) => ({
     },
   },
   container: {
-    paddingTop: "1rem",
+    paddingBottom: "3rem",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -30,14 +30,16 @@ const styles = (theme) => ({
       width: "80%"
     },
   },
-  dashboardTitle: {
-    marginTop: "3rem",
-    width: "80%",
-    display: "flex",
-    flexDirection: "column"
-  },
-  titleText: {
+  title: {
+    paddingTop: "2rem",
+    paddingBottom: "1rem",
+    fontFamily: "Archivo narrow",
+    fontSize: "2rem",
+    fontWeight: 500,
     textAlign: "center",
+  },
+  spanTitle: {
+    color: "#E81B7D",
   },
 });
 
@@ -50,12 +52,9 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
   window.scrollTo(0, 0)
   return (
     <div className={classes.root}>
-
-    <div className={classes.dashboardTitle}>
-    <Typography variant="h1" className={classes.titleText}>
-    <hr/>Tableau de bord<hr/>
+    <Typography variant="h1" className={classes.title}>
+    <span className={classes.spanTitle}>T</span>ableau de bord
     </Typography>
-    </div>
       <div className={classes.container}>
             <MenuLinks restaurant={restaurant} menuId={menuId} />
             <RestaurantSummary restaurant={restaurant} />

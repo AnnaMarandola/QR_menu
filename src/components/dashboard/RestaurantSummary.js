@@ -10,6 +10,8 @@ import {
 import { withStyles } from "@material-ui/styles";
 import { NavLink } from "react-router-dom";
 import UploadLogo from "../forms/UploadLogo";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
+
 
 const styles = (theme) => ({
   root: {
@@ -19,13 +21,24 @@ const styles = (theme) => ({
     padding: "1rem",
     backgroundColor: "white",
   },
+  cardTitle: {
+    fontFamily: "Archivo narrow",
+    fontSize: "1.5rem",
+    fontWeight: 400,
+    color: "#E81B7D",
+  },
   media: {
     height: 140,
   },
   modifyButton: {
-    backgroundColor: theme.palette.primary.orange,
-    padding: "0, 1.5rem, 0, 1.5rem",
-    color: theme.palette.primary.whiteish,
+    border: "solid 1px #e81b7d",
+    margin: "0.4rem",
+    padding: "0.4rem",
+    fontFamily: "Archivo narrow",
+  },
+  modifyIcon: {
+    marginRight: "0.3rem",
+    fill: "#E81B7D",
   },
   links: {
     textDecoration: "none",
@@ -38,10 +51,10 @@ const RestaurantSummary = ({ restaurant, classes }) => {
       {restaurant ? (
         <Card className={classes.root}>
           <CardActionArea>
-            <Typography gutterBottom variant="h5">
-              Mon établissement 
+            <Typography gutterBottom className={classes.cardTitle}>
+              Mon établissement
             </Typography>
-            <UploadLogo restaurant={restaurant}/>
+            <UploadLogo restaurant={restaurant} />
             <CardContent>
               <Typography gutterBottom variant="h5">
                 {restaurant.name}
@@ -61,8 +74,14 @@ const RestaurantSummary = ({ restaurant, classes }) => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <NavLink className={classes.links} to={`/inforesto/edit/${restaurant.id}`}>
-              <Button className={classes.modifyButton}>Modifier</Button>
+            <NavLink
+              className={classes.links}
+              to={`/inforesto/edit/${restaurant.id}`}
+            >
+              <Button className={classes.modifyButton}>
+                <EditRoundedIcon className={classes.modifyIcon} />
+                Modifier
+              </Button>
             </NavLink>
           </CardActions>
         </Card>
@@ -73,7 +92,8 @@ const RestaurantSummary = ({ restaurant, classes }) => {
               Mon restaurant
             </Typography>{" "}
             <Typography gutterBottom variant="body2">
-              Ces informations seront utilisées pour personnaliser votre carte en ligne . 
+              Ces informations seront utilisées pour personnaliser votre carte
+              en ligne .
             </Typography>
             <NavLink className={classes.links} to="/inforesto">
               <Button className={classes.modifyButton}>Modifier</Button>
