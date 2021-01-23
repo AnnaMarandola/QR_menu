@@ -22,6 +22,12 @@ const styles = (theme) => ({
     marginTop: "1rem",
     padding: "1rem",
   },
+  cardTitle: {
+    fontFamily: "Archivo narrow",
+    fontSize: "1.5rem",
+    fontWeight: 400,
+    color: "#E81B7D",
+  },
   cardButtons: {
     display: "flex",
     flexDirection: "column",
@@ -61,7 +67,7 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
     <div>
       <Card className={classes.root}>
         <CardActionArea>
-          <Typography gutterBottom variant="h5">
+          <Typography gutterBottom className={classes.cardTitle}>
             Ma carte
           </Typography>
           <CardContent>
