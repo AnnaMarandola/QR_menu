@@ -1,61 +1,3 @@
-// import React from "react";
-// import { compose } from "redux";
-// import { Typography, withStyles } from "@material-ui/core";
-// import AnchorLink from "react-anchor-link-smooth-scroll";
-// import MenuOutlinedIcon from "@material-ui/icons/MenuOutlined";
-
-// const styles = (theme) => ({
-//   rootNav: {
-//     // display: "none",
-//     // [theme.breakpoints.up("sm")]: {
-//     //   display: "flex",
-//     //   height: "5rem",
-//     //   borderBottom: "1px solid grey",
-//     // },
-//   },
-//   homeNav: {
-//     // display: "flex",
-//     // justifyContent: "flex-end",
-//     // alignItems: "center",
-//     // width: "100%",
-//   },
-//   menuIcon: {
-//     fill: "white",
-//   },
-//   menuItem: {
-//     marginRight: "2rem",
-//     fontFamily: "Archivo narrow",
-//     fontSize: "1.5rem",
-//     fontWeight: "300",
-//     fontColor: "grey",
-//   },
-//   navlink: {
-//     textDecoration: "none",
-//     color: "inherit",
-//   },
-// });
-
-// const RestoNav = ({ classes }) => {
-//   return (
-//     <div className={classes.rootNav}>
-//       <MenuOutlinedIcon className={classes.menuIcon} />
-//       <div className={classes.homeNav}>
-//         <AnchorLink href="#menu" className={classes.navlink}>
-//           <Typography className={classes.menuItem}>LA CARTE</Typography>
-//         </AnchorLink>
-//         <AnchorLink href="#infos-contact" className={classes.navlink}>
-//           <Typography className={classes.menuItem}>INFOS & CONTACT</Typography>
-//         </AnchorLink>
-//         <AnchorLink href="#infos-allergens" className={classes.navlink}>
-//           <Typography className={classes.menuItem}>INFO ALLERGENES</Typography>
-//         </AnchorLink>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default compose(withStyles(styles))(RestoNav);
-
 import React from "react";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -69,7 +11,6 @@ const styles = (theme, menu) => ({
   root: {
     position: "relative",
     left: "17rem",
-    // top: "-3rem",
   },
   menuIcon: {
       fontSize: "3rem",

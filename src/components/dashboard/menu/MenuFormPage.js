@@ -3,11 +3,14 @@ import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Typography } from "@material-ui/core";
+import { Typography, Fab } from "@material-ui/core";
 import TitleForm from "./TitleForm";
 import FormulaFormContainer from "../../forms/FormulaFormContainer";
 import NewDishContainer from "./NewDishContainer";
 import DishItemList from "./DishListContainer.js.js";
+import { NavLink } from "react-router-dom";
+import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
+
 
 const styles = (theme) => ({
   root: {
@@ -15,10 +18,8 @@ const styles = (theme) => ({
     marginLeft: "2.5%",
     paddingTop: "4rem",
     paddingBottom: "4rem",
-    // backgroundColor: "yellow",
   },
   titlePage: {
-    paddingTop: "2rem",
     paddingBottom: "2rem",
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
@@ -71,6 +72,12 @@ const styles = (theme) => ({
     paddingTop: "1rem",
     marginBottom: "2rem",
   },
+  goBackButton: {
+    margin: "2rem",
+  },
+  backArrow: {
+    fill: "#E81B7D",
+  },
 });
 
 const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
@@ -78,6 +85,11 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
 
   return (
     <div className={classes.root}>
+          <NavLink to="/dashboard">
+        <Fab size="small" className={classes.goBackButton}>
+          <ArrowBackOutlinedIcon className={classes.backArrow} />
+        </Fab>
+      </NavLink>
       <Typography className={classes.titlePage} variant="h1">
         Mon <span className={classes.spanTitle}>Menu</span>
       </Typography>

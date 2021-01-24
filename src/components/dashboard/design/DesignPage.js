@@ -3,10 +3,14 @@ import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Typography } from "@material-ui/core";
+import { Typography, Fab } from "@material-ui/core";
 import HeaderDesignForm from "./HeaderDesignForm";
 import TemplateForm from "./TemplateForm";
 import GalleryCard from "./add-carousel/GalleryCard";
+import { NavLink } from "react-router-dom";
+import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
+
+
 
 const styles = (theme) => ({
   root: {
@@ -16,7 +20,6 @@ const styles = (theme) => ({
     paddingBottom: "4rem",
   },
   titlePage: {
-    paddingTop: "2rem",
     paddingBottom: "1rem",
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
@@ -33,13 +36,6 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  restoName: {
-    marginTop: "2rem",
-    marginBottom: "2rem",
-  },
-  logo: {
-    width: "10rem",
-  },
   headerDesign: {
     width: "100%",
   },
@@ -52,6 +48,12 @@ const styles = (theme) => ({
     paddingTop: "1rem",
     paddingLeft: "1rem",
   },
+  goBackButton: {
+    margin: "2rem",
+  },
+  backArrow: {
+    fill: "#E81B7D",
+  },
 });
 
 const DesignPage = ({ classes, restaurant, menu }) => {
@@ -60,7 +62,14 @@ const DesignPage = ({ classes, restaurant, menu }) => {
 
   return (
     <div className={classes.root}>
-          <Typography className={classes.titlePage}>Mon <span className={classes.spanTitle}>Design</span></Typography>
+      <NavLink to="/dashboard">
+        <Fab size="small" className={classes.goBackButton}>
+          <ArrowBackOutlinedIcon className={classes.backArrow} />
+        </Fab>
+      </NavLink>
+      <Typography className={classes.titlePage}>
+        Mon <span className={classes.spanTitle}>Design</span>
+      </Typography>
       {!menuData.template && (
         <div>
           <TemplateForm />
@@ -72,10 +81,10 @@ const DesignPage = ({ classes, restaurant, menu }) => {
             <HeaderDesignForm menu={menu} restaurant={restaurant} />
           </div>
           <div className={classes.templateCard}>
-          <TemplateForm menu={menu} restaurant={restaurant}/>
+            <TemplateForm menu={menu} restaurant={restaurant} />
           </div>
           <div>
-          <GalleryCard restaurant={restaurant}/>
+            <GalleryCard restaurant={restaurant} />
           </div>
         </div>
       )}

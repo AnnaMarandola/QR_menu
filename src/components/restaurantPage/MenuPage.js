@@ -10,9 +10,8 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import FooterResto from "./FooterResto";
 import RestoCarousel from "./RestoCarousel";
-import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
+import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 import { NavLink } from "react-router-dom";
-import RestoNav from './RestoNav';
 import RestoNavBar from "./RestoNavBar";
 
 const styles = (theme) => ({
@@ -24,14 +23,14 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    paddingTop: "2.5rem",
+    paddingTop: "1rem",
   },
   logo: {
     maxWidth: "40%",
     marginBottom: "1rem",
   },
   restoName: {
-    marginTop: "3rem",
+    margin: "2rem",
   },
   menuTitle: {
     marginTop: "3rem",
@@ -59,8 +58,7 @@ const styles = (theme) => ({
   categoryHeader: {
     backgroundColor: "white",
   },
-  carouselSection: {
-  },
+  carouselSection: {},
   categoryTitle: {
     width: "10rem",
     height: "2rem",
@@ -76,7 +74,6 @@ const styles = (theme) => ({
     height: "4rem",
     width: "100%",
     marginTop: "1rem",
-    position: "fixed",
     bottom: 0,
   },
   mediaLogo: {
@@ -89,12 +86,12 @@ const styles = (theme) => ({
     backgroundColor: "#E81B7D",
     position: "relative",
     right: "8rem",
-    top: "-1rem",
-    // alignItems: "flex-start",
+    top: "0.5rem",
+    zIndex: 3,
   },
   backArrow: {
     fill: "white",
-  }
+  },
 });
 
 const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
@@ -120,18 +117,18 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
 
   return (
     <div className={classes.root}>
-      <RestoNavBar menu={menuData}/>
+      <RestoNavBar menu={menuData} />
       <div
         className={classes.menuHearder}
         style={{ backgroundColor: menuData.headerColor || "#272727" }}
       >
-      { auth && auth.uid &&
-      <NavLink to="/dashboard">
-      <Fab size="small" className={classes.goBackButton}>
-      <ArrowBackOutlinedIcon className={classes.backArrow} />
-      </Fab>
-      </NavLink> 
-      }
+        {auth && auth.uid && (
+          <NavLink to="/dashboard">
+            <Fab size="small" className={classes.goBackButton}>
+              <ArrowBackOutlinedIcon className={classes.backArrow} />
+            </Fab>
+          </NavLink>
+        )}
         <Typography
           className={classes.restoName}
           variant="h1"
@@ -145,149 +142,151 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
       <div className={classes.carouselSection}>
-      <RestoCarousel restaurant={resto}/>
+        <RestoCarousel restaurant={resto} />
       </div>
-          <section id="menu">
-      <div className={classes.menuBody}>
-        <Typography
-          variant="h1"
-          className={classes.menuTitle}
-          style={{
-            fontFamily: menuData.fontFamily || "Roboto",
-          }}
-        >
-          {menuData.menuTitle}
-        </Typography>
-        {menu && menu.template === "Menu du jour" && (
-          <div className={classes.formulaContainer}>
-            <div className={classes.formula}>
-              <div className={classes.formulaAndPrice}>
-                <Typography>{menuData.formula1}</Typography>
-                <Typography>
-                  {menuData.formula1Price} {menuData.formula2 ? "€" : null}
+      <section id="menu">
+        <div className={classes.menuBody}>
+          <Typography
+            variant="h1"
+            className={classes.menuTitle}
+            style={{
+              fontFamily: menuData.fontFamily || "Roboto",
+            }}
+          >
+            {menuData.menuTitle}
+          </Typography>
+          {menu && menu.template === "Menu du jour" && (
+            <div className={classes.formulaContainer}>
+              <div className={classes.formula}>
+                <div className={classes.formulaAndPrice}>
+                  <Typography>{menuData.formula1}</Typography>
+                  <Typography>
+                    {menuData.formula1Price} {menuData.formula2 ? "€" : null}
+                  </Typography>
+                </div>
+                <Typography className={classes.formulaComment}>
+                  {menuData.formula1Comment}
                 </Typography>
               </div>
-              <Typography className={classes.formulaComment}>
-                {menuData.formula1Comment}
-              </Typography>
-            </div>
-            <div className={classes.formula}>
-              <div className={classes.formulaAndPrice}>
-                <Typography>{menuData.formula2}</Typography>
-                <Typography>
-                  {menuData.formula2Price} {menuData.formula2 ? "€" : null}
-                </Typography>
+              <div className={classes.formula}>
+                <div className={classes.formulaAndPrice}>
+                  <Typography>{menuData.formula2}</Typography>
+                  <Typography>
+                    {menuData.formula2Price} {menuData.formula2 ? "€" : null}
+                  </Typography>
+                </div>
+                <Typography>{menuData.formula2Comment}</Typography>
               </div>
-              <Typography>{menuData.formula2Comment}</Typography>
-            </div>
-          </div>
-        )}
-        {menu && menu.template === "Carte thématique" && (
-          <div>
-            {publishedDishes &&
-              publishedDishes.map((dish) => (
-                <DishItem
-                  key={dish.id}
-                  menu={menuData}
-                  title={dish.dishName}
-                  price={dish.price}
-                  ingredients={dish.ingredients}
-                  description={dish.description}
-                  allergens={dish.checkedAllergens}
-                />
-              ))}
-          </div>
-        )}
-        {menu &&
-          (menu.template === "Carte complète" ||
-            menu.template === "Menu du jour") && (
-            <div className={classes.menuSection}>
-              <Accordion className={classes.accordion}>
-                <AccordionSummary className={classes.categoryHeader}>
-                  <Button
-                    className={classes.categoryTitle}
-                    style={{
-                      backgroundColor: menuData.headerColor || "#272727",
-                    }}
-                  >
-                    Entrée
-                  </Button>
-                </AccordionSummary>
-                <AccordionDetails className={classes.dishList}>
-                  {starters &&
-                    starters.map((starter) => (
-                      <DishItem
-                        key={starter.id}
-                        menu={menuData}
-                        title={starter.dishName}
-                        price={starter.price}
-                        ingredients={starter.ingredients}
-                        description={starter.description}
-                        allergens={starter.checkedAllergens}
-                      />
-                    ))}
-                </AccordionDetails>
-              </Accordion>
-              <Accordion className={classes.accordion}>
-                <AccordionSummary className={classes.categoryHeader}>
-                  <Button
-                    className={classes.categoryTitle}
-                    style={{
-                      backgroundColor: menuData.headerColor || "#272727",
-                    }}
-                  >
-                    Plats
-                  </Button>
-                </AccordionSummary>
-                <AccordionDetails className={classes.dishList}>
-                  {mains &&
-                    mains.map((main) => (
-                      <DishItem
-                        key={main.id}
-                        menu={menuData}
-                        title={main.dishName}
-                        price={main.price}
-                        ingredients={main.ingredients}
-                        description={main.description}
-                        allergens={main.checkedAllergens}
-                      />
-                    ))}
-                </AccordionDetails>
-              </Accordion>
-              <Accordion className={classes.accordion}>
-                <AccordionSummary className={classes.categoryHeader}>
-                  <Button
-                    className={classes.categoryTitle}
-                    style={{
-                      backgroundColor: menuData.headerColor || "#272727",
-                    }}
-                  >
-                    Desserts
-                  </Button>
-                </AccordionSummary>
-                <AccordionDetails className={classes.dishList}>
-                  {desserts &&
-                    desserts.map((dessert) => (
-                      <DishItem
-                        key={dessert.id}
-                        menu={menuData}
-                        title={dessert.dishName}
-                        price={dessert.price}
-                        ingredients={dessert.ingredients}
-                        description={dessert.description}
-                        allergens={dessert.checkedAllergens}
-                      />
-                    ))}
-                </AccordionDetails>
-              </Accordion>
             </div>
           )}
-      </div>
+          {menu && menu.template === "Carte thématique" && (
+            <div>
+              {publishedDishes &&
+                publishedDishes.map((dish) => (
+                  <DishItem
+                    key={dish.id}
+                    menu={menuData}
+                    title={dish.dishName}
+                    price={dish.price}
+                    ingredients={dish.ingredients}
+                    description={dish.description}
+                    allergens={dish.checkedAllergens}
+                  />
+                ))}
+            </div>
+          )}
+          {menu &&
+            (menu.template === "Carte complète" ||
+              menu.template === "Menu du jour") && (
+              <div className={classes.menuSection}>
+                <Accordion className={classes.accordion}>
+                  <AccordionSummary className={classes.categoryHeader}>
+                    <Button
+                      className={classes.categoryTitle}
+                      style={{
+                        backgroundColor: menuData.headerColor || "#272727",
+                      }}
+                    >
+                      Entrée
+                    </Button>
+                  </AccordionSummary>
+                  <AccordionDetails className={classes.dishList}>
+                    {starters &&
+                      starters.map((starter) => (
+                        <DishItem
+                          key={starter.id}
+                          menu={menuData}
+                          title={starter.dishName}
+                          price={starter.price}
+                          ingredients={starter.ingredients}
+                          description={starter.description}
+                          allergens={starter.checkedAllergens}
+                        />
+                      ))}
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion className={classes.accordion}>
+                  <AccordionSummary className={classes.categoryHeader}>
+                    <Button
+                      className={classes.categoryTitle}
+                      style={{
+                        backgroundColor: menuData.headerColor || "#272727",
+                      }}
+                    >
+                      Plats
+                    </Button>
+                  </AccordionSummary>
+                  <AccordionDetails className={classes.dishList}>
+                    {mains &&
+                      mains.map((main) => (
+                        <DishItem
+                          key={main.id}
+                          menu={menuData}
+                          title={main.dishName}
+                          price={main.price}
+                          ingredients={main.ingredients}
+                          description={main.description}
+                          allergens={main.checkedAllergens}
+                        />
+                      ))}
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion className={classes.accordion}>
+                  <AccordionSummary className={classes.categoryHeader}>
+                    <Button
+                      className={classes.categoryTitle}
+                      style={{
+                        backgroundColor: menuData.headerColor || "#272727",
+                      }}
+                    >
+                      Desserts
+                    </Button>
+                  </AccordionSummary>
+                  <AccordionDetails className={classes.dishList}>
+                    {desserts &&
+                      desserts.map((dessert) => (
+                        <DishItem
+                          key={dessert.id}
+                          menu={menuData}
+                          title={dessert.dishName}
+                          price={dessert.price}
+                          ingredients={dessert.ingredients}
+                          description={dessert.description}
+                          allergens={dessert.checkedAllergens}
+                        />
+                      ))}
+                  </AccordionDetails>
+                </Accordion>
+              </div>
+            )}
+        </div>
       </section>
 
-                      <section id="infoscontact">
-                        <div><Typography>Info et contact</Typography>Info et contact</div>
-                      </section>
+      <section id="infoscontact">
+        <div>
+          <Typography>to do : Info et contact</Typography>
+        </div>
+      </section>
       <div
         className={classes.footerSection}
         style={{ backgroundColor: menuData.headerColor || "#272727" }}
