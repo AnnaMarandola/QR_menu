@@ -8,7 +8,7 @@ const cstyles = (theme) => ({
     root: {
     },
     image: {
-        height: "18rem",
+        // height: "18rem",
 
     }
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, Fab } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
@@ -10,6 +10,10 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import FooterResto from "./FooterResto";
 import RestoCarousel from "./RestoCarousel";
+import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
+import { NavLink } from "react-router-dom";
+import RestoNav from './RestoNav';
+import RestoNavBar from "./RestoNavBar";
 
 const styles = (theme) => ({
   root: {
@@ -51,7 +55,6 @@ const styles = (theme) => ({
   },
   menuBody: {
     marginBottom: "6rem",
-    // marginTop: "18rem",
   },
   categoryHeader: {
     backgroundColor: "white",
@@ -82,9 +85,19 @@ const styles = (theme) => ({
   contactTitle: {
     textAlign: "center",
   },
+  goBackButton: {
+    backgroundColor: "#E81B7D",
+    position: "relative",
+    right: "8rem",
+    top: "-1rem",
+    // alignItems: "flex-start",
+  },
+  backArrow: {
+    fill: "white",
+  }
 });
 
-const MenuPage = ({ classes, restaurant, menu, dishes }) => {
+const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const resto = { ...restaurant };
   const menuData = { ...menu };
 
@@ -107,10 +120,18 @@ const MenuPage = ({ classes, restaurant, menu, dishes }) => {
 
   return (
     <div className={classes.root}>
+      <RestoNavBar menu={menuData}/>
       <div
         className={classes.menuHearder}
         style={{ backgroundColor: menuData.headerColor || "#272727" }}
       >
+      { auth && auth.uid &&
+      <NavLink to="/dashboard">
+      <Fab size="small" className={classes.goBackButton}>
+      <ArrowBackOutlinedIcon className={classes.backArrow} />
+      </Fab>
+      </NavLink> 
+      }
         <Typography
           className={classes.restoName}
           variant="h1"
@@ -126,7 +147,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes }) => {
       <div className={classes.carouselSection}>
       <RestoCarousel restaurant={resto}/>
       </div>
-
+          <section id="menu">
       <div className={classes.menuBody}>
         <Typography
           variant="h1"
@@ -262,7 +283,11 @@ const MenuPage = ({ classes, restaurant, menu, dishes }) => {
             </div>
           )}
       </div>
+      </section>
 
+                      <section id="infoscontact">
+                        <div><Typography>Info et contact</Typography>Info et contact</div>
+                      </section>
       <div
         className={classes.footerSection}
         style={{ backgroundColor: menuData.headerColor || "#272727" }}

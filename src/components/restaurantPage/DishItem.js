@@ -52,7 +52,7 @@ const DishItem = ({
       <div className={classes.allergenList}>
         {allergens.map((allergen, i) => (
           <ListItemAvatar key={i}>
-            <Tooltip title={`${allergen}`} ariaLabel={`${allergen}`} enterTouchDelay={700}>
+            <Tooltip title={`${allergen}`} aria-label={`${allergen}`} enterTouchDelay={700}>
               <Avatar
                 alt={`${allergen}`}
                 src={require(`../../assets/allergens/${allergen}.png`)}

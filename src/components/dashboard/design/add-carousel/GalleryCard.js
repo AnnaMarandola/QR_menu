@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Typography, withStyles } from "@material-ui/core";
-import { Button } from "@material-ui/core";
 import { compose } from "redux";
-import AddCircleOutlineTwoToneIcon from "@material-ui/icons/AddCircleOutlineTwoTone";
-import UploadLogo from "../../../forms/UploadLogo";
 import UploadCarouselImg from "./UploadCarouselImg";
 import Gallery from "./Gallery";
 
