@@ -34,7 +34,7 @@ const styles = (theme) => ({
   },
   menuTitle: {
     marginTop: "3rem",
-    marginBottom: "2rem",
+    marginBottom: "1rem",
     textAlign: "center",
   },
   formulaContainer: {
@@ -53,7 +53,7 @@ const styles = (theme) => ({
     marginBottom: "1rem",
   },
   menuBody: {
-    marginBottom: "6rem",
+    marginBottom: "4rem",
   },
   categoryHeader: {
     backgroundColor: "white",
@@ -289,16 +289,8 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
       </section>
       <div
         className={classes.footerSection}
-        style={{ backgroundColor: menuData.headerColor || "#272727" }}
       >
-        <FooterResto
-          adress={resto.adress}
-          postalCode={resto.postalCode}
-          city={resto.city}
-          phone={resto.phone}
-          facebook={resto.facebook}
-          instagram={resto.instagram}
-        />
+        <FooterResto/>
       </div>
     </div>
   );

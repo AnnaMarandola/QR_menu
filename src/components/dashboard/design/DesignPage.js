@@ -11,7 +11,6 @@ import { NavLink } from "react-router-dom";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 
 
-
 const styles = (theme) => ({
   root: {
     width: "95%",
@@ -58,7 +57,6 @@ const styles = (theme) => ({
 
 const DesignPage = ({ classes, restaurant, menu }) => {
   let menuData = { ...menu };
-  console.log("menuData", menuData.fontColor);
 
   return (
     <div className={classes.root}>
