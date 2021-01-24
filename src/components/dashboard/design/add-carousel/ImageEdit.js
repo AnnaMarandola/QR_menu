@@ -10,7 +10,7 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  image: {
+  img: {
     backgroundColor: "grey",
     width: "4.5rem",
     margin: "1rem",
@@ -31,7 +31,7 @@ const ImageEdit = ({ classes, image, carousel, restoId, removeCarouselPicture })
 
   return (
     <div className={classes.root}>
-      <img className={classes.image} src={image} alt="photo du restaurant" />
+      <img className={classes.img} src={image} alt="restaurant" />
       <Button onClick={handleClick}>x</Button>
     </div>
   );

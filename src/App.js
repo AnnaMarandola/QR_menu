@@ -8,7 +8,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import UserIsAuthenticated from "./HOC/UserIsAuthenticated";
 import WithTopBar from "./HOC/WithTopBar";
 import MenuFormPage from "./components/dashboard/menu/MenuFormPage";
-import MenuPage from "./components/menu/MenuPage";
+import MenuPage from "./components/restaurantPage/MenuPage";
 import QrCodePdf from "./components/qrcode/QrCodePdf";
 import ToastComponent from "./constants/Toast";
 import LandingPage from "./components/landingPage/LandingPage";
@@ -50,7 +50,7 @@ function App() {
           path="/qrcode/:resto/:menu"
           component={UserIsAuthenticated(WithTopBar(QrCodePdf))}
         />
-        <Route path="/menupage/:resto/:menu" component={WithTopBar(MenuPage)} />
+        <Route path="/menupage/:resto/:menu" component={MenuPage} />
       </Switch>
       <ToastComponent/>
     </BrowserRouter>
