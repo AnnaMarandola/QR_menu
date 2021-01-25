@@ -1,9 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import LOGO from "../../assets/logoIcon.png";
 import "../../App.css";
-import { connect } from "react-redux";
-import MyMenu from "../nav/MyMenu";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import RestoNav from "./RestoNav";
@@ -16,12 +12,18 @@ const styles = (theme) => ({
     marginTop: "0.8rem",
     zIndex: 2,
   },
+  container: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
 });
 
 const Navbar = ({classes, menu }) => {
   return (
     <nav className={classes.navbar}>
+    <div className={classes.container}>
       <RestoNav menu={menu} />
+      </div>
     </nav>
   );
 };

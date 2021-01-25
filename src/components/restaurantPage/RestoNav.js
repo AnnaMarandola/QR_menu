@@ -10,7 +10,6 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 const styles = (theme, menu) => ({
   root: {
     position: "relative",
-    left: "19rem",
   },
   menuIcon: {
       fontSize: "3rem",

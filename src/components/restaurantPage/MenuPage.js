@@ -82,11 +82,16 @@ const styles = (theme) => ({
   contactTitle: {
     textAlign: "center",
   },
+  goBackContainer: {
+    display: "flex",
+    justifyContent: "flex-start",
+    width: "100%",
+  },
   goBackButton: {
     backgroundColor: "#E81B7D",
     position: "relative",
-    right: "9.5rem",
-    top: "0.5rem",
+    top: "1.5rem",
+    left: "1rem",
     zIndex: 3,
   },
   backArrow: {
@@ -118,17 +123,19 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   return (
     <div className={classes.root}>
       <RestoNavBar menu={menuData} />
+    {auth && auth.uid && (
+      <div className={classes.goBackContainer} style={{ backgroundColor: menuData.headerColor }}>
+      <NavLink to="/dashboard">
+        <Fab size="small" className={classes.goBackButton}>
+          <ArrowBackOutlinedIcon className={classes.backArrow} />
+        </Fab>
+      </NavLink>
+      </div>
+    )}
       <div
         className={classes.menuHearder}
-        style={{ backgroundColor: menuData.headerColor || "#272727" }}
+        style={{ backgroundColor: menuData.headerColor }}
       >
-        {auth && auth.uid && (
-          <NavLink to="/dashboard">
-            <Fab size="small" className={classes.goBackButton}>
-              <ArrowBackOutlinedIcon className={classes.backArrow} />
-            </Fab>
-          </NavLink>
-        )}
         <Typography
           className={classes.restoName}
           variant="h1"
