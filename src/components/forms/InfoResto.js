@@ -112,6 +112,7 @@ class InfoResto extends Component {
       });
     }
   }
+  
 
   handleChange = (e) => {
     this.setState({
