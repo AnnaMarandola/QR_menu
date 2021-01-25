@@ -85,7 +85,7 @@ const styles = (theme) => ({
   goBackButton: {
     backgroundColor: "#E81B7D",
     position: "relative",
-    right: "8rem",
+    right: "9.5rem",
     top: "0.5rem",
     zIndex: 3,
   },
