@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Button, Fab } from "@material-ui/core";
+import { Typography, Button, Fab, Link } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
@@ -124,15 +124,18 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   return (
     <div className={classes.root}>
       <RestoNavBar menu={menuData} />
-    {auth && auth.uid && (
-      <div className={classes.goBackContainer} style={{ backgroundColor: menuData.headerColor }}>
-      <NavLink to="/dashboard">
-        <Fab size="small" className={classes.goBackButton}>
-          <ArrowBackOutlinedIcon className={classes.backArrow} />
-        </Fab>
-      </NavLink>
-      </div>
-    )}
+      {auth && auth.uid && (
+        <div
+          className={classes.goBackContainer}
+          style={{ backgroundColor: menuData.headerColor }}
+        >
+          <NavLink to="/dashboard">
+            <Fab size="small" className={classes.goBackButton}>
+              <ArrowBackOutlinedIcon className={classes.backArrow} />
+            </Fab>
+          </NavLink>
+        </div>
+      )}
       <div
         className={classes.menuHearder}
         style={{ backgroundColor: menuData.headerColor }}
@@ -291,12 +294,25 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
       </section>
 
       <section id="infoscontact">
-      <GoogleMap restaurant={resto}/>
+        {" "}
+        {/* <Typography
+          variant="h1"
+          className={classes.menuTitle}
+          style={{
+            fontFamily: menuData.fontFamily || "Roboto",
+          }}
+        >
+          Infos et contact
+        </Typography> */}
+        <GoogleMap restaurant={resto} />
+        <Typography>{resto.adress}</Typography>
+        <Typography>{resto.postalCode} {resto.city}</Typography>
+        <Typography>{resto.phone}</Typography>
+        <img src={"../../assets/icons/facebook.png"} alt="facebook logo"/>
+        <img src={"../../assets/icons/instagram.png"} alt="instagram logo"/>
       </section>
-      <div
-        className={classes.footerSection}
-      >
-        <FooterResto/>
+      <div className={classes.footerSection}>
+        <FooterResto />
       </div>
     </div>
   );

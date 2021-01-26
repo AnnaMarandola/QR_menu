@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
-import Geocode from "react-geocode";
 import GoogleMaps from "simple-react-google-maps";
 
 const styles = (theme) => ({
