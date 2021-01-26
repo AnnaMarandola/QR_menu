@@ -13,6 +13,7 @@ import RestoCarousel from "./RestoCarousel";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 import { NavLink } from "react-router-dom";
 import RestoNavBar from "./RestoNavBar";
+import GoogleMap from "./GoogleMap";
 
 const styles = (theme) => ({
   root: {
@@ -290,9 +291,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
       </section>
 
       <section id="infoscontact">
-        <div>
-          <Typography>to do : Info et contact</Typography>
-        </div>
+      <GoogleMap restaurant={resto}/>
       </section>
       <div
         className={classes.footerSection}
