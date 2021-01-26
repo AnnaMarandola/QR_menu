@@ -11,6 +11,7 @@ import {
 import { Redirect } from "react-router-dom";
 import UploadLogo from "./UploadLogo";
 import HEADER from "../../assets/landingPage/illustration-header.png";
+import Geocode from "react-geocode";
 
 const styles = (theme) => ({
   root: {
@@ -96,6 +97,8 @@ class InfoResto extends Component {
     instagram: "",
     phone: "",
     submited: false,
+    latitude: null,
+    longitude: null,
   };
 
   componentDidMount() {
@@ -108,16 +111,37 @@ class InfoResto extends Component {
         facebook: this.props.restaurant.facebook,
         instagram: this.props.restaurant.instagram,
         template: this.props.restaurant.template,
+        latitude: this.props.restaurant.latitude,
+        longitude: this.props.restaurant.longitude,
         submited: false,
       });
     }
   }
-  
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
     });
+      this.handleGeocode();
+  };
+
+  handleGeocode = () => {
+    Geocode.setApiKey("AIzaSyDXqly7--kzaJ8_3YYM_rc9l_td59XPUwE");
+    Geocode.setLanguage("fr");
+    Geocode.setRegion("fr");
+    Geocode.fromAddress(
+      `${this.state.adress}, ${this.state.postalCode}, ${this.state.city}`
+    ).then(
+      (response) => {
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log("lat :", lat, "long :", lng);
+        this.setState({ latitude: lat, longitude: lng });
+        this.setState({ longitude: lng });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   };
 
   handleSubmit = (e) => {

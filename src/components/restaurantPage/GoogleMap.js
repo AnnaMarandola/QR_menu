@@ -13,29 +13,6 @@ const styles = (theme) => ({
 });
 
 const GoogleMap = ({ classes, restaurant }) => {
-  console.log("resto in geogoogle", restaurant);
-  Geocode.setApiKey("AIzaSyDXqly7--kzaJ8_3YYM_rc9l_td59XPUwE");
-  Geocode.setLanguage("fr");
-  Geocode.setRegion("fr");
-
-//   const [latitude, setLatitude] = useState();
-//   const [longitude, setLongitude] = useState();
-//   const marker = { latitude, longitude }
-//   console.log("marker", marker)
-
-//   Geocode.fromAddress(
-//     `${restaurant.adress}, ${restaurant.postalCode}, ${restaurant.city}`
-//   ).then(
-//     (response) => {
-//       const { lat, lng } = response.results[0].geometry.location;
-//       console.log("lat :", lat, "long :", lng);
-//       setLatitude(lat);
-//       setLongitude(lng);
-//     },
-//     (error) => {
-//       console.error(error);
-//     }
-//   );
   return (
     <div>
       <GoogleMaps
