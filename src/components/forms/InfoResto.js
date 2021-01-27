@@ -290,7 +290,6 @@ class InfoResto extends Component {
               />
             </Card>
 
-            <Card className={classes.formPart}>
             <List
               id="daysOff"
               defaultValue={resto ? resto.daysOff : ""}
@@ -327,8 +326,6 @@ class InfoResto extends Component {
                 );
               })}
             </List>
-            </Card>
-
           </div>
 
           <div className={classes.buttonsContainer}>
