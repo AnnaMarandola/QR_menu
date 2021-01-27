@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
-import { Typography, TextField, Button } from "@material-ui/core";
+import { Typography, TextField, Button, Card } from "@material-ui/core";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -65,6 +65,15 @@ const styles = (theme) => ({
       paddingRight: "4rem",
     },
   },
+  formPart: {
+    marginTop: "1rem",
+    paddingLeft: "1rem",
+    paddingBottom: "1rem",
+    paddingRight: "1rem",
+    backgroundColor: "white",
+    display: "flex",
+    flexDirection: "column",
+  },
   inputs: {
     display: "flex",
     flexDirection: "column",
@@ -101,6 +110,7 @@ class InfoResto extends Component {
     name: "",
     adress: "",
     city: "",
+    email: "",
     postalCode: null,
     facebook: "",
     instagram: "",
@@ -108,7 +118,7 @@ class InfoResto extends Component {
     submited: false,
     latitude: null,
     longitude: null,
-    // daysOff: [],
+    daysOff: [],
   };
 
   componentDidMount() {
@@ -116,6 +126,7 @@ class InfoResto extends Component {
       this.setState({
         name: this.props.restaurant.name,
         adress: this.props.restaurant.adress,
+        email: this.props.restaurant.email,
         city: this.props.restaurant.city,
         postalCode: this.props.restaurant.postalCode,
         facebook: this.props.restaurant.facebook,
@@ -123,7 +134,7 @@ class InfoResto extends Component {
         template: this.props.restaurant.template,
         latitude: this.props.restaurant.latitude,
         longitude: this.props.restaurant.longitude,
-        // daysOff: this.props.restaurant.daysOff,
+        daysOff: this.props.restaurant.daysOff,
         submited: false,
       });
     }
@@ -134,6 +145,7 @@ class InfoResto extends Component {
       [e.target.id]: e.target.value,
     });
     this.handleGeocode();
+    this.handleDaysOff();
   };
 
   handleGeocode = () => {
@@ -155,18 +167,18 @@ class InfoResto extends Component {
     );
   };
 
-  // handleDaysOff = (value) => () => {
-  //   const currentIndex = this.state.daysOff.indexOf(value);
-  //   const newChecked = [...this.state.daysOff];
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //     console.log("VVVValue", value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-  //   this.setState({ daysOff: newChecked });
-  //   console.log("checkedDays", this.daysOff);
-  // };
+  handleDaysOff = (value) => () => {
+    const currentIndex = this.state.daysOff.indexOf(value);
+    const newChecked = [...this.state.daysOff];
+    if (currentIndex === -1) {
+      newChecked.push(value);
+      console.log("VVVValue", value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    this.setState({ daysOff: newChecked });
+    console.log("checkedDays", this.daysOff);
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -202,67 +214,84 @@ class InfoResto extends Component {
           </Typography>
           <div className={classes.inputs}>
             {restaurant && (
+              <Card className={classes.formPart}>
               <div className={classes.logoUpload}>
                 <Typography>Logo</Typography>
                 <UploadLogo restaurant={resto} />
               </div>
+              </Card>
             )}
-            <TextField
-              id="name"
-              type="text"
-              label="nom de l'établisement"
-              onChange={this.handleChange}
-              defaultValue={resto && resto.name}
-              required
-            />
-            <TextField
-              id="adress"
-              type="text"
-              label="adresse"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.adress : ""}
-              required
-            />
-            <TextField
-              id="city"
-              label="ville"
-              type="text"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.city : ""}
-              required
-            />
-            <TextField
-              id="postalCode"
-              label="code postal"
-              type="number"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.postalCode : ""}
-              required
-            />
-            <TextField
-              id="phone"
-              type="tel"
-              label="numéro de téléphone"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.phone : ""}
-              required
-            />
-            <TextField
-              id="instagram"
-              type="url"
-              label="votre instagram"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.instagram : ""}
-            />
-            <TextField
-              id="facebook"
-              type="url"
-              label="votre facebook"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.facebook : ""}
-            />
+            <Card className={classes.formPart}>
+              <TextField
+                id="name"
+                type="text"
+                label="nom de l'établisement"
+                onChange={this.handleChange}
+                defaultValue={resto && resto.name}
+                required
+              />
+            </Card>
+            <Card className={classes.formPart}>
+              <TextField
+                id="adress"
+                type="text"
+                label="adresse"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.adress : ""}
+                required
+              />
+              <TextField
+                id="postalCode"
+                label="code postal"
+                type="number"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.postalCode : ""}
+                required
+              />
+              <TextField
+                id="city"
+                label="ville"
+                type="text"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.city : ""}
+                required
+              />
+            </Card>
+            <Card className={classes.formPart}>
+              <TextField
+                id="phone"
+                type="tel"
+                label="numéro de téléphone"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.phone : ""}
+                required
+              />
+              <TextField
+                id="email"
+                type="email"
+                label="email"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.email : ""}
+                required
+              />
+              <TextField
+                id="instagram"
+                type="url"
+                label="votre instagram"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.instagram : ""}
+              />
+              <TextField
+                id="facebook"
+                type="url"
+                label="votre facebook"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.facebook : ""}
+              />
+            </Card>
 
-            {/* <List
+            <Card className={classes.formPart}>
+            <List
               id="daysOff"
               defaultValue={resto ? resto.daysOff : ""}
               className={classes.daysList}
@@ -297,7 +326,9 @@ class InfoResto extends Component {
                   </ListItem>
                 );
               })}
-            </List> */}
+            </List>
+            </Card>
+
           </div>
 
           <div className={classes.buttonsContainer}>
