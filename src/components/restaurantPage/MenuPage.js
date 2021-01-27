@@ -14,6 +14,9 @@ import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 import { NavLink } from "react-router-dom";
 import RestoNavBar from "./RestoNavBar";
 import GoogleMap from "./GoogleMap";
+import PHONE from "../../assets/icons/contactPhone.png";
+import FACEBOOK from "../../assets/icons/contactFacebook.png";
+import INSTAGRAM from "../../assets/icons/instagrm.png";
 
 const styles = (theme) => ({
   root: {
@@ -97,6 +100,23 @@ const styles = (theme) => ({
   },
   backArrow: {
     fill: "white",
+  },
+  adress: {
+    margin: "2rem",
+    textAlign: "center",
+  },
+  adressText: {
+    fontFamily: "Archivo narrow",
+  },
+  phoneContact: {
+    textAlign: "center",
+    margin: "2rem",
+  },
+  phoneNumber: {
+    fontFamily: "Archivo narrow",
+  },
+  contactIcons: {
+    width: "10%",
   },
 });
 
@@ -295,21 +315,52 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
 
       <section id="infoscontact">
         {" "}
-        {/* <Typography
+        <Typography
           variant="h1"
           className={classes.menuTitle}
           style={{
             fontFamily: menuData.fontFamily || "Roboto",
           }}
         >
-          Infos et contact
-        </Typography> */}
+          Infos
+        </Typography>
         <GoogleMap restaurant={resto} />
-        <Typography>{resto.adress}</Typography>
-        <Typography>{resto.postalCode} {resto.city}</Typography>
-        <Typography>{resto.phone}</Typography>
-        <img src={"../../assets/icons/facebook.png"} alt="facebook logo"/>
-        <img src={"../../assets/icons/instagram.png"} alt="instagram logo"/>
+        <div className={classes.adress}>
+          <Typography className={classes.adressText}>{resto.adress}</Typography>
+          <Typography className={classes.adressText}>
+            {resto.postalCode} {resto.city}
+          </Typography>
+        </div>
+        <div className={classes.phoneContact}>
+          <a className={classes.phone} href={`tel:+${resto.phone}`}>
+            <Button>
+              <img
+                className={classes.contactIcons}
+                src={PHONE}
+                alt="call the restaurant"
+              />
+            </Button>
+          </a>
+          <Typography className={classes.phoneNumber}>{resto.phone}</Typography>
+        </div>
+        <a className={classes.phone} href={resto.phone}>
+          <Button>
+            <img
+              className={classes.contactIcons}
+              src={FACEBOOK}
+              alt="facebook"
+            />
+          </Button>
+        </a>
+        <a className={classes.phone} href={resto.phone}>
+          <Button>
+            <img
+              className={classes.contactIcons}
+              src={INSTAGRAM}
+              alt="facebook"
+            />
+          </Button>
+        </a>
       </section>
       <div className={classes.footerSection}>
         <FooterResto />

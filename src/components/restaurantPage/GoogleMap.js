@@ -1,17 +1,9 @@
 import React from "react";
-import { withStyles } from "@material-ui/core";
-import { compose } from "redux";
 import GoogleMaps from "simple-react-google-maps";
 
-const styles = (theme) => ({
-    root: {
-        height: "25rem", 
-        width: "90%",
-        marginLeft: "5%",
-    },
-});
 
-const GoogleMap = ({ classes, restaurant }) => {
+const GoogleMap = ({ restaurant }) => {
+  console.log("restaurant 9999999", restaurant)
   return (
     <div>
       <GoogleMaps
@@ -20,8 +12,8 @@ const GoogleMap = ({ classes, restaurant }) => {
         zoom={15}
         center={{ lat: restaurant.latitude, lng: restaurant.longitude }}
         markers={{ lat: restaurant.latitude, lng: restaurant.longitude }}
-        className={classes.root} />
+        />
     </div>
   );
 };
-export default compose(withStyles(styles))(GoogleMap);
+export default GoogleMap;
