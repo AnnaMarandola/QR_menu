@@ -12,6 +12,15 @@ import { Redirect } from "react-router-dom";
 import UploadLogo from "./UploadLogo";
 import HEADER from "../../assets/landingPage/illustration-header.png";
 import Geocode from "react-geocode";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const styles = (theme) => ({
   root: {
@@ -99,6 +108,7 @@ class InfoResto extends Component {
     submited: false,
     latitude: null,
     longitude: null,
+    // daysOff: [],
   };
 
   componentDidMount() {
@@ -113,6 +123,7 @@ class InfoResto extends Component {
         template: this.props.restaurant.template,
         latitude: this.props.restaurant.latitude,
         longitude: this.props.restaurant.longitude,
+        // daysOff: this.props.restaurant.daysOff,
         submited: false,
       });
     }
@@ -122,7 +133,7 @@ class InfoResto extends Component {
     this.setState({
       [e.target.id]: e.target.value,
     });
-      this.handleGeocode();
+    this.handleGeocode();
   };
 
   handleGeocode = () => {
@@ -144,6 +155,19 @@ class InfoResto extends Component {
     );
   };
 
+  // handleDaysOff = (value) => () => {
+  //   const currentIndex = this.state.daysOff.indexOf(value);
+  //   const newChecked = [...this.state.daysOff];
+  //   if (currentIndex === -1) {
+  //     newChecked.push(value);
+  //     console.log("VVVValue", value);
+  //   } else {
+  //     newChecked.splice(currentIndex, 1);
+  //   }
+  //   this.setState({ daysOff: newChecked });
+  //   console.log("checkedDays", this.daysOff);
+  // };
+
   handleSubmit = (e) => {
     e.preventDefault();
     const restoId = this.props.match.params.resto;
@@ -161,7 +185,7 @@ class InfoResto extends Component {
 
     if (this.state.submited === true) return <Redirect to="/dashboard" />;
 
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
 
     return (
       <div className={classes.root}>
@@ -237,6 +261,43 @@ class InfoResto extends Component {
               onChange={this.handleChange}
               defaultValue={resto ? resto.facebook : ""}
             />
+
+            {/* <List
+              id="daysOff"
+              defaultValue={resto ? resto.daysOff : ""}
+              className={classes.daysList}
+            >
+              {[
+                "lundi",
+                "mardi",
+                "mercredi",
+                "jeudi",
+                "vendredi",
+                "samedi",
+                "dimanche",
+              ].map((value) => {
+                const labelId = `checkbox-list-secondary-label-${value}`;
+                return (
+                  <ListItem key={value} button className={classes.day}>
+                    <ListItemText
+                      id={labelId}
+                      primary={` ${value}`}
+                      className={classes.dayText}
+                    />
+                    <ListItemSecondaryAction>
+                      <Checkbox
+                        edge="end"
+                        onChange={this.handleDaysOff(value)}
+                        checked={this.state.daysOff.indexOf(value) !== -1}
+                        inputProps={{ "aria-labelledby": labelId }}
+                        className={classes.checkBox}
+                        defaultValue={resto ? resto.daysOff : []}
+                      />
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                );
+              })}
+            </List> */}
           </div>
 
           <div className={classes.buttonsContainer}>

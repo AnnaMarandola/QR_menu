@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Button, Fab } from "@material-ui/core";
+import { Typography, Button, Fab, Link } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
@@ -14,6 +14,9 @@ import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 import { NavLink } from "react-router-dom";
 import RestoNavBar from "./RestoNavBar";
 import GoogleMap from "./GoogleMap";
+import PHONE from "../../assets/icons/contactPhone.png";
+import FACEBOOK from "../../assets/icons/contactFacebook.png";
+import INSTAGRAM from "../../assets/icons/instagrm.png";
 
 const styles = (theme) => ({
   root: {
@@ -98,6 +101,23 @@ const styles = (theme) => ({
   backArrow: {
     fill: "white",
   },
+  adress: {
+    margin: "2rem",
+    textAlign: "center",
+  },
+  adressText: {
+    fontFamily: "Archivo narrow",
+  },
+  phoneContact: {
+    textAlign: "center",
+    margin: "2rem",
+  },
+  phoneNumber: {
+    fontFamily: "Archivo narrow",
+  },
+  contactIcons: {
+    width: "10%",
+  },
 });
 
 const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
@@ -124,15 +144,18 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   return (
     <div className={classes.root}>
       <RestoNavBar menu={menuData} />
-    {auth && auth.uid && (
-      <div className={classes.goBackContainer} style={{ backgroundColor: menuData.headerColor }}>
-      <NavLink to="/dashboard">
-        <Fab size="small" className={classes.goBackButton}>
-          <ArrowBackOutlinedIcon className={classes.backArrow} />
-        </Fab>
-      </NavLink>
-      </div>
-    )}
+      {auth && auth.uid && (
+        <div
+          className={classes.goBackContainer}
+          style={{ backgroundColor: menuData.headerColor }}
+        >
+          <NavLink to="/dashboard">
+            <Fab size="small" className={classes.goBackButton}>
+              <ArrowBackOutlinedIcon className={classes.backArrow} />
+            </Fab>
+          </NavLink>
+        </div>
+      )}
       <div
         className={classes.menuHearder}
         style={{ backgroundColor: menuData.headerColor }}
@@ -291,12 +314,56 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
       </section>
 
       <section id="infoscontact">
-      <GoogleMap restaurant={resto}/>
+        {" "}
+        <Typography
+          variant="h1"
+          className={classes.menuTitle}
+          style={{
+            fontFamily: menuData.fontFamily || "Roboto",
+          }}
+        >
+          Infos
+        </Typography>
+        <GoogleMap restaurant={resto} />
+        <div className={classes.adress}>
+          <Typography className={classes.adressText}>{resto.adress}</Typography>
+          <Typography className={classes.adressText}>
+            {resto.postalCode} {resto.city}
+          </Typography>
+        </div>
+        <div className={classes.phoneContact}>
+          <a className={classes.phone} href={`tel:+${resto.phone}`}>
+            <Button>
+              <img
+                className={classes.contactIcons}
+                src={PHONE}
+                alt="call the restaurant"
+              />
+            </Button>
+          </a>
+          <Typography className={classes.phoneNumber}>{resto.phone}</Typography>
+        </div>
+        <a className={classes.phone} href={resto.phone}>
+          <Button>
+            <img
+              className={classes.contactIcons}
+              src={FACEBOOK}
+              alt="facebook"
+            />
+          </Button>
+        </a>
+        <a className={classes.phone} href={resto.phone}>
+          <Button>
+            <img
+              className={classes.contactIcons}
+              src={INSTAGRAM}
+              alt="facebook"
+            />
+          </Button>
+        </a>
       </section>
-      <div
-        className={classes.footerSection}
-      >
-        <FooterResto/>
+      <div className={classes.footerSection}>
+        <FooterResto />
       </div>
     </div>
   );

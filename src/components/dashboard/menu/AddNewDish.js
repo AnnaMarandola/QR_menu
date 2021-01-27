@@ -280,6 +280,8 @@ class AddNewDish extends Component {
             </AccordionDetails>
           </Accordion>
 
+
+
           <Button
             className={classes.addButton}
             type="submit"
