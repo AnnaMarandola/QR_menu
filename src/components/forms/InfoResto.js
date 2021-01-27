@@ -12,15 +12,16 @@ import { Redirect } from "react-router-dom";
 import UploadLogo from "./UploadLogo";
 import HEADER from "../../assets/landingPage/illustration-header.png";
 import Geocode from "react-geocode";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
 
 const styles = (theme) => ({
   root: {
@@ -102,6 +103,14 @@ const styles = (theme) => ({
     marginTop: "1rem",
     marginBottom: "1rem",
   },
+  daysOffContainer: {
+    marginTop: "1.5rem",
+    backgroundColor: "white",
+  },
+  daysList: {
+    display: "flex",
+    flexDirection: "column",
+  },
 });
 
 class InfoResto extends Component {
@@ -172,12 +181,10 @@ class InfoResto extends Component {
     const newChecked = [...this.state.daysOff];
     if (currentIndex === -1) {
       newChecked.push(value);
-      console.log("VVVValue", value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
     this.setState({ daysOff: newChecked });
-    console.log("checkedDays", this.daysOff);
   };
 
   handleSubmit = (e) => {
@@ -215,10 +222,10 @@ class InfoResto extends Component {
           <div className={classes.inputs}>
             {restaurant && (
               <Card className={classes.formPart}>
-              <div className={classes.logoUpload}>
-                <Typography>Logo</Typography>
-                <UploadLogo restaurant={resto} />
-              </div>
+                <div className={classes.logoUpload}>
+                  <Typography>Logo</Typography>
+                  <UploadLogo restaurant={resto} />
+                </div>
               </Card>
             )}
             <Card className={classes.formPart}>
@@ -290,42 +297,55 @@ class InfoResto extends Component {
               />
             </Card>
 
-            <List
-              id="daysOff"
-              defaultValue={resto ? resto.daysOff : ""}
-              className={classes.daysList}
-            >
-              {[
-                "lundi",
-                "mardi",
-                "mercredi",
-                "jeudi",
-                "vendredi",
-                "samedi",
-                "dimanche",
-              ].map((value) => {
-                const labelId = `checkbox-list-secondary-label-${value}`;
-                return (
-                  <ListItem key={value} button className={classes.day}>
-                    <ListItemText
-                      id={labelId}
-                      primary={` ${value}`}
-                      className={classes.dayText}
-                    />
-                    <ListItemSecondaryAction>
-                      <Checkbox
-                        edge="end"
-                        onChange={this.handleDaysOff(value)}
-                        checked={this.state.daysOff.indexOf(value) !== -1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                        className={classes.checkBox}
-                        defaultValue={resto ? resto.daysOff : []}
-                      />
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                );
-              })}
-            </List>
+            <Card className={classes.formPart}>
+              <Accordion className={classes.daysOffContainer}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>Jours de fermeture</Typography>
+                </AccordionSummary>
+                <AccordionDetails className={classes.accordion}>
+                  <List
+                    id="daysOff"
+                    defaultValue={resto ? resto.daysOff : ""}
+                    className={classes.daysList}
+                  >
+                    {[
+                      "lundi",
+                      "mardi",
+                      "mercredi",
+                      "jeudi",
+                      "vendredi",
+                      "samedi",
+                      "dimanche",
+                    ].map((value) => {
+                      const labelId = `checkbox-list-secondary-label-${value}`;
+                      return (
+                        <ListItem key={value} button className={classes.day}>
+                          <ListItemText
+                            id={labelId}
+                            primary={` ${value}`}
+                            className={classes.dayText}
+                          />
+                          <ListItemSecondaryAction>
+                            <Checkbox
+                              edge="end"
+                              onChange={this.handleDaysOff(value)}
+                              checked={this.state.daysOff.indexOf(value) !== -1}
+                              inputProps={{ "aria-labelledby": labelId }}
+                              className={classes.checkBox}
+                              defaultValue={resto ? resto.daysOff : []}
+                            />
+                          </ListItemSecondaryAction>
+                        </ListItem>
+                      );
+                    })}
+                  </List>
+                </AccordionDetails>
+              </Accordion>
+            </Card>
           </div>
 
           <div className={classes.buttonsContainer}>
