@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { Carousel } from "react-responsive-carousel";
+// eslint-disable-next-line
 import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const cstyles = (theme) => ({

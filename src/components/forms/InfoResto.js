@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
-import { Typography, TextField, Button } from "@material-ui/core";
+import { Typography, TextField, Button, Card } from "@material-ui/core";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -12,15 +12,16 @@ import { Redirect } from "react-router-dom";
 import UploadLogo from "./UploadLogo";
 import HEADER from "../../assets/landingPage/illustration-header.png";
 import Geocode from "react-geocode";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import "date-fns";
 
 const styles = (theme) => ({
   root: {
@@ -43,6 +44,7 @@ const styles = (theme) => ({
   title: {
     marginTop: "6rem",
     marginBottom: "1rem",
+    marginLeft: "5%",
     fontFamily: "Archivo narrow",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "4rem",
@@ -53,17 +55,27 @@ const styles = (theme) => ({
     color: "#E81B7D",
   },
   subtitle: {
+    marginLeft: "5%",
     fontFamily: "Archivo narrow",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "4rem",
     },
   },
   form: {
-    width: "90%",
+    // width: "90%",
     [theme.breakpoints.up("sm")]: {
       width: "60%",
       paddingRight: "4rem",
     },
+  },
+  formPart: {
+    marginTop: "1rem",
+    paddingLeft: "1rem",
+    paddingBottom: "1rem",
+    paddingRight: "1rem",
+    backgroundColor: "white",
+    display: "flex",
+    flexDirection: "column",
   },
   inputs: {
     display: "flex",
@@ -93,6 +105,31 @@ const styles = (theme) => ({
     marginTop: "1rem",
     marginBottom: "1rem",
   },
+  daysOffContainer: {
+    marginTop: "1.5rem",
+    backgroundColor: "white",
+  },
+  daysList: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  openAndClose: {
+    display: "flex",
+    justifyContent: "space-between",
+    margin: "1rem",
+  },
+  timeInput: {
+    width: "7.2rem",
+  },
+  subcard: {
+    backgroundColor: "white",
+    marginBottom: "1rem",
+    marginTop: "1rem",
+  }, 
+  service: {
+    textAlign: "center",
+    paddingTop: "1rem",
+  }
 });
 
 class InfoResto extends Component {
@@ -101,6 +138,7 @@ class InfoResto extends Component {
     name: "",
     adress: "",
     city: "",
+    email: "",
     postalCode: null,
     facebook: "",
     instagram: "",
@@ -108,7 +146,13 @@ class InfoResto extends Component {
     submited: false,
     latitude: null,
     longitude: null,
-    // daysOff: [],
+    daysOff: [],
+    opening: null,
+    closing: null,
+    lunchStart: null,
+    lunchEnd: null,
+    dinerStart: null,
+    dinerEnd: null,
   };
 
   componentDidMount() {
@@ -116,6 +160,7 @@ class InfoResto extends Component {
       this.setState({
         name: this.props.restaurant.name,
         adress: this.props.restaurant.adress,
+        email: this.props.restaurant.email,
         city: this.props.restaurant.city,
         postalCode: this.props.restaurant.postalCode,
         facebook: this.props.restaurant.facebook,
@@ -123,7 +168,13 @@ class InfoResto extends Component {
         template: this.props.restaurant.template,
         latitude: this.props.restaurant.latitude,
         longitude: this.props.restaurant.longitude,
-        // daysOff: this.props.restaurant.daysOff,
+        daysOff: this.props.restaurant.daysOff,
+        opening: this.props.restaurant.opening,
+        closing: this.props.restaurant.closing,
+        lunchStart: this.props.restaurant.lunchStart,
+        lunchEnd: this.props.restaurant.lunchEnd,
+        dinerStart: this.props.restaurant.dinerStart,
+        dinerEnd: this.props.restaurant.dinerEnd,
         submited: false,
       });
     }
@@ -134,6 +185,7 @@ class InfoResto extends Component {
       [e.target.id]: e.target.value,
     });
     this.handleGeocode();
+    this.handleDaysOff();
   };
 
   handleGeocode = () => {
@@ -155,18 +207,16 @@ class InfoResto extends Component {
     );
   };
 
-  // handleDaysOff = (value) => () => {
-  //   const currentIndex = this.state.daysOff.indexOf(value);
-  //   const newChecked = [...this.state.daysOff];
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //     console.log("VVVValue", value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-  //   this.setState({ daysOff: newChecked });
-  //   console.log("checkedDays", this.daysOff);
-  // };
+  handleDaysOff = (value) => () => {
+    const currentIndex = this.state.daysOff.indexOf(value);
+    const newChecked = [...this.state.daysOff];
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    this.setState({ daysOff: newChecked });
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -202,102 +252,230 @@ class InfoResto extends Component {
           </Typography>
           <div className={classes.inputs}>
             {restaurant && (
-              <div className={classes.logoUpload}>
-                <Typography>Logo</Typography>
-                <UploadLogo restaurant={resto} />
-              </div>
+              <Card className={classes.formPart}>
+                <div className={classes.logoUpload}>
+                  <Typography>Logo</Typography>
+                  <UploadLogo restaurant={resto} />
+                </div>
+              </Card>
             )}
-            <TextField
-              id="name"
-              type="text"
-              label="nom de l'établisement"
-              onChange={this.handleChange}
-              defaultValue={resto && resto.name}
-              required
-            />
-            <TextField
-              id="adress"
-              type="text"
-              label="adresse"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.adress : ""}
-              required
-            />
-            <TextField
-              id="city"
-              label="ville"
-              type="text"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.city : ""}
-              required
-            />
-            <TextField
-              id="postalCode"
-              label="code postal"
-              type="number"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.postalCode : ""}
-              required
-            />
-            <TextField
-              id="phone"
-              type="tel"
-              label="numéro de téléphone"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.phone : ""}
-              required
-            />
-            <TextField
-              id="instagram"
-              type="url"
-              label="votre instagram"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.instagram : ""}
-            />
-            <TextField
-              id="facebook"
-              type="url"
-              label="votre facebook"
-              onChange={this.handleChange}
-              defaultValue={resto ? resto.facebook : ""}
-            />
+            <Card className={classes.formPart}>
+              <TextField
+                id="name"
+                type="text"
+                label="nom de l'établisement"
+                onChange={this.handleChange}
+                defaultValue={resto && resto.name}
+                required
+              />
+            </Card>
+            <Card className={classes.formPart}>
+              <TextField
+                id="adress"
+                type="text"
+                label="adresse"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.adress : ""}
+                required
+              />
+              <TextField
+                id="postalCode"
+                label="code postal"
+                type="number"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.postalCode : ""}
+                required
+              />
+              <TextField
+                id="city"
+                label="ville"
+                type="text"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.city : ""}
+                required
+              />
+            </Card>
+            <Card className={classes.formPart}>
+              <TextField
+                id="phone"
+                type="tel"
+                label="numéro de téléphone"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.phone : ""}
+                required
+              />
+              <TextField
+                id="email"
+                type="email"
+                label="email"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.email : ""}
+                required
+              />
+              <TextField
+                id="instagram"
+                type="url"
+                label="votre instagram"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.instagram : ""}
+              />
+              <TextField
+                id="facebook"
+                type="url"
+                label="votre facebook"
+                onChange={this.handleChange}
+                defaultValue={resto ? resto.facebook : ""}
+              />
+            </Card>
 
-            {/* <List
-              id="daysOff"
-              defaultValue={resto ? resto.daysOff : ""}
-              className={classes.daysList}
-            >
-              {[
-                "lundi",
-                "mardi",
-                "mercredi",
-                "jeudi",
-                "vendredi",
-                "samedi",
-                "dimanche",
-              ].map((value) => {
-                const labelId = `checkbox-list-secondary-label-${value}`;
-                return (
-                  <ListItem key={value} button className={classes.day}>
-                    <ListItemText
-                      id={labelId}
-                      primary={` ${value}`}
-                      className={classes.dayText}
-                    />
-                    <ListItemSecondaryAction>
-                      <Checkbox
-                        edge="end"
-                        onChange={this.handleDaysOff(value)}
-                        checked={this.state.daysOff.indexOf(value) !== -1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                        className={classes.checkBox}
-                        defaultValue={resto ? resto.daysOff : []}
-                      />
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                );
-              })}
-            </List> */}
+            <Card className={classes.formPart}>
+              <Accordion className={classes.daysOffContainer}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>Jours de fermeture</Typography>
+                </AccordionSummary>
+                <AccordionDetails className={classes.accordion}>
+                  <List
+                    id="daysOff"
+                    defaultValue={resto ? resto.daysOff : ""}
+                    className={classes.daysList}
+                  >
+                    {[
+                      "lundi",
+                      "mardi",
+                      "mercredi",
+                      "jeudi",
+                      "vendredi",
+                      "samedi",
+                      "dimanche",
+                    ].map((value) => {
+                      const labelId = `checkbox-list-secondary-label-${value}`;
+                      return (
+                        <ListItem key={value} button className={classes.day}>
+                          <ListItemText
+                            id={labelId}
+                            primary={` ${value}`}
+                            className={classes.dayText}
+                          />
+                          <ListItemSecondaryAction>
+                            <Checkbox
+                              edge="end"
+                              onChange={this.handleDaysOff(value)}
+                              checked={this.state.daysOff.indexOf(value) !== -1}
+                              inputProps={{ "aria-labelledby": labelId }}
+                              className={classes.checkBox}
+                              defaultValue={resto ? resto.daysOff : []}
+                            />
+                          </ListItemSecondaryAction>
+                        </ListItem>
+                      );
+                    })}
+                  </List>
+                </AccordionDetails>
+              </Accordion>
+              <div className={classes.openAndClose}>
+                <TextField
+                  id="opening"
+                  label="heure d'ouverture"
+                  type="time"
+                  defaultValue={resto ? resto.opening : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                <TextField
+                  id="closing"
+                  label="heure de fermeture"
+                  type="time"
+                  defaultValue={resto ? resto.closing : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <Card className={classes.subcard}>
+              <Typography className={classes.service}>Service du midi</Typography>
+              <div className={classes.openAndClose}>
+                <TextField
+                  id="lunchStart"
+                  label="début"
+                  type="time"
+                  defaultValue={resto ? resto.lunchStart : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                <TextField
+                  id="lunchEnd"
+                  label="fin"
+                  type="time"
+                  defaultValue={resto ? resto.lunchEnd : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                </div>
+                </Card>
+
+                <Card className={classes.subcard}>
+              <Typography className={classes.service}>Service du soir</Typography>
+              <div className={classes.openAndClose}>
+                <TextField
+                  id="dinerStart"
+                  label="début"
+                  type="time"
+                  defaultValue={resto ? resto.dinerStart : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                <TextField
+                  id="dinerEnd"
+                  label="fin"
+                  type="time"
+                  defaultValue={resto ? resto.dinerEnd : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                </div>
+                </Card>
+
+            </Card>
           </div>
 
           <div className={classes.buttonsContainer}>

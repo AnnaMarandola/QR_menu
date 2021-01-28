@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Button, Fab, Link } from "@material-ui/core";
+import { Typography, Button, Fab } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
@@ -17,6 +17,7 @@ import GoogleMap from "./GoogleMap";
 import PHONE from "../../assets/icons/contactPhone.png";
 import FACEBOOK from "../../assets/icons/contactFacebook.png";
 import INSTAGRAM from "../../assets/icons/instagrm.png";
+import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
 
 const styles = (theme) => ({
   root: {
@@ -107,10 +108,11 @@ const styles = (theme) => ({
   },
   adressText: {
     fontFamily: "Archivo narrow",
+    fontSize: "1rem",
   },
   phoneContact: {
     textAlign: "center",
-    margin: "2rem",
+    margin: "1rem",
   },
   phoneNumber: {
     fontFamily: "Archivo narrow",
@@ -118,11 +120,32 @@ const styles = (theme) => ({
   contactIcons: {
     width: "10%",
   },
+  secondTitle: {
+    fontSize: "1.5rem",
+    marginTop: "2rem",
+    marginBottom: "1rem",
+  },
+  link: {
+    textDecoration: "none",
+  },
+  bookingButton: {
+    // background: 'linear-gradient(5deg, white 1%, blue 150%)',
+    width: '50%',
+    marginLeft: "25%",
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
+    marginTop: "3rem",
+    marginBottom: "2rem",
+    border: "solid 3px black",
+  },
 });
 
 const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const resto = { ...restaurant };
   const menuData = { ...menu };
+  console.log("krsekkkkkkl", restaurant && restaurant.daysOff);
+  const days = restaurant && restaurant.daysOff.join(", ");
+  console.log("dddddddays", days);
 
   let publishedDishes =
     dishes && dishes.filter((dish) => dish.published === true);
@@ -172,9 +195,11 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
-      <div className={classes.carouselSection}>
-        <RestoCarousel restaurant={resto} />
-      </div>
+      {restaurant && restaurant.carousel.length > 0 && (
+        <div className={classes.carouselSection}>
+          <RestoCarousel restaurant={resto} />
+        </div>
+      )}
       <section id="menu">
         <div className={classes.menuBody}>
           <Typography
@@ -322,7 +347,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             fontFamily: menuData.fontFamily || "Roboto",
           }}
         >
-          Infos
+          Accès
         </Typography>
         <GoogleMap restaurant={resto} />
         <div className={classes.adress}>
@@ -330,19 +355,82 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
           <Typography className={classes.adressText}>
             {resto.postalCode} {resto.city}
           </Typography>
+          <div className={classes.phoneContact}>
+            <a className={classes.phone} href={`tel:+33${resto.phone}`}>
+              <Button>
+                <img
+                  className={classes.contactIcons}
+                  src={PHONE}
+                  alt="telephone"
+                />
+              </Button>
+            </a>
+            <Typography className={classes.phoneNumber}>
+              {resto.phone}
+            </Typography>
+          </div>
         </div>
-        <div className={classes.phoneContact}>
-          <a className={classes.phone} href={`tel:+${resto.phone}`}>
-            <Button>
-              <img
-                className={classes.contactIcons}
-                src={PHONE}
-                alt="call the restaurant"
-              />
-            </Button>
-          </a>
-          <Typography className={classes.phoneNumber}>{resto.phone}</Typography>
-        </div>
+        {restaurant &&
+          (restaurant.opening ||
+            restaurant.lunchStart ||
+            restaurant.dinerStart) && (
+            <div className={classes.adress}>
+              <Typography
+                variant="h1"
+                className={classes.menuTitle}
+                style={{
+                  fontFamily: menuData.fontFamily || "Roboto",
+                }}
+              >
+                Horaires
+              </Typography>
+              <Typography className={classes.adressText}>
+                {" "}
+                Ouvert de {resto.opening} à {resto.closing}
+              </Typography>
+              <Typography className={classes.adressText}>
+                {restaurant && restaurant.daysOff.length > 1
+                  ? "Fermé les "
+                  : "Fermé le "}
+                {days}
+              </Typography>
+              <Typography
+                variant="h1"
+                className={classes.secondTitle}
+                style={{
+                  fontFamily: menuData.fontFamily || "Roboto",
+                }}
+              >
+                Le midi
+              </Typography>
+              <Typography className={classes.adressText}>
+                {" "}
+                Service de {resto.lunchStart} à {resto.lunchEnd}
+              </Typography>
+              <Typography
+                variant="h1"
+                className={classes.secondTitle}
+                style={{
+                  fontFamily: menuData.fontFamily || "Roboto",
+                }}
+              >
+                Le soir
+              </Typography>
+              <Typography className={classes.adressText}>
+                {" "}
+                Service de {resto.dinerStart} à {resto.dinerEnd}
+              </Typography>
+            </div>
+          )}
+
+        <a href={`tel:+33${resto.phone}`} className={classes.link}>
+          <Button className={classes.bookingButton}>
+            <PhoneInTalkIcon className={classes.callIcon}/>
+            Reservez
+          </Button>
+        </a>
+
+
         <a className={classes.phone} href={resto.phone}>
           <Button>
             <img
