@@ -21,7 +21,7 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
+import "date-fns";
 
 const styles = (theme) => ({
   root: {
@@ -44,6 +44,7 @@ const styles = (theme) => ({
   title: {
     marginTop: "6rem",
     marginBottom: "1rem",
+    marginLeft: "5%",
     fontFamily: "Archivo narrow",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "4rem",
@@ -54,13 +55,14 @@ const styles = (theme) => ({
     color: "#E81B7D",
   },
   subtitle: {
+    marginLeft: "5%",
     fontFamily: "Archivo narrow",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "4rem",
     },
   },
   form: {
-    width: "90%",
+    // width: "90%",
     [theme.breakpoints.up("sm")]: {
       width: "60%",
       paddingRight: "4rem",
@@ -111,6 +113,23 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+  openAndClose: {
+    display: "flex",
+    justifyContent: "space-between",
+    margin: "1rem",
+  },
+  timeInput: {
+    width: "7.2rem",
+  },
+  subcard: {
+    backgroundColor: "white",
+    marginBottom: "1rem",
+    marginTop: "1rem",
+  }, 
+  service: {
+    textAlign: "center",
+    paddingTop: "1rem",
+  }
 });
 
 class InfoResto extends Component {
@@ -128,6 +147,12 @@ class InfoResto extends Component {
     latitude: null,
     longitude: null,
     daysOff: [],
+    opening: null,
+    closing: null,
+    lunchStart: null,
+    lunchEnd: null,
+    dinerStart: null,
+    dinerEnd: null,
   };
 
   componentDidMount() {
@@ -144,6 +169,12 @@ class InfoResto extends Component {
         latitude: this.props.restaurant.latitude,
         longitude: this.props.restaurant.longitude,
         daysOff: this.props.restaurant.daysOff,
+        opening: this.props.restaurant.opening,
+        closing: this.props.restaurant.closing,
+        lunchStart: this.props.restaurant.lunchStart,
+        lunchEnd: this.props.restaurant.lunchEnd,
+        dinerStart: this.props.restaurant.dinerStart,
+        dinerEnd: this.props.restaurant.dinerEnd,
         submited: false,
       });
     }
@@ -345,6 +376,105 @@ class InfoResto extends Component {
                   </List>
                 </AccordionDetails>
               </Accordion>
+              <div className={classes.openAndClose}>
+                <TextField
+                  id="opening"
+                  label="heure d'ouverture"
+                  type="time"
+                  defaultValue={resto ? resto.opening : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                <TextField
+                  id="closing"
+                  label="heure de fermeture"
+                  type="time"
+                  defaultValue={resto ? resto.closing : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <Card className={classes.subcard}>
+              <Typography className={classes.service}>Service du midi</Typography>
+              <div className={classes.openAndClose}>
+                <TextField
+                  id="lunchStart"
+                  label="début"
+                  type="time"
+                  defaultValue={resto ? resto.lunchStart : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                <TextField
+                  id="lunchEnd"
+                  label="fin"
+                  type="time"
+                  defaultValue={resto ? resto.lunchEnd : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                </div>
+                </Card>
+
+                <Card className={classes.subcard}>
+              <Typography className={classes.service}>Service du soir</Typography>
+              <div className={classes.openAndClose}>
+                <TextField
+                  id="dinerStart"
+                  label="début"
+                  type="time"
+                  defaultValue={resto ? resto.dinerStart : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                <TextField
+                  id="dinerEnd"
+                  label="fin"
+                  type="time"
+                  defaultValue={resto ? resto.dinerEnd : null}
+                  className={classes.timeInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                  onChange={this.handleChange}
+                />
+                </div>
+                </Card>
+
             </Card>
           </div>
 
