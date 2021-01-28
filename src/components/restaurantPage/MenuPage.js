@@ -107,10 +107,11 @@ const styles = (theme) => ({
   },
   adressText: {
     fontFamily: "Archivo narrow",
+    fontSize: "1rem",
   },
   phoneContact: {
     textAlign: "center",
-    margin: "2rem",
+    margin: "1rem",
   },
   phoneNumber: {
     fontFamily: "Archivo narrow",
@@ -118,11 +119,19 @@ const styles = (theme) => ({
   contactIcons: {
     width: "10%",
   },
+  secondTitle: {
+    fontSize: "1.5rem",
+    marginTop: "2rem",
+    marginBottom: "1rem",
+  },
 });
 
 const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const resto = { ...restaurant };
   const menuData = { ...menu };
+  console.log("krsekkkkkkl", restaurant && restaurant.daysOff);
+  const days = restaurant && restaurant.daysOff.join(", ");
+  console.log("dddddddays", days);
 
   let publishedDishes =
     dishes && dishes.filter((dish) => dish.published === true);
@@ -172,9 +181,11 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
-      <div className={classes.carouselSection}>
-        <RestoCarousel restaurant={resto} />
-      </div>
+      {restaurant && restaurant.carousel.length > 0 && (
+        <div className={classes.carouselSection}>
+          <RestoCarousel restaurant={resto} />
+        </div>
+      )}
       <section id="menu">
         <div className={classes.menuBody}>
           <Typography
@@ -322,7 +333,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             fontFamily: menuData.fontFamily || "Roboto",
           }}
         >
-          Infos
+          Accès
         </Typography>
         <GoogleMap restaurant={resto} />
         <div className={classes.adress}>
@@ -330,19 +341,70 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
           <Typography className={classes.adressText}>
             {resto.postalCode} {resto.city}
           </Typography>
-        </div>
-        <div className={classes.phoneContact}>
-          <a className={classes.phone} href={`tel:+${resto.phone}`}>
+          <div className={classes.phoneContact}>
+          <a className={classes.phone} href={`tel:+33${resto.phone}`}>
             <Button>
               <img
                 className={classes.contactIcons}
                 src={PHONE}
-                alt="call the restaurant"
+                alt="telephone"
               />
             </Button>
           </a>
           <Typography className={classes.phoneNumber}>{resto.phone}</Typography>
         </div>
+
+        </div>
+        {restaurant &&
+          (restaurant.opening || restaurant.lunchStart || restaurant.dinerStart) && (
+            <div className={classes.adress}>
+              <Typography
+                variant="h1"
+                className={classes.menuTitle}
+                style={{
+                  fontFamily: menuData.fontFamily || "Roboto",
+                }}
+              >
+                Horaires
+              </Typography>
+              <Typography className={classes.adressText}>
+                {" "}
+                Ouvert de {resto.opening} à {resto.closing}
+              </Typography>
+              <Typography className={classes.adressText}>
+                {restaurant && restaurant.daysOff.length > 1
+                  ? "Fermé les "
+                  : "Fermé le "}
+                {days}
+              </Typography>
+              <Typography
+                variant="h1"
+                className={classes.secondTitle}
+                style={{
+                  fontFamily: menuData.fontFamily || "Roboto",
+                }}
+              >
+                Le midi
+              </Typography>
+              <Typography className={classes.adressText}>
+                {" "}
+                Service de {resto.lunchStart} à {resto.lunchEnd}
+              </Typography>
+              <Typography
+                variant="h1"
+                className={classes.secondTitle}
+                style={{
+                  fontFamily: menuData.fontFamily || "Roboto",
+                }}
+              >
+                Le soir
+              </Typography>
+              <Typography className={classes.adressText}>
+                {" "}
+                Service de {resto.dinerStart} à {resto.dinerEnd}
+              </Typography>
+            </div>
+          )}
         <a className={classes.phone} href={resto.phone}>
           <Button>
             <img
