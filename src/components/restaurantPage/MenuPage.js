@@ -17,6 +17,7 @@ import GoogleMap from "./GoogleMap";
 import PHONE from "../../assets/icons/contactPhone.png";
 import FACEBOOK from "../../assets/icons/contactFacebook.png";
 import INSTAGRAM from "../../assets/icons/instagrm.png";
+import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
 
 const styles = (theme) => ({
   root: {
@@ -123,6 +124,19 @@ const styles = (theme) => ({
     fontSize: "1.5rem",
     marginTop: "2rem",
     marginBottom: "1rem",
+  },
+  link: {
+    textDecoration: "none",
+  },
+  bookingButton: {
+    // background: 'linear-gradient(5deg, white 1%, blue 150%)',
+    width: '50%',
+    marginLeft: "25%",
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
+    marginTop: "3rem",
+    marginBottom: "2rem",
+    border: "solid 3px black",
   },
 });
 
@@ -342,21 +356,24 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             {resto.postalCode} {resto.city}
           </Typography>
           <div className={classes.phoneContact}>
-          <a className={classes.phone} href={`tel:+33${resto.phone}`}>
-            <Button>
-              <img
-                className={classes.contactIcons}
-                src={PHONE}
-                alt="telephone"
-              />
-            </Button>
-          </a>
-          <Typography className={classes.phoneNumber}>{resto.phone}</Typography>
-        </div>
-
+            <a className={classes.phone} href={`tel:+33${resto.phone}`}>
+              <Button>
+                <img
+                  className={classes.contactIcons}
+                  src={PHONE}
+                  alt="telephone"
+                />
+              </Button>
+            </a>
+            <Typography className={classes.phoneNumber}>
+              {resto.phone}
+            </Typography>
+          </div>
         </div>
         {restaurant &&
-          (restaurant.opening || restaurant.lunchStart || restaurant.dinerStart) && (
+          (restaurant.opening ||
+            restaurant.lunchStart ||
+            restaurant.dinerStart) && (
             <div className={classes.adress}>
               <Typography
                 variant="h1"
@@ -405,6 +422,15 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
               </Typography>
             </div>
           )}
+
+        <a href={`tel:+33${resto.phone}`} className={classes.link}>
+          <Button className={classes.bookingButton}>
+            <PhoneInTalkIcon className={classes.callIcon}/>
+            Reservez
+          </Button>
+        </a>
+
+
         <a className={classes.phone} href={resto.phone}>
           <Button>
             <img
