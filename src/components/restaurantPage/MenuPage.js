@@ -17,7 +17,8 @@ import GoogleMap from "./GoogleMap";
 import PHONE from "../../assets/icons/contactPhone.png";
 import FACEBOOK from "../../assets/icons/contactFacebook.png";
 import INSTAGRAM from "../../assets/icons/instagrm.png";
-import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
+import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
+import ContactRestoForm from "./ContactRestoForm";
 
 const styles = (theme) => ({
   root: {
@@ -129,8 +130,7 @@ const styles = (theme) => ({
     textDecoration: "none",
   },
   bookingButton: {
-    // background: 'linear-gradient(5deg, white 1%, blue 150%)',
-    width: '50%',
+    width: "50%",
     marginLeft: "25%",
     paddingTop: "1rem",
     paddingBottom: "1rem",
@@ -422,15 +422,13 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
               </Typography>
             </div>
           )}
-
         <a href={`tel:+33${formatedPhone}`} className={classes.link}>
           <Button className={classes.bookingButton}>
-            <PhoneInTalkIcon className={classes.callIcon}/>
+            <PhoneInTalkIcon className={classes.callIcon} />
             Reservez
           </Button>
         </a>
-
-
+        <ContactRestoForm restaurant={resto} />
         <a className={classes.phone} href={resto.phone}>
           <Button>
             <img
