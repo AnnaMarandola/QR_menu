@@ -6,7 +6,6 @@ import PHONE from "../../assets/icons/contactPhone.png";
 import ADRESS from "../../assets/icons/contactAdress.png";
 import FACEBOOK from "../../assets/icons/contactFacebook.png";
 import LINKEDIN from "../../assets/icons/contactLinkedin.png";
-import MAIL from "../../assets/icons/contactMail.png";
 import BackToTopButton from "../UI kit/BackToTopButton";
 
 const styles = (theme) => ({
@@ -88,9 +87,6 @@ const styles = (theme) => ({
       width: "100%",
     },
   },
-  mailIcon: {
-    width: "15%",
-  },
 });
 
 const ContactSection = ({ classes }) => {
@@ -152,7 +148,6 @@ const ContactSection = ({ classes }) => {
         </div>
 
         <div className={classes.formContainer}>
-          <img src={MAIL} alt="mail icon" className={classes.mailIcon} />
           <ContactForm />
         </div>
       </div>

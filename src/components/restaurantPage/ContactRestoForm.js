@@ -4,66 +4,77 @@ import {
   TextField,
   Button,
   Card,
+  Typography,
 } from "@material-ui/core";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { sendMessage } from "../../store/actions/messageActions";
+import { sendRestoMessage } from "../../store/actions/restoMessageActions";
 import { toast } from "react-toastify";
-import MAIL from "../../assets/icons/contactMail.png";
+// import MAIL from 0.5"../../assets/icons/contactMail.png";
+import EmailSharpIcon from '@material-ui/icons/EmailSharp';
 
 const styles = (theme) => ({
   root: {
     display: "flex",
-    backgroundColor: "white",
+    width: "90%",
+    marginLeft: "5%",
+    marginTop: "2rem",
+    marginBottom: "2rem",
     flexDirection: "column",
-    paddingBottom: "2rem",
+    textAlign: "center",
+    backgroundColor: "white",
     [theme.breakpoints.up("sm")]: {
       margin: 0,
+      flexDirection: "row",
     },
   },
   textArea: {
-    margin: "0.5rem",
     marginTop: "2rem",
     width: "80%",
     [theme.breakpoints.up("sm")]: {
       marginBottom: "2rem",
+      marginRight: "2.5%",
     },
   },
   contactInputs: {
     width: "80%",
   },
   submitButton: {
-    width: "35%",
-    color: "white",
-    marginTop: "2rem",
+    color: "black",
+    margin: "2rem",
+    paddingRight: "1rem",
+    border: "2px solid black",
   },
   mailIcon: {
-    width: "15%",
-    margin: "1rem",
+    margin: "0.5rem",
   },
+  mailIntro: {
+    fontFamily: "Archivo narrow",
+  }
 });
 
-const ContactForm = ({ classes, sendMessage }) => {
+const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [emailSender, setEmailSender] = useState("");
   const [message, setMessage] = useState("");
-  const [subject, setSubject] = useState("");
+  console.log("rrrerestorant", restaurant)
+  const recipient = restaurant.id
+  console.log("recipient", recipient)
 
-  const [loader, setLoader] = useState(false);
+  // const [loader, setLoader] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoader(true);
+    // setLoader(true);
     setName("");
-    setEmail("");
+    setEmailSender("");
     setMessage("");
-    setSubject("");
-    console.log("MAIL SENT", name, email, message);
-    sendMessage({
-      email: email,
+    console.log("MAIL SENT", name, emailSender, message, recipient);
+    sendRestoMessage({
+      emailSender: emailSender,
       name: name,
-      subject: subject,
       message: message,
+      recipient: recipient,
     });
     toast.success(
       "Votre message a bien été envoyé, nous vous répondrons rapidement.",
@@ -75,8 +86,9 @@ const ContactForm = ({ classes, sendMessage }) => {
 
   return (
     <Card className={classes.root}>
+    <Typography className={classes.mailIntro}>Ecrivez-nous pour toutes demandes d'informations, repas de groupe, devis ...</Typography>
       <form onSubmit={handleSubmit}>
-        <img src={MAIL} alt="mail icon" className={classes.mailIcon} />
+        {/* <img src={MAIL} alt="mail icon" className={classes.mailIcon} /> */}
 
         <div>
           <TextField
@@ -90,21 +102,13 @@ const ContactForm = ({ classes, sendMessage }) => {
           />
 
           <TextField
-            id="email"
+            id="emailSender"
             label="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={emailSender}
+            onChange={(e) => setEmailSender(e.target.value)}
             className={classes.contactInputs}
             required="required"
             type="mail"
-          />
-
-          <TextField
-            id="subject"
-            label="objet"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            className={classes.contactInputs}
           />
         </div>
 
@@ -122,9 +126,10 @@ const ContactForm = ({ classes, sendMessage }) => {
 
         <Button
           type="submit"
-          style={{ background: loader ? "#eeeeee" : "#031627" }}
+          // style={{ background: loader ? "#eeeeee" : "#031627" }}
           className={classes.submitButton}
         >
+        <EmailSharpIcon className={classes.mailIcon}/>
           Envoyer
         </Button>
       </form>
@@ -134,11 +139,11 @@ const ContactForm = ({ classes, sendMessage }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sendMessage: (message) => dispatch(sendMessage(message)),
+    sendRestoMessage: (message) => dispatch(sendRestoMessage(message)),
   };
 };
 
 export default compose(
   withStyles(styles),
   connect(null, mapDispatchToProps)
-)(ContactForm);
+)(ContactRestoForm);
