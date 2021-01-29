@@ -143,7 +143,7 @@ const styles = (theme) => ({
 const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const resto = { ...restaurant };
   const menuData = { ...menu };
-  console.log("krsekkkkkkl", restaurant && restaurant.daysOff);
+  const formatedPhone = restaurant && restaurant.phone.substring(1);
   const days = restaurant && restaurant.daysOff.join(", ");
   console.log("dddddddays", days);
 
@@ -195,7 +195,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
         </Typography>
         <img className={classes.logo} src={resto.logo} alt="logo" />
       </div>
-      {restaurant && restaurant.carousel.length > 0 && (
+      {restaurant && [restaurant.carousel].length > 0 && (
         <div className={classes.carouselSection}>
           <RestoCarousel restaurant={resto} />
         </div>
@@ -356,7 +356,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             {resto.postalCode} {resto.city}
           </Typography>
           <div className={classes.phoneContact}>
-            <a className={classes.phone} href={`tel:+33${resto.phone}`}>
+            <a className={classes.phone} href={`tel:+33${formatedPhone}`}>
               <Button>
                 <img
                   className={classes.contactIcons}
@@ -423,7 +423,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             </div>
           )}
 
-        <a href={`tel:+33${resto.phone}`} className={classes.link}>
+        <a href={`tel:+33${formatedPhone}`} className={classes.link}>
           <Button className={classes.bookingButton}>
             <PhoneInTalkIcon className={classes.callIcon}/>
             Reservez
