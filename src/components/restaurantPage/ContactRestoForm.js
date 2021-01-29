@@ -50,6 +50,7 @@ const styles = (theme) => ({
   },
   mailIntro: {
     fontFamily: "Archivo narrow",
+    margin: "2rem",
   }
 });
 
@@ -61,11 +62,9 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
   const recipient = restaurant.email
   console.log("recipient", recipient)
 
-  // const [loader, setLoader] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setLoader(true);
     setName("");
     setEmailSender("");
     setMessage("");
