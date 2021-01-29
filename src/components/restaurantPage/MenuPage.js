@@ -104,6 +104,11 @@ const styles = (theme) => ({
     fill: "white",
   },
   adress: {
+    marginTop: "6rem",
+    marginBottom: "6rem",
+    textAlign: "center",
+  },
+  adressUnderMap: {
     margin: "2rem",
     textAlign: "center",
   },
@@ -118,7 +123,28 @@ const styles = (theme) => ({
   phoneNumber: {
     fontFamily: "Archivo narrow",
   },
+  socialContainer: {
+    marginTop: "4rem",
+  },
+  // subtitle: {
+  //   textAlign: "center",
+  //   fontFamily: "Archivo narrow",
+  //   fontSize: "1.2rem",
+
+  // },
+  socialMedia: {
+    // display: "flex",
+    // marginLeft: "10%",
+    marginTop: "2rem",
+    marginBottom: "4rem",
+  },
   contactIcons: {
+    width: "10%",
+  },
+  instaIcon: {
+    width: "10%",
+  },
+  fbIcon: {
     width: "10%",
   },
   secondTitle: {
@@ -135,7 +161,6 @@ const styles = (theme) => ({
     paddingTop: "1rem",
     paddingBottom: "1rem",
     marginTop: "3rem",
-    marginBottom: "2rem",
     border: "solid 3px black",
   },
 });
@@ -339,51 +364,17 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
       </section>
 
       <section id="infoscontact">
-        {" "}
-        <Typography
-          variant="h1"
-          className={classes.menuTitle}
-          style={{
-            fontFamily: menuData.fontFamily || "Roboto",
-          }}
-        >
-          Accès
-        </Typography>
-        <GoogleMap restaurant={resto} />
-        <div className={classes.adress}>
-          <Typography className={classes.adressText}>{resto.adress}</Typography>
-          <Typography className={classes.adressText}>
-            {resto.postalCode} {resto.city}
-          </Typography>
-          <div className={classes.phoneContact}>
-            <a className={classes.phone} href={`tel:+33${formatedPhone}`}>
-              <Button>
-                <img
-                  className={classes.contactIcons}
-                  src={PHONE}
-                  alt="telephone"
-                />
-              </Button>
-            </a>
-            <Typography className={classes.phoneNumber}>
-              {resto.phone}
-            </Typography>
-          </div>
-        </div>
+        <a href={`tel:+33${formatedPhone}`} className={classes.link}>
+          <Button className={classes.bookingButton}>
+            <PhoneInTalkIcon className={classes.callIcon} />
+            Reservez
+          </Button>
+        </a>
         {restaurant &&
           (restaurant.opening ||
             restaurant.lunchStart ||
             restaurant.dinerStart) && (
             <div className={classes.adress}>
-              <Typography
-                variant="h1"
-                className={classes.menuTitle}
-                style={{
-                  fontFamily: menuData.fontFamily || "Roboto",
-                }}
-              >
-                Horaires
-              </Typography>
               <Typography className={classes.adressText}>
                 {" "}
                 Ouvert de {resto.opening} à {resto.closing}
@@ -422,31 +413,50 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
               </Typography>
             </div>
           )}
-        <a href={`tel:+33${formatedPhone}`} className={classes.link}>
-          <Button className={classes.bookingButton}>
-            <PhoneInTalkIcon className={classes.callIcon} />
-            Reservez
-          </Button>
-        </a>
+
+        <GoogleMap restaurant={resto} />
+        <div className={classes.adressUnderMap}>
+          <Typography className={classes.adressText}>{resto.adress}</Typography>
+          <Typography className={classes.adressText}>
+            {resto.postalCode} {resto.city}
+          </Typography>
+          <div className={classes.phoneContact}>
+            <a className={classes.phone} href={`tel:+33${formatedPhone}`}>
+              <Button>
+                <img
+                  className={classes.contactIcons}
+                  src={PHONE}
+                  alt="telephone"
+                />
+              </Button>
+            </a>
+            <Typography className={classes.phoneNumber}>
+              {resto.phone}
+            </Typography>
+          </div>
+        </div>
         <ContactRestoForm restaurant={resto} />
-        <a className={classes.phone} href={resto.phone}>
-          <Button>
-            <img
-              className={classes.contactIcons}
-              src={FACEBOOK}
-              alt="facebook"
-            />
-          </Button>
-        </a>
-        <a className={classes.phone} href={resto.phone}>
-          <Button>
-            <img
-              className={classes.contactIcons}
-              src={INSTAGRAM}
-              alt="facebook"
-            />
-          </Button>
-        </a>
+        {restaurant && (restaurant.facebook || restaurant.instagram) && (
+          <div className={classes.socialContainer}>
+          {/* <Typography className={classes.subtitle}>Retrouvez-nous sur les réseaux sociaux !</Typography> */}
+          <div className={classes.socialMedia}>
+            <a className={classes.phon} href={resto.phone}>
+              <Button>
+                <img className={classes.fbIcon} src={FACEBOOK} alt="facebook" />
+              </Button>
+            </a>
+            <a className={classes.phon} href={resto.phone}>
+              <Button>
+                <img
+                  className={classes.instaIcon}
+                  src={INSTAGRAM}
+                  alt="facebook"
+                />
+              </Button>
+            </a>
+          </div>
+          </div>
+        )}
       </section>
       <div className={classes.footerSection}>
         <FooterResto />

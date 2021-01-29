@@ -18,8 +18,8 @@ const styles = (theme) => ({
     display: "flex",
     width: "90%",
     marginLeft: "5%",
-    marginTop: "2rem",
-    marginBottom: "2rem",
+    marginTop: "6rem",
+    marginBottom: "3rem",
     flexDirection: "column",
     textAlign: "center",
     backgroundColor: "white",
@@ -44,6 +44,7 @@ const styles = (theme) => ({
     margin: "2rem",
     paddingRight: "1rem",
     border: "2px solid black",
+    height: "2.5rem",
   },
   mailIcon: {
     margin: "0.5rem",
@@ -51,7 +52,9 @@ const styles = (theme) => ({
   mailIntro: {
     fontFamily: "Archivo narrow",
     margin: "2rem",
-  }
+    fontSize: "1.2rem",
+  },
+
 });
 
 const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
