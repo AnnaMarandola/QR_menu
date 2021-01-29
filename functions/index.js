@@ -81,3 +81,34 @@ exports.onUploadCarouselPicture = functions.storage
       return false;
     }
   });
+
+  exports.onRestoMessageCreate = functions.firestore
+  .document("restoMessages/{restoMessageID}")
+  .onCreate(async (snapshot) => {
+    const message = snapshot.data();
+    console.log("message", message);
+
+    const gmailEmail = functions.config().gmail.email;
+    const gmailPassword = functions.config().gmail.password;
+    console.log("gmail", gmailEmail);
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "qrmenu.contact",
+        pass: gmailPassword,
+      },
+    });
+
+    const messageOptions = {
+      from: gmailEmail,
+      to: message.recipient,
+      subject: `${message.name} vous a envoyé un message depuis l'application QR Menu`,
+      text: message.message,
+      html: `<p>${message.message}</p>
+                 <p>${message.name}</p>
+                 <p>${message.emailSender}</p>`,
+    };
+
+    return transporter.sendMail(messageOptions);
+  });

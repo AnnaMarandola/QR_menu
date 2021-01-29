@@ -58,7 +58,7 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
   const [emailSender, setEmailSender] = useState("");
   const [message, setMessage] = useState("");
   console.log("rrrerestorant", restaurant)
-  const recipient = restaurant.id
+  const recipient = restaurant.email
   console.log("recipient", recipient)
 
   // const [loader, setLoader] = useState(false);
