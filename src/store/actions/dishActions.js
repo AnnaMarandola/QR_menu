@@ -72,3 +72,30 @@ export const deleteDish = (dishId) => {
       });
   };
 };
+
+export const uploadDishPic = (file, dishId) => 
+(dispatch,getState,{ getFirebase }) => {
+  console.log("pic and dish in upload action", file, dishId)
+  const firebase = getFirebase();
+  firebase
+    .storage()
+    .ref(
+      `dish-pictures/${dishId}-${new Date().getMilliseconds()}.${file.name.split(".").pop()}`
+    )
+    .put(file)
+    .on(
+      "state_changed",
+      function progress(snapshot) {
+        dispatch({
+          type: "UPLOAD_PROGRESS",
+          progress: (100 * snapshot.bytesTransferred) / snapshot.totalBytes,
+        });
+      },
+      function error(err) {
+        dispatch({ type: "UPLOAD_ERROR", err });
+      },
+      function complete() {
+        dispatch({ type: "UPLOAD_COMPLETE" });
+      }
+    );
+};
