@@ -4,17 +4,6 @@ const admin = require("firebase-admin");
 
 admin.initializeApp();
 
-// exports.onMenuCreate = functions.firestore
-//   .document("menus/{menuId}")
-//   .onCreate( async(snapshot, context) => {
-//     const menuId = context.params.menuId;
-//     const data = snapshot.data();
-//     const restoId = data.restoId
-//     return admin.firestore()
-//       .collection("restaurants")
-//       .doc(restoId)
-//       .update({ menuId: menuId, template: data.template });
-//   });
 
 exports.onUploadLogo = functions.storage.object().onFinalize((object) => {
   console.log(object);
@@ -76,13 +65,33 @@ exports.onUploadCarouselPicture = functions.storage
         .firestore()
         .collection("restaurants")
         .doc(restoId)
-        .update({ carousel: admin.firestore.FieldValue.arrayUnion(object.mediaLink)});
+        .update({
+          carousel: admin.firestore.FieldValue.arrayUnion(object.mediaLink),
+        });
     } else {
       return false;
     }
   });
 
-  exports.onRestoMessageCreate = functions.firestore
+exports.onUploadDishPic = functions.storage
+  .object()
+  .onFinalize(async (object) => {
+    console.log(object);
+    const filePath = object.name;
+    console.log("filePath", filePath);
+    if (filePath.startsWith("dish-pictures/")) {
+      const dishId = object.name.split("/").pop().split("-")[0].split(".")[0];
+      return admin
+        .firestore()
+        .collection("dishes")
+        .doc(dishId)
+        .update({ picture: object.mediaLink });
+    } else {
+      return false;
+    }
+  });
+
+exports.onRestoMessageCreate = functions.firestore
   .document("restoMessages/{restoMessageID}")
   .onCreate(async (snapshot) => {
     const message = snapshot.data();
