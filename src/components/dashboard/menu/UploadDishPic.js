@@ -7,9 +7,31 @@ import { toast } from "react-toastify";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
 const styles = (theme) => ({
+  imgContainer: {
+    width: "8rem",
+    height: "8rem",
+    display: "flex",
+    marginLeft: "auto",
+    marginRight: 0,
+    justifyContent: "flex-end",
+    textAlign: "flex-end",
+    overflow: "hidden",
+    "& img": {
+      objectFit: "cover",
+      height: "100%",
+    },
+  },
+  uploadForm: {
+    // maxWidth: "200px",
+    // marginTop: "1rem",
+  },
   inputfile: {
     display: "none",
   },
+  uploadButton: {
+    marginLeft: "35%",
+    marginTop: "-2rem",
+  }
 });
 
 const INITIAL_STATE = {
@@ -42,9 +64,13 @@ class UploadDishPic extends Component {
     return (
       <div>
         <div className={classes.imgContainer}>
-
+        {this.props.dish && this.props.dish.picture ? (
+            <img src={this.props.dish.picture} alt={this.props.dish.name} />
+          ) : (
+            <img src="https://via.placeholder.com/300x150" alt="avatar" />
+          )}
         </div>
-
+        <img src={this.props.dish.image} alt={this.props.dish.name}/>
         <label htmlFor="file">
           <input
             type="file"
@@ -57,6 +83,7 @@ class UploadDishPic extends Component {
             component="span"
             aria-label="add"
             variant="extended"
+            className={classes.uploadButton}
           >
             <AddPhotoAlternateIcon />
           </Fab>

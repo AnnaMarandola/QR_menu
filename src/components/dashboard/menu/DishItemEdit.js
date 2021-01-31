@@ -104,7 +104,7 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
             <Button onClick={handleClose}>X</Button>
           </div>
         )}
-        <UploadDishPic dish={dish}/>
+        {/* <UploadDishPic dish={dish}/> */}
       </div>
       <hr />
     </div>
