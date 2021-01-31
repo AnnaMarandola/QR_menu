@@ -126,15 +126,7 @@ const styles = (theme) => ({
   socialContainer: {
     marginTop: "4rem",
   },
-  // subtitle: {
-  //   textAlign: "center",
-  //   fontFamily: "Archivo narrow",
-  //   fontSize: "1.2rem",
-
-  // },
   socialMedia: {
-    // display: "flex",
-    // marginLeft: "10%",
     marginTop: "2rem",
     marginBottom: "4rem",
   },
@@ -170,7 +162,6 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const menuData = { ...menu };
   const formatedPhone = restaurant && restaurant.phone.substring(1);
   const days = restaurant && restaurant.daysOff.join(", ");
-  console.log("dddddddays", days);
 
   let publishedDishes =
     dishes && dishes.filter((dish) => dish.published === true);
@@ -272,6 +263,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
                     ingredients={dish.ingredients}
                     description={dish.description}
                     allergens={dish.checkedAllergens}
+                    picture={dish.picture}
                   />
                 ))}
             </div>
@@ -302,6 +294,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
                           ingredients={starter.ingredients}
                           description={starter.description}
                           allergens={starter.checkedAllergens}
+                          picture={starter.picture}
                         />
                       ))}
                   </AccordionDetails>
@@ -328,6 +321,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
                           ingredients={main.ingredients}
                           description={main.description}
                           allergens={main.checkedAllergens}
+                          picture={main.picture}
                         />
                       ))}
                   </AccordionDetails>
@@ -354,6 +348,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
                           ingredients={dessert.ingredients}
                           description={dessert.description}
                           allergens={dessert.checkedAllergens}
+                          picture={dessert.picture}
                         />
                       ))}
                   </AccordionDetails>

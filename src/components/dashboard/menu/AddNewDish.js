@@ -24,6 +24,7 @@ import { createDish, updateDish } from "../../../store/actions/dishActions";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
+import UploadDishPic from "./UploadDishPic";
 
 const styles = (theme) => ({
   // root: {
@@ -38,12 +39,21 @@ const styles = (theme) => ({
     backgroundColor: "white",
     paddingLeft: "10%",
   },
-  categoryInput: {
-    width: "8rem",
-    alignItems: "flex-end",
-    paddingTop: "10%",
+  imgAndCategory: {
+    alignItems: "center",
   },
-
+  categoryInput: {
+    width: "6rem",
+    alignItems: "flex-end",
+  },
+  categoryLabel: {
+    marginTop: "3rem"
+  },
+  upload: {
+    width: "40%",
+    marginLeft: "50%",
+    marginTop: "-4rem",
+  },
   input: {
     width: "90%",
   },
@@ -84,6 +94,7 @@ class AddNewDish extends Component {
     checkedAllergens: [],
     price: "",
     published: true,
+    picture: "",
   };
 
   componentDidMount() {
@@ -98,6 +109,7 @@ class AddNewDish extends Component {
         checkedAllergens: this.props.dish.checkedAllergens,
         price: this.props.dish.price,
         published: this.props.dish.published,
+        picture: this.props.dish.picture,
       });
     }
   }
@@ -169,8 +181,8 @@ class AddNewDish extends Component {
     return (
         <form className={classes.form} onSubmit={this.handleSubmit}>
           {template !== "Carte thématique" && (
-            <div className={classes.categoryInput}>
-              <InputLabel id="category">Catégorie</InputLabel>
+            <div className={classes.imgAndCategory}>
+              <InputLabel id="category" className={classes.categoryLabel}>Catégorie</InputLabel>
               <Select
                 className={classes.categoryInput}
                 id="category"
@@ -181,6 +193,11 @@ class AddNewDish extends Component {
                 <MenuItem value={"main"}>Plat</MenuItem>
                 <MenuItem value={"dessert"}>Dessert</MenuItem>
               </Select>
+              { dish &&
+              <div className={classes.upload}>
+              <UploadDishPic dish={dish}/>
+              </div>
+              }
             </div>
           )}
 

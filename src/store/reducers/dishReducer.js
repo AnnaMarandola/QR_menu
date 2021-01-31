@@ -27,6 +27,19 @@ const dishReducer = (state = initialState, action) => {
     case "SWITCH_STATUS_ERROR":
       console.log("switch status error", action.err);
       return state;
+    case "UPLOAD_ERROR":
+      console.log("upload error");
+      console.log(action.err);
+      return {
+        ...state,
+        authError: action.err,
+      };
+    case "UPLOAD_COMPLETE":
+      console.log("upload complete");
+      return {
+        ...state,
+        uploadProgress: null,
+      };
     default:
       return state;
   }

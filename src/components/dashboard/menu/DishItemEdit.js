@@ -11,6 +11,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import AddNewDish from "./AddNewDish";
 import Switch from "@material-ui/core/Switch";
 import { toast } from "react-toastify";
+import UploadDishPic from "./UploadDishPic";
 
 
 const styles = (theme) => ({
@@ -103,6 +104,7 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
             <Button onClick={handleClose}>X</Button>
           </div>
         )}
+        {/* <UploadDishPic dish={dish}/> */}
       </div>
       <hr />
     </div>
