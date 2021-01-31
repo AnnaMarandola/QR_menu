@@ -17,6 +17,7 @@ const styles = (theme) => ({
     maxWidth: 345,
     backgroundColor: "white",
     marginTop: "1rem",
+    marginLeft: "1rem",
   },
   dishTitle: {
     fontSize: "1.3rem",
