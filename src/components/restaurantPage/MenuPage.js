@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Button, Fab } from "@material-ui/core";
+import { Typography, Button, Fab, Card } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
@@ -19,6 +19,7 @@ import FACEBOOK from "../../assets/icons/contactFacebook.png";
 import INSTAGRAM from "../../assets/icons/instagrm.png";
 import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
 import ContactRestoForm from "./ContactRestoForm";
+import Loading from "../Loading";
 
 const styles = (theme) => ({
   root: {
@@ -104,7 +105,7 @@ const styles = (theme) => ({
     fill: "white",
   },
   adress: {
-    marginTop: "6rem",
+    marginTop: "4rem",
     marginBottom: "6rem",
     textAlign: "center",
   },
@@ -125,24 +126,34 @@ const styles = (theme) => ({
   },
   socialContainer: {
     marginTop: "4rem",
+    width: "90%",
+    marginLeft: "5%",
+    backgroundColor: "white",
   },
   socialMedia: {
-    marginTop: "2rem",
-    marginBottom: "4rem",
+    margin: "1rem",
   },
   contactIcons: {
-    width: "10%",
+    width: "15%",
   },
   instaIcon: {
-    width: "10%",
+    width: "15%",
+    marginTop: "1rem",
   },
   fbIcon: {
-    width: "10%",
+    width: "15%",
   },
   secondTitle: {
     fontSize: "1.5rem",
     marginTop: "2rem",
     marginBottom: "1rem",
+    textAlign: "center",
+  },
+  socialTitle: {
+    fontFamily: "Archivo narrow",
+    fontSize: "1rem",
+    textAlign: "center",
+    // fontWeight: 500,
   },
   link: {
     textDecoration: "none",
@@ -154,6 +165,7 @@ const styles = (theme) => ({
     paddingBottom: "1rem",
     marginTop: "3rem",
     border: "solid 3px black",
+    marginBottom: "4rem",
   },
 });
 
@@ -179,6 +191,9 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const starters = sorts && sorts.starter;
   const mains = sorts && sorts.main;
   const desserts = sorts && sorts.dessert;
+
+  if (!restaurant && !menu) return <Loading/>;
+
 
   return (
     <div className={classes.root}>
@@ -365,21 +380,25 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             Reservez
           </Button>
         </a>
-        {restaurant &&
-          (restaurant.opening ||
-            restaurant.lunchStart ||
-            restaurant.dinerStart) && (
-            <div className={classes.adress}>
-              <Typography className={classes.adressText}>
-                {" "}
-                Ouvert de {resto.opening} à {resto.closing}
-              </Typography>
-              <Typography className={classes.adressText}>
-                {restaurant && restaurant.daysOff.length > 1
-                  ? "Fermé les "
-                  : "Fermé le "}
-                {days}
-              </Typography>
+        <div className={classes.adress}>
+          {restaurant && restaurant.opening && restaurant.closing && (
+            <Typography className={classes.adressText}>
+              {" "}
+              Ouvert de {resto.opening} à {resto.closing}
+            </Typography>
+          )}
+
+          {restaurant && restaurant.daysOff.length > 0 && (
+            <Typography className={classes.adressText}>
+              {restaurant && restaurant.daysOff.length > 1
+                ? "Fermé les "
+                : "Fermé le "}
+              {days}
+            </Typography>
+          )}
+
+          {restaurant && restaurant.lunchStart && restaurant.lunchEnd && (
+            <div>
               <Typography
                 variant="h1"
                 className={classes.secondTitle}
@@ -393,6 +412,11 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
                 {" "}
                 Service de {resto.lunchStart} à {resto.lunchEnd}
               </Typography>
+            </div>
+          )}
+
+          {restaurant && restaurant.dinerStart && restaurant.dinerEnd && (
+            <div>
               <Typography
                 variant="h1"
                 className={classes.secondTitle}
@@ -408,8 +432,10 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
               </Typography>
             </div>
           )}
+        </div>
 
         <GoogleMap restaurant={resto} />
+
         <div className={classes.adressUnderMap}>
           <Typography className={classes.adressText}>{resto.adress}</Typography>
           <Typography className={classes.adressText}>
@@ -430,29 +456,37 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             </Typography>
           </div>
         </div>
-        <ContactRestoForm restaurant={resto} />
         {restaurant && (restaurant.facebook || restaurant.instagram) && (
-          <div className={classes.socialContainer}>
-          {/* <Typography className={classes.subtitle}>Retrouvez-nous sur les réseaux sociaux !</Typography> */}
-          <div className={classes.socialMedia}>
-            <a className={classes.phon} href={resto.phone}>
-              <Button>
-                <img className={classes.fbIcon} src={FACEBOOK} alt="facebook" />
-              </Button>
-            </a>
-            <a className={classes.phon} href={resto.phone}>
-              <Button>
-                <img
-                  className={classes.instaIcon}
-                  src={INSTAGRAM}
-                  alt="facebook"
-                />
-              </Button>
-            </a>
-          </div>
-          </div>
+          <Card className={classes.socialContainer}>
+            <Typography className={classes.socialTitle}>
+              Retrouvez-nous sur nos réseaux sociaux
+            </Typography>
+            <div className={classes.socialMedia}>
+              <a className={classes.phon} href={resto.phone}>
+                <Button>
+                  <img
+                    className={classes.fbIcon}
+                    src={FACEBOOK}
+                    alt="facebook"
+                  />
+                </Button>
+              </a>
+              <a className={classes.phon} href={resto.phone}>
+                <Button>
+                  <img
+                    className={classes.instaIcon}
+                    src={INSTAGRAM}
+                    alt="facebook"
+                  />
+                </Button>
+              </a>
+            </div>
+          </Card>
         )}
+
+        <ContactRestoForm restaurant={resto} />
       </section>
+
       <div className={classes.footerSection}>
         <FooterResto />
       </div>

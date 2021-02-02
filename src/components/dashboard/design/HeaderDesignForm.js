@@ -74,7 +74,83 @@ const styles = (theme, menu) => ({
   },
   police4: {
     fontFamily: "Lobster",
+  },  
+  police5: {
+    fontFamily: 'Cinzel',
   },
+  police6: {
+    fontFamily: 'Righteous',
+  },
+  police7: {
+    fontFamily: 'Aclonica',
+  },
+  police8: {
+    fontFamily: 'Barrio',
+  },
+  police9: {
+    fontFamily: 'Big Shoulders Stencil Text',
+  },
+  police10: {
+    fontFamily: 'Emilys Candy',
+  },
+  police11: {
+    fontFamily: 'Cabin Sketch',
+  },
+  police12: {
+    fontFamily: 'Cinzel decorative',
+  },
+  police13: {
+    fontFamily: 'Cookie',
+  },
+  police14: {
+    fontFamily: 'Cutive Mono',
+  },
+  police15: {
+    fontFamily: 'Delius Unicase'
+  },
+  police16: {
+    fontFamily: 'Emilys Candy',
+  },
+  police17: {
+    fontFamily: 'Fontdiner Swanky'
+  },  
+  police18: {
+    fontFamily: 'Fredericka the Great'
+  },
+  police19: {
+    fontFamily: 'Kranky'
+  },
+  police20: {
+    fontFamily: 'Lexend Zetta'
+  },
+  police21: {
+    fontFamily: 'Lobster Two'
+  },
+  police22: {
+    fontFamily: 'Megrim'
+  },
+  police23: {
+    fontFamily: 'Monofett'
+  },
+  police24: {
+    fontFamily: 'Montserrat Subrayada'
+  },
+  police25: {
+    fontFamily: 'Pompiere'
+  },
+  police26: {
+    fontFamily: 'Princess Sofia'
+  },
+  police27: {
+    fontFamily: 'Sacramento'
+  },
+  police28: {
+    fontFamily: 'Sofia'
+  },
+  police29: {
+    fontFamily: 'Special Elite'
+  },
+
 });
 
 const HeaderDesignForm = ({
@@ -217,6 +293,84 @@ const HeaderDesignForm = ({
                         {resto.name}
                       </MenuItem>
                       <MenuItem value={"Lobster"} className={classes.police4}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Cinzel"} className={classes.police5}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Righteous"} className={classes.police6}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Aclonica"} className={classes.police7}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Barrio"} className={classes.police8}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Big Shoulders Stencil Text"} className={classes.police9}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Emilys Candy"} className={classes.police10}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Cabin Sketch"} className={classes.police11}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Cinzel Decorative"} className={classes.police12}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Cookie"} className={classes.police13}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Cutive Mono"} className={classes.police14}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Delius Unicase"} className={classes.police15}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Emilys Candy"} className={classes.police16}>
+                        {resto.name}
+                      </MenuItem>                      
+                      <MenuItem value={"Fontdiner Swanky"} className={classes.police17}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Fredericka the Great"} className={classes.police18}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Kranky"} className={classes.police19}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Lexend Zetta"} className={classes.police20}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Lobster Two"} className={classes.police21}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Magrim"} className={classes.police22}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Monofett"} className={classes.police23}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Montserrat Subrayada"} className={classes.police24}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Pompiere"} className={classes.police25}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Princess Sofia"} className={classes.police26}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Sacramento"} className={classes.police27}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Sofia"} className={classes.police28}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Special Elite"} className={classes.police29}>
+                        {resto.name}
+                      </MenuItem>
+                      <MenuItem value={"Syncopate"} className={classes.police30}>
                         {resto.name}
                       </MenuItem>
                     </Select>
