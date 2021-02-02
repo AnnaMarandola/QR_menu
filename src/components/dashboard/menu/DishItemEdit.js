@@ -11,7 +11,6 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import AddNewDish from "./AddNewDish";
 import Switch from "@material-ui/core/Switch";
 import { toast } from "react-toastify";
-import UploadDishPic from "./UploadDishPic";
 
 
 const styles = (theme) => ({

@@ -1,7 +1,6 @@
 import {
   Avatar,
   Card,
-  CardActionArea,
   CardContent,
   CardMedia,
   ListItemAvatar,
