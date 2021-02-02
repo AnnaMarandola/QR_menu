@@ -3,14 +3,12 @@ import {
   withStyles,
   TextField,
   Button,
-  Card,
   Typography,
 } from "@material-ui/core";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { sendRestoMessage } from "../../store/actions/restoMessageActions";
 import { toast } from "react-toastify";
-// import MAIL from 0.5"../../assets/icons/contactMail.png";
 import EmailSharpIcon from '@material-ui/icons/EmailSharp';
 
 const styles = (theme) => ({
@@ -51,8 +49,9 @@ const styles = (theme) => ({
   },
   mailIntro: {
     fontFamily: "Archivo narrow",
-    margin: "2rem",
-    fontSize: "1.2rem",
+    margin: "1rem",
+    fontSize: "1rem",
+    fontWeight: 600,
   },
 
 });
@@ -87,7 +86,7 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
   };
 
   return (
-    <Card className={classes.root}>
+    <div className={classes.root}>
     <Typography className={classes.mailIntro}>Ecrivez-nous pour toutes demandes d'informations, repas de groupe, devis ...</Typography>
       <form onSubmit={handleSubmit}>
         {/* <img src={MAIL} alt="mail icon" className={classes.mailIcon} /> */}
@@ -135,7 +134,7 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
           Envoyer
         </Button>
       </form>
-    </Card>
+    </div>
   );
 };
 
