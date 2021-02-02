@@ -19,6 +19,7 @@ import FACEBOOK from "../../assets/icons/contactFacebook.png";
 import INSTAGRAM from "../../assets/icons/instagrm.png";
 import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
 import ContactRestoForm from "./ContactRestoForm";
+import Loading from "../Loading";
 
 const styles = (theme) => ({
   root: {
@@ -190,6 +191,9 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const starters = sorts && sorts.starter;
   const mains = sorts && sorts.main;
   const desserts = sorts && sorts.dessert;
+
+  if (!restaurant && !menu) return <Loading/>;
+
 
   return (
     <div className={classes.root}>
