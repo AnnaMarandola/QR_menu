@@ -1,6 +1,7 @@
 import React from "react";
 import useQrCode from "react-qrcode-hook";
 import { withStyles } from "@material-ui/styles";
+import { Fab } from "@material-ui/core";
 import { compose } from "redux";
 
 

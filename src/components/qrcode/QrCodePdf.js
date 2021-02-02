@@ -3,7 +3,9 @@ import Pdf from "react-to-pdf";
 import { compose } from "redux";
 import QrCode from "./QrCode";
 import { withStyles } from "@material-ui/styles";
-import { Button } from "@material-ui/core";
+import { Button, Fab, Typography } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
+import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 
 const styles = (theme) => ({
   root: {
@@ -11,20 +13,38 @@ const styles = (theme) => ({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center"
-
+    // justifyContent: "center",
   },
   restoContainer: {
-    paddingTop: "9rem",
+    paddingTop: "3rem",
   },
 
   downloadButton: {
-    backgroundColor: theme.palette.primary.red,
+    color: "#E81B7D",
     padding: "0, 1.5rem, 0, 1.5rem",
-    color: theme.palette.primary.whiteish,
     marginTop: "2rem",
+    marginBottom: "1rem",
+    border: "1px solid #E81B7D",
     width: "60%",
   },
+  orderButton: {
+    backgroundColor: "#E81B7D",
+    color: "white",
+    marginTop: "1rem",
+    marginBottom: "2rem",
+  },
+  goBackButton: {
+    marginTop: "6rem",
+  },
+  backArrow: {
+    fill: "#E81B7D",
+  },
+  navButton: {
+    marginRight: "60%",
+  },
+  navlink: {
+    textDecoration: "none",
+  }
 });
 
 const ref = React.createRef();
@@ -36,6 +56,11 @@ const QrCodePdf = ({ classes, match }) => {
 
   return (
     <div className={classes.root}>
+      <NavLink to="/dashboard" className={classes.navButton}>
+        <Fab size="small" className={classes.goBackButton}>
+          <ArrowBackOutlinedIcon className={classes.backArrow} />
+        </Fab>
+      </NavLink>
       <div ref={ref} className={classes.restoContainer}>
         <QrCode restoId={restoId} menuId={menuId} />
       </div>
@@ -46,12 +71,14 @@ const QrCodePdf = ({ classes, match }) => {
           </Button>
         )}
       </Pdf>
+      <Typography className={classes.ou}>Ou</Typography>
+      <NavLink to="/shop" className={classes.navlink}>
+        <Button className={classes.orderButton}>
+          Commander des supports personnalisés
+        </Button>
+      </NavLink>
     </div>
   );
 };
 
-
-
-export default compose(
-  withStyles(styles),
-)(QrCodePdf);
+export default compose(withStyles(styles))(QrCodePdf);
