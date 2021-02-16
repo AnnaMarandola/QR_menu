@@ -13,6 +13,7 @@ export const createMenu = (menu) => {
         headerColor: "#031627",
         fontColor: "#fdfffc",
         fontFamily: "Roboto",
+        fontSize: "1.5rem",
       })
       .then(() => {
         dispatch({ type: "CREATE_MENU", menu });

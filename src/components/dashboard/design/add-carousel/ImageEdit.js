@@ -19,11 +19,8 @@ const styles = (theme) => ({
 });
 
 const ImageEdit = ({ classes, image, carousel, restoId, removeCarouselPicture }) => {
-  console.log("image", image);
-  console.log("caroussel", carousel);
-  console.log("restoId", restoId);
-  const imgIndex = carousel.indexOf(image);
-  console.log("INDEX", imgIndex);
+  // const imgIndex = carousel.indexOf(image);
+  // console.log("INDEX", imgIndex);
 
   const handleClick = (e) => {
     removeCarouselPicture({ restoId: restoId, image: image });

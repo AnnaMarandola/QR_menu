@@ -220,6 +220,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
           style={{
             color: menuData.fontColor || "#272727",
             fontFamily: menuData.fontFamily || "Roboto",
+            fontSize: menuData.fontSize,
           }}
         >
           {resto.name}

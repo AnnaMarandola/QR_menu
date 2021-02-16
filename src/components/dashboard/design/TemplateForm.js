@@ -122,7 +122,6 @@ const TemplateForm = ({
     handleClose();
   };
 
-  console.log("selected template", selectedTemplate);
 
   return (
     <Card className={classes.rootCard}>

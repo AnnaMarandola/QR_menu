@@ -14,8 +14,6 @@ const styles = (theme) => ({
 });
 
 const Gallery = ({ classes, restaurant }) => {
-  console.log("resto in gallery", restaurant.id);
-  console.log("CAROUSEL in gallery", restaurant.carousel);
   const images = restaurant.carousel;
 
   return (

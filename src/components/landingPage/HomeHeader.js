@@ -65,6 +65,14 @@ const styles = (theme) => ({
       marginBottom: "0",
     },
   },
+  freeTrial: {
+    color: "black",
+    marginLeft: "0.3rem",
+    marginTop: 0,
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "1rem",
+    },
+  },
   headerImg: {
     width: "80%",
     marginLeft: "2rem",
@@ -98,9 +106,10 @@ const HomeHeader = ({ classes }) => {
             <Button className={classes.connectButton}>Connexion</Button>
           </Link>
           <Link className={classes.links} to="./createaccount">
-            <Button className={classes.registerButton}>
-              Essai gratuit de 14 jours
-            </Button>
+            <Button className={classes.registerButton}>CRÉER UN COMPTE</Button>
+            <Typography className={classes.freeTrial}>
+              essai gratuit de 14 jours
+            </Typography>
           </Link>
         </div>
       </div>
