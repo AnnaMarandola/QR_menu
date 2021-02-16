@@ -14,6 +14,7 @@ import {
   selectFontColor,
   selectFontFamily,
   selectFontSize,
+  selectLogoSize,
 } from "../../../store/actions/menuActions";
 
 const styles = (theme, menu) => ({
@@ -30,7 +31,8 @@ const styles = (theme, menu) => ({
     padding: "1rem",
   },
   header: {
-    height: "17rem",
+    height: "19rem",
+    minHeight: "fit-content",
     width: "100%",
     display: "flex",
     flexDirection: "column",
@@ -38,13 +40,12 @@ const styles = (theme, menu) => ({
   },
   restoName: {
     paddingTop: "2rem",
-    marginBottom: "2rem",
   },
   logo: {
-    width: "10rem",
+    marginTop: "2rem",
   },
   inputLabel: {
-    marginTop: "1rem",
+    margin: "1rem",
   },
   colorInput: {
     width: "3rem",
@@ -159,6 +160,7 @@ const HeaderDesignForm = ({
   selectFontColor,
   selectFontFamily,
   selectFontSize,
+  selectLogoSize,
 }) => {
   let menuColor = menu && menu.headerColor;
   let resto = { ...restaurant };
@@ -187,6 +189,10 @@ const HeaderDesignForm = ({
     selectFontSize({ menuId: menu.id, fontSize: e.target.value });
   };
 
+  const handleChangeLogoSize = (e) => {
+    selectLogoSize({ menuId: menu.id, logoSize: e.target.value });
+  };
+
   console.log("menu in design form", menu);
 
   return (
@@ -208,7 +214,13 @@ const HeaderDesignForm = ({
           >
             {resto.name}
           </Typography>
-          <img className={classes.logo} src={restaurant.logo} alt="logo" />
+          <img 
+          className={classes.logo} 
+          src={restaurant.logo} 
+          alt="logo"
+          style={{
+              width: menu && menu.logoSize,
+            }} />
         </div>
 
         <table className={classes.table}>
@@ -415,6 +427,44 @@ const HeaderDesignForm = ({
             </tr>
           </tbody>
         </table>
+
+        <table className={classes.table}>
+          <thead>
+            <tr>
+              <th>
+                {/* <Typography variant="body2">Police d'écriture</Typography> */}
+              </th>
+              <th>
+                <Typography variant="body2">Taille du logo</Typography>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="center">
+
+              </td>
+              <td align="center">
+                <Select
+                  className={classes.fontSizeInput}
+                  variant="outlined"
+                  onChange={handleChangeLogoSize}
+                  defaultValue={fontSize}
+                >
+                  <MenuItem value={"7rem"} className={classes.small}>
+                    petit
+                  </MenuItem>
+                  <MenuItem value={"9rem"} className={classes.medium}>
+                    moyen
+                  </MenuItem>
+                  <MenuItem value={"11rem"} className={classes.big}>
+                    grand
+                  </MenuItem>
+                </Select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </form>
     </Card>
   );
@@ -430,6 +480,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(selectFontFamily(menuId, fontFamily)),
     selectFontSize: (menuId, fontSize) =>
       dispatch(selectFontSize(menuId, fontSize)),
+    selectLogoSize: (menuId, logoSize) =>
+      dispatch(selectLogoSize(menuId, logoSize)),
   };
 };
 

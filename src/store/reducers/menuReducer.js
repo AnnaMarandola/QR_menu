@@ -39,6 +39,12 @@ const menuReducer = (state = initialState, action) => {
     case "SELECT_FONT_SIZE_ERROR":
       console.log("select font size error", action.err);
       return state;
+      case "SELECT_LOGO_SIZE":
+        console.log("select logo size success", action.menu);
+        return state;
+      case "SELECT_LOGO_SIZE_ERROR":
+        console.log("select logo size error", action.err);
+        return state;
     case "UPDATE_MENU_TEMPLATE":
       console.log("update menu template success", action.menu);
       return state;

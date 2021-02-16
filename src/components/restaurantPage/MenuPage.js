@@ -33,7 +33,6 @@ const styles = (theme) => ({
     paddingTop: "1rem",
   },
   logo: {
-    maxWidth: "40%",
     marginBottom: "1rem",
   },
   restoName: {
@@ -153,7 +152,6 @@ const styles = (theme) => ({
     fontFamily: "Archivo narrow",
     fontSize: "1rem",
     textAlign: "center",
-    // fontWeight: 500,
   },
   link: {
     textDecoration: "none",
@@ -225,7 +223,13 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
         >
           {resto.name}
         </Typography>
-        <img className={classes.logo} src={resto.logo} alt="logo" />
+        <img 
+        className={classes.logo} 
+        src={resto.logo} 
+        alt="logo"
+        style={{
+            width: menuData.logoSize,
+          }} />
       </div>
       {restaurant && [restaurant.carousel].length > 0 && (
         <div className={classes.carouselSection}>
