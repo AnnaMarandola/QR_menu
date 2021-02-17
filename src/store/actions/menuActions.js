@@ -42,6 +42,23 @@ export const updateMenu = (payload) => {
   };
 };
 
+export const updateCategory = (payload) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    let menuId = payload.menuId;
+    let newCategories = payload.newCategories;
+    getFirestore()
+      .collection("menus")
+      .doc(menuId)
+      .update({ newCategories: newCategories })
+      .then(() => {
+        dispatch({ type: "UPDATE_NEWCATEGORIES", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "UPDATE_NEWCATEGORIES_ERROR", err });
+      });
+  };
+};
+
 export const selectHeaderColor = (payload) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let menuId = payload.menuId;

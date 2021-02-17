@@ -177,6 +177,8 @@ class AddNewDish extends Component {
   render() {
     const { classes, dish, menu } = this.props;
     const template = menu.template;
+    let newCategories = menu.newCategories;
+    console.log("new categories in addnewdish", newCategories)
 
     return (
         <form className={classes.form} onSubmit={this.handleSubmit}>
@@ -192,6 +194,9 @@ class AddNewDish extends Component {
                 <MenuItem value={"starter"}>Entrée</MenuItem>
                 <MenuItem value={"main"}>Plat</MenuItem>
                 <MenuItem value={"dessert"}>Dessert</MenuItem>
+              { newCategories && newCategories.map((newCategory, id) => (
+                <MenuItem key={id} value={newCategory}>{newCategory}</MenuItem>
+              ))}
               </Select>
               { dish &&
               <div className={classes.upload}>
