@@ -43,6 +43,7 @@ const styles = (theme, menu) => ({
   },
   logo: {
     marginTop: "2rem",
+    maxWidth: "11rem",
   },
   inputLabel: {
     margin: "1rem",

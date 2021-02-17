@@ -58,6 +58,7 @@ const styles = (theme) => ({
 const DesignPage = ({ classes, restaurant, menu }) => {
   let menuData = { ...menu };
 
+
   return (
     <div className={classes.root}>
       <NavLink to="/dashboard">
