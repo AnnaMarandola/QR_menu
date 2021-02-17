@@ -22,6 +22,10 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import "date-fns";
+import ROOF from "../../assets/infoResto-icons/roof.png";
+import CONTACT from "../../assets/infoResto-icons/contact.png";
+import ADRESS from "../../assets/infoResto-icons/adress.png";
+import HOURS from "../../assets/infoResto-icons/hours.png";
 
 const styles = (theme) => ({
   root: {
@@ -57,6 +61,9 @@ const styles = (theme) => ({
   subtitle: {
     marginLeft: "5%",
     fontFamily: "Archivo narrow",
+    marginTop: "2rem",
+    marginBottom: "2rem",
+    color: "#E81B7D",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "4rem",
     },
@@ -76,6 +83,11 @@ const styles = (theme) => ({
     backgroundColor: "white",
     display: "flex",
     flexDirection: "column",
+  },
+  formIcons: {
+    width: "10%",
+    marginLeft: "45%",
+    marginTop: "1rem",
   },
   inputs: {
     display: "flex",
@@ -125,11 +137,11 @@ const styles = (theme) => ({
     backgroundColor: "white",
     marginBottom: "1rem",
     marginTop: "1rem",
-  }, 
+  },
   service: {
     textAlign: "center",
     paddingTop: "1rem",
-  }
+  },
 });
 
 class InfoResto extends Component {
@@ -248,7 +260,8 @@ class InfoResto extends Component {
             votre établissement
           </Typography>
           <Typography className={classes.subtitle}>
-            Ces informations seront disponibles sur votre page.{" "}
+            Ces informations sont destinées à être affichées sur votre page.{" "}
+            Vous pourrez les modifier ici à tout instant.
           </Typography>
           <div className={classes.inputs}>
             {restaurant && (
@@ -260,6 +273,7 @@ class InfoResto extends Component {
               </Card>
             )}
             <Card className={classes.formPart}>
+              <img src={ROOF} alt="home icon" className={classes.formIcons} />
               <TextField
                 id="name"
                 type="text"
@@ -270,6 +284,11 @@ class InfoResto extends Component {
               />
             </Card>
             <Card className={classes.formPart}>
+              <img
+                src={ADRESS}
+                alt="adress icon"
+                className={classes.formIcons}
+              />
               <TextField
                 id="adress"
                 type="text"
@@ -296,6 +315,12 @@ class InfoResto extends Component {
               />
             </Card>
             <Card className={classes.formPart}>
+              <img
+                src={CONTACT}
+                alt="contact icon"
+                className={classes.formIcons}
+              />
+
               <TextField
                 id="phone"
                 type="tel"
@@ -329,6 +354,7 @@ class InfoResto extends Component {
             </Card>
 
             <Card className={classes.formPart}>
+              <img src={HOURS} alt="hours icon" className={classes.formIcons} />
               <Accordion className={classes.daysOffContainer}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -408,73 +434,76 @@ class InfoResto extends Component {
               </div>
 
               <Card className={classes.subcard}>
-              <Typography className={classes.service}>Service du midi</Typography>
-              <div className={classes.openAndClose}>
-                <TextField
-                  id="lunchStart"
-                  label="début"
-                  type="time"
-                  defaultValue={resto ? resto.lunchStart : null}
-                  className={classes.timeInput}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  inputProps={{
-                    step: 300, // 5 min
-                  }}
-                  onChange={this.handleChange}
-                />
-                <TextField
-                  id="lunchEnd"
-                  label="fin"
-                  type="time"
-                  defaultValue={resto ? resto.lunchEnd : null}
-                  className={classes.timeInput}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  inputProps={{
-                    step: 300, // 5 min
-                  }}
-                  onChange={this.handleChange}
-                />
+                <Typography className={classes.service}>
+                  Service du midi
+                </Typography>
+                <div className={classes.openAndClose}>
+                  <TextField
+                    id="lunchStart"
+                    label="début"
+                    type="time"
+                    defaultValue={resto ? resto.lunchStart : null}
+                    className={classes.timeInput}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    inputProps={{
+                      step: 300, // 5 min
+                    }}
+                    onChange={this.handleChange}
+                  />
+                  <TextField
+                    id="lunchEnd"
+                    label="fin"
+                    type="time"
+                    defaultValue={resto ? resto.lunchEnd : null}
+                    className={classes.timeInput}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    inputProps={{
+                      step: 300, // 5 min
+                    }}
+                    onChange={this.handleChange}
+                  />
                 </div>
-                </Card>
+              </Card>
 
-                <Card className={classes.subcard}>
-              <Typography className={classes.service}>Service du soir</Typography>
-              <div className={classes.openAndClose}>
-                <TextField
-                  id="dinerStart"
-                  label="début"
-                  type="time"
-                  defaultValue={resto ? resto.dinerStart : null}
-                  className={classes.timeInput}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  inputProps={{
-                    step: 300, // 5 min
-                  }}
-                  onChange={this.handleChange}
-                />
-                <TextField
-                  id="dinerEnd"
-                  label="fin"
-                  type="time"
-                  defaultValue={resto ? resto.dinerEnd : null}
-                  className={classes.timeInput}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  inputProps={{
-                    step: 300, // 5 min
-                  }}
-                  onChange={this.handleChange}
-                />
+              <Card className={classes.subcard}>
+                <Typography className={classes.service}>
+                  Service du soir
+                </Typography>
+                <div className={classes.openAndClose}>
+                  <TextField
+                    id="dinerStart"
+                    label="début"
+                    type="time"
+                    defaultValue={resto ? resto.dinerStart : null}
+                    className={classes.timeInput}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    inputProps={{
+                      step: 300, // 5 min
+                    }}
+                    onChange={this.handleChange}
+                  />
+                  <TextField
+                    id="dinerEnd"
+                    label="fin"
+                    type="time"
+                    defaultValue={resto ? resto.dinerEnd : null}
+                    className={classes.timeInput}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    inputProps={{
+                      step: 300, // 5 min
+                    }}
+                    onChange={this.handleChange}
+                  />
                 </div>
-                </Card>
-
+              </Card>
             </Card>
           </div>
 

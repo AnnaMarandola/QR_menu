@@ -1,29 +1,17 @@
 import React from "react";
 import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
-import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { removeCarouselPicture } from "../../../../store/actions/restaurantActions";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const styles = (theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-  },
   img: {
-    backgroundColor: "grey",
-    width: "4.5rem",
-    margin: "1rem",
-    marginBottom: 0,
+    display: "none",
   },
 });
 
-const ImageEdit = ({ classes, image, carousel, restoId, removeCarouselPicture }) => {
-  console.log("image", image);
-  console.log("caroussel", carousel);
-  console.log("restoId", restoId);
-  const imgIndex = carousel.indexOf(image);
-  console.log("INDEX", imgIndex);
+const ImageEdit = ({ classes, image, restoId, removeCarouselPicture }) => {
 
   const handleClick = (e) => {
     removeCarouselPicture({ restoId: restoId, image: image });
@@ -32,7 +20,7 @@ const ImageEdit = ({ classes, image, carousel, restoId, removeCarouselPicture })
   return (
     <div className={classes.root}>
       <img className={classes.img} src={image} alt="restaurant" />
-      <Button onClick={handleClick}>x</Button>
+      <DeleteForeverIcon onClick={handleClick}/>
     </div>
   );
 };

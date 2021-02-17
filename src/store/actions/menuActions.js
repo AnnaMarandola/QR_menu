@@ -13,6 +13,8 @@ export const createMenu = (menu) => {
         headerColor: "#031627",
         fontColor: "#fdfffc",
         fontFamily: "Roboto",
+        fontSize: "1.5rem",
+        logoSize: "9rem",
       })
       .then(() => {
         dispatch({ type: "CREATE_MENU", menu });
@@ -36,6 +38,23 @@ export const updateMenu = (payload) => {
       })
       .catch((err) => {
         dispatch({ type: "UPDATE_MENU_ERROR", err });
+      });
+  };
+};
+
+export const updateCategory = (payload) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    let menuId = payload.menuId;
+    let newCategories = payload.newCategories;
+    getFirestore()
+      .collection("menus")
+      .doc(menuId)
+      .update({ newCategories: newCategories })
+      .then(() => {
+        dispatch({ type: "UPDATE_NEWCATEGORIES", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "UPDATE_NEWCATEGORIES_ERROR", err });
       });
   };
 };
@@ -104,6 +123,23 @@ export const selectFontSize = (payload) => {
       })
       .catch((err) => {
         dispatch({ type: "SELECT_FONT_SIZE_ERROR", err });
+      });
+  };
+};
+
+export const selectLogoSize = (payload) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    let menuId = payload.menuId;
+    let logoSize = payload.logoSize;
+    getFirestore()
+      .collection("menus")
+      .doc(menuId)
+      .update({ logoSize: logoSize })
+      .then(() => {
+        dispatch({ type: "SELECT_LOGO_SIZE", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "SELECT_LOGO_SIZE_ERROR", err });
       });
   };
 };

@@ -1,36 +1,32 @@
 import React, { useState } from "react";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, Card } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { deleteDish, switchStatus } from "../../../store/actions/dishActions";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import AddNewDish from "./AddNewDish";
 import Switch from "@material-ui/core/Switch";
 import { toast } from "react-toastify";
-
+import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
 const styles = (theme) => ({
   root: {
     width: "100%",
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
-    marginTop: "1rem",
+    backgroundColor: "yellow",
+    padding: 0,
   },
   dishInfos: {
     display: "flex",
     justifyContent: "space-between",
-    padding: "0.4rem",
-    backgroundColor: "white"
+    padding: "1rem",
+    backgroundColor: "white",
   },
   dishTitle: {},
   dishPrice: {},
   editButtons: {
-    backgroundColor: "white"
-
+    backgroundColor: "white",
   },
 });
 
@@ -49,7 +45,7 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
     deleteDish(dish.id);
     toast.warning("Plat supprimé !", {
       position: toast.POSITION.TOP_LEFT,
-    })
+    });
   };
 
   const handleOpen = (e) => {
@@ -61,8 +57,7 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
   };
 
   return (
-    <div className={classes.root}>
-      <hr />
+    <Card className={classes.root}>
       <div className={classes.dishInfos}>
         <Typography className={classes.dishTitle} variant="body1">
           {dish.dishName}
@@ -73,15 +68,6 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
       </div>
 
       <div className={classes.editButtons}>
-        <Button onClick={handleOpen}>
-          <EditRoundedIcon />
-        </Button>
-        <Button>
-          <ArrowDropUpIcon />
-        </Button>
-        <Button>
-          <ArrowDropDownIcon />
-        </Button>
         <Switch
           size="small"
           checked={isPublished}
@@ -90,6 +76,13 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
           name="checked"
           inputProps={{ "aria-label": "secondary checkbox" }}
         />
+        <Button onClick={handleOpen}>
+          <EditRoundedIcon />
+        </Button>
+
+        <Button onClick={handleOpen}>
+          <AddPhotoAlternateIcon />
+        </Button>
         <Button onClick={handleDelete}>
           <DeleteForeverIcon />
         </Button>
@@ -105,8 +98,8 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
         )}
         {/* <UploadDishPic dish={dish}/> */}
       </div>
-      <hr />
-    </div>
+      {/* <hr /> */}
+    </Card>
   );
 };
 

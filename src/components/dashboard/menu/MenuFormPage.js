@@ -7,9 +7,10 @@ import { Typography, Fab } from "@material-ui/core";
 import TitleForm from "./TitleForm";
 import FormulaFormContainer from "../../forms/FormulaFormContainer";
 import NewDishContainer from "./NewDishContainer";
-import DishItemList from "./DishListContainer.js.js";
+import DishesTabs from "./DishesTabs.js";
 import { NavLink } from "react-router-dom";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
+import NewCategoryForm from "./NewCategoryForm";
 
 
 const styles = (theme) => ({
@@ -141,9 +142,13 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
             dishes={dishes}
           />
         )}
+        {menu && menu.template !== "Carte thématique" && (
+          <NewCategoryForm restaurant={restaurant} menu={menu} dishes={dishes}/>
+        )}
 
-        <DishItemList dishes={dishes} restaurant={restaurant} menu={menu} />
-      </div>
+        {/* <DishItemList dishes={dishes} restaurant={restaurant} menu={menu} /> */}
+        <DishesTabs dishes={dishes} restaurant={restaurant} menu={menu} />
+        </div>
     </div>
   );
 };

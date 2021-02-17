@@ -14,12 +14,14 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 import HomeFooter from "../landingPage/HomeFooter";
+import { toast } from "react-toastify";
+
 
 const styles = (theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       flexDirection: "row",
       height: "100vh",
     },
@@ -30,39 +32,34 @@ const styles = (theme) => ({
     marginRight: "0.5rem",
     position: "absolute",
     right: "0",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       width: "3%",
       margin: "1rem",
     },
   },
   header: {
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
     marginTop: "4rem",
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      flexDirection: "row",
-      marginTop: 0,
-      height: "100%",
-      width: "40%",
-      marginLeft: "10%",
+    backgroundColor: "grey",
+    [theme.breakpoints.up("md")]: {
+      width: "50%",
     },
   },
   headerImg: {
     width: "70%",
     marginTop: "1rem",
     marginLeft: "15%",
-    [theme.breakpoints.up("sm")]: {
-      width: "100%",
-      marginLeft: "10%",
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "20%",
     },
   },
   form: {
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       height: "100%",
-      width: "80%",
+      width: "100%",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -119,7 +116,9 @@ class SignUp extends Component {
     lastName: "",
     firstName: "",
     email: "",
+    siret: "",
     password: "",
+    passwordConfirm: "",
     cguAccepted: false,
   };
 
@@ -128,10 +127,19 @@ class SignUp extends Component {
       [e.target.id]: e.target.value,
     });
   };
+
+
   handleSubmit = (e) => {
     e.preventDefault();
+    if (this.state.password === this.state.passwordConfirm){
     this.props.signUp(this.state);
+    } else {
+      toast.error("mot de passe incorrect", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   };
+
   acceptCGU = (e) => {
     this.setState({
       cguAccepted: true,
@@ -167,21 +175,28 @@ class SignUp extends Component {
               <TextField
                 id="lastName"
                 type="text"
-                label="nom"
+                label="votre nom"
                 onChange={this.handleChange}
                 required
               />
               <TextField
                 id="firstName"
                 type="text"
-                label="prénom"
+                label="votre prénom"
                 onChange={this.handleChange}
                 required
               />
               <TextField
                 id="email"
                 type="email"
-                label="email"
+                label="email d'inscription"
+                onChange={this.handleChange}
+                required
+              />
+              <TextField
+                id="siret"
+                type="number"
+                label="numéro SIRET"
                 onChange={this.handleChange}
                 required
               />
@@ -192,6 +207,14 @@ class SignUp extends Component {
                 label="choisir un mot de passe"
                 onChange={this.handleChange}
                 className={classes.passwordInput}
+                required
+              />
+              <TextField
+                id="passwordConfirm"
+                type="passwordConfirm"
+                label="confirmer le mot de passe"
+                onChange={this.handleChange}
+                // className={classes.passwordInput}
                 required
               />
               <FormControlLabel
