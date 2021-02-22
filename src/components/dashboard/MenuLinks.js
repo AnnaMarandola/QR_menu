@@ -24,36 +24,27 @@ const styles = (theme) => ({
   },
   cardTitle: {
     fontFamily: "Archivo narrow",
-    fontSize: "1.5rem",
-    fontWeight: 400,
+    fontSize: "2rem",
+    fontWeight: 500,
     color: "#E81B7D",
   },
   cardButtons: {
     display: "flex",
     flexDirection: "column",
-    height: "7rem",
-    flexWrap: "wrap",
     alignItems: "center",
   },
-  modifyButton: {
-    border: "solid 1px #e81b7d",
-    margin: "0.4rem",
-    padding: "0.4rem",
+  menuButtons: {
+    width: "20rem",
+    height: "3rem",
+    padding: "0.5rem",
+    backgroundImage: "linear-gradient(to right top, #433d40, #3d3b3f, #37393d, #333739, #111538)",
+    margin: "0.2rem",
     fontFamily: "Archivo narrow",
+    color: "white",
   },
-  showButton: {
-    margin: "0.4rem",
-    padding: "0.4rem",
-    border: "solid 1px grey",
-    fontFamily: "Archivo narrow",
-  },
-  modifyIcon: {
-    marginRight: "0.3rem",
-    fill: "#E81B7D"
-  },
-  showIcon: {
-    marginRight: "0.3rem",
-    fill: "#82e3fb"
+  menuIcon: {
+    fill: "#white",
+    marginRight: "1rem",
   },
   links: {
     textDecoration: "none",
@@ -77,9 +68,9 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                   className={classes.links}
                   to={`/menuform/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.modifyButton}>
+                  <Button className={classes.menuButtons}>
                     {" "}
-                    <EditRoundedIcon  className={classes.modifyIcon} />
+                    <EditRoundedIcon  className={classes.menuIcon} />
                     Menu
                   </Button>
                 </NavLink>
@@ -88,8 +79,8 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                   className={classes.links}
                   to={`/design/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.modifyButton}>
-                    <EditRoundedIcon className={classes.modifyIcon} />
+                  <Button className={classes.menuButtons}>
+                    <EditRoundedIcon className={classes.menuIcon} />
                     Design
                   </Button>
                 </NavLink>
@@ -98,8 +89,8 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                   className={classes.links}
                   to={`/menupage/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.showButton}>
-                    <VisibilityIcon className={classes.showIcon} />
+                  <Button className={classes.menuButtons}>
+                    <VisibilityIcon className={classes.menuIcon} />
                     Consulter
                   </Button>
                 </NavLink>
@@ -108,8 +99,8 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                   className={classes.links}
                   to={`/qrcode/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.showButton}>
-                    <CropFreeIcon className={classes.showIcon} />
+                  <Button className={classes.menuButtons}>
+                    <CropFreeIcon className={classes.menuIcon} />
                     QR CODE
                   </Button>
                 </NavLink>

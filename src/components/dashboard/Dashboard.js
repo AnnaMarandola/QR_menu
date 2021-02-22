@@ -31,11 +31,11 @@ const styles = (theme) => ({
     },
   },
   title: {
-    paddingTop: "2rem",
-    paddingBottom: "1rem",
+    paddingTop: "3rem",
+    paddingBottom: "2rem",
     fontFamily: "Archivo narrow",
-    fontSize: "2rem",
-    fontWeight: 500,
+    fontSize: "2.5rem",
+    fontWeight: 600,
     textAlign: "center",
   },
   spanTitle: {
