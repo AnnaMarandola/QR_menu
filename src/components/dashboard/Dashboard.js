@@ -45,7 +45,6 @@ const styles = (theme) => ({
 
 const Dashboard = ({ classes, restaurant, auth, profile }) => {
   let menuId = restaurant && restaurant.menuId;
-  console.log("profile", profile);
 
   if (!auth.uid) return <Redirect to="/signin" />;
 
@@ -64,7 +63,6 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile,

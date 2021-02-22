@@ -96,7 +96,7 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
       </Typography>
 
       <div>
-        {menu && menu.template !== "Menu du jour" && (
+        {menu && menu.template && (
           <TitleForm
             className={classes.modifTitleButton}
             menu={menu}

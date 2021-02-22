@@ -15,6 +15,7 @@ export const createMenu = (menu) => {
         fontFamily: "Roboto",
         fontSize: "1.5rem",
         logoSize: "9rem",
+        categories: [ "entrées", "plats", "desserts"]
       })
       .then(() => {
         dispatch({ type: "CREATE_MENU", menu });
@@ -32,7 +33,7 @@ export const updateMenu = (payload) => {
     getFirestore()
       .collection("menus")
       .doc(menuId)
-      .update({ title: title })
+      .update({ menuTitle: title })
       .then(() => {
         dispatch({ type: "UPDATE_MENU", payload });
       })
@@ -43,13 +44,14 @@ export const updateMenu = (payload) => {
 };
 
 export const updateCategory = (payload) => {
+  console.log("payload in update action", payload)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let menuId = payload.menuId;
     let newCategories = payload.newCategories;
     getFirestore()
       .collection("menus")
       .doc(menuId)
-      .update({ newCategories: newCategories })
+      .update({ categories: newCategories })
       .then(() => {
         dispatch({ type: "UPDATE_NEWCATEGORIES", payload });
       })
