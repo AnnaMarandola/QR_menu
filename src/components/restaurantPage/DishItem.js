@@ -74,7 +74,7 @@ const DishItem = ({
               <Tooltip
                 title={`${allergen}`}
                 aria-label={`${allergen}`}
-                enterTouchDelay={700}
+                enterTouchDelay={50}
               >
                 <Avatar
                   alt={`${allergen}`}
