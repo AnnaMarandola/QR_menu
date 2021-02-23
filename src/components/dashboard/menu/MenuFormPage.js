@@ -49,7 +49,6 @@ const styles = (theme) => ({
   },
   formulaSection: {
     textAlign: "center",
-    paddingBottom: "2rem",
   },
   formula: {
     margin: "1rem",
@@ -104,34 +103,9 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
           />
         )}
 
-        {restaurant && restaurant.template === "template2" && dishes && (
+        {restaurant && restaurant.template === "Menu du jour" && dishes && (
           <div className={classes.formulaSection}>
             <FormulaFormContainer />
-            <Typography>Menu du jour</Typography>
-            <div className={classes.formulaContainer}>
-              <div className={classes.formula}>
-                <div className={classes.formulaAndPrice}>
-                  <Typography>{menu.formula1}</Typography>
-                  <Typography>
-                    {menu.formula1Price} {menu.formula1Price ? "€" : null}
-                  </Typography>
-                </div>
-                <Typography className={classes.comment}>
-                  {menu.formula1Comment}
-                </Typography>
-              </div>
-              <div className={classes.formula}>
-                <div className={classes.formulaAndPrice}>
-                  <Typography>{menu.formula2}</Typography>
-                  <Typography>
-                    {menu.formula2Price} {menu.formula2Price ? "€" : null}
-                  </Typography>
-                </div>
-                <Typography className={classes.comment}>
-                  {menu.formula2Comment}
-                </Typography>
-              </div>
-            </div>
           </div>
         )}
 

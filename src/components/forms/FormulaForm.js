@@ -5,6 +5,7 @@ import {
   TextField,
   InputAdornment,
   Button,
+  Card,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -15,36 +16,52 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     width: "100%",
+    backgroundColor: "white",
   },
   title: {
-    textAlign: "start",
-    marginBottom: "2rem",
-    fontSize: "1.5rem",
-    fontColor: "black",
+    display: "flex",
+    alignItems: "center",
+    fontFamily: "Archivo narrow",
+    fontSize: "1.2rem",
+    color: "#E81B7D",
+    fontWeight: 400,
+    margin: "1rem",
   },
   formula: {
     display: "flex",
     flexDirection: "column",
-    marginBottom: "2rem",
-    width: "100%",
+    // width: "100%",
+  },
+  formulaCard: {
+    margin: "0.5rem",
+    padding: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#f8f8f8",
   },
   formulaInput: {
     width: "80%",
   },
   priceInput: {
+    marginTop: "1rem",
     width: "15%",
   },
-  commentInput: {
+  formulaComment: {
     width: "80%",
-    marginBottom: "3rem",
-    marginLeft: "-5rem",
   },
   submitButton: {
-    backgroundColor: "blue",
+    backgroundColor: "#e81b7d",
     color: "white",
     width: "60%",
     marginLeft: "20%",
-    marginBottom: "2rem",
+    marginTop: "2rem",
+  },
+  closeButton: {
+    backgroundColor: "#031627",
+    color: "white",
+    width: "60%",
+    marginLeft: "20%",
+    margin: "1rem",
   }
 });
 
@@ -76,9 +93,11 @@ const FormulaForm = ({ classes, restaurant, menu, updateMenuFormula, handleClose
   };
 
   return (
+    <Card>
     <form onSubmit={handleSubmit} className={classes.root}>
-      <Typography variant="body2" className={classes.title}>Les formules</Typography>
+          <Typography variant="body2" className={classes.title}>Les formules</Typography>
       <div className={classes.formula}>
+      <Card className={classes.formulaCard}>
         <TextField
           id="formula1"
           label="Formule 1"
@@ -105,10 +124,12 @@ const FormulaForm = ({ classes, restaurant, menu, updateMenuFormula, handleClose
           label="commentaires, supplements"
           defaultValue={menu.formula1Comment || formula1Comment }
           onChange={(e) => setFormula1Comment(e.target.value)}
-          className={classes.comment1Input}
+          className={classes.formulaComment}
           type="text"
         />
+        </Card>
 
+        <Card className={classes.formulaCard}>
         <TextField
           id="formula2"
           label="Formule 2"
@@ -135,16 +156,18 @@ const FormulaForm = ({ classes, restaurant, menu, updateMenuFormula, handleClose
           label="commentaires, supplements"
           defaultValue={menu.formula2Comment || formula2Comment}
           onChange={(e) => setFormula2Comment(e.target.value)}
-          className={classes.formulaInput}
+          className={classes.formulaComment}
           type="text"
         />
+        </Card>
       </div>
       <Button className={classes.submitButton} type="submit">
         Valider
       </Button>
-      <Button onClick={handleClose}>x</Button>
+      <Button className={classes.closeButton} onClick={handleClose}>quiter</Button>
 
     </form>
+    </Card>
   );
 };
 
