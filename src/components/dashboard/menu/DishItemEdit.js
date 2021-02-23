@@ -14,20 +14,26 @@ import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 const styles = (theme) => ({
   root: {
     width: "100%",
-    backgroundColor: "yellow",
-    padding: 0,
+    backgroundColor: "white",
+    marginBottom: "1rem",
   },
   dishInfos: {
     display: "flex",
     justifyContent: "space-between",
     padding: "1rem",
-    backgroundColor: "white",
+    width: "90%",
   },
   dishTitle: {},
   dishPrice: {},
   editButtons: {
-    backgroundColor: "white",
+    marginBottom: "1rem",
+    textAlign: "center",
   },
+  closeButton: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.whiteish,
+    width: "80%",
+  }
 });
 
 const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
@@ -80,11 +86,11 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
           <EditRoundedIcon />
         </Button>
 
-        <Button onClick={handleOpen}>
-          <AddPhotoAlternateIcon />
-        </Button>
         <Button onClick={handleDelete}>
           <DeleteForeverIcon />
+        </Button>
+        <Button onClick={handleOpen}>
+          <AddPhotoAlternateIcon />
         </Button>
         {edited && (
           <div>
@@ -93,7 +99,7 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
               menu={dish.menuId}
               dish={dish}
             />
-            <Button onClick={handleClose}>X</Button>
+            <Button onClick={handleClose} className={classes.closeButton}>quitter</Button>
           </div>
         )}
         {/* <UploadDishPic dish={dish}/> */}
