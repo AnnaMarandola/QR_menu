@@ -27,12 +27,6 @@ import { toast } from "react-toastify";
 import UploadDishPic from "./UploadDishPic";
 
 const styles = (theme) => ({
-  // root: {
-  //   width: "95%",
-  //   marginLeft: "2.5%",
-  //   marginTop: "2rem",
-  //   marginBottom: "2rem",
-  // },
   form: {
     display: "flex",
     flexDirection: "column",
@@ -40,18 +34,23 @@ const styles = (theme) => ({
     paddingLeft: "10%",
   },
   imgAndCategory: {
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
+    width: "100%"
   },
   categoryInput: {
     width: "6rem",
     alignItems: "flex-end",
+    marginRight: "10rem",
   },
   categoryLabel: {
+    marginRight: "13rem",
     marginTop: "3rem"
   },
   upload: {
     width: "40%",
-    marginLeft: "50%",
+    marginLeft: "35%",
     marginTop: "-4rem",
   },
   input: {
@@ -69,12 +68,12 @@ const styles = (theme) => ({
     backgroundColor: "white",
   },
   addButton: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: "#E81B7D",
     padding: "0, 1rem, 0, 1rem",
     color: theme.palette.primary.whiteish,
     marginTop: "2rem",
     marginRight: "2rem",
-    marginBottom: "2rem",
+    marginBottom: "1rem",
   },
   rootAllergens: {
     width: "90%",
@@ -178,7 +177,6 @@ class AddNewDish extends Component {
     const { classes, dish, menu } = this.props;
     const template = menu.template;
     let newCategories = menu.newCategories;
-    console.log("new categories in addnewdish", newCategories)
 
     return (
         <form className={classes.form} onSubmit={this.handleSubmit}>

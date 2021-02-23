@@ -23,7 +23,7 @@ const styles = (theme) => ({
   },
   cardTitle: {
     fontFamily: "Archivo narrow",
-    fontSize: "1.5rem",
+    fontSize: "2rem",
     fontWeight: 400,
     color: "#E81B7D",
   },

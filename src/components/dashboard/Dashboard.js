@@ -31,11 +31,11 @@ const styles = (theme) => ({
     },
   },
   title: {
-    paddingTop: "2rem",
-    paddingBottom: "1rem",
+    paddingTop: "3rem",
+    paddingBottom: "2rem",
     fontFamily: "Archivo narrow",
-    fontSize: "2rem",
-    fontWeight: 500,
+    fontSize: "2.5rem",
+    fontWeight: 600,
     textAlign: "center",
   },
   spanTitle: {
@@ -45,7 +45,6 @@ const styles = (theme) => ({
 
 const Dashboard = ({ classes, restaurant, auth, profile }) => {
   let menuId = restaurant && restaurant.menuId;
-  console.log("profile", profile);
 
   if (!auth.uid) return <Redirect to="/signin" />;
 
@@ -64,7 +63,6 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile,

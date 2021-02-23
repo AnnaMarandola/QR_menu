@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, withStyles } from "@material-ui/core";
+import { Card, Typography, withStyles } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -9,17 +9,21 @@ import FormulaForm from "./FormulaForm";
 
 const styles = (theme) => ({
   root: {
-    width: "95%",
-    marginLeft: "2.5%",
-    marginTop: "2rem",
-    marginBottom: "2rem",
-  },
-  titleContainer: {
-    display: "flex",
-    alignItems: "center",
+    marginTop: "1rem",
+    marginBottom: "1rem",
+    backgroundColor: "white",
   },
   title: {
-    fontSize: "1.5rem",
+    display: "flex",
+    alignItems: "center",
+    fontFamily: "Archivo narrow",
+    fontSize: "1.2rem",
+    color: "#E81B7D",
+    fontWeight: 400,
+  },
+  titleContainer: {
+    paddingTop: "1rem",
+    paddingLeft: "1rem",
   },
   addButton: {
     color: theme.palette.primary.whiteish,
@@ -37,6 +41,10 @@ const styles = (theme) => ({
     marginTop: "-2rem",
     minWidth: "60%",
   },
+  editIcon: {
+    fill: "#E81B7D",
+    marginBottom: "1rem",
+  },
 });
 
 const FormulaFormContainer = ({ classes, restaurant, menu }) => {
@@ -51,26 +59,50 @@ const FormulaFormContainer = ({ classes, restaurant, menu }) => {
   };
 
   return (
-    <div className={classes.root}>
+    <Card className={classes.root}>
       {!open && (
         <div className={classes.titleContainer}>
-        <Typography className={classes.title}>Les formules</Typography>
+          <Typography className={classes.title}>Les formules : </Typography>
           <Button onClick={handleClickOpen} className={classes.editButton}>
-            <EditRoundedIcon style={{ fill: "grey" }} />
+            <EditRoundedIcon className={classes.editIcon} />
           </Button>
         </div>
       )}
 
       {open && (
-        <div>
+        <Card>
           <FormulaForm
             restaurant={restaurant}
             menu={menu}
             handleClose={handleClose}
           />
-        </div>
+        </Card>
       )}
-    </div>
+      {/* <div className={classes.formulaContainer}>
+        <div className={classes.formula}>
+          <div className={classes.formulaAndPrice}>
+            <Typography>{menu.formula1}</Typography>
+            <Typography>
+              {menu.formula1Price} {menu.formula1Price ? "€" : null}
+            </Typography>
+          </div>
+          <Typography className={classes.comment}>
+            {menu.formula1Comment}
+          </Typography>
+        </div>
+        <div className={classes.formula}>
+          <div className={classes.formulaAndPrice}>
+            <Typography>{menu.formula2}</Typography>
+            <Typography>
+              {menu.formula2Price} {menu.formula2Price ? "€" : null}
+            </Typography>
+          </div>
+          <Typography className={classes.comment}>
+            {menu.formula2Comment}
+          </Typography>
+        </div>
+      </div> */}
+    </Card>
   );
 };
 

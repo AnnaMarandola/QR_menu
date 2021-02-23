@@ -26,12 +26,12 @@ const styles = (theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: "1rem",
+    marginBottom: "0.5rem",
   },
-  crossButton: {
+  exitButton: {
     margin: "1rem",
-    color: "#E81B7D",
-    border: "solid 1px #e81b7d",
+    backgroundColor: "#E81B7D",
+    // border: "solid 1px #e81b7d",
     width: "2rem",
   },
 });
@@ -69,7 +69,7 @@ const NewDishContainer = ({ classes, restaurant, menu }) => {
         {open && (
             <div>
           <AddNewDish restaurant={restaurant} menu={menu} handleClose={handleClose}/>
-      <Button onClick={handleClose} className={classes.crossButton}>x</Button>
+      <Button onClick={handleClose} className={classes.exitButton}>quitter</Button>
       </div>
         )}
       </div>

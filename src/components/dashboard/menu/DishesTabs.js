@@ -86,6 +86,8 @@ function DishesTabs({ classes, restaurant, dishes, menu }) {
   const starters = sorts && sorts.starter;
   const mains = sorts && sorts.main;
   const desserts = sorts && sorts.dessert;
+  const unknown = dishes && dishes.filter(dish => (dish.category !== "starter" || "main" || "dessert"));
+  console.log("unknown", unknown)
 
   return (
     <div className={classes.root}>
@@ -99,6 +101,7 @@ function DishesTabs({ classes, restaurant, dishes, menu }) {
           <Tab label="Entrées" {...a11yProps(0)} />
           <Tab label="Plats" {...a11yProps(1)} />
           <Tab label="Desserts" {...a11yProps(2)} />
+          <Tab label="Autres" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -113,6 +116,11 @@ function DishesTabs({ classes, restaurant, dishes, menu }) {
       </TabPanel>
       <TabPanel value={value} index={2}>
       {desserts && desserts.map((dessert) => (
+          <DishItemEdit dish={dessert} key={dessert.id} />
+        ))}
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+      {unknown && unknown.map((dessert) => (
           <DishItemEdit dish={dessert} key={dessert.id} />
         ))}
       </TabPanel>

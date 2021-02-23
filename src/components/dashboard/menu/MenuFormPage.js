@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Typography, Fab } from "@material-ui/core";
+import { Typography, Fab, Card } from "@material-ui/core";
 import TitleForm from "./TitleForm";
 import FormulaFormContainer from "../../forms/FormulaFormContainer";
 import NewDishContainer from "./NewDishContainer";
@@ -11,7 +11,7 @@ import DishesTabs from "./DishesTabs.js";
 import { NavLink } from "react-router-dom";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 import NewCategoryForm from "./NewCategoryForm";
-
+import DishItemEdit from "./DishItemEdit";
 
 const styles = (theme) => ({
   root: {
@@ -49,7 +49,6 @@ const styles = (theme) => ({
   },
   formulaSection: {
     textAlign: "center",
-    paddingBottom: "2rem",
   },
   formula: {
     margin: "1rem",
@@ -69,6 +68,17 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.primary.main,
     color: "white",
   },
+  allDishesCard: {
+    backgroundColor: "white",
+  },
+  allDishesTitle: {
+    fontFamily: "Archivo narrow",
+    fontSize: "1.2rem",
+    color: "#E81B7D",
+    textAlign: "center",
+    fontWeight: 400,
+    margin: "1rem",
+  },
   dishesTable: {
     paddingTop: "1rem",
     marginBottom: "2rem",
@@ -86,7 +96,7 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
 
   return (
     <div className={classes.root}>
-          <NavLink to="/dashboard">
+      <NavLink to="/dashboard">
         <Fab size="small" className={classes.goBackButton}>
           <ArrowBackOutlinedIcon className={classes.backArrow} />
         </Fab>
@@ -96,7 +106,7 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
       </Typography>
 
       <div>
-        {menu && menu.template !== "Menu du jour" && (
+        {menu && menu.template && (
           <TitleForm
             className={classes.modifTitleButton}
             menu={menu}
@@ -104,34 +114,9 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
           />
         )}
 
-        {restaurant && restaurant.template === "template2" && dishes && (
+        {restaurant && restaurant.template === "Menu du jour" && dishes && (
           <div className={classes.formulaSection}>
             <FormulaFormContainer />
-            <Typography>Menu du jour</Typography>
-            <div className={classes.formulaContainer}>
-              <div className={classes.formula}>
-                <div className={classes.formulaAndPrice}>
-                  <Typography>{menu.formula1}</Typography>
-                  <Typography>
-                    {menu.formula1Price} {menu.formula1Price ? "€" : null}
-                  </Typography>
-                </div>
-                <Typography className={classes.comment}>
-                  {menu.formula1Comment}
-                </Typography>
-              </div>
-              <div className={classes.formula}>
-                <div className={classes.formulaAndPrice}>
-                  <Typography>{menu.formula2}</Typography>
-                  <Typography>
-                    {menu.formula2Price} {menu.formula2Price ? "€" : null}
-                  </Typography>
-                </div>
-                <Typography className={classes.comment}>
-                  {menu.formula2Comment}
-                </Typography>
-              </div>
-            </div>
           </div>
         )}
 
@@ -143,12 +128,31 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
           />
         )}
         {menu && menu.template !== "Carte thématique" && (
-          <NewCategoryForm restaurant={restaurant} menu={menu} dishes={dishes}/>
+          <NewCategoryForm
+            restaurant={restaurant}
+            menu={menu}
+            dishes={dishes}
+          />
         )}
 
-        {/* <DishItemList dishes={dishes} restaurant={restaurant} menu={menu} /> */}
-        <DishesTabs dishes={dishes} restaurant={restaurant} menu={menu} />
-        </div>
+        {restaurant && dishes && restaurant.template === "Carte thématique" ? (
+          <Card className={classes.allDishesCard}>
+            <Typography className={classes.allDishesTitle}>
+              Mes plats
+            </Typography>
+            {dishes.map((dish) => (
+              <DishItemEdit
+                dish={dish}
+                restaurant={restaurant}
+                menu={menu}
+                key={dish.id}
+              />
+            ))}
+          </Card>
+        ) : (
+          <DishesTabs dishes={dishes} restaurant={restaurant} menu={menu} />
+        )}
+      </div>
     </div>
   );
 };
