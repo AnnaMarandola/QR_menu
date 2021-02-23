@@ -4,7 +4,7 @@ import { compose } from "redux";
 import { Typography, withStyles } from "@material-ui/core";
 import AVATAR from "../../assets/landingPage/Sans titre (9).png";
 import { NavLink } from "react-router-dom";
-import LOGO from "../../assets/LogoProject.png";
+import LOGO from "../../assets/LogoYumi.png";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const styles = (theme) => ({
@@ -23,7 +23,8 @@ const styles = (theme) => ({
     width: "100%",
   },
   logo: {
-    width: "4%",
+    width: "3%",
+    height: "auto",
     margin: "1rem",
     marginLeft: "2rem",
   },

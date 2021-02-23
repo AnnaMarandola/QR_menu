@@ -190,8 +190,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
   const mains = sorts && sorts.main;
   const desserts = sorts && sorts.dessert;
 
-  if (!restaurant && !menu) return <Loading/>;
-
+  if (!restaurant && !menu) return <Loading />;
 
   return (
     <div className={classes.root}>
@@ -223,13 +222,14 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
         >
           {resto.name}
         </Typography>
-        <img 
-        className={classes.logo} 
-        src={resto.logo} 
-        alt="logo"
-        style={{
+        <img
+          className={classes.logo}
+          src={resto.logo}
+          alt="logo"
+          style={{
             width: menuData.logoSize,
-          }} />
+          }}
+        />
       </div>
       {restaurant && [restaurant.carousel].length > 0 && (
         <div className={classes.carouselSection}>
@@ -488,8 +488,7 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
             </div>
           </Card>
         )}
-
-        <ContactRestoForm restaurant={resto} />
+          <ContactRestoForm restaurant={resto} menu={menuData} />
       </section>
 
       <div className={classes.footerSection}>
@@ -500,7 +499,6 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     auth: state.firebase.auth,
     restaurant:

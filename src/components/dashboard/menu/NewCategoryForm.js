@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Typography, withStyles } from "@material-ui/core";
 import { Button, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
@@ -44,16 +44,32 @@ const styles = (theme) => ({
 
 const NewCategoryForm = ({ classes, restaurant, menu, updateCategory }) => {
   const menuId = menu && menu.id;
-  let categoriesData = menu && menu.newCategories
+  let categoriesData = menu && menu.categories;
 
   const [newCategory, setNewCategory] = useState("");
   const [open, setOpen] = useState(false);
 
-  const [newCategories, setNewCategories] = useState(categoriesData || []);
+  const [newCategories, setNewCategories] = useState(categoriesData);
+
+  console.log("newCategory START", newCategory);
+  console.log("newCategories START", newCategories);
+  console.log("categoriesData START", categoriesData);
 
   const handleChange = (e) => {
+    console.log("newCategory after setter", newCategory);
+    console.log("e.target.value", e.target.value);
     setNewCategory(e.target.value);
+    console.log("newCategory before setter", newCategory);
   };
+
+  useEffect(
+    function effectFunction() {
+      if (newCategory) {
+        setNewCategories((newCategories) => newCategories.concat(newCategory));
+      }
+    },
+    [newCategory]
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,14 +77,16 @@ const NewCategoryForm = ({ classes, restaurant, menu, updateCategory }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setNewCategory("");
   };
 
   const setCategory = (e) => {
     e.preventDefault();
+    // setNewCategory(e.target.value);
     console.log("newCategories", newCategories);
-    setNewCategories(newCategories.push(newCategory));
+    // setNewCategories((newCategories) => [...newCategories, newCategory]);
     updateCategory({ menuId: menuId, newCategories: newCategories });
-    setNewCategory("");
+
     console.log("newCategories", newCategories);
     handleClose();
   };
@@ -91,10 +109,10 @@ const NewCategoryForm = ({ classes, restaurant, menu, updateCategory }) => {
 
         {open && (
           <div>
-            <form className={classes.titleform} onSubmit={setCategory}>
+            <form className={classes.titleform}>
               <TextField
                 className={classes.titleInput}
-                defaultValue={newCategory}
+                value={newCategory}
                 id="newCategory"
                 onChange={handleChange}
               />
@@ -117,5 +135,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { updateCategory }),
+  connect(mapStateToProps, { updateCategory })
 )(NewCategoryForm);

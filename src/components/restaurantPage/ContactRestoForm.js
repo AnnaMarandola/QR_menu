@@ -1,15 +1,10 @@
 import React, { useState } from "react";
-import {
-  withStyles,
-  TextField,
-  Button,
-  Typography,
-} from "@material-ui/core";
+import { withStyles, TextField, Button, Typography } from "@material-ui/core";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { sendRestoMessage } from "../../store/actions/restoMessageActions";
 import { toast } from "react-toastify";
-import EmailSharpIcon from '@material-ui/icons/EmailSharp';
+import EmailSharpIcon from "@material-ui/icons/EmailSharp";
 
 const styles = (theme) => ({
   root: {
@@ -51,26 +46,21 @@ const styles = (theme) => ({
     fontFamily: "Archivo narrow",
     margin: "1rem",
     fontSize: "1rem",
-    fontWeight: 600,
+    fontWeight: 400,
   },
-
 });
 
-const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
+const ContactRestoForm = ({ classes, restaurant, menu, sendRestoMessage }) => {
   const [name, setName] = useState("");
   const [emailSender, setEmailSender] = useState("");
   const [message, setMessage] = useState("");
-  console.log("rrrerestorant", restaurant)
-  const recipient = restaurant.email
-  console.log("recipient", recipient)
-
+  const recipient = restaurant.email;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setName("");
     setEmailSender("");
     setMessage("");
-    console.log("MAIL SENT", name, emailSender, message, recipient);
     sendRestoMessage({
       emailSender: emailSender,
       name: name,
@@ -87,10 +77,11 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
 
   return (
     <div className={classes.root}>
-    <Typography className={classes.mailIntro}>Ecrivez-nous pour toutes demandes d'informations, repas de groupe, devis ...</Typography>
+      <Typography className={classes.mailIntro}>
+        Ecrivez-nous pour toutes demandes d'informations, repas de groupe, devis
+        ...
+      </Typography>
       <form onSubmit={handleSubmit}>
-        {/* <img src={MAIL} alt="mail icon" className={classes.mailIcon} /> */}
-
         <div>
           <TextField
             id="name"
@@ -123,14 +114,11 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
           onChange={(e) => setMessage(e.target.value)}
           className={classes.textArea}
           required="required"
+          color={menu.fontColor}
         />
 
-        <Button
-          type="submit"
-          // style={{ background: loader ? "#eeeeee" : "#031627" }}
-          className={classes.submitButton}
-        >
-        <EmailSharpIcon className={classes.mailIcon}/>
+        <Button type="submit" className={classes.submitButton}>
+          <EmailSharpIcon className={classes.mailIcon} />
           Envoyer
         </Button>
       </form>

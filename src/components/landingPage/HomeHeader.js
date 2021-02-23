@@ -2,29 +2,55 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import { Typography, withStyles, Button } from "@material-ui/core";
-import HEADER from "../../assets/landingPage/illustration-header.png";
+import LOGOBUBBLE from "../../assets/logoBubble.png";
 
 const styles = (theme) => ({
   header: {
     display: "flex",
     flexDirection: "column-reverse",
     justifyContent: "space-around",
-    paddingTop: "6rem",
+    paddingTop: "3rem",
     paddingBottom: "3rem",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
       paddingLeft: "10%",
       paddingRight: "10%",
+      height: "100vh",
+    },
+  },
+  title: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: "4rem",
+    [theme.breakpoints.up("sm")]: {
+      margin: 0
+    },
+
+  },
+  bubble: {
+    width: "30%",
+    [theme.breakpoints.up("sm")]: {
+      width: "15%",
     },
   },
   headerTitle: {
-    marginBottom: "2rem",
-    marginTop: "-3rem",
+    textAlign: "center",
+    marginBottom: "3rem",
     fontFamily: "Archivo narrow",
     fontSize: "4rem",
+    fontWeight: 700,
     [theme.breakpoints.up("sm")]: {
-      marginTop: "5rem",
       fontSize: "6rem",
+      marginBottom: "4rem",
+    },
+  },
+  subtitle: {
+    fontSize: "1.5rem",
+    fontFamily: "Archivo narrow",
+    textAlign: "center",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "2rem",
     },
   },
   titleSpan: {
@@ -41,12 +67,18 @@ const styles = (theme) => ({
     marginTop: "2rem",
     width: "100%",
     display: "flex",
+    // justifyContent: "center",
     flexDirection: "column",
+    justifyContent: "space-evenly",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
+      marginTop: "5rem",
+      marginBottom: "5rem",
     },
   },
   connectButton: {
+    width: "80%",
+    marginLeft: "10%",  
     backgroundColor: "#c7def5",
     color: "black",
     marginBottom: "1rem",
@@ -57,18 +89,21 @@ const styles = (theme) => ({
     },
   },
   registerButton: {
+    width: "80%",
+    marginLeft: "10%",
     backgroundColor: "#ee1c80",
     color: "white",
     fontWeight: "600",
-    marginBottom: "1rem",
+    margin: "1rem",
     [theme.breakpoints.up("sm")]: {
       marginBottom: "0",
     },
   },
   freeTrial: {
+    textAlign: "center",
     color: "black",
     marginLeft: "0.3rem",
-    marginTop: 0,
+    marginTop: '-0.5rem',
     [theme.breakpoints.up("sm")]: {
       marginTop: "1rem",
     },
@@ -90,14 +125,17 @@ const HomeHeader = ({ classes }) => {
   return (
     <div className={classes.header}>
       <div className={classes.headerText}>
+      <div className={classes.title}>
+        <img src={LOGOBUBBLE} alt="yumi bubble" className={classes.bubble}/>
         <Typography variant="h1" className={classes.headerTitle}>
-          <span className={classes.titleSpan}>QR</span>Menu
+          <span className={classes.titleSpan}>y</span>umi.pro
         </Typography>
-        <Typography variant="h6">
+        </div>
+        <Typography className={classes.subtitle}>
           {" "}
           Digitalisez votre menu et donnez de la visibilité à votre restaurant !
         </Typography>
-        <Typography variant="h6">
+        <Typography className={classes.subtitle}>
           {" "}
           Crééz votre carte en ligne en quelques clics{" "}
         </Typography>
@@ -113,13 +151,13 @@ const HomeHeader = ({ classes }) => {
           </Link>
         </div>
       </div>
-      <div className={classes.headerImage}>
+      {/* <div className={classes.headerImage}>
         <img
           src={HEADER}
           className={classes.headerImg}
           alt="illustration cuisinier et QR code"
         />
-      </div>
+      </div> */}
     </div>
   );
 };

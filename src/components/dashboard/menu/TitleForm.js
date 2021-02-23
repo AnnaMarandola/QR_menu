@@ -27,28 +27,23 @@ const styles = (theme) => ({
     marginBottom: "1rem",
   },
   titleForm: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      
-    },
-    titleInput: {
-        width: "60%",
-        marginLeft: "1rem",
-        marginTop: "1rem",
-        
-    },
-    submitButton: {
-      margin: "1rem",
-      color: "#E81B7D",
-      border: "solid 1px #e81b7d"
-
-
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  titleInput: {
+    width: "60%",
+    marginLeft: "1rem",
+    marginTop: "1rem",
+  },
+  submitButton: {
+    margin: "1rem",
+    color: "#E81B7D",
+    border: "solid 1px #e81b7d",
   },
 });
 
 const TitleForm = ({ classes, restaurant, menu, updateMenu }) => {
-
   const menuId = menu && menu.id;
   const title = menu && menu.title;
 
@@ -96,12 +91,12 @@ const TitleForm = ({ classes, restaurant, menu, updateMenu }) => {
             <form className={classes.titleform} onSubmit={setTitle}>
               <TextField
                 className={classes.titleInput}
-                defaultValue={ title }
+                defaultValue={title}
                 id="title"
                 onChange={handleChange}
               />
               <Button className={classes.submitButton} onClick={setTitle}>
-                 valider
+                valider
               </Button>
             </form>
           </div>
