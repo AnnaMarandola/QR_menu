@@ -14,8 +14,9 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
     paddingTop: "4rem",
-    [theme.breakpoints.up('sm')]: {
-
+    [theme.breakpoints.up("md")]: {
+      width: "80%",
+      marginLeft: "10%",
     },
   },
   container: {
@@ -23,12 +24,14 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("md")]: {
+      flexWrap: "wrap",
       paddingTop: "6rem",
       flexDirection: "row",
-      justifyContent: "space-evenly",
-      alignItems: 'start',
-      width: "80%"
+      justifyContent: "space-between",
+      alignItems: "start",
+      // justifyContent: "center",
+      width: "90%",
     },
   },
   title: {
@@ -49,16 +52,16 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
 
   if (!auth.uid) return <Redirect to="/signin" />;
 
-  window.scrollTo(0, 0)
+  window.scrollTo(0, 0);
   return (
     <div className={classes.root}>
-    <Typography variant="h1" className={classes.title}>
-    <span className={classes.spanTitle}>T</span>ableau de bord
-    </Typography>
+      <Typography variant="h1" className={classes.title}>
+        <span className={classes.spanTitle}>T</span>ableau de bord
+      </Typography>
       <div className={classes.container}>
-            <MenuLinks restaurant={restaurant} menuId={menuId} />
-            <RestaurantSummary restaurant={restaurant} />
-            <Options restaurant={restaurant}/>
+        <MenuLinks restaurant={restaurant} menuId={menuId} />
+        <RestaurantSummary restaurant={restaurant} />
+        <Options restaurant={restaurant} />
       </div>
     </div>
   );
