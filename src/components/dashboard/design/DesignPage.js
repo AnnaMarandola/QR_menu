@@ -3,20 +3,23 @@ import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Typography, Fab } from "@material-ui/core";
+import { Typography, Fab, Card, Paper } from "@material-ui/core";
 import HeaderDesignForm from "./HeaderDesignForm";
 import TemplateForm from "./TemplateForm";
 import GalleryCard from "./add-carousel/GalleryCard";
 import { NavLink } from "react-router-dom";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
-
+import PHONEBG from "../../../assets/smartphoneBG.png";
+import DemoMobile from "./DemoMobile";
 
 const styles = (theme) => ({
   root: {
-    width: "95%",
-    marginLeft: "2.5%",
     paddingTop: "4rem",
-    paddingBottom: "4rem",
+    [theme.breakpoints.up("md")]: {
+      width: "80%",
+      marginLeft: "10%",
+      backgroundColor: "yellow",
+    },
   },
   titlePage: {
     paddingBottom: "1rem",
@@ -28,12 +31,50 @@ const styles = (theme) => ({
   spanTitle: {
     color: "#E81B7D",
   },
-  header: {
-    height: "17rem",
-    width: "100%",
+  rootContainer: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    backgroundColor: "pink",
+    [theme.breakpoints.up("md")]: {
+      flexDirection: "row",
+      justifyContent: "space-evenly",
+    },
+  },
+  vizContainer: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      // backgroundColor: "blue",
+      marginTop: "5rem",
+      width: "45%",
+      height: "130vh",
+      minWidth: 500,
+      flexDirection: "column",
+    },
+  },
+  formContainer: {
+    paddingTop: "4rem",
+    paddingBottom: "4rem",
+    [theme.breakpoints.up("md")]: {
+      width: "45%",
+    },
+  },
+  phoneContainer: {
+    width: "100%",
+    minWidth: 500,
+    height: "130vh",
+    position: "relative",
+    top: 0,
+
+  },
+  cardHeader: {
+    [theme.breakpoints.up("md")]: {
+      fontFamily: "Archivo narrow",
+      fontSize: "1.2rem",
+      fontWeight: 400,
+      color: "#E81B7D",
+      padding: "1rem",
+    },
   },
   headerDesign: {
     width: "100%",
@@ -55,9 +96,8 @@ const styles = (theme) => ({
   },
 });
 
-const DesignPage = ({ classes, restaurant, menu }) => {
+const DesignPage = ({ classes, restaurant, menu, auth }) => {
   let menuData = { ...menu };
-
 
   return (
     <div className={classes.root}>
@@ -69,24 +109,39 @@ const DesignPage = ({ classes, restaurant, menu }) => {
       <Typography className={classes.titlePage}>
         Mon <span className={classes.spanTitle}>Design</span>
       </Typography>
-      {!menuData.template && (
-        <div>
-          <TemplateForm />
+      <div className={classes.rootContainer}>
+        <Card className={classes.vizContainer}>
+          <Typography className={classes.cardHeader}>
+            Pré-visualisation
+          </Typography>
+          <div 
+          className={classes.phoneContainer}
+          >
+          {/* <h1>prout</h1> */}
+          <DemoMobile menu={menu} restaurant={restaurant}/>
+          </div>
+        </Card>
+        <div className={classes.formContainer}>
+          {!menuData.template && (
+            <div>
+              <TemplateForm />
+            </div>
+          )}
+          {menuData.template && (
+            <div>
+              <div className={classes.headerDesign}>
+                <HeaderDesignForm menu={menu} restaurant={restaurant} />
+              </div>
+              <div>
+                <GalleryCard restaurant={restaurant} />
+              </div>
+              <div className={classes.templateCard}>
+                <TemplateForm menu={menu} restaurant={restaurant} />
+              </div>
+            </div>
+          )}
         </div>
-      )}
-      {menuData.template && (
-        <div>
-          <div className={classes.headerDesign}>
-            <HeaderDesignForm menu={menu} restaurant={restaurant} />
-          </div>
-          <div className={classes.templateCard}>
-            <TemplateForm menu={menu} restaurant={restaurant} />
-          </div>
-          <div>
-            <GalleryCard restaurant={restaurant} />
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };
@@ -94,6 +149,7 @@ const DesignPage = ({ classes, restaurant, menu }) => {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
+    auth: state.firebase.auth,
     restaurant:
       state.firestore.ordered.restaurants &&
       state.firestore.ordered.restaurants[0],

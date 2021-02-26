@@ -7,6 +7,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 import MenuLinks from "./MenuLinks";
 import Options from "./Options";
+import DemoMobile from './design/DemoMobile';
 
 const styles = (theme) => ({
   root: {
