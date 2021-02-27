@@ -20,6 +20,7 @@
     "material-ui-color-picker": "^3.5.1",
     "react": "^16.13.1",
     "react-anchor-link-smooth-scroll": "^1.0.12",
+    "react-custom-scrollbars-2": "^4.2.4",
     "react-dom": "^16.13.1",
     "react-geocode": "^0.2.2",
     "react-google-button": "^0.7.1",

@@ -37,7 +37,7 @@ const styles = (theme) => ({
     width: "20rem",
     height: "3rem",
     padding: "0.5rem",
-    backgroundImage: "linear-gradient(to right top, #433d40, #3d3b3f, #37393d, #333739, #111538)",
+    backgroundColor: "#031627",
     margin: "0.2rem",
     fontFamily: "Archivo narrow",
     color: "white",

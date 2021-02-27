@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Typography,
   CardActionArea,
   CardContent,
   Card,
-  FormLabel,
   FormControl,
   FormGroup,
   FormControlLabel,
@@ -58,9 +57,6 @@ const Options = ({ restaurant, classes, updateOptions }) => {
     translation: restaurant && restaurant.options.translation,
   });
 
-  // useEffect(() => {
-  //   console.log("options useEffect", options);
-  // });
 
   const handleChange = (event) => {
     let newOptions = (prevState) => ({
@@ -80,7 +76,6 @@ const Options = ({ restaurant, classes, updateOptions }) => {
         </Typography>
         <CardContent>
           <FormControl component="fieldset">
-            {/* <FormLabel component="legend">Assign responsibility</FormLabel> */}
             <FormGroup>
               <FormControlLabel
                 control={

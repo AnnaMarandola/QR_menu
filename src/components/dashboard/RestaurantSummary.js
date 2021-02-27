@@ -2,7 +2,6 @@ import React from "react";
 import {
   Typography,
   CardActionArea,
-  CardActions,
   CardContent,
   Button,
   Card,
@@ -21,7 +20,8 @@ const styles = (theme) => ({
     padding: "1rem",
     backgroundColor: "white",
     [theme.breakpoints.up("md")]: {
-      minWidth: 600,
+      minWidth: 500,
+      maxWidth: 500,
     },
   },
   cardContainer: {

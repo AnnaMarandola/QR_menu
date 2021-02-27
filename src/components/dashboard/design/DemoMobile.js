@@ -1,25 +1,38 @@
 import React from "react";
-import { withStyles, Typography, Card } from "@material-ui/core";
+import { withStyles, Typography } from "@material-ui/core";
 import { compose } from "redux";
 import PHONEBG from "../../../assets/smartphoneBG.png";
 import RestoCarousel from "../../restaurantPage/RestoCarousel";
+import { Scrollbars } from "react-custom-scrollbars-2";
 
 const styles = (theme, menu) => ({
   root: {
     backgroungColor: "#11ffee00",
-    backgroundImage: `url(${PHONEBG})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundSize: "cover",
+    // backgroundImage: `url(${PHONEBG})`,
+    // backgroundRepeat: "no-repeat",
+    // backgroundPosition: "center center",
+    // backgroundSize: "cover",
     position: "relative",
     top: 0,
     width: "50%",
     minWidth: 350,
     height: "60%",
-    marginLeft: "20%",
-    marginTop: "2rem",
-    padding: "1rem",
+    marginLeft: "25%",
+  },
+  phoneBg: {
+    position: "absolute",
+    top: 0,
+    width: "50%",
+    minWidth: 350,
+    height: "auto",
+    //   marginLeft: "25%",
     zIndex: 1,
+  },
+  container: {
+    padding: "1rem",
+    height: "94%",
+    // overflowX: "hidden",
+    // overflowY: "hidden",
   },
   header: {
     minHeight: "fit-content",
@@ -32,7 +45,7 @@ const styles = (theme, menu) => ({
     alignItems: "center",
   },
   restoName: {
-    paddingTop: "2rem",
+    paddingTop: "3rem",
   },
   logo: {
     marginTop: "2rem",
@@ -43,7 +56,28 @@ const styles = (theme, menu) => ({
     width: "99.6%",
     marginLeft: "0.225rem",
   },
+  menuTitle: {
+    textAlign: "center",
+    marginTop: "4rem",
+    fontSize: "1.5rem",
+  },
 });
+
+const renderThumb = ({ style, ...props }) => {
+  const thumbStyle = {
+    borderRadius: 6,
+    backgroundColor: "rgba(35, 49, 86, 0.8)",
+  };
+  return <div style={{ ...style, ...thumbStyle }} {...props} />;
+};
+
+const CustomScrollbars = (props) => (
+  <Scrollbars
+    renderThumbHorizontal={renderThumb}
+    renderThumbVertical={renderThumb}
+    {...props}
+  />
+);
 
 const DemoMobile = ({ classes, restaurant, menu }) => {
   let resto = { ...restaurant };
@@ -54,53 +88,73 @@ const DemoMobile = ({ classes, restaurant, menu }) => {
 
   return (
     <div className={classes.root}>
-      <div
-        className={classes.header}
-        style={{ backgroundColor: menu && menu.headerColor }}
-      >
-        <Typography
-          className={classes.restoName}
-          style={{
-            color: menu && menu.fontColor,
-            fontFamily: menu && menu.fontFamily,
-            fontSize: menu && menu.fontSize,
-          }}
-        >
-          {resto.name}
-        </Typography>
-        {menu && menu.logoSize === "11rem" && (
-          <img
-            className={classes.logo}
-            src={resto.logo}
-            alt="logo"
+      <img
+        src={PHONEBG}
+        alt="smartphone background"
+        className={classes.phoneBg}
+      />
+      <div className={classes.container}>
+        <CustomScrollbars autoHide autoHideTimeout={500} autoHideDuration={200}>
+          <div
+            className={classes.header}
+            style={{ backgroundColor: menu && menu.headerColor }}
+          >
+            <Typography
+              className={classes.restoName}
+              style={{
+                color: menu && menu.fontColor,
+                fontFamily: menu && menu.fontFamily,
+                fontSize: menu && menu.fontSize,
+              }}
+            >
+              {resto.name}
+            </Typography>
+            {menu && menu.logoSize === "11rem" && (
+              <img
+                className={classes.logo}
+                src={resto.logo}
+                alt="logo"
+                style={{
+                  width: "9rem",
+                }}
+              />
+            )}{" "}
+            {menu && menu.logoSize === "9rem" && (
+              <img
+                className={classes.logo}
+                src={resto.logo}
+                alt="logo"
+                style={{
+                  width: "7rem",
+                }}
+              />
+            )}
+            {menu && menu.logoSize === "7rem" && (
+              <img
+                className={classes.logo}
+                src={resto.logo}
+                alt="logo"
+                style={{
+                  width: "5rem",
+                }}
+              />
+            )}
+          </div>
+          <div className={classes.carouselSection}>
+            <RestoCarousel restaurant={resto} />
+          </div>
+          <Typography
+            className={classes.menuTitle}
             style={{
-              width: "9rem",
+              fontFamily: menuData.fontFamily,
             }}
-          />
-        )}{" "}
-        {menu && menu.logoSize === "9rem" && (
-          <img
-            className={classes.logo}
-            src={resto.logo}
-            alt="logo"
-            style={{
-              width: "7rem",
-            }}
-          />
-        )}
-        {menu && menu.logoSize === "7rem" && (
-          <img
-            className={classes.logo}
-            src={resto.logo}
-            alt="logo"
-            style={{
-              width: "5rem",
-            }}
-          />
-        )}
-      </div>
-      <div className={classes.carouselSection}>
-        <RestoCarousel restaurant={resto} />
+          >
+            {menuData.menuTitle}
+          </Typography>
+          <div className={classes.carouselSection}>
+            <RestoCarousel restaurant={resto} />
+          </div>
+        </CustomScrollbars>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 import MenuLinks from "./MenuLinks";
 import Options from "./Options";
-import DemoMobile from './design/DemoMobile';
+import QrcodeSailingCard from "./QrcodeSailingCard";
 
 const styles = (theme) => ({
   root: {
@@ -16,8 +16,8 @@ const styles = (theme) => ({
     alignItems: "center",
     paddingTop: "4rem",
     [theme.breakpoints.up("md")]: {
-      width: "80%",
-      marginLeft: "10%",
+      width: "90%",
+      marginLeft: "5%",
     },
   },
   container: {
@@ -29,10 +29,10 @@ const styles = (theme) => ({
       flexWrap: "wrap",
       paddingTop: "6rem",
       flexDirection: "row",
-      justifyContent: "space-between",
+      justifyContent: "space-evenly",
       alignItems: "start",
       // justifyContent: "center",
-      width: "90%",
+      width: "100%",
     },
   },
   title: {
@@ -50,6 +50,7 @@ const styles = (theme) => ({
 
 const Dashboard = ({ classes, restaurant, auth, profile }) => {
   let menuId = restaurant && restaurant.menuId;
+  let restoId = restaurant && restaurant.id;
 
   if (!auth.uid) return <Redirect to="/signin" />;
 
@@ -63,6 +64,10 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
         <MenuLinks restaurant={restaurant} menuId={menuId} />
         <RestaurantSummary restaurant={restaurant} />
         <Options restaurant={restaurant} />
+      </div>
+        <QrcodeSailingCard restoId={restoId} menuId={menuId}/>
+      <div>
+
       </div>
     </div>
   );

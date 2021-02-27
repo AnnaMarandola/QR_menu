@@ -3,13 +3,12 @@ import { withStyles } from "@material-ui/styles";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Typography, Fab, Card, Paper } from "@material-ui/core";
+import { Typography, Fab, Card } from "@material-ui/core";
 import HeaderDesignForm from "./HeaderDesignForm";
 import TemplateForm from "./TemplateForm";
 import GalleryCard from "./add-carousel/GalleryCard";
 import { NavLink } from "react-router-dom";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
-import PHONEBG from "../../../assets/smartphoneBG.png";
 import DemoMobile from "./DemoMobile";
 
 const styles = (theme) => ({
@@ -18,7 +17,6 @@ const styles = (theme) => ({
     [theme.breakpoints.up("md")]: {
       width: "80%",
       marginLeft: "10%",
-      backgroundColor: "yellow",
     },
   },
   titlePage: {
@@ -34,7 +32,6 @@ const styles = (theme) => ({
   rootContainer: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "pink",
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
       justifyContent: "space-evenly",
@@ -44,7 +41,7 @@ const styles = (theme) => ({
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex",
-      // backgroundColor: "blue",
+      backgroundColor: "white",
       marginTop: "5rem",
       width: "45%",
       height: "130vh",
