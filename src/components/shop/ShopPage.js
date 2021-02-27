@@ -1,6 +1,7 @@
+import React from "react";
 import { Button, Typography, withStyles } from "@material-ui/core";
 import { compose } from "redux";
-import React from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import WIPANIM from "../../assets/workInProgress/shopConstruction.png";
 
@@ -68,7 +69,7 @@ const styles = (theme) => ({
   },
 });
 
-const ShopPage = ({ classes }) => {
+const ShopPage = ({ classes, auth }) => {
   return (
     <div className={classes.root}>
       <div className={classes.illustrationSection}>
@@ -86,12 +87,29 @@ const ShopPage = ({ classes }) => {
         <Typography className={classes.subtitle}>
           Notre boutique sera disponible très prochainement !
         </Typography>
+        { !auth &&
         <NavLink to="./" className={classes.links}>
-          <Button className={classes.goBackButton}>Acceuil</Button>
+          <Button className={classes.goBackButton}>Accueil</Button>
         </NavLink>
+        }
+        { auth &&
+        <NavLink to="/dashboard" className={classes.links}>
+          <Button className={classes.goBackButton}>Accueil</Button>
+        </NavLink>
+        }
       </div>
     </div>
   );
 };
 
-export default compose(withStyles(styles))(ShopPage);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps),
+  )(ShopPage);
