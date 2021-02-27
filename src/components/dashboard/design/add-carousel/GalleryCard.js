@@ -6,11 +6,19 @@ import Gallery from "./Gallery";
 
 const styles = (theme) => ({
   rootCard: {
+    minWidth: 345,
+    maxWidth: 345,
+    marginLeft: "0.5rem",
     marginBottom: "1rem",
     marginTop: "1rem",
     backgroundColor: "white",
     height: "fit-content",
-    width: "100%",
+    // width: "100%",
+    [theme.breakpoints.up("md")]: {
+      minWidth: 345,
+      maxWidth: 600,
+      marginLeft: 0,
+    },
   },
   cardHeader: {
     fontFamily: "Archivo narrow",
@@ -37,7 +45,7 @@ const GalleryCard = ({ classes, restaurant }) => {
       <div className={classes.uploadButton}>
         <UploadCarouselImg restaurant={restaurant} />
       </div>
-        <Gallery restaurant={restaurant}/>
+      <Gallery restaurant={restaurant} />
     </Card>
   );
 };

@@ -17,9 +17,17 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 const styles = (theme) => ({
   rootCard: {
+    minWidth: 345,
+    maxWidth: 345,
     backgroundColor: "white",
     marginTop: "1rem",
     marginBottom: "1rem",
+    [theme.breakpoints.up("md")]: {
+      minWidth: 345,
+      maxWidth: 600,
+      marginLeft: 0,
+    },
+
   },
   cardHeader: {
     fontFamily: "Archivo narrow",

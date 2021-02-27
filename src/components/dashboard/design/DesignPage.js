@@ -114,7 +114,6 @@ const DesignPage = ({ classes, restaurant, menu, auth }) => {
           <div 
           className={classes.phoneContainer}
           >
-          {/* <h1>prout</h1> */}
           <DemoMobile menu={menu} restaurant={restaurant}/>
           </div>
         </Card>

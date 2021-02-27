@@ -40,7 +40,7 @@ const styles = (theme) => ({
     paddingBottom: "2rem",
     fontFamily: "Archivo narrow",
     fontSize: "2.5rem",
-    fontWeight: 600,
+    fontWeight: 400,
     textAlign: "center",
   },
   spanTitle: {

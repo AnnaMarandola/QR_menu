@@ -3,7 +3,7 @@ import { withStyles, Typography } from "@material-ui/core";
 import { compose } from "redux";
 import PHONEBG from "../../../assets/smartphoneBG.png";
 import RestoCarousel from "../../restaurantPage/RestoCarousel";
-import { Scrollbars } from "react-custom-scrollbars-2";
+// import { Scrollbars } from "react-custom-scrollbars-2";
 
 const styles = (theme, menu) => ({
   root: {
@@ -30,9 +30,9 @@ const styles = (theme, menu) => ({
   },
   container: {
     padding: "1rem",
-    height: "94%",
-    // overflowX: "hidden",
-    // overflowY: "hidden",
+    height: "90%",
+    overflowX: "hidden",
+    overflowY: "hidden",
   },
   header: {
     minHeight: "fit-content",
@@ -71,13 +71,13 @@ const renderThumb = ({ style, ...props }) => {
   return <div style={{ ...style, ...thumbStyle }} {...props} />;
 };
 
-const CustomScrollbars = (props) => (
-  <Scrollbars
-    renderThumbHorizontal={renderThumb}
-    renderThumbVertical={renderThumb}
-    {...props}
-  />
-);
+// const CustomScrollbars = (props) => (
+//   <Scrollbars
+//     renderThumbHorizontal={renderThumb}
+//     renderThumbVertical={renderThumb}
+//     {...props}
+//   />
+// );
 
 const DemoMobile = ({ classes, restaurant, menu }) => {
   let resto = { ...restaurant };
@@ -94,7 +94,7 @@ const DemoMobile = ({ classes, restaurant, menu }) => {
         className={classes.phoneBg}
       />
       <div className={classes.container}>
-        <CustomScrollbars autoHide autoHideTimeout={500} autoHideDuration={200}>
+        {/* <CustomScrollbars autoHide autoHideTimeout={500} autoHideDuration={200}> */}
           <div
             className={classes.header}
             style={{ backgroundColor: menu && menu.headerColor }}
@@ -154,7 +154,7 @@ const DemoMobile = ({ classes, restaurant, menu }) => {
           <div className={classes.carouselSection}>
             <RestoCarousel restaurant={resto} />
           </div>
-        </CustomScrollbars>
+        {/* </CustomScrollbars> */}
       </div>
     </div>
   );

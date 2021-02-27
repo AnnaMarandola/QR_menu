@@ -11,7 +11,6 @@ import { withStyles } from "@material-ui/styles";
 import { NavLink } from "react-router-dom";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import CropFreeIcon from "@material-ui/icons/CropFree";
 import StartMenu from "./StartMenu";
 
 const styles = (theme) => ({
@@ -70,7 +69,7 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                 >
                   <Button className={classes.menuButtons}>
                     {" "}
-                    <EditRoundedIcon  className={classes.menuIcon} />
+                    <EditRoundedIcon className={classes.menuIcon} />
                     Menu
                   </Button>
                 </NavLink>
@@ -92,16 +91,6 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                   <Button className={classes.menuButtons}>
                     <VisibilityIcon className={classes.menuIcon} />
                     Consulter
-                  </Button>
-                </NavLink>
-
-                <NavLink
-                  className={classes.links}
-                  to={`/qrcode/${restoId}/${menuId}`}
-                >
-                  <Button className={classes.menuButtons}>
-                    <CropFreeIcon className={classes.menuIcon} />
-                    QR CODE
                   </Button>
                 </NavLink>
               </div>
