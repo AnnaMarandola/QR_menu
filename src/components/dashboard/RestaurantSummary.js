@@ -2,7 +2,6 @@ import React from "react";
 import {
   Typography,
   CardActionArea,
-  CardActions,
   CardContent,
   Button,
   Card,
@@ -20,6 +19,16 @@ const styles = (theme) => ({
     marginTop: "1rem",
     padding: "1rem",
     backgroundColor: "white",
+    [theme.breakpoints.up("md")]: {
+      minWidth: 500,
+      maxWidth: 500,
+    },
+  },
+  cardContainer: {
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      justifyContent: "space-evenly"
+    },
   },
   cardTitle: {
     fontFamily: "Archivo narrow",
@@ -27,14 +36,17 @@ const styles = (theme) => ({
     fontWeight: 400,
     color: "#E81B7D",
   },
-  media: {
-    height: 140,
-  },
   modifyButton: {
     border: "solid 1px #e81b7d",
-    margin: "0.4rem",
+    width: "80%",
+    marginLeft: "10%",
+    margin: "1rem",
     padding: "0.4rem",
     fontFamily: "Archivo narrow",
+    [theme.breakpoints.up("md")]: {
+      width: "50%",
+      marginLeft: "25%",
+    },
   },
   modifyIcon: {
     marginRight: "0.3rem",
@@ -54,8 +66,11 @@ const RestaurantSummary = ({ restaurant, classes }) => {
             <Typography gutterBottom className={classes.cardTitle}>
               Mon établissement
             </Typography>
+            <CardContent className={classes.cardContainer}>
+          <div className={classes.uploadSection}>
             <UploadLogo restaurant={restaurant} />
-            <CardContent>
+            </div>
+            <div className={classes.summarySection}>
               <Typography gutterBottom variant="h5">
                 {restaurant.name}
               </Typography>
@@ -71,9 +86,9 @@ const RestaurantSummary = ({ restaurant, classes }) => {
               <Typography variant="body1">
                 instagram: {restaurant.instagram}
               </Typography>
+            </div>
             </CardContent>
           </CardActionArea>
-          <CardActions>
             <NavLink
               className={classes.links}
               to={`/inforesto/edit/${restaurant.id}`}
@@ -83,7 +98,6 @@ const RestaurantSummary = ({ restaurant, classes }) => {
                 Modifier
               </Button>
             </NavLink>
-          </CardActions>
         </Card>
       ) : (
         <Card className={classes.root}>
@@ -95,10 +109,10 @@ const RestaurantSummary = ({ restaurant, classes }) => {
               Ces informations seront utilisées pour personnaliser votre carte
               en ligne .
             </Typography>
+          </CardContent>
             <NavLink className={classes.links} to="/inforesto">
               <Button className={classes.modifyButton}>Modifier</Button>
             </NavLink>
-          </CardContent>
         </Card>
       )}
     </div>

@@ -7,6 +7,7 @@ import Gallery from "./Gallery";
 const styles = (theme) => ({
   rootCard: {
     marginBottom: "1rem",
+    marginTop: "1rem",
     backgroundColor: "white",
     height: "fit-content",
     width: "100%",

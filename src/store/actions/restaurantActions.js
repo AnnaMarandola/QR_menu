@@ -82,6 +82,24 @@ export const editRestaurant = (restaurant, restoId) => {
   };
 };
 
+export const updateOptions = (payload) => {
+  console.log("options payload", payload.options)
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    getFirestore()
+      .collection("restaurants")
+      .doc(payload.restoId)
+      .update({
+         options: {...payload.options},
+      })
+      .then(() => {
+        dispatch({ type: "UPDATE_OPTIONS", payload });
+      })
+      .catch((err) => {
+        dispatch({ type: "UPDATE_OPTIONS_ERROR", err });
+      });
+  };
+};
+
 // https://firebase.google.com/docs/storage/web/start
 export const uploadLogoPicture = (file, restoId) => 
 (dispatch,getState,{ getFirebase }) => {

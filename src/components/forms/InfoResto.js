@@ -165,6 +165,13 @@ class InfoResto extends Component {
     lunchEnd: null,
     dinerStart: null,
     dinerEnd: null,
+    options: {
+      carousel: true,
+      dishPic: true,
+      contactForm: true,
+      googleMaps: true,
+      translation: false,
+    },
   };
 
   componentDidMount() {
@@ -187,6 +194,7 @@ class InfoResto extends Component {
         lunchEnd: this.props.restaurant.lunchEnd,
         dinerStart: this.props.restaurant.dinerStart,
         dinerEnd: this.props.restaurant.dinerEnd,
+        options: this.props.restaurant.options,
         submited: false,
       });
     }

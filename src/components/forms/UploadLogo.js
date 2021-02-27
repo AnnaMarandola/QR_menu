@@ -8,7 +8,7 @@ import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
 const styles = (theme) => ({
   imgContainer: {
-    height: "200px",
+    height: "150px",
     display: "flex",
     marginLeft: "auto",
     marginRight: "auto",
@@ -19,10 +19,17 @@ const styles = (theme) => ({
       objectFit: "cover",
       height: "100%",
     },
+    [theme.breakpoints.up("md")]: {
+      height: "100px",
+      marginRight: "2rem",
+    },
   },
   uploadForm: {
     maxWidth: "200px",
     marginTop: "1rem",
+    [theme.breakpoints.up("md")]: {
+      maxWidth: "100px",
+    },
   },
   inputfile: {
     display: "none",

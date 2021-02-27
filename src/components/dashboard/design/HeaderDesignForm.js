@@ -37,6 +37,9 @@ const styles = (theme, menu) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
   restoName: {
     paddingTop: "2rem",
@@ -215,13 +218,14 @@ const HeaderDesignForm = ({
           >
             {resto.name}
           </Typography>
-          <img 
-          className={classes.logo} 
-          src={restaurant.logo} 
-          alt="logo"
-          style={{
+          <img
+            className={classes.logo}
+            src={restaurant.logo}
+            alt="logo"
+            style={{
               width: menu && menu.logoSize,
-            }} />
+            }}
+          />
         </div>
 
         <table className={classes.table}>
@@ -442,9 +446,7 @@ const HeaderDesignForm = ({
           </thead>
           <tbody>
             <tr>
-              <td align="center">
-
-              </td>
+              <td align="center"></td>
               <td align="center">
                 <Select
                   className={classes.fontSizeInput}

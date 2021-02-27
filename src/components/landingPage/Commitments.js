@@ -145,8 +145,8 @@ const Commitments = ({ classes }) => {
           l'application <span className={classes.CTitleSpan}>QR</span>Menu{" "}
           <span className={classes.CTitleSpan}>?</span>
         </Typography>
-        {commitments.map((commitment, key) => (
-          <div className={classes.container} key={key}>
+        {commitments.map((commitment, id) => (
+          <div className={classes.container} key={id}>
             <div
               className={
                 commitment.id % 2 === 0
