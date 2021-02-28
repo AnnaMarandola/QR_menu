@@ -24,12 +24,10 @@ const styles = (theme, menu) => ({
     textAlign: "center",
     backgroundColor: "white",
     overflow: "visible",
-    marginTop: "1rem",
-    marginLeft: "0.5rem",
+    padding: "1rem",
     [theme.breakpoints.up("md")]: {
       minWidth: 345,
       maxWidth: 600,
-      marginLeft: 0,
     },
   },
   cardHeader: {
