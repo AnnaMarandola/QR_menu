@@ -8,19 +8,19 @@ import CARD from "../../assets/products/La Petite escale2.png";
 import FLYER from "../../assets/products/flyer.jpg";
 import CHEVALET from "../../assets/products/chevalet.jpeg";
 import MAGNET from "../../assets/products/magnets.jpg";
-import QRCODE from "../../assets/logoIcon.png";
+import QRCODE from "../../assets/logoIcon1.png";
 
 const styles = (theme) => ({
   root: {
-    minWidth: 245,
-    maxWidth: 245,
+    minWidth: 300,
+    maxWidth: 300,
     marginTop: "1rem",
     padding: "1rem",
     backgroundColor: "white",
     [theme.breakpoints.up("md")]: {
-      minWidth: 300,
-      maxWidth: 300,
-      width: "100%",
+      // minWidth: 300,
+      // maxWidth: 300,
+      // width: "100%",
     },
   },
   cardTitle: {
