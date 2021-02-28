@@ -13,6 +13,9 @@ import DemoMobile from "./DemoMobile";
 
 const styles = (theme) => ({
   root: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     paddingTop: "4rem",
     [theme.breakpoints.up("md")]: {
       width: "80%",
