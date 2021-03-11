@@ -8,7 +8,7 @@ import CARD from "../../assets/products/La Petite escale2.png";
 import FLYER from "../../assets/products/flyer.jpg";
 import CHEVALET from "../../assets/products/chevalet.jpeg";
 import MAGNET from "../../assets/products/magnets.jpg";
-import QRCODE from "../../assets/logoIcon1.png";
+import QRCODE from "../../assets/products/logoIcon (1).png";
 
 const styles = (theme) => ({
   root: {
@@ -36,8 +36,19 @@ const styles = (theme) => ({
   shopButton: {
     position: "relative",
     bottom: 0,
-    backgroundColor: "#E81B7D",
+    backgroundColor: "#FE4A49",
     color: "white",
+    width: "80%",
+    marginLeft: "10%",
+    borderRadius: "20px",
+    margin: "2rem",
+  },
+  freeButton: {
+    position: "relative",
+    bottom: 0,
+    backgroundColor: "white",
+    color: "#FE4A49",
+    border: "solid 1px #FE4A49",
     width: "80%",
     marginLeft: "10%",
     borderRadius: "20px",
@@ -66,9 +77,11 @@ const ProductCard = ({
     <Card className={classes.root}>
       <Typography className={classes.status}>{status}</Typography>
 
-      <Typography gutterBottom className={classes.cardTitle}>
-        {name}
-      </Typography>
+      {name && name !== "Mon QR code" && (
+        <Typography gutterBottom className={classes.cardTitle}>
+          {name}
+        </Typography>
+      )}
       <CardContent>
         {name && name === "Mon QR code" && (
           <img src={QRCODE} alt={name} className={classes.productPic} />
@@ -102,11 +115,8 @@ const ProductCard = ({
       ) : (
         <div>
           {" "}
-          <NavLink
-            className={classes.links}
-            to={`/shop`}
-          >
-            <Button className={classes.shopButton}>{buttonText}</Button>
+          <NavLink className={classes.links} to={`/shop`}>
+            <Button className={name && name === "Mon QR code" ? classes.freeButton : classes.shopButton} >{buttonText}</Button>
           </NavLink>
         </div>
       )}

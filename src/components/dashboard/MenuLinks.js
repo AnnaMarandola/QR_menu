@@ -15,34 +15,49 @@ import StartMenu from "./StartMenu";
 
 const styles = (theme) => ({
   root: {
-    maxWidth: 345,
-    minWidth: 345,
+    maxWidth: 325,
+    minWidth: 325,
     backgroundColor: "white",
-    marginTop: "1rem",
+    marginTop: "3rem",
     padding: "1rem",
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "1rem",
+    }
   },
   cardTitle: {
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
     fontWeight: 500,
-    color: "#E81B7D",
+    // color: "#FE4A49",
   },
   cardButtons: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginTop: "1rem",
   },
   menuButtons: {
-    width: "20rem",
-    height: "3rem",
+    width: "18rem",
+    height: "2rem",
     padding: "0.5rem",
-    backgroundColor: "#031627",
     margin: "0.2rem",
+    marginBottom: "1.5rem",
     fontFamily: "Archivo narrow",
+    border: "solid 1px #FE4A49",
+    color: "#FE4A49",
+  },
+  menuButton: {
+    width: "18rem",
+    height: "2rem",
+    padding: "0.5rem",
+    margin: "0.2rem",
+    marginBottom: "1.5rem",
+    fontFamily: "Archivo narrow",
+    backgroundColor: "#FE4A49",
     color: "white",
   },
-  menuIcon: {
-    fill: "#white",
+  firstMenuIcon: {
+    fill: "white",
     marginRight: "1rem",
   },
   links: {
@@ -67,10 +82,10 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                   className={classes.links}
                   to={`/menuform/${restoId}/${menuId}`}
                 >
-                  <Button className={classes.menuButtons}>
+                  <Button className={classes.menuButton}>
                     {" "}
-                    <EditRoundedIcon className={classes.menuIcon} />
-                    Menu
+                    <EditRoundedIcon className={classes.firstMenuIcon} />
+                    gérer mon menu
                   </Button>
                 </NavLink>
 
@@ -80,7 +95,7 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                 >
                   <Button className={classes.menuButtons}>
                     <EditRoundedIcon className={classes.menuIcon} />
-                    Design
+                    personnaliser mon design
                   </Button>
                 </NavLink>
 
@@ -90,7 +105,7 @@ const MenuChipSet = ({ restaurant, classes, menuId }) => {
                 >
                   <Button className={classes.menuButtons}>
                     <VisibilityIcon className={classes.menuIcon} />
-                    Consulter
+                    consulter ma carte en ligne
                   </Button>
                 </NavLink>
               </div>

@@ -12,8 +12,8 @@ import ProductCard from "./ProductCard";
 
 const styles = (theme) => ({
   root: {
-    minWidth: 345,
-    maxWidth: 345,
+    minWidth: 325,
+    maxWidth: 325,
     marginTop: "1rem",
     padding: "1rem",
     backgroundColor: "white",
@@ -27,7 +27,7 @@ const styles = (theme) => ({
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
     fontWeight: 400,
-    color: "#E81B7D",
+    color: "#001730",
   },
   cardContent: {
       display: "flex",
@@ -52,24 +52,21 @@ const styles = (theme) => ({
     marginTop: "4rem",
     marginBottom: "4rem",
     padding: "1.2rem",
-    backgroundColor: "#031627",
+    backgroundColor: "#FE4A49",
     color: "white",
     [theme.breakpoints.up("md")]: {
         fontSize: "1.5rem",
         width: "40%",
         marginLeft: "30%",
       },
-  
-
   },
-
 });
 
 const products = [
     {
         id: 1,
         name: "Mon QR code",
-        text2: "Téléchargez grtuitement votre QR code",
+        text2: "Téléchargez gratuitement votre qr code au format .PDF",
         button: "Mon QR code",
         link: "qrcode",
 

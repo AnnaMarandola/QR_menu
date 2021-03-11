@@ -14,8 +14,8 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 const styles = (theme) => ({
   root: {
-    minWidth: 345,
-    maxWidth: 345,
+    minWidth: 325,
+    maxWidth: 325,
     marginTop: "1rem",
     padding: "1rem",
     backgroundColor: "white",
@@ -34,15 +34,16 @@ const styles = (theme) => ({
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
     fontWeight: 400,
-    color: "#E81B7D",
+    color: "#001730",
   },
   modifyButton: {
-    border: "solid 1px #e81b7d",
+    border: "solid 2px #FE4A49",
     width: "80%",
     marginLeft: "10%",
     margin: "1rem",
     padding: "0.4rem",
     fontFamily: "Archivo narrow",
+    color: "#FE4A49",
     [theme.breakpoints.up("md")]: {
       width: "50%",
       marginLeft: "25%",
@@ -50,7 +51,7 @@ const styles = (theme) => ({
   },
   modifyIcon: {
     marginRight: "0.3rem",
-    fill: "#E81B7D",
+    fill: "#FE4A49",
   },
   links: {
     textDecoration: "none",

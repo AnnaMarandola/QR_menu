@@ -13,7 +13,7 @@ const styles = (theme) => ({
   cardHeader: {
     fontFamily: "Archivo narrow",
     fontSize: "1.2rem",
-    color: "#E81B7D",
+    color: "#f5564e",
     padding: "1rem",
     paddingBottom: 0,
     fontWeight: 400,

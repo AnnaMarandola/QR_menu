@@ -78,7 +78,7 @@ const styles = (theme) => ({
     },
   },
   spanTitle: {
-    color: "#E81B7D",
+    color: "#f5564e",
   },
   inputs: {
     display: "flex",
@@ -95,7 +95,7 @@ const styles = (theme) => ({
   connectionButton: {
     marginTop: "2rem",
     position: "right",
-    backgroundColor: "#E81B7D",
+    backgroundColor: "#f5564e",
     color: theme.palette.primary.whiteish,
     width: "80%",
     marginLeft: "10%",

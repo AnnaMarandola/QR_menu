@@ -85,7 +85,7 @@ const styles = (theme) => ({
     },
   },
   spanTitle: {
-    color: "#E81B7D",
+    color: "#f5564e",
   },
   instruction: {
     display: "flex",
@@ -97,7 +97,7 @@ const styles = (theme) => ({
   },
   createAccountLink: {
     marginLeft: "0.5rem",
-    color: "#E81B7D",
+    color: "#f5564e",
   },
   separation: {
     textAlign: "center",
@@ -109,7 +109,7 @@ const styles = (theme) => ({
     marginTop: "2rem",
     marginBottom: "2rem",
     position: "right",
-    backgroundColor: "#E81B7D",
+    backgroundColor: "#f5564e",
     color: theme.palette.primary.whiteish,
     [theme.breakpoints.up("sm")]: {
       width: "40%",

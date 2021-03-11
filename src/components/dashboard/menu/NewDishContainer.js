@@ -17,7 +17,7 @@ const styles = (theme) => ({
   cardHeader: {
     fontFamily: "Archivo narrow",
     fontSize: "1.2rem",
-    color: "#E81B7D",
+    color: "#f5564e",
     paddingTop: "1rem",
     paddingLeft: "1rem",
     fontWeight: 400,
@@ -30,8 +30,8 @@ const styles = (theme) => ({
   },
   exitButton: {
     margin: "1rem",
-    backgroundColor: "#E81B7D",
-    // border: "solid 1px #e81b7d",
+    backgroundColor: "#f5564e",
+    // border: "solid 1px #f5564e",
     width: "2rem",
   },
 });
@@ -61,7 +61,7 @@ const NewDishContainer = ({ classes, restaurant, menu }) => {
         {!open && (
           <div className={classes.addButton}>
             <Button onClick={handleClickOpen}>
-            <AddCircleOutlineTwoToneIcon style={{ fill: "#E81B7D" }} />
+            <AddCircleOutlineTwoToneIcon style={{ fill: "#f5564e" }} />
             </Button>
           </div>
         )}

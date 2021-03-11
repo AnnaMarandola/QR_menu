@@ -23,7 +23,7 @@ const styles = (theme) => ({
     alignItems: "center",
     fontFamily: "Archivo narrow",
     fontSize: "1.2rem",
-    color: "#E81B7D",
+    color: "#f5564e",
     fontWeight: 400,
     margin: "1rem",
   },
@@ -50,7 +50,7 @@ const styles = (theme) => ({
     width: "80%",
   },
   submitButton: {
-    backgroundColor: "#e81b7d",
+    backgroundColor: "#f5564e",
     color: "white",
     width: "60%",
     marginLeft: "20%",

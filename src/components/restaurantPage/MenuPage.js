@@ -94,7 +94,7 @@ const styles = (theme) => ({
     width: "100%",
   },
   goBackButton: {
-    backgroundColor: "#E81B7D",
+    backgroundColor: "#f5564e",
     position: "relative",
     top: "1.5rem",
     left: "1rem",

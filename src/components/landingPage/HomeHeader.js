@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import { Typography, withStyles, Button } from "@material-ui/core";
-import HEADER from "../../assets/landingPage/illustration-header.png";
+import HEADER from "../../assets/Sans titre (15).png";
+import LOGO from "../../assets/LogoYumi (18).png";
 
 const styles = (theme) => ({
   header: {
@@ -11,74 +12,86 @@ const styles = (theme) => ({
     justifyContent: "space-around",
     paddingTop: "6rem",
     paddingBottom: "3rem",
+    backgroundColor: "#001730",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
       paddingLeft: "10%",
       paddingRight: "10%",
+      width: "100%",
     },
   },
-  headerTitle: {
-    marginBottom: "2rem",
-    marginTop: "-3rem",
-    fontFamily: "Archivo narrow",
-    fontSize: "4rem",
-    [theme.breakpoints.up("sm")]: {
-      marginTop: "5rem",
-      fontSize: "6rem",
-    },
-  },
-  titleSpan: {
-    color: "#ee1c80",
+  titleLogo: {
+    width: "40%",
+    marginLeft: "20%",
+    marginTop: "5rem",
   },
   headerText: {
     marginLeft: "1.5rem",
     marginRight: "1.5rem",
+    color: "white",
     [theme.breakpoints.up("sm")]: {
-      marginTop: "5rem",
+      width: "100%",
+      marginTop: "-5rem",
     },
   },
   buttonSection: {
-    marginTop: "2rem",
+    marginTop: "6rem",
     width: "100%",
     display: "flex",
+    marginLeft: "3rem",
     flexDirection: "column",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
     },
   },
   connectButton: {
-    backgroundColor: "#c7def5",
-    color: "black",
+    color: "#FE4A49",
     marginBottom: "1rem",
     marginRight: "1rem",
     fontWeight: "300",
+    border: "solid 2px #FE4A49",
+    width: "60%",
+    marginLeft: "20%",
+    height: "3rem",
     [theme.breakpoints.up("sm")]: {
       marginBottom: "0",
+      width: "100%",
+      marginLeft: "3rem",
     },
   },
   registerButton: {
-    backgroundColor: "#ee1c80",
+    backgroundColor: "#FE4A49",
     color: "white",
     fontWeight: "600",
     marginBottom: "1rem",
+    borderRadius: "33.33px",
+    width: "60%",
+    marginLeft: "20%",
+    height: "3rem",
     [theme.breakpoints.up("sm")]: {
       marginBottom: "0",
+      width: "12rem",
+      marginLeft : "-10%",
     },
   },
   freeTrial: {
-    color: "black",
+    color: "#FE4A49",
     marginLeft: "0.3rem",
-    marginTop: 0,
+    marginTop: "-1rem",
+    marginBottom: "1rem",
+    textAlign: "center",
     [theme.breakpoints.up("sm")]: {
       marginTop: "1rem",
+      marginLeft: "-3rem",
     },
   },
   headerImg: {
     width: "80%",
     marginLeft: "2rem",
     [theme.breakpoints.up("sm")]: {
-      width: "120%",
-      margin: "0",
+      marginLeft: "10%",
+      width: "100%",
+
     },
   },
   links: {
@@ -90,9 +103,7 @@ const HomeHeader = ({ classes }) => {
   return (
     <div className={classes.header}>
       <div className={classes.headerText}>
-        <Typography variant="h1" className={classes.headerTitle}>
-          <span className={classes.titleSpan}>QR</span>Menu
-        </Typography>
+      <img src={LOGO} alt="yumi logo" className={classes.titleLogo}/>
         <Typography variant="h6">
           {" "}
           Digitalisez votre menu et donnez de la visibilité à votre restaurant !
@@ -102,14 +113,14 @@ const HomeHeader = ({ classes }) => {
           Crééz votre carte en ligne en quelques clics{" "}
         </Typography>
         <div className={classes.buttonSection}>
-          <Link to="./signin" className={classes.links}>
-            <Button className={classes.connectButton}>Connexion</Button>
-          </Link>
           <Link className={classes.links} to="./createaccount">
             <Button className={classes.registerButton}>CRÉER UN COMPTE</Button>
             <Typography className={classes.freeTrial}>
               essai gratuit de 14 jours
             </Typography>
+          </Link>
+          <Link to="./signin" className={classes.links}>
+            <Button className={classes.connectButton}>Connexion</Button>
           </Link>
         </div>
       </div>

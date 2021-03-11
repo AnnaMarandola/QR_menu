@@ -20,15 +20,15 @@ const styles = (theme) => ({
   },
 
   downloadButton: {
-    color: "#E81B7D",
+    color: "#f5564e",
     padding: "0, 1.5rem, 0, 1.5rem",
     marginTop: "2rem",
     marginBottom: "1rem",
-    border: "1px solid #E81B7D",
+    border: "1px solid #f5564e",
     width: "60%",
   },
   orderButton: {
-    backgroundColor: "#E81B7D",
+    backgroundColor: "#f5564e",
     color: "white",
     marginTop: "1rem",
     marginBottom: "2rem",
@@ -37,7 +37,7 @@ const styles = (theme) => ({
     marginTop: "6rem",
   },
   backArrow: {
-    fill: "#E81B7D",
+    fill: "#f5564e",
   },
   navButton: {
     marginRight: "60%",

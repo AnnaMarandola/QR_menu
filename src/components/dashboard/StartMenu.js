@@ -10,7 +10,7 @@ import { updateRestaurantMenu } from "../../store/actions/restaurantActions";
 
 const styles = (theme) => ({
   startButton: {
-    backgroundColor: "#E81B7D",
+    backgroundColor: "#f5564e",
     padding: "0, 1.5rem, 0, 1.5rem",
     color: theme.palette.primary.whiteish,
   },
@@ -18,10 +18,10 @@ const styles = (theme) => ({
     textDecoration: "none",
   },
   nextButton: {
-    color: "#E81B7D",
+    color: "#f5564e",
     marginTop: "1rem",
     marginLeft: "75%",
-    border: "solid 1px #e81b7d",
+    border: "solid 1px #f5564e",
   },
 });
 

@@ -18,7 +18,7 @@ const styles = (theme) => ({
     alignItems: "center",
     fontFamily: "Archivo narrow",
     fontSize: "1.2rem",
-    color: "#E81B7D",
+    color: "#f5564e",
     fontWeight: 400,
   },
   titleContainer: {
@@ -42,7 +42,7 @@ const styles = (theme) => ({
     minWidth: "60%",
   },
   editIcon: {
-    fill: "#E81B7D",
+    fill: "#f5564e",
     marginBottom: "1rem",
   },
 });

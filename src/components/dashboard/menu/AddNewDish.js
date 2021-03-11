@@ -68,7 +68,7 @@ const styles = (theme) => ({
     backgroundColor: "white",
   },
   addButton: {
-    backgroundColor: "#E81B7D",
+    backgroundColor: "#f5564e",
     padding: "0, 1rem, 0, 1rem",
     color: theme.palette.primary.whiteish,
     marginTop: "2rem",

@@ -56,14 +56,14 @@ const styles = (theme) => ({
     },
   },
   titleSpan: {
-    color: "#E81B7D",
+    color: "#f5564e",
   },
   subtitle: {
     marginLeft: "5%",
     fontFamily: "Archivo narrow",
     marginTop: "2rem",
     marginBottom: "2rem",
-    color: "#E81B7D",
+    color: "#f5564e",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "4rem",
     },
@@ -102,7 +102,7 @@ const styles = (theme) => ({
   validationButton: {
     marginTop: "2rem",
     position: "right",
-    color: "#e81b7d",
+    color: "#f5564e",
     [theme.breakpoints.up("sm")]: {
       width: "40%",
       marginLeft: "20%",

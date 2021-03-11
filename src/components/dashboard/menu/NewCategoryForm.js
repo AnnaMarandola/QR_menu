@@ -14,7 +14,7 @@ const styles = (theme) => ({
   cardHeader: {
     fontFamily: "Archivo narrow",
     fontSize: "1.2rem",
-    color: "#E81B7D",
+    color: "#f5564e",
     paddingTop: "1rem",
     paddingLeft: "1rem",
     fontWeight: 400,
@@ -37,8 +37,8 @@ const styles = (theme) => ({
   },
   submitButton: {
     margin: "1rem",
-    color: "#E81B7D",
-    border: "solid 1px #e81b7d",
+    color: "#f5564e",
+    border: "solid 1px #f5564e",
   },
 });
 
@@ -84,7 +84,7 @@ const NewCategoryForm = ({ classes, restaurant, menu, updateCategory }) => {
           <div className={classes.titleSelected}>
             <Typography>{newCategory}</Typography>
             <Button onClick={handleClickOpen}>
-              <EditRoundedIcon style={{ fill: "#E81B7D" }} />
+              <EditRoundedIcon style={{ fill: "#f5564e" }} />
             </Button>
           </div>
         )}

@@ -8,7 +8,7 @@ import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
 const styles = (theme) => ({
   imgContainer: {
-    height: "150px",
+    height: "100px",
     display: "flex",
     marginLeft: "auto",
     marginRight: "auto",
@@ -33,6 +33,13 @@ const styles = (theme) => ({
   },
   inputfile: {
     display: "none",
+  },
+  uploadFab: {
+    backgroundColor: "#fe4a49",
+    marginBottom: "1rem",
+  },
+  uploadIcon: {
+    fill: "white",
   },
 });
 
@@ -92,8 +99,9 @@ class UploadLogo extends Component {
             component="span"
             aria-label="add"
             variant="extended"
+            className={classes.uploadFab}
           >
-            <AddPhotoAlternateIcon />
+            <AddPhotoAlternateIcon className={classes.uploadIcon} />
             {/* {restaurant.logo ? "modifier" : "ajouter"} */}
           </Fab>
         </label>

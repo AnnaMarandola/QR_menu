@@ -30,7 +30,7 @@ const styles = (theme) => ({
     textAlign: "center",
   },
   spanTitle: {
-    color: "#E81B7D",
+    color: "#f5564e",
   },
   rootContainer: {
     display: "flex",
@@ -72,7 +72,7 @@ const styles = (theme) => ({
       fontFamily: "Archivo narrow",
       fontSize: "1.2rem",
       fontWeight: 400,
-      color: "#E81B7D",
+      color: "#f5564e",
       padding: "1rem",
     },
   },
@@ -92,7 +92,7 @@ const styles = (theme) => ({
     margin: "2rem",
   },
   backArrow: {
-    fill: "#E81B7D",
+    fill: "#f5564e",
   },
 });
 

@@ -8,6 +8,7 @@ import { Redirect } from "react-router-dom";
 import MenuLinks from "./MenuLinks";
 import Options from "./Options";
 import QrcodeSailingCard from "./QrcodeSailingCard";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const styles = (theme) => ({
   root: {
@@ -15,6 +16,7 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
     paddingTop: "4rem",
+    backgroundColor: "#001730",
     [theme.breakpoints.up("md")]: {
       width: "90%",
       marginLeft: "5%",
@@ -37,15 +39,30 @@ const styles = (theme) => ({
   },
   title: {
     paddingTop: "3rem",
-    paddingBottom: "2rem",
+    paddingBottom: "3rem",
     fontFamily: "Archivo narrow",
     fontSize: "2.5rem",
     fontWeight: 400,
     textAlign: "center",
+    color: "white",
   },
-  spanTitle: {
-    color: "#E81B7D",
+  list: {
+    listStyleType: "none",
+    textAlign: "center",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+        }
   },
+  titleNav: {
+    color: "#4ad7d1",
+    marginBottom: "1rem",
+    fontSize: "1.5rem",
+    fontFamily: "Archivo narrow",
+  },
+  links: {
+    color: "white",
+    marginTop: "0..5rem",
+  }
 });
 
 const Dashboard = ({ classes, restaurant, auth, profile }) => {
@@ -58,17 +75,34 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
   return (
     <div className={classes.root}>
       <Typography variant="h1" className={classes.title}>
-        <span className={classes.spanTitle}>T</span>ableau de bord
+        Tableau de bord
       </Typography>
+      <nav>
+        <ul className={classes.list}>
+        <AnchorLink href="#menu" className={classes.links}>
+          <li className={classes.titleNav}>Ma carte</li>
+          </AnchorLink>
+          <AnchorLink href="#resto" className={classes.links}>
+          <li className={classes.titleNav}>Mon établissement</li>
+          </AnchorLink>
+          <AnchorLink href="#qrcode" className={classes.links}>
+          <li className={classes.titleNav}>Mon QR code</li>
+          </AnchorLink>
+        </ul>
+      </nav>
       <div className={classes.container}>
+      <section id="menu">
         <MenuLinks restaurant={restaurant} menuId={menuId} />
+        </section>
+        <section id="resto">
         <RestaurantSummary restaurant={restaurant} />
+        </section>
         <Options restaurant={restaurant} />
       </div>
-        <QrcodeSailingCard restoId={restoId} menuId={menuId}/>
-      <div>
-
-      </div>
+      <section id="qrcode">
+      <QrcodeSailingCard restoId={restoId} menuId={menuId} />
+      </section>
+      <div></div>
     </div>
   );
 };

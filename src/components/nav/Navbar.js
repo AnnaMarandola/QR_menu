@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LOGO from "../../assets/logoIcon.png";
+import LOGO from "../../assets/LogoYumi (15).png";
 import "../../App.css";
 import { connect } from "react-redux";
 import MyMenu from "../nav/MyMenu";
