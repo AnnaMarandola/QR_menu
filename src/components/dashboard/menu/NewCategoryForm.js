@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Typography, withStyles } from "@material-ui/core";
+import { Card, Fab, Typography, withStyles } from "@material-ui/core";
 import { Button, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -10,11 +10,13 @@ const styles = (theme) => ({
   rootCard: {
     marginBottom: "1rem",
     backgroundColor: "white",
+    width: "95%",
+    marginLeft: "2.5%",
   },
   cardHeader: {
     fontFamily: "Archivo narrow",
     fontSize: "1.2rem",
-    color: "#f5564e",
+    color: "001730",
     paddingTop: "1rem",
     paddingLeft: "1rem",
     fontWeight: 400,
@@ -40,11 +42,17 @@ const styles = (theme) => ({
     color: "#f5564e",
     border: "solid 1px #f5564e",
   },
+  editButton: {
+    backgroundColor: "#fffff2",
+  },
+  editIcon: {
+    fill: "#df4937",
+  },
 });
 
 const NewCategoryForm = ({ classes, restaurant, menu, updateCategory }) => {
   const menuId = menu && menu.id;
-  let categoriesData = menu && menu.newCategories
+  let categoriesData = menu && menu.newCategories;
 
   const [newCategory, setNewCategory] = useState("");
   const [open, setOpen] = useState(false);
@@ -83,9 +91,13 @@ const NewCategoryForm = ({ classes, restaurant, menu, updateCategory }) => {
         {!open && (
           <div className={classes.titleSelected}>
             <Typography>{newCategory}</Typography>
-            <Button onClick={handleClickOpen}>
-              <EditRoundedIcon style={{ fill: "#f5564e" }} />
-            </Button>
+            <Fab
+              size="small"
+              onClick={handleClickOpen}
+              className={classes.editButton}
+            >
+              <EditRoundedIcon className={classes.editIcon} />
+            </Fab>
           </div>
         )}
 
@@ -117,5 +129,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { updateCategory }),
+  connect(mapStateToProps, { updateCategory })
 )(NewCategoryForm);

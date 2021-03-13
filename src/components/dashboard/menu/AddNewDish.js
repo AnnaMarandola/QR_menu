@@ -42,10 +42,10 @@ const styles = (theme) => ({
   categoryInput: {
     width: "6rem",
     alignItems: "flex-end",
-    marginRight: "10rem",
+    marginRight: "13rem",
   },
   categoryLabel: {
-    marginRight: "13rem",
+    marginRight: "15rem",
     marginTop: "3rem"
   },
   upload: {
@@ -68,9 +68,10 @@ const styles = (theme) => ({
     backgroundColor: "white",
   },
   addButton: {
-    backgroundColor: "#f5564e",
+    backgroundColor: "#fffff2",
     padding: "0, 1rem, 0, 1rem",
-    color: theme.palette.primary.whiteish,
+    border: "solid 2px #fe4a49",
+    color: "#FE4A49",
     marginTop: "2rem",
     marginRight: "2rem",
     marginBottom: "1rem",

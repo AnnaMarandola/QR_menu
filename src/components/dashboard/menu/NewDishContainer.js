@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Typography, withStyles } from "@material-ui/core";
+import { Card, Fab, Typography, withStyles } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -13,11 +13,13 @@ const styles = (theme) => ({
   rootCard: {
     marginBottom: "1rem",
     backgroundColor: "white",
+    width: "95%",
+    marginLeft: "2.5%",
   },
   cardHeader: {
     fontFamily: "Archivo narrow",
     fontSize: "1.2rem",
-    color: "#f5564e",
+    color: "#001730",
     paddingTop: "1rem",
     paddingLeft: "1rem",
     fontWeight: 400,
@@ -28,11 +30,15 @@ const styles = (theme) => ({
     justifyContent: "center",
     marginBottom: "0.5rem",
   },
+  editButton: {
+    backgroundColor: "#fffff2",
+  },
+  editIcon: {
+    fill: "#df4937",
+  },
   exitButton: {
     margin: "1rem",
-    backgroundColor: "#f5564e",
-    // border: "solid 1px #f5564e",
-    width: "2rem",
+    fill: "#001730",
   },
 });
 
@@ -60,16 +66,15 @@ const NewDishContainer = ({ classes, restaurant, menu }) => {
       <div>
         {!open && (
           <div className={classes.addButton}>
-            <Button onClick={handleClickOpen}>
-            <AddCircleOutlineTwoToneIcon style={{ fill: "#f5564e" }} />
-            </Button>
+            <Fab size="small" onClick={handleClickOpen} className={classes.editButton}>
+            <AddCircleOutlineTwoToneIcon className={classes.editIcon} />
+            </Fab>
           </div>
         )}
-
         {open && (
             <div>
           <AddNewDish restaurant={restaurant} menu={menu} handleClose={handleClose}/>
-      <Button onClick={handleClose} className={classes.exitButton}>quitter</Button>
+      <Fab size="small" onClick={handleClose} className={classes.exitButton}>x</Fab>
       </div>
         )}
       </div>

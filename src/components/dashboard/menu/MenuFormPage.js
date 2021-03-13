@@ -15,10 +15,14 @@ import DishItemEdit from "./DishItemEdit";
 
 const styles = (theme) => ({
   root: {
-    width: "95%",
-    marginLeft: "2.5%",
+    width: "100%",
     paddingTop: "4rem",
     paddingBottom: "4rem",
+    backgroundColor: "#001730",
+  },
+  container: {
+    display: "flex",
+    justifyContent: "center",
   },
   titlePage: {
     paddingBottom: "2rem",
@@ -26,26 +30,7 @@ const styles = (theme) => ({
     fontSize: "2rem",
     fontWeight: 500,
     textAlign: "center",
-  },
-  spanTitle: {
-    color: "#f5564e",
-  },
-  header: {
-    height: "17rem",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  restoName: {
-    marginTop: "2rem",
-    marginBottom: "2rem",
-  },
-  logo: {
-    width: "10rem",
-  },
-  colorSection: {
-    width: "100%",
+    color: "#fffff2",
   },
   formulaSection: {
     textAlign: "center",
@@ -69,7 +54,9 @@ const styles = (theme) => ({
     color: "white",
   },
   allDishesCard: {
-    backgroundColor: "white",
+    backgroundColor: "#fffff2",
+    width: "95%",
+    marginLeft: "2.5%",
   },
   allDishesTitle: {
     fontFamily: "Archivo narrow",
@@ -104,54 +91,59 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
       <Typography className={classes.titlePage} variant="h1">
         Mon <span className={classes.spanTitle}>Menu</span>
       </Typography>
+      <div className={classes.container}>
+        <div>
+          {menu && menu.template && (
+            <TitleForm
+              className={classes.modifTitleButton}
+              menu={menu}
+              restaurant={restaurant}
+            />
+          )}
 
-      <div>
-        {menu && menu.template && (
-          <TitleForm
-            className={classes.modifTitleButton}
-            menu={menu}
-            restaurant={restaurant}
-          />
-        )}
+          {restaurant && restaurant.template === "Menu du jour" && dishes && (
+            <div className={classes.formulaSection}>
+              <FormulaFormContainer />
+            </div>
+          )}
 
-        {restaurant && restaurant.template === "Menu du jour" && dishes && (
-          <div className={classes.formulaSection}>
-            <FormulaFormContainer />
-          </div>
-        )}
+          {restaurant && (
+            <NewDishContainer
+              restaurant={restaurant}
+              menu={menuData}
+              dishes={dishes}
+            />
+          )}
+          {menu && menu.template !== "Carte thématique" && (
+            <NewCategoryForm
+              restaurant={restaurant}
+              menu={menu}
+              dishes={dishes}
+            />
+          )}
 
-        {restaurant && (
-          <NewDishContainer
-            restaurant={restaurant}
-            menu={menuData}
-            dishes={dishes}
-          />
-        )}
-        {menu && menu.template !== "Carte thématique" && (
-          <NewCategoryForm
-            restaurant={restaurant}
-            menu={menu}
-            dishes={dishes}
-          />
-        )}
-
-        {restaurant && dishes && restaurant.template === "Carte thématique" ? (
-          <Card className={classes.allDishesCard}>
-            <Typography className={classes.allDishesTitle}>
-              Mes plats
-            </Typography>
-            {dishes.map((dish) => (
-              <DishItemEdit
-                dish={dish}
-                restaurant={restaurant}
-                menu={menu}
-                key={dish.id}
-              />
-            ))}
-          </Card>
-        ) : (
-          <DishesTabs dishes={dishes} restaurant={restaurant} menu={menu} />
-        )}
+          {restaurant &&
+          dishes &&
+          restaurant.template === "Carte thématique" ? (
+            <Card className={classes.allDishesCard}>
+              <Typography className={classes.allDishesTitle}>
+                Mes plats
+              </Typography>
+              {dishes.map((dish) => (
+                <DishItemEdit
+                  dish={dish}
+                  restaurant={restaurant}
+                  menu={menu}
+                  key={dish.id}
+                />
+              ))}
+            </Card>
+          ) : (
+            <Card className={classes.allDishesCard}>
+              <DishesTabs dishes={dishes} restaurant={restaurant} menu={menu} />
+            </Card>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Typography, withStyles } from "@material-ui/core";
+import { Card, Fab, Typography, withStyles } from "@material-ui/core";
 import { Button, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -11,11 +11,13 @@ const styles = (theme) => ({
   rootCard: {
     marginBottom: "1rem",
     backgroundColor: "white",
+    width: "95%",
+    marginLeft: "2.5%",
   },
   cardHeader: {
     fontFamily: "Archivo narrow",
     fontSize: "1.2rem",
-    color: "#f5564e",
+    color: "#001730",
     paddingTop: "1rem",
     paddingLeft: "1rem",
     fontWeight: 400,
@@ -27,28 +29,29 @@ const styles = (theme) => ({
     marginBottom: "1rem",
   },
   titleForm: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      
-    },
-    titleInput: {
-        width: "60%",
-        marginLeft: "1rem",
-        marginTop: "1rem",
-        
-    },
-    submitButton: {
-      margin: "1rem",
-      color: "#f5564e",
-      border: "solid 1px #f5564e"
-
-
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  titleInput: {
+    width: "60%",
+    marginLeft: "1rem",
+    marginTop: "1rem",
+  },
+  submitButton: {
+    margin: "1rem",
+    color: "#f5564e",
+    border: "solid 1px #f5564e",
+  },
+  editButton: {
+    backgroundColor: "#fffff2",
+  },
+  editIcon: {
+    fill: "#df4937",
   },
 });
 
 const TitleForm = ({ classes, restaurant, menu, updateMenu }) => {
-
   const menuId = menu && menu.id;
   const title = menu && menu.title;
 
@@ -85,9 +88,9 @@ const TitleForm = ({ classes, restaurant, menu, updateMenu }) => {
         {!open && (
           <div className={classes.titleSelected}>
             <Typography>{title}</Typography>
-            <Button onClick={handleClickOpen}>
-              <EditRoundedIcon style={{ fill: "#f5564e" }} />
-            </Button>
+            <Fab size="small" onClick={handleClickOpen} className={classes.editButton}>
+              <EditRoundedIcon className={classes.editIcon} />
+            </Fab>
           </div>
         )}
 
@@ -96,12 +99,12 @@ const TitleForm = ({ classes, restaurant, menu, updateMenu }) => {
             <form className={classes.titleform} onSubmit={setTitle}>
               <TextField
                 className={classes.titleInput}
-                defaultValue={ title }
+                defaultValue={title}
                 id="title"
                 onChange={handleChange}
               />
               <Button className={classes.submitButton} onClick={setTitle}>
-                 valider
+                valider
               </Button>
             </form>
           </div>

@@ -1,9 +1,9 @@
 import React from "react";
 import { compose } from "redux";
 import { Button, Typography, withStyles } from "@material-ui/core";
-import HDIW1 from "../../assets/landingPage/HDIW1.png";
-import HDIW2 from "../../assets/landingPage/HDIW2.png";
-import HDIW3 from "../../assets/landingPage/HDIW3.png";
+import HDIW1 from "../../assets/landingPage/HDIW1 (2).png";
+import HDIW2 from "../../assets/landingPage/HDIW2 (2).png";
+import HDIW3 from "../../assets/landingPage/HDIW3 (2).png";
 import { NavLink } from "react-router-dom";
 import BackToTopButton from "../UI kit/BackToTopButton";
 
@@ -12,9 +12,39 @@ const styles = (theme) => ({
     textAlign: "center",
     paddingBottom: "0.5rem",
     paddingTop: "2rem",
-    backgroundColor: "#c7def5",
+    backgroundColor: "#fffff2",
     [theme.breakpoints.up("sm")]: {
 
+    },
+  },  
+  HTitle: {
+    marginTop: "2rem",
+    marginBottom: "4rem",
+    fontFamily: "Archivo narrow",
+    fontSize: "2.5rem",
+    fontWeight: 300,
+    color: "#001730",
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "4rem",
+      fontSize: "4rem",
+    },
+  },
+  HTitleSpan: {
+    color: "#FE4A49",
+  },
+
+  stepSection: {
+    marginBottom: "5rem",
+    [theme.breakpoints.up("sm")]: {
+      width: "30%"
+    },
+  },
+  step: {
+    backgroundColor: "#001730",
+    borderRadius: "30px",
+    paddingTop: "1rem",
+    [theme.breakpoints.up("sm")]: {
+      height: "22rem",
     },
   },
   explanations: {
@@ -23,32 +53,13 @@ const styles = (theme) => ({
     textAlign: "center",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
-      justifyContent: "center",
+      justifyContent: "space-around",
       marginTop: "6rem",
       paddingLeft: "10%",
       paddingRight: "10%",
     },
   },
-  stepSection: {
-    marginBottom: "5rem",
-    [theme.breakpoints.up("sm")]: {
-      width: "33%",
-    },
-  },
-  HTitle: {
-    marginTop: "2rem",
-    marginBottom: "4rem",
-    fontFamily: "Archivo narrow",
-    fontSize: "2rem",
-    fontWeight: 300,
-    [theme.breakpoints.up("sm")]: {
-      marginTop: "4rem",
-      fontSize: "4rem",
-    },
-  },
-  HTitleSpan: {
-    color: "#ee1c80",
-  },
+
   stepImg: {
     width: "30%",
   },
@@ -57,20 +68,24 @@ const styles = (theme) => ({
     width: "70%",
     marginLeft: "15%",
     marginBottom: "0.5rem",
+    color: "#fffff2"
   },
   stepText: {
     width: "80%",
     marginTop: "1rem",
     marginLeft: "10%",
     textAlign: "justify",
+    color: "#fffff2"
   },
   shopButton: {
-    marginTop: "-6rem",
-    backgroundColor: "#ee1c80",
+    backgroundColor: "#FE4A49",
     color: "white",
+    borderRadius: "30px",
+    width: "60%",
     [theme.breakpoints.up("sm")]: {
-      marginTop: "-6rem",
-      marginLeft: "65%",
+      marginTop: "2rem",
+      width: "15%",
+      height: "4rem",
     },
   },
   links: {
@@ -109,6 +124,7 @@ const HowDoesItWork = ({ classes }) => {
       <div className={classes.explanations}>
         {steps.map((step, key) => (
           <div className={classes.stepSection} key={key}>
+          <div className={classes.step}>
             <Typography className={classes.stepTitle} variant="body1">
               {step.title}
             </Typography>
@@ -120,11 +136,12 @@ const HowDoesItWork = ({ classes }) => {
             <Typography className={classes.stepText} variant="body2">
               {step.text}
             </Typography>
+            </div>
           </div>
         ))}
       </div>
       <NavLink to="./shop" className={classes.links}>
-        <Button className={classes.shopButton}>BOUTIQUE</Button>
+        <Button className={classes.shopButton}>BOUTIQUE QR CODE</Button>
       </NavLink>
       <BackToTopButton />
     </div>

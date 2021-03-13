@@ -42,7 +42,7 @@ const styles = (theme) => ({
     alignItems: "center",
     marginTop: "4rem",
     width: "100%",
-    backgroundColor: "grey",
+    // backgroundColor: "grey",
     [theme.breakpoints.up("md")]: {
       width: "50%",
     },

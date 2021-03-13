@@ -21,9 +21,14 @@ const styles = (theme) => ({
     },
   },
   titleLogo: {
-    width: "40%",
+    width: "60%",
     marginLeft: "20%",
-    marginTop: "5rem",
+    marginTop: "0rem",
+    [theme.breakpoints.up("sm")]: {
+      width: "40%",
+      marginTop: "5rem",
+
+    },
   },
   headerText: {
     marginLeft: "1.5rem",
@@ -35,13 +40,14 @@ const styles = (theme) => ({
     },
   },
   buttonSection: {
-    marginTop: "6rem",
-    width: "100%",
-    display: "flex",
-    marginLeft: "3rem",
     flexDirection: "column",
+    marginTop: "2rem",
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
+      marginTop: "6rem",
+      width: "100%",
+      display: "flex",
+      marginLeft: "3rem",
     },
   },
   connectButton: {
@@ -86,9 +92,11 @@ const styles = (theme) => ({
     },
   },
   headerImg: {
-    width: "80%",
-    marginLeft: "2rem",
+    display: "none",
+    // width: "80%",
+    // marginLeft: "2rem",
     [theme.breakpoints.up("sm")]: {
+      display: "block",
       marginLeft: "10%",
       width: "100%",
 

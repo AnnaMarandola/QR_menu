@@ -52,7 +52,7 @@ const styles = (theme) => ({
   cardHeader: {
     fontFamily: "Archivo narrow",
     fontSize: "1.2rem",
-    color: "#f5564e",
+    color: "#001730",
     padding: "1rem",
     paddingBottom: "1rem",
     fontWeight: 400,
