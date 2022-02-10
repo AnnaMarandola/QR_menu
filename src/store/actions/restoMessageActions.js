@@ -1,6 +1,5 @@
 
 export const sendRestoMessage = (message) => {
-    console.log("payload in messageAction", message)
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         getFirestore()
         .collection("restoMessages")

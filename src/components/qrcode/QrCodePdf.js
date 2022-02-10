@@ -13,7 +13,6 @@ const styles = (theme) => ({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "center",
   },
   restoContainer: {
     paddingTop: "3rem",
@@ -44,13 +43,12 @@ const styles = (theme) => ({
   },
   navlink: {
     textDecoration: "none",
-  }
+  },
 });
 
 const ref = React.createRef();
 
 const QrCodePdf = ({ classes, match }) => {
-  console.log("params", match.params);
   const restoId = match.params.resto;
   const menuId = match.params.menu;
 

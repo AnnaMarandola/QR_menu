@@ -34,7 +34,7 @@ function Gallery({ classes, restaurant }) {
       <GridList cellHeight={180} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
           <ListSubheader component="div">
-            Gallerie d'images :
+            Vos photos :
           </ListSubheader>
         </GridListTile>
         {restaurant &&

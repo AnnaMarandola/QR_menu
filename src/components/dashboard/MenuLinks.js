@@ -33,13 +33,17 @@ const styles = (theme) => ({
     alignItems: "center",
   },
   menuButtons: {
-    width: "20rem",
+    width: "15rem",
     height: "3rem",
-    padding: "0.5rem",
+    padding: "1rem",
     backgroundColor: "#031627",
-    margin: "0.2rem",
+    margin: ".5rem",
     fontFamily: "Archivo narrow",
     color: "white",
+    borderRadius: "30px",
+    "&:hover": {
+      backgroundColor: "#003162"
+    }
   },
   menuIcon: {
     fill: "#white",

@@ -217,7 +217,6 @@ class InfoResto extends Component {
     ).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
-        console.log("lat :", lat, "long :", lng);
         this.setState({ latitude: lat, longitude: lng });
         this.setState({ longitude: lng });
       },
@@ -254,8 +253,6 @@ class InfoResto extends Component {
     const resto = (restaurant && restaurant) || null;
 
     if (this.state.submited === true) return <Redirect to="/dashboard" />;
-
-    // window.scrollTo(0, 0);
 
     return (
       <div className={classes.root}>

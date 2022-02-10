@@ -21,13 +21,9 @@ export const createRestaurant = (restaurant) => {
 };
 
 export const updateRestaurantMenu = (payload) => {
-  console.log("payload MMMMMMMM IN ACTIONS", payload)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    console.log("payload", payload);
     let restoId = payload.restoId;
     let menuId = payload.menuId;
-    console.log("restoId in actions", restoId);
-    console.log("MENU in actions", menuId);
     getFirestore()
       .collection("restaurants")
       .doc(restoId)
@@ -42,13 +38,9 @@ export const updateRestaurantMenu = (payload) => {
 };
 
 export const updateRestaurant = (payload) => {
-  console.log("payload TEMPLATE IN ACTIONS", payload)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    console.log("payload", payload);
     let restoId = payload.restoId;
     let template = payload.template;
-    console.log("restoId in actions", restoId);
-    console.log("template in actions", template);
     getFirestore()
       .collection("restaurants")
       .doc(restoId)
@@ -83,13 +75,12 @@ export const editRestaurant = (restaurant, restoId) => {
 };
 
 export const updateOptions = (payload) => {
-  console.log("options payload", payload.options)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     getFirestore()
       .collection("restaurants")
       .doc(payload.restoId)
       .update({
-         options: {...payload.options},
+        options: { ...payload.options },
       })
       .then(() => {
         dispatch({ type: "UPDATE_OPTIONS", payload });
@@ -101,14 +92,18 @@ export const updateOptions = (payload) => {
 };
 
 // https://firebase.google.com/docs/storage/web/start
-export const uploadLogoPicture = (file, restoId) => 
-(dispatch,getState,{ getFirebase }) => {
-  console.log("file and resto in upload action", file, restoId)
+export const uploadLogoPicture = (file, restoId) => (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
   const firebase = getFirebase();
   firebase
     .storage()
     .ref(
-      `logo-pictures/${restoId}-${new Date().getMilliseconds()}.${file.name.split(".").pop()}`
+      `logo-pictures/${restoId}-${new Date().getMilliseconds()}.${file.name
+        .split(".")
+        .pop()}`
     )
     .put(file)
     .on(
@@ -128,14 +123,18 @@ export const uploadLogoPicture = (file, restoId) =>
     );
 };
 
-export const uploadCarouselPicture = (file, restoId) => 
-(dispatch,getState,{ getFirebase }) => {
-  console.log("file and resto in upload action", file, restoId)
+export const uploadCarouselPicture = (file, restoId) => (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
   const firebase = getFirebase();
   firebase
     .storage()
     .ref(
-      `carousel-pictures/${restoId}-${new Date().getMilliseconds()}.${file.name.split(".").pop()}`
+      `carousel-pictures/${restoId}-${new Date().getMilliseconds()}.${file.name
+        .split(".")
+        .pop()}`
     )
     .put(file)
     .on(
@@ -159,11 +158,10 @@ export const removeCarouselPicture = (payload) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let restoId = payload.restoId;
     let image = payload.image;
-    console.log("payload inREMOVE", payload)
     getFirestore()
       .collection("restaurants")
       .doc(restoId)
-      .update({ carousel: getFirestore().FieldValue.arrayRemove(image)})
+      .update({ carousel: getFirestore().FieldValue.arrayRemove(image) })
       .then(() => {
         dispatch({ type: "REMOVE_PICTURE", payload });
       })

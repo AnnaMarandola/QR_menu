@@ -20,7 +20,7 @@ const styles = (theme) => ({
     marginBottom: "4rem",
     [theme.breakpoints.up("md")]: {
         minWidth: 600,
-        maxWidth: 1400,
+        maxWidth: 1300,
       },
   },
   cardTitle: {
@@ -28,6 +28,9 @@ const styles = (theme) => ({
     fontSize: "2rem",
     fontWeight: 400,
     color: "#E81B7D",
+    [theme.breakpoints.up("md")]: {
+      textAlign: "center",
+    }
   },
   cardContent: {
       display: "flex",

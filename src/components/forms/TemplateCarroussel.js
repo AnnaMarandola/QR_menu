@@ -7,14 +7,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-const TemplateCarousel = ({
-  handleOpen,
-  setHandleOpen,
-  isMobile,
-  auth,
-}) => {
-  console.log("auth in template carousel", auth.uid);
-
+const TemplateCarousel = ({ handleOpen, setHandleOpen, isMobile, auth }) => {
   return (
     <div className="App">
       <AutoRotatingCarousel
@@ -25,7 +18,6 @@ const TemplateCarousel = ({
         mobile={isMobile}
         label="choisir ce menu"
         style={{ postion: "absolute" }}
-
       >
         <Slide
           media={<img alt="something" src={Temp1} />}

@@ -6,9 +6,7 @@ admin.initializeApp();
 
 
 exports.onUploadLogo = functions.storage.object().onFinalize((object) => {
-  console.log(object);
   const filePath = object.name;
-  console.log("filePath", filePath);
   if (filePath.startsWith("logo-pictures/")) {
     const restoId = object.name.split("/").pop().split("-")[0].split(".")[0];
     return admin
@@ -25,11 +23,9 @@ exports.onMessageCreate = functions.firestore
   .document("messages/{messageID}")
   .onCreate(async (snapshot) => {
     const message = snapshot.data();
-    console.log("message", message);
 
     const gmailEmail = functions.config().gmail.email;
     const gmailPassword = functions.config().gmail.password;
-    console.log("gmail", gmailEmail);
 
     const transporter = nodemailer.createTransport({
       service: "gmail",

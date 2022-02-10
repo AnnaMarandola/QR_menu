@@ -12,7 +12,7 @@ const styles = (theme, menu) => ({
     position: "relative",
   },
   menuIcon: {
-      fontSize: "3rem",
+    fontSize: "3rem",
   },
   navlink: {
     textDecoration: "none",
@@ -47,7 +47,6 @@ const StyledMenu = withStyles({
 ));
 
 const StyledMenuItem = withStyles((theme, menu) => ({
-
   root: {
     fontFamily: "Archivo narrow",
     fontSize: "1.5em",
@@ -61,10 +60,7 @@ const StyledMenuItem = withStyles((theme, menu) => ({
   },
 }))(MenuItem);
 
-function RestoNav({
-  classes,
-  menu,
-}) {
+function RestoNav({ classes, menu }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -75,9 +71,6 @@ function RestoNav({
     setAnchorEl(null);
   };
 
-  console.log("menu in nav+++++++", menu.headerColor)
-
-
   return (
     <React.Fragment>
       <Button
@@ -86,7 +79,10 @@ function RestoNav({
         onClick={handleClick}
         className={classes.root}
       >
-        <MenuOutlinedIcon style={{ fill: menu.fontColor}} className={classes.menuIcon} />
+        <MenuOutlinedIcon
+          style={{ fill: menu.fontColor }}
+          className={classes.menuIcon}
+        />
       </Button>
       <StyledMenu
         id="menu"

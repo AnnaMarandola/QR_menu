@@ -1,9 +1,7 @@
 import React from "react";
 import GoogleMaps from "simple-react-google-maps";
 
-
 const GoogleMap = ({ restaurant }) => {
-  console.log("restaurant 9999999", restaurant)
   return (
     <div>
       <GoogleMaps
@@ -12,7 +10,7 @@ const GoogleMap = ({ restaurant }) => {
         zoom={15}
         center={{ lat: restaurant.latitude, lng: restaurant.longitude }}
         markers={{ lat: restaurant.latitude, lng: restaurant.longitude }}
-        />
+      />
     </div>
   );
 };

@@ -500,7 +500,6 @@ const MenuPage = ({ classes, restaurant, menu, dishes, auth }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     auth: state.firebase.auth,
     restaurant:

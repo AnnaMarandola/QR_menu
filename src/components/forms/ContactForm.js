@@ -58,7 +58,6 @@ const ContactForm = ({ classes, sendMessage }) => {
     setEmail("");
     setMessage("");
     setSubject("");
-    console.log("MAIL SENT", name, email, message);
     sendMessage({
       email: email,
       name: name,

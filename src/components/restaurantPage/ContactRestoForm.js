@@ -60,9 +60,7 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
   const [name, setName] = useState("");
   const [emailSender, setEmailSender] = useState("");
   const [message, setMessage] = useState("");
-  console.log("rrrerestorant", restaurant)
   const recipient = restaurant.email
-  console.log("recipient", recipient)
 
 
   const handleSubmit = (e) => {
@@ -70,7 +68,6 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
     setName("");
     setEmailSender("");
     setMessage("");
-    console.log("MAIL SENT", name, emailSender, message, recipient);
     sendRestoMessage({
       emailSender: emailSender,
       name: name,
@@ -89,7 +86,6 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
     <div className={classes.root}>
     <Typography className={classes.mailIntro}>Ecrivez-nous pour toutes demandes d'informations, repas de groupe, devis ...</Typography>
       <form onSubmit={handleSubmit}>
-        {/* <img src={MAIL} alt="mail icon" className={classes.mailIcon} /> */}
 
         <div>
           <TextField
@@ -127,7 +123,6 @@ const ContactRestoForm = ({ classes, restaurant, sendRestoMessage }) => {
 
         <Button
           type="submit"
-          // style={{ background: loader ? "#eeeeee" : "#031627" }}
           className={classes.submitButton}
         >
         <EmailSharpIcon className={classes.mailIcon}/>

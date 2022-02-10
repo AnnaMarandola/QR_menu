@@ -38,7 +38,7 @@ const GalleryCard = ({ classes, restaurant }) => {
   return (
     <Card className={classes.rootCard}>
       <Typography className={classes.cardHeader}>
-        Ajouter une gallerie d'images :
+        Gallerie photos:
       </Typography>
       <div className={classes.uploadButton}>
         <UploadCarouselImg restaurant={restaurant} />

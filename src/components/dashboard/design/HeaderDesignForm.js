@@ -204,7 +204,6 @@ const HeaderDesignForm = ({
     selectLogoSize({ menuId: menu.id, logoSize: e.target.value });
   };
 
-  console.log("menu in design form", menu);
 
   return (
     <Card className={classes.root}>
@@ -444,7 +443,7 @@ const HeaderDesignForm = ({
           <thead>
             <tr>
               <th>
-                {/* <Typography variant="body2">Police d'écriture</Typography> */}
+                <Typography variant="body2">Police d'écriture</Typography>
               </th>
               <th>
                 <Typography variant="body2">Taille du logo</Typography>

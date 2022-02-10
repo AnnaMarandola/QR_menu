@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import DishItemEdit from "./DishItemEdit";
 
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -69,8 +68,6 @@ function DishesTabs({ classes, restaurant, dishes, menu }) {
   const filteredDishes =
     dishes &&
     dishes.filter((dish) => dish.category === "starter" || "main" || "dessert");
-  console.log("filtrés", filteredDishes);
-  console.log("dishes", dishes);
 
   const sortedDishes =
     filteredDishes &&
@@ -82,16 +79,16 @@ function DishesTabs({ classes, restaurant, dishes, menu }) {
       { starter: [], main: [], dessert: [] }
     );
   const sorts = { ...sortedDishes };
-  console.log("sorts", sorts);
   const starters = sorts && sorts.starter;
   const mains = sorts && sorts.main;
   const desserts = sorts && sorts.dessert;
-  const unknown = dishes && dishes.filter(dish => (dish.category !== "starter" || "main" || "dessert"));
-  console.log("unknown", unknown)
+  const unknown =
+    dishes &&
+    dishes.filter((dish) => dish.category !== "starter" || "main" || "dessert");
 
   return (
     <div className={classes.root}>
-          <Typography className={classes.cardHeader}>Mes plats:</Typography>
+      <Typography className={classes.cardHeader}>Mes plats:</Typography>
       <AppBar position="static">
         <Tabs
           value={value}
@@ -101,28 +98,30 @@ function DishesTabs({ classes, restaurant, dishes, menu }) {
           <Tab label="Entrées" {...a11yProps(0)} />
           <Tab label="Plats" {...a11yProps(1)} />
           <Tab label="Desserts" {...a11yProps(2)} />
-          <Tab label="Autres" {...a11yProps(3)} />
+          <Tab label="Tous" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        {starters && starters.map((starter) => (
-          <DishItemEdit dish={starter} key={starter.id} />
-        ))}
+        {starters &&
+          starters.map((starter) => (
+            <DishItemEdit dish={starter} key={starter.id} />
+          ))}
       </TabPanel>
       <TabPanel value={value} index={1}>
-      {mains && mains.map((main) => (
-          <DishItemEdit dish={main} key={main.id} />
-        ))}
+        {mains &&
+          mains.map((main) => <DishItemEdit dish={main} key={main.id} />)}
       </TabPanel>
       <TabPanel value={value} index={2}>
-      {desserts && desserts.map((dessert) => (
-          <DishItemEdit dish={dessert} key={dessert.id} />
-        ))}
+        {desserts &&
+          desserts.map((dessert) => (
+            <DishItemEdit dish={dessert} key={dessert.id} />
+          ))}
       </TabPanel>
       <TabPanel value={value} index={3}>
-      {unknown && unknown.map((dessert) => (
-          <DishItemEdit dish={dessert} key={dessert.id} />
-        ))}
+        {unknown &&
+          unknown.map((dessert) => (
+            <DishItemEdit dish={dessert} key={dessert.id} />
+          ))}
       </TabPanel>
     </div>
   );

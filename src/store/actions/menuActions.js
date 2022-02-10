@@ -44,7 +44,6 @@ export const updateMenu = (payload) => {
 };
 
 export const updateCategory = (payload) => {
-  console.log("payload in update action", payload)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let menuId = payload.menuId;
     let newCategories = payload.newCategories;
@@ -165,7 +164,6 @@ export const updateMenuTemplate = (payload) => {
 };
 
 export const updateMenuFormula = (payload) => {
-  console.log("PAYLOAD!!!!!!!!!!", payload)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     getFirestore()
       .collection("menus")

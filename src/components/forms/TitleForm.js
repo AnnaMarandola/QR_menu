@@ -42,11 +42,7 @@ const styles = (theme) => ({
 });
 
 const TitleForm = ({ classes, restaurant, menu, auth, updateMenu }) => {
-  console.log("restaurant in template form", restaurant);
-  console.log("auth in template form", auth.uid);
   const menuId = menu && menu.id;
-  console.log("menuId", menuId);
-
   const [menuTitle, setMenuTitle] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -64,9 +60,7 @@ const TitleForm = ({ classes, restaurant, menu, auth, updateMenu }) => {
 
   const setTitle = (e) => {
     e.preventDefault();
-    console.log("e", e);
     updateMenu({ menuId: menuId, title: menuTitle });
-    console.log("menuTitle", menuTitle);
     handleClose()
   };
 

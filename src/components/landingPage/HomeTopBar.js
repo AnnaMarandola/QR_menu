@@ -50,17 +50,17 @@ const HomeTopBar = ({ classes, auth }) => {
       <img id="top" src={LOGO} alt="logo qr menu" className={classes.logo} />
       <div className={classes.homeNav}>
         <AnchorLink href="#product" className={classes.navlink}>
-          <Typography className={classes.menuItem}>PRODUITS</Typography>
-        </AnchorLink>
-        <AnchorLink href="#pricing" className={classes.navlink}>
-          <Typography className={classes.menuItem}>ABONNEMENTS</Typography>
+          <Typography className={classes.menuItem}>PRODUIT</Typography>
         </AnchorLink>
         <AnchorLink href="#engagements" className={classes.navlink}>
-          <Typography className={classes.menuItem}>NOS ENGAGEMENTS</Typography>
+          <Typography className={classes.menuItem}>ENGAGEMENTS</Typography>
         </AnchorLink>
-        {/* <AnchorLink href="#contact" className={classes.navlink}> */}
-        <Typography className={classes.menuItem}>CONTACT</Typography>
-        {/* </AnchorLink> */}
+        <AnchorLink href="#contact" className={classes.navlink}>
+          <Typography className={classes.menuItem}>CONTACT</Typography>
+        </AnchorLink>
+        <AnchorLink href="#pricing" className={classes.navlink}>
+          <Typography className={classes.menuItem}>PRIX</Typography>
+        </AnchorLink>
         <NavLink to="./shop" className={classes.navlink}>
           <Typography className={classes.menuItem}>BOUTIQUE</Typography>
         </NavLink>
@@ -73,7 +73,6 @@ const HomeTopBar = ({ classes, auth }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     auth: state.firebase.auth,
   };

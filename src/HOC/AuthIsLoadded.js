@@ -7,8 +7,6 @@ export default function ({ children }) {
   const auth = useSelector((state) => state.firebase.auth);
   const profile = useSelector((state) => state.firebase.profile);
   if (isLoaded(auth) && isLoaded(profile)) {
-    console.info("auth", auth);
-    console.info("profile", profile);
     return children;
   }
   return <Loading />;

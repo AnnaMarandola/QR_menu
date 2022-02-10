@@ -32,12 +32,9 @@ const StartMenu = ({
   createMenu,
   updateRestaurantMenu,
 }) => {
-  console.log("restooooo", restaurant);
   const resto = { ...restaurant };
   const restoId = resto.id;
-  console.log("resto id", resto.id);
   const menuData = { ...menu };
-  console.log("menu id", menuData.id);
 
   const [started, setStarted] = useState(false);
 

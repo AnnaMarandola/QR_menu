@@ -3,15 +3,10 @@ import { withStyles, Typography } from "@material-ui/core";
 import { compose } from "redux";
 import PHONEBG from "../../../assets/smartphoneBG.png";
 import RestoCarousel from "../../restaurantPage/RestoCarousel";
-// import { Scrollbars } from "react-custom-scrollbars-2";
 
 const styles = (theme, menu) => ({
   root: {
     backgroungColor: "#11ffee00",
-    // backgroundImage: `url(${PHONEBG})`,
-    // backgroundRepeat: "no-repeat",
-    // backgroundPosition: "center center",
-    // backgroundSize: "cover",
     position: "relative",
     top: 0,
     width: "50%",
@@ -25,7 +20,6 @@ const styles = (theme, menu) => ({
     width: "50%",
     minWidth: 350,
     height: "auto",
-    //   marginLeft: "25%",
     zIndex: 1,
   },
   container: {
@@ -63,28 +57,11 @@ const styles = (theme, menu) => ({
   },
 });
 
-// const renderThumb = ({ style, ...props }) => {
-//   const thumbStyle = {
-//     borderRadius: 6,
-//     backgroundColor: "rgba(35, 49, 86, 0.8)",
-//   };
-//   return <div style={{ ...style, ...thumbStyle }} {...props} />;
-// };
 
-// const CustomScrollbars = (props) => (
-//   <Scrollbars
-//     renderThumbHorizontal={renderThumb}
-//     renderThumbVertical={renderThumb}
-//     {...props}
-//   />
-// );
 
 const DemoMobile = ({ classes, restaurant, menu }) => {
   let resto = { ...restaurant };
   let menuData = { ...menu };
-  console.log("resto in smartphone", restaurant);
-  console.log("menu in smartphone", menu);
-  console.log("logoSie in smartphone", menuData.logoSize);
 
   return (
     <div className={classes.root}>
@@ -94,7 +71,6 @@ const DemoMobile = ({ classes, restaurant, menu }) => {
         className={classes.phoneBg}
       />
       <div className={classes.container}>
-        {/* <CustomScrollbars autoHide autoHideTimeout={500} autoHideDuration={200}> */}
           <div
             className={classes.header}
             style={{ backgroundColor: menu && menu.headerColor }}
@@ -109,7 +85,7 @@ const DemoMobile = ({ classes, restaurant, menu }) => {
             >
               {resto.name}
             </Typography>
-            {menu && menu.logoSize === "11rem" && (
+            {resto && resto.logo && menu && menu.logoSize === "11rem" && (
               <img
                 className={classes.logo}
                 src={resto.logo}
@@ -154,7 +130,6 @@ const DemoMobile = ({ classes, restaurant, menu }) => {
           <div className={classes.carouselSection}>
             <RestoCarousel restaurant={resto} />
           </div>
-        {/* </CustomScrollbars> */}
       </div>
     </div>
   );

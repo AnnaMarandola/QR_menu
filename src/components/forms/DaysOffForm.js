@@ -1,12 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Checkbox from "@material-ui/core/Checkbox";
-import Avatar from "@material-ui/core/Avatar";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -16,12 +14,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "98%",
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
-  accordion: {
-
-    
-  },
+  accordion: {},
 }));
 
 function AllergenList() {
@@ -40,7 +35,6 @@ function AllergenList() {
 
     setChecked(newChecked);
   };
-  console.log("checked", checked)
 
   return (
     <div className={classes.root}>
@@ -56,7 +50,7 @@ function AllergenList() {
           <Typography>
             Sélectionnez les jours de fermeture de votre établissement :
           </Typography>
-          <List >
+          <List>
             {[
               "lundi",
               "mardi",
@@ -66,7 +60,6 @@ function AllergenList() {
               "samedi",
               "dimanche",
             ].map((value) => {
-              console.log("days off value", value);
               const labelId = `checkbox-list-secondary-label-${value}`;
               return (
                 <ListItem key={value} button>

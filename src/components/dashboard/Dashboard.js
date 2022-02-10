@@ -6,7 +6,6 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 import MenuLinks from "./MenuLinks";
-import Options from "./Options";
 import QrcodeSailingCard from "./QrcodeSailingCard";
 
 const styles = (theme) => ({
@@ -31,7 +30,6 @@ const styles = (theme) => ({
       flexDirection: "row",
       justifyContent: "space-evenly",
       alignItems: "start",
-      // justifyContent: "center",
       width: "100%",
     },
   },
@@ -63,7 +61,6 @@ const Dashboard = ({ classes, restaurant, auth, profile }) => {
       <div className={classes.container}>
         <MenuLinks restaurant={restaurant} menuId={menuId} />
         <RestaurantSummary restaurant={restaurant} />
-        <Options restaurant={restaurant} />
       </div>
         <QrcodeSailingCard restoId={restoId} menuId={menuId}/>
       <div>

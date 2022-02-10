@@ -42,9 +42,9 @@ const styles = (theme) => ({
   },
 });
 
-const NewCategoryForm = ({ classes, restaurant, menu, updateCategory }) => {
+const NewCategoryForm = ({ classes, menu, updateCategory }) => {
   const menuId = menu && menu.id;
-  let categoriesData = menu && menu.newCategories
+  let categoriesData = menu && menu.newCategories;
 
   const [newCategory, setNewCategory] = useState("");
   const [open, setOpen] = useState(false);
@@ -65,11 +65,9 @@ const NewCategoryForm = ({ classes, restaurant, menu, updateCategory }) => {
 
   const setCategory = (e) => {
     e.preventDefault();
-    console.log("newCategories", newCategories);
     setNewCategories(newCategories.push(newCategory));
     updateCategory({ menuId: menuId, newCategories: newCategories });
     setNewCategory("");
-    console.log("newCategories", newCategories);
     handleClose();
   };
 
@@ -117,5 +115,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { updateCategory }),
+  connect(mapStateToProps, { updateCategory })
 )(NewCategoryForm);

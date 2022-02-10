@@ -10,7 +10,6 @@ import NewDishContainer from "./NewDishContainer";
 import DishesTabs from "./DishesTabs.js";
 import { NavLink } from "react-router-dom";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
-import NewCategoryForm from "./NewCategoryForm";
 import DishItemEdit from "./DishItemEdit";
 
 const styles = (theme) => ({
@@ -127,13 +126,6 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
             dishes={dishes}
           />
         )}
-        {menu && menu.template !== "Carte thématique" && (
-          <NewCategoryForm
-            restaurant={restaurant}
-            menu={menu}
-            dishes={dishes}
-          />
-        )}
 
         {restaurant && dishes && restaurant.template === "Carte thématique" ? (
           <Card className={classes.allDishesCard}>
@@ -158,7 +150,6 @@ const MenuFormPage = ({ classes, restaurant, menu, dishes }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     restaurant:
       state.firestore.ordered.restaurants &&

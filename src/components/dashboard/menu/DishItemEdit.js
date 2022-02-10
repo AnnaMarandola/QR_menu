@@ -33,7 +33,7 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.whiteish,
     width: "80%",
-  }
+  },
 });
 
 const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
@@ -47,7 +47,6 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
   };
 
   const handleDelete = (e) => {
-    console.log("e", e);
     deleteDish(dish.id);
     toast.warning("Plat supprimé !", {
       position: toast.POSITION.TOP_LEFT,
@@ -99,7 +98,9 @@ const DishItemEdit = ({ classes, dish, deleteDish, switchStatus }) => {
               menu={dish.menuId}
               dish={dish}
             />
-            <Button onClick={handleClose} className={classes.closeButton}>quitter</Button>
+            <Button onClick={handleClose} className={classes.closeButton}>
+              quitter
+            </Button>
           </div>
         )}
         {/* <UploadDishPic dish={dish}/> */}

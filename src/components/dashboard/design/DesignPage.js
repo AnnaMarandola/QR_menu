@@ -146,7 +146,6 @@ const DesignPage = ({ classes, restaurant, menu, auth }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     auth: state.firebase.auth,
     restaurant:

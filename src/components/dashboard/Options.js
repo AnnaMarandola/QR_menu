@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   CardActionArea,
@@ -18,8 +18,8 @@ import { firestoreConnect } from "react-redux-firebase";
 
 const styles = (theme) => ({
   root: {
-    minWidth: 345,
-    maxWidth: 345,
+    minWidth: 325,
+    maxWidth: 325,
     marginTop: "1rem",
     padding: "1rem",
     backgroundColor: "white",
@@ -28,20 +28,20 @@ const styles = (theme) => ({
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
     fontWeight: 400,
-    color: "#E81B7D",
+    color: "#001730",
   },
   media: {
     height: 140,
   },
   modifyButton: {
-    border: "solid 1px #e81b7d",
+    border: "solid 1px #f5564e",
     margin: "0.4rem",
     padding: "0.4rem",
     fontFamily: "Archivo narrow",
   },
   modifyIcon: {
     marginRight: "0.3rem",
-    fill: "#E81B7D",
+    fill: "#f5564e",
   },
   links: {
     textDecoration: "none",
@@ -57,6 +57,10 @@ const Options = ({ restaurant, classes, updateOptions }) => {
     translation: restaurant && restaurant.options.translation,
   });
 
+  useEffect(() => {
+
+  }, [options])
+  
 
   const handleChange = (event) => {
     let newOptions = (prevState) => ({
@@ -67,7 +71,6 @@ const Options = ({ restaurant, classes, updateOptions }) => {
     updateOptions({ restoId: restaurant.id, options: options });
   };
 
-  console.log("options", options);
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -128,6 +131,7 @@ const Options = ({ restaurant, classes, updateOptions }) => {
                     value={options.translation}
                     onChange={handleChange}
                     name="translation"
+                    disabled
                   />
                 }
                 label="Traduction multilingue"

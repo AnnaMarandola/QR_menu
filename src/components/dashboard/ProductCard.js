@@ -18,9 +18,6 @@ const styles = (theme) => ({
     padding: "1rem",
     backgroundColor: "white",
     [theme.breakpoints.up("md")]: {
-      // minWidth: 300,
-      // maxWidth: 300,
-      // width: "100%",
     },
   },
   cardTitle: {
@@ -37,6 +34,16 @@ const styles = (theme) => ({
     position: "relative",
     bottom: 0,
     backgroundColor: "#E81B7D",
+    color: "white",
+    width: "80%",
+    marginLeft: "10%",
+    borderRadius: "20px",
+    margin: "2rem",
+  },
+  shopSoonButton: {
+    position: "relative",
+    bottom: 0,
+    backgroundColor: "grey",
     color: "white",
     width: "80%",
     marginLeft: "10%",
@@ -106,7 +113,7 @@ const ProductCard = ({
             className={classes.links}
             to={`/shop`}
           >
-            <Button className={classes.shopButton}>{buttonText}</Button>
+            <Button className={classes.shopSoonButton} >{buttonText}</Button>
           </NavLink>
         </div>
       )}

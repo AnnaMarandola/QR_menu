@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -16,11 +16,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "98%",
-    backgroundColor: 'white',
-  },
-  accordion: {
-
-    
+    backgroundColor: "white",
   },
 }));
 
@@ -40,7 +36,6 @@ function AllergenList() {
 
     setChecked(newChecked);
   };
-  console.log("checked", checked)
 
   return (
     <div className={classes.root}>
@@ -56,7 +51,7 @@ function AllergenList() {
           <Typography>
             Sélectionnez les allergènes présents dans ce plat
           </Typography>
-          <List >
+          <List>
             {[
               "celeri",
               "crustace",
@@ -72,7 +67,6 @@ function AllergenList() {
               "sulfites",
               "soja",
             ].map((value) => {
-              console.log("alleergen value", value);
               const labelId = `checkbox-list-secondary-label-${value}`;
               return (
                 <ListItem key={value} button>

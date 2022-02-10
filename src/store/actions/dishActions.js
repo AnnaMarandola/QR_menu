@@ -1,7 +1,6 @@
 export const createDish = (data) => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
+  return (dispatch, getState,  { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    //   const ownerId = getState().firebase.auth.uid;
 
     firestore
       .collection("dishes")
@@ -37,7 +36,6 @@ export const updateDish = (dish, dishId) => {
 };
 
 export const switchStatus = (payload) => {
-  console.log("payload in select switchStatus ACTION", payload);
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let dishId = payload.dishId;
     let status = payload.status;
@@ -52,12 +50,10 @@ export const switchStatus = (payload) => {
         dispatch({ type: "SWITCH_STATUS_ERROR", err });
       });
   };
-
-}
+};
 
 export const deleteDish = (dishId) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    console.log("dish Id in ACTIONS", dishId);
     const firestore = getFirestore();
 
     firestore
@@ -73,14 +69,18 @@ export const deleteDish = (dishId) => {
   };
 };
 
-export const uploadDishPic = (file, dishId) => 
-(dispatch,getState,{ getFirebase }) => {
-  console.log("pic and dish in upload action", file, dishId)
+export const uploadDishPic = (file, dishId) => (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
   const firebase = getFirebase();
   firebase
     .storage()
     .ref(
-      `dish-pictures/${dishId}-${new Date().getMilliseconds()}.${file.name.split(".").pop()}`
+      `dish-pictures/${dishId}-${new Date().getMilliseconds()}.${file.name
+        .split(".")
+        .pop()}`
     )
     .put(file)
     .on(

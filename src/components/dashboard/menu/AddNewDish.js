@@ -113,9 +113,6 @@ class AddNewDish extends Component {
     }
   }
 
-  componentDidUpdate = () => {
-    console.log("plat ajouté/ mis à jour");
-  };
 
   handleChange = (e) => {
     this.setState({
@@ -142,7 +139,6 @@ class AddNewDish extends Component {
       newChecked.splice(currentIndex, 1);
     }
     this.setState({ checkedAllergens: newChecked });
-    console.log("checked", this.checkedAllergens);
   };
 
   handleSubmit = (e) => {

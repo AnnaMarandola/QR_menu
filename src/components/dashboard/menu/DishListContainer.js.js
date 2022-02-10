@@ -29,8 +29,6 @@ const styles = (theme) => ({
 
 const DishListContainer = ({ classes, restaurant, dishes, menu }) => {
   const filteredDishes = dishes && dishes.filter(dish => dish.category === "starter" || "main" || "dessert")
-  console.log("filtrés", filteredDishes)
-  console.log("dishes", dishes)
 
   const sortedDishes =
     filteredDishes && filteredDishes.reduce(
@@ -41,7 +39,6 @@ const DishListContainer = ({ classes, restaurant, dishes, menu }) => {
       { starter: [], main: [], dessert: [] }
     );
   const sorts = { ...sortedDishes };
-  console.log("sorts", sorts);
   const starters = sorts && sorts.starter;
   const mains = sorts && sorts.main;
   const desserts = sorts && sorts.dessert;
