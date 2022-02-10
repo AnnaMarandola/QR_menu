@@ -67,7 +67,6 @@ const Options = ({ restaurant, classes, updateOptions }) => {
     updateOptions({ restoId: restaurant.id, options: options });
   };
 
-  console.log("options", options);
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -119,7 +118,7 @@ const Options = ({ restaurant, classes, updateOptions }) => {
                     name="googleMaps"
                   />
                 }
-                label="Google maps"
+                label="Google map"
               />
               <FormControlLabel
                 control={
@@ -128,6 +127,7 @@ const Options = ({ restaurant, classes, updateOptions }) => {
                     value={options.translation}
                     onChange={handleChange}
                     name="translation"
+                    disabled
                   />
                 }
                 label="Traduction multilingue"

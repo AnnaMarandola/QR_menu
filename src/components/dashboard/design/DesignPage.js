@@ -18,19 +18,24 @@ const styles = (theme) => ({
     alignItems: "center",
     paddingTop: "4rem",
     [theme.breakpoints.up("md")]: {
-      width: "80%",
-      marginLeft: "10%",
+      width: "100%",
+      // marginLeft: "10%",
     },
   },
+  header: {
+    backgroundColor: "#001730",
+    width: "100%",
+  },
   titlePage: {
-    paddingBottom: "1rem",
+    paddingBottom: "2rem",
     fontFamily: "Archivo narrow",
     fontSize: "2rem",
     fontWeight: 500,
     textAlign: "center",
+    color: "#fffff2",
   },
   spanTitle: {
-    color: "#f5564e",
+    // color: "#f5564e",
   },
   rootContainer: {
     display: "flex",
@@ -38,6 +43,8 @@ const styles = (theme) => ({
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
       justifyContent: "space-evenly",
+      width: "80%",
+      // marginLeft: "10%",
     },
   },
   vizContainer: {
@@ -101,6 +108,7 @@ const DesignPage = ({ classes, restaurant, menu, auth }) => {
 
   return (
     <div className={classes.root}>
+    <div className={classes.header}>
       <NavLink to="/dashboard">
         <Fab size="small" className={classes.goBackButton}>
           <ArrowBackOutlinedIcon className={classes.backArrow} />
@@ -109,6 +117,7 @@ const DesignPage = ({ classes, restaurant, menu, auth }) => {
       <Typography className={classes.titlePage}>
         Mon <span className={classes.spanTitle}>Design</span>
       </Typography>
+      </div>
       <div className={classes.rootContainer}>
         <Card className={classes.vizContainer}>
           <Typography className={classes.cardHeader}>

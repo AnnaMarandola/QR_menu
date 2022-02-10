@@ -168,7 +168,6 @@ class SignIn extends Component {
   render() {
     const { classes, authError, auth } = this.props;
     if (auth.uid) return <Redirect to="/dashboard" />;
-    console.log(this.state);
 
     return (
       <div>
@@ -240,7 +239,7 @@ class SignIn extends Component {
             </form>
           </div>
         </div>
-        <HomeFooter/>
+        <HomeFooter />
       </div>
     );
   }

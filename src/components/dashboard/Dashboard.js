@@ -16,7 +16,7 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
     paddingTop: "4rem",
-    backgroundColor: "#001730",
+    backgroundColor: "#F2F2F2",
     [theme.breakpoints.up("md")]: {
       width: "90%",
       marginLeft: "5%",
@@ -44,7 +44,7 @@ const styles = (theme) => ({
     fontSize: "2.5rem",
     fontWeight: 400,
     textAlign: "center",
-    color: "white",
+    color: "black",
   },
   list: {
     listStyleType: "none",
@@ -60,8 +60,9 @@ const styles = (theme) => ({
     fontFamily: "Archivo narrow",
   },
   links: {
-    color: "white",
-    marginTop: "0..5rem",
+    // color: "white",
+    // marginTop: "0..5rem",
+    textDecoration: "none",
   }
 });
 

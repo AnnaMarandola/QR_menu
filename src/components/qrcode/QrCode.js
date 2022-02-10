@@ -32,7 +32,6 @@ const options = {
 };
 
 const QrCode = ({classes, restoId, menuId}) => {
-  console.log("restoId in QRCODE", restoId)
   const url = `https://qrmenu-64802.web.app/menupage/${restoId}/${menuId}`;
   const qrCode = useQrCode(url, options);
   return (
