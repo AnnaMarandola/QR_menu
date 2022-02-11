@@ -69,7 +69,6 @@ const styles = (theme) => ({
     },
   },
   form: {
-    // width: "90%",
     [theme.breakpoints.up("sm")]: {
       width: "60%",
       paddingRight: "4rem",
@@ -209,7 +208,7 @@ class InfoResto extends Component {
   };
 
   handleGeocode = () => {
-    Geocode.setApiKey("AIzaSyDXqly7--kzaJ8_3YYM_rc9l_td59XPUwE");
+    Geocode.setApiKey(process.env.REACT_APP_FIREBASE_API_KEY);
     Geocode.setLanguage("fr");
     Geocode.setRegion("fr");
     Geocode.fromAddress(

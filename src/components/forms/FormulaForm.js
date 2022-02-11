@@ -30,7 +30,6 @@ const styles = (theme) => ({
   formula: {
     display: "flex",
     flexDirection: "column",
-    // width: "100%",
   },
   formulaCard: {
     margin: "0.5rem",

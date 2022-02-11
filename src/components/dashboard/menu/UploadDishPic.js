@@ -22,8 +22,6 @@ const styles = (theme) => ({
     },
   },
   uploadForm: {
-    // maxWidth: "200px",
-    // marginTop: "1rem",
   },
   inputfile: {
     display: "none",

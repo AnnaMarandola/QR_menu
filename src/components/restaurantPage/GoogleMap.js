@@ -5,7 +5,7 @@ const GoogleMap = ({ restaurant }) => {
   return (
     <div>
       <GoogleMaps
-        apiKey={"AIzaSyDXqly7--kzaJ8_3YYM_rc9l_td59XPUwE"}
+        apiKey={process.env.REACT_APP_FIREBASE_API_KEY}
         style={{ height: "25rem", width: "90%", marginLeft: "5%" }}
         zoom={15}
         center={{ lat: restaurant.latitude, lng: restaurant.longitude }}

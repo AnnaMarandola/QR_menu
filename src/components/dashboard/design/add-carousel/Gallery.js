@@ -43,11 +43,8 @@ function Gallery({ classes, restaurant }) {
             <GridListTile key={id}>
               <img src={image} alt="le restaurant" />
               <GridListTileBar
-                // title={tile.title}
-                // subtitle={<span>by: {tile.author}</span>}
                 actionIcon={
                   <IconButton
-                    // aria-label={`info about ${tile.title}`}
                     className={classes.icon}
                   >
                     <ImageEdit image={image} carousel={restaurant.carousel} restoId={restaurant.id} key={image.id} />

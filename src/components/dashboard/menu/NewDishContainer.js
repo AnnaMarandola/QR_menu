@@ -8,7 +8,6 @@ import { updateMenu } from "../../../store/actions/menuActions";
 import AddCircleOutlineTwoToneIcon from "@material-ui/icons/AddCircleOutlineTwoTone";
 import AddNewDish from "./AddNewDish";
 
-
 const styles = (theme) => ({
   rootCard: {
     marginBottom: "1rem",
@@ -31,16 +30,12 @@ const styles = (theme) => ({
   exitButton: {
     margin: "1rem",
     backgroundColor: "#E81B7D",
-    // border: "solid 1px #e81b7d",
     width: "2rem",
   },
 });
 
 const NewDishContainer = ({ classes, restaurant, menu }) => {
-
   const [open, setOpen] = useState(false);
-
-
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -50,27 +45,30 @@ const NewDishContainer = ({ classes, restaurant, menu }) => {
     setOpen(false);
   };
 
-
   return (
     <Card className={classes.rootCard}>
-      <Typography className={classes.cardHeader}>
-        Ajouter un plat :
-      </Typography>
+      <Typography className={classes.cardHeader}>Ajouter un plat :</Typography>
 
       <div>
         {!open && (
           <div className={classes.addButton}>
             <Button onClick={handleClickOpen}>
-            <AddCircleOutlineTwoToneIcon style={{ fill: "#E81B7D" }} />
+              <AddCircleOutlineTwoToneIcon style={{ fill: "#E81B7D" }} />
             </Button>
           </div>
         )}
 
         {open && (
-            <div>
-          <AddNewDish restaurant={restaurant} menu={menu} handleClose={handleClose}/>
-      <Button onClick={handleClose} className={classes.exitButton}>quitter</Button>
-      </div>
+          <div>
+            <AddNewDish
+              restaurant={restaurant}
+              menu={menu}
+              handleClose={handleClose}
+            />
+            <Button onClick={handleClose} className={classes.exitButton}>
+              quitter
+            </Button>
+          </div>
         )}
       </div>
     </Card>
